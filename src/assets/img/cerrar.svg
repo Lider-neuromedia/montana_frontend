@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="26px" viewBox="0 0 24 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Combined Shape</title>
+    <defs>
+        <filter x="-4.7%" y="-1.9%" width="109.5%" height="103.8%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="USUARIOS/CREAR-ADMIN" transform="translate(-1389.000000, -15.000000)" fill="#1E2933">
+            <g id="Group-21-Copy-2" filter="url(#filter-1)" transform="translate(1017.000000, 0.000000)">
+                <g id="header-copy" transform="translate(0.000000, 4.000000)">
+                    <path d="M384,13 C384.441828,13 384.8,13.3581722 384.8,13.8 L384.8,20.2 L391.2,20.2 C391.641828,20.2 392,20.5581722 392,21 C392,21.4418278 391.641828,21.8 391.2,21.8 L384.8,21.8 L384.8,28.2 C384.8,28.6418278 384.441828,29 384,29 C383.558172,29 383.2,28.6418278 383.2,28.2 L383.199,21.8 L376.8,21.8 C376.358172,21.8 376,21.4418278 376,21 C376,20.5581722 376.358172,20.2 376.8,20.2 L383.199,20.2 L383.2,13.8 C383.2,13.3581722 383.558172,13 384,13 Z" id="Combined-Shape" transform="translate(384.000000, 21.000000) rotate(-315.000000) translate(-384.000000, -21.000000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

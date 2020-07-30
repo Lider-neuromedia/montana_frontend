@@ -1,0 +1,300 @@
+.title-datos-personales,
+.title-tiendas,
+.title-credenciales,
+.title-vendedor-asignado,
+.title-tus-finanzas{
+    font-size: 26px;
+    letter-spacing: 0.74px;
+    font-weight: 700;
+    margin: .6em 0em;
+}
+
+.filtro-clientes{
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 0 2em;
+}
+
+.filtro-clientes .box-editar{
+    margin-right: 0;
+}
+
+.ident-admin{
+    display: flex;
+}
+
+.div-imagen img{
+    margin-right: 10px;
+}
+
+.filtros{
+    justify-content: space-between;
+}
+
+.div-edit-boton{
+    display: flex;
+}
+
+.box-editar,
+.box-create-new{
+    height: max-content;
+}
+.texto-editar{
+    padding: 5px;
+}
+
+.datos{
+    margin-bottom: 1em;
+}
+.datos p:nth-child(2){
+    font-weight: 800;
+}
+
+.color-email{
+    color: #FF596A;
+}
+
+.cupo-preaprobado,
+.cupo-disponible,
+.total-deuda,
+.saldo-en-mora{
+    background: white;
+    margin: 1em 0em;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cupo-preaprobado{
+    border-top: 4px solid #FFCF27;
+    border-radius: 8px;
+}
+
+.cupo-preaprobado p:nth-child(1){
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    /* padding-bottom: 10px; */
+}
+
+.cupo-preaprobado p:nth-child(2){
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.cupo-disponible{
+    border-top: 4px solid #95D5C1;
+    border-radius: 8px;
+}
+
+.cupo-disponible p:nth-child(1){
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+}
+
+.cupo-disponible p:nth-child(2){
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.total-deuda{
+    border-top: 4px solid #EB1EC3;
+    border-radius: 8px;
+}
+
+.total-deuda p:nth-child(1){
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+}
+
+.total-deuda p:nth-child(2){
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.saldo-en-mora{
+    border-top: 4px solid #E31D31;
+    border-radius: 8px;
+}
+
+.saldo-en-mora p:nth-child(1){
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+}
+
+.saldo-en-mora p:nth-child(2){
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.actions{
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions a{
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+}
+
+
+.buscador-pedido{
+    border: 1px solid #FF596A;
+    width: 100%;
+    border-radius: 15px;
+    padding: .8em 1em;
+    margin-bottom: 1.2em;
+}
+
+.box-pedidos{
+    background: #E4E4E4;
+    border-radius: 7px;
+    padding: .3em .6em;
+    margin: 1em 0em;
+}
+
+.foto-referencia{
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #D7D7D7;
+    align-items: center;
+}
+
+.foto-referencia p{
+    font-size: 22px;
+    margin-left: 15px;
+}
+
+.list-tienda{
+    display: flex;
+    justify-content: space-between;
+    margin: .6em 0em;
+}
+
+.list-tienda .cantidad{
+    color: #FF596A;
+    font-weight: bold;
+}
+
+.foto-referencia img{
+    height: 55px;
+    width: 50px;
+}
+
+.vendedor-detalle .actions{
+    padding: 8px 10px;
+    border-bottom: 1px solid #c7c7c7;
+    margin-bottom: 15px;
+    text-decoration: none;
+    position: relative;
+}
+
+.vendedor-detalle .actions a{
+    color: #1E2933;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.line-pedidos{
+    background: #FF596A;
+    height: 3px;
+    width: 200px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+.tabla-clientes-en-vendedores{
+    width: 100%;
+}
+
+.tabla-clientes-en-vendedores thead{
+    text-align: left;
+}
+
+.tabla-clientes-en-vendedores td{
+    padding: 2em 0em;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.actions{
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #D7D7D7;
+}
+
+.actions a{
+    color: #1E2933;
+    display: block;
+    font-weight: 600;
+    padding: .8em 0em;
+}
+
+.actions .pedidos{
+    border-bottom: 3px solid #FF596A;
+}
+
+.row-vendedor-asignado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-whatsapp{
+    background: #1CD34D;
+    cursor: pointer;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 30px;
+}
+
+.aside-pedidos{
+    padding-right: 2em;
+    border-left: 1px solid #D8D8D8;
+}
+.title-datos-personales,
+.title-credenciales,
+.title-vendedor-asignado,
+.title-tiendas{
+    margin: .8em 0em;
+    margin-bottom: 1.2em;
+}
+
+ /* Cambiar color del placeholder */
+::placeholder {
+    color: #E3E3E3;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #E3E3E3;
+}
+
+::-ms-input-placeholder {
+    color: #E3E3E3;
+}

@@ -1,0 +1,51 @@
+.header{
+    background: #FF596A;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header .header-items{
+    color: white;
+    margin-left: 230px;
+    width: calc(100% - 250px);
+    justify-content: space-between;
+    display: flex;
+}
+
+.header .breadcrumb ul{
+    display: flex;
+    list-style: none;
+}
+
+.header .notify-accout{
+    align-items: center;
+    display: flex;
+}
+
+.header .notify,
+.header .account,
+.header .close{
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+}
+
+.header .notify,
+.header .notify img,
+.header .account img,
+.header .close img{
+    margin: 0 .5em;
+}
+
+.breadcrumb li{
+    margin: 0 4px;
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: white;
+}

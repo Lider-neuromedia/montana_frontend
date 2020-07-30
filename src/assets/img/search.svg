@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="12px" viewBox="0 0 13 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>search</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="USUARIOS/INTERNA-CLIENTE" transform="translate(-1398.000000, -178.000000)" fill="#FF596A" fill-rule="nonzero">
+            <g id="Group-4" transform="translate(1123.000000, 111.000000)">
+                <g id="Group-10" transform="translate(18.000000, 58.000000)">
+                    <g id="Search" transform="translate(257.500000, 9.000000)">
+                        <g id="search">
+                            <path d="M12,11.3042298 L8.56256516,7.86403269 C10.1725969,5.85944588 9.93353631,2.93991488 8.01902331,1.22601938 C6.1045103,-0.487876118 3.18718842,-0.393977377 1.38603277,1.43951295 C-0.41512288,3.27300328 -0.467295633,6.2019081 1.2674098,8.09883911 C3.00211524,9.99577012 5.91422877,10.194261 7.88855833,8.55013942 L11.3259932,12 L12,11.3042298 Z M2.04395623,7.54513801 C0.630403549,5.99241577 0.684187836,3.59836347 2.16603487,2.1111598 C3.64788191,0.62395614 6.03331129,0.569977432 7.58044092,1.98863987 C8.99399361,3.54136211 8.94020932,5.93541442 7.45836228,7.42261808 C5.97651525,8.90982174 3.59108586,8.96380045 2.04395623,7.54513801 L2.04395623,7.54513801 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

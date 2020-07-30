@@ -1,0 +1,30 @@
+<div class="admin-menu">
+    <div class="box-logo-menu">
+        <img src="{{ templateImage.logo }}" alt="logo menu">
+    </div>
+
+    <p class="title-menu">Menú</p>
+
+    <ul class="firts-menu">
+        <li> <a class="das" href="#"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
+        <li (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
+            <a routerLinkActive="active-menu" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
+        </li>
+        <!-- <li> <a [routerLink]="['/roles']"> <img src="" alt=""> Roles</a></li> -->
+        <li> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.catalogo }}" alt=""> Catálogo</a></li>
+        <li *ngIf="notAdmin"> <a> <img src="{{ templateImage.encuestas }}" alt=""> Encuestas</a></li>
+        <li> <a [routerLink]="['/pedidos']"> <img src="{{ templateImage.pedidos }}" alt=""> Pedidos</a></li>
+        <li *ngIf="notAdmin"> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.ampliacion }}" alt=""> Ampliación de cupo</a></li>
+        <li *ngIf="notAdmin"> <a href="#"> <img src="{{ templateImage.pqrs }}" alt="">PQRS</a></li>
+        <li> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.descuento }}" alt=""> Descuento</a></li>
+        <li *ngIf="notAdmin"> <a [routerLink]="['/catalogos']"> <img src="" alt="">Auditoria</a></li>
+        <li *ngIf="notAdmin"> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.show }}" alt=""> Show Room</a></li>
+    </ul>
+
+</div>
+
+<ul class="child-menu">
+    <li *ngIf="notAdmin"><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/administradores']">Administradores</a></li>
+    <li *ngIf="notAdmin"><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/vendedores']">Vendedores</a></li>
+    <li><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/clientes']">Clientes</a></li>
+</ul>

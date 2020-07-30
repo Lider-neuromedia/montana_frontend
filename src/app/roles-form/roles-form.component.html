@@ -1,0 +1,10 @@
+<div class="view-roles">
+    <div>
+        <div class="label-input">
+            <label for="">Nombre del rol</label>
+            <input [(ngModel)]="rol.name" type="text" placeholder="Escriba un rol aquí">
+            <input [(ngModel)]="rol.guard_name" type="hidden">
+        </div>
+        <button (click)="updateCountry()" class="btn btn-crear">Crear rol</button>
+    </div>
+</div>

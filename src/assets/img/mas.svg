@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>mas copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="mas-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(11.000000, 11.000000)" fill="#FFFFFF">
+            <rect id="Rectangle" x="3.33333333" y="0" width="1.33333333" height="8" rx="0.666666667"></rect>
+            <path d="M4,-6.66133815e-14 C4.36818983,-6.66810169e-14 4.66666667,0.298476833 4.66666667,0.666666667 L4.66666667,7.33333333 C4.66666667,7.70152317 4.36818983,8 4,8 C3.63181017,8 3.33333333,7.70152317 3.33333333,7.33333333 L3.33333333,0.666666667 C3.33333333,0.298476833 3.63181017,-6.65457461e-14 4,-6.66133815e-14 Z" id="Rectangle" transform="translate(4.000000, 4.000000) rotate(-90.000000) translate(-4.000000, -4.000000) "></path>
+        </g>
+        <circle id="Oval" cx="15" cy="15" r="15"></circle>
+    </g>
+</svg>

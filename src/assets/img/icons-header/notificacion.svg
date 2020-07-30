@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>notificacin</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="USUARIOS/CLIENTES-inicio" transform="translate(-1202.000000, -11.000000)">
+            <g id="notificación" transform="translate(1202.000000, 11.000000)">
+                <g id="Group-5">
+                    <g id="Group-2-Copy-2" stroke="#FFFFFF">
+                        <circle id="Oval" cx="10" cy="10" r="9.5"></circle>
+                    </g>
+                    <g id="icon/notifica" transform="translate(4.000000, 4.000000)">
+                        <g id="notifications-24px">
+                            <polygon id="Path" points="0 0 12 0 12 12 0 12"></polygon>
+                            <path d="M6,11 C6.55,11 7,10.55 7,10 L5,10 C5,10.55 5.45,11 6,11 Z M9,8 L9,5.5 C9,3.965 8.185,2.68 6.75,2.34 L6.75,2 C6.75,1.585 6.415,1.25 6,1.25 C5.585,1.25 5.25,1.585 5.25,2 L5.25,2.34 C3.82,2.68 3,3.96 3,5.5 L3,8 L2,9 L2,9.5 L10,9.5 L10,9 L9,8 Z M8,8.5 L4,8.5 L4,5.5 C4,4.26 4.755,3.25 6,3.25 C7.245,3.25 8,4.26 8,5.5 L8,8.5 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

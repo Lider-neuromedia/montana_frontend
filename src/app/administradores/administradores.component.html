@@ -1,0 +1,136 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="overview"></div>
+
+<div class="nuevo-administrador">
+    <div class="header-form">
+        <h2>Nuevo administardor</h2>
+        <img (click)="cerrarFormAdmin()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
+    </div>
+
+    <h3 class="datos-generales">Datos generales</h3>
+
+    <form action="">
+
+        <!-- <div class="label-field">
+            <input [(ngModel)]="admin.rol_id" name="rol_id" type="hidden" value="1">
+        </div> -->
+
+        <div class="label-field">
+            <label for="">Nombres</label>
+            <input [(ngModel)]="admin.name" name="name" type="text" class="">
+        </div>
+
+        <div class="label-field">
+            <label for="">Apellidos</label>
+            <!-- <input type="hidden" name="apellidos[]"> -->
+            <input name="apellido" name="apellidos" type="text" class="">
+        </div>
+
+        <div class="label-field">
+            <label for="">Password</label>
+            <input [(ngModel)]="admin.password" name="password" type="password" class="">
+        </div>
+
+        <div class="label-field">
+            <label for="">Teléfono</label>
+            <!-- <input type="hidden" name="telefono[]"> -->
+            <input [(ngModel)]="admin.telefono" name="telefono" type="tel" class="">
+        </div>
+
+        <div class="label-field">
+            <label for="">Correo electrónico</label>
+            <input [(ngModel)]="admin.email" name="email" type="email" class="">
+        </div>
+
+        <div class="acciones-form-adminitrador">
+            <a (click)="agregarAdmin()" class="agregar">
+                <span class="mas">
+                    <img src="" alt="">
+                </span>
+                Agregar
+            </a>
+
+            <a class="cancelar" (click)="cerrarFormAdmin()">
+                <span class="mas">
+                    <img src="" alt="">
+                </span>
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="filtros">
+    <div class="box-buscador">
+        <img class="lupa" src="{{ templateImage.lupa }}" alt="">
+        <input class="buscador" type="text">
+    </div>
+
+    <div (click)="accionesAdministrador()" class="box-editar">
+        <div class="icono-editar">
+            <img src="{{ templateImage.lapiz }}" alt="">
+        </div>
+        <p class="texto-editar">Editar</p>
+        <div class="icono-puntos">
+            <img src="{{ templateImage.points }}" alt="">
+        </div>
+
+        <!-- Pop up editar -->
+        <ul class="acciones-administrador">
+            <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+            <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+        </ul>
+    </div>
+
+    <div class="box-create-new">
+        <div class="box-mas">
+            <img class="mas" src="{{ templateImage.mas }}" alt="">
+        </div>
+        <a class="btn-nuevo-cliente" (click)="nuevoAdmin()">Nuevo administrador</a>
+    </div>
+</div>
+
+<section class="table-data">
+
+    <table style="width:100%">
+
+        <tr class="tabla-fila-cabecera">
+            <th style="padding-left: 95px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
+            <th>Cel <img src="{{ templateImage.ordenar }}" alt=""></th>
+            <th>Correo <img src="{{ templateImage.ordenar }}" alt=""></th>
+        </tr>
+
+        <!-- TABLA DINÁMICA -->
+        <tr *ngFor="let usuario of usuarios" (click)="administradorDetalle(usuario.id)" class="tabla-fila-datos">
+            <td class="imagen-nombre">
+                <input class="check-nombre" type="checkbox" name="" id="">
+                <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
+                <p class="nombre">{{ usuario.name }}</p>
+            </td>
+            <td class="telefono"></td>
+            <td class="correo">{{ usuario.email }}</td>
+        </tr>
+
+    </table>
+</section>
+
+<!-- <div class="paginador">
+    <ul class="pages">
+        <li>atrás</li>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li>adelante</li>
+    </ul>
+</div> -->
+    </div>
+</div>
+
+
+

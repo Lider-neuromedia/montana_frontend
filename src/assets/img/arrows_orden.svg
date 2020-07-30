@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="4px" height="10px" viewBox="0 0 4 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>arrows_orden</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.531333333 0.162 2 1.62766667 3.46866667 0.162 3.92 0.613333333 2 2.53333333 0.08 0.613333333"></polygon>
+        <polygon id="path-3" points="0.47 2.47 2 0.943333333 3.53 2.47 4 2 2 0 0 2"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="USUARIOS/CLIENTES-inicio" transform="translate(-540.000000, -133.000000)">
+            <g id="Group-6" transform="translate(476.000000, 127.000000)">
+                <g id="Group-12">
+                    <g id="icon/arrows_filter" transform="translate(62.000000, 4.000000)">
+                        <g id="icon/keyboard_arrow_down" transform="translate(0.000000, 6.000000)">
+                            <g id="keyboard_arrow_down">
+                                <polygon id="Path" points="0.16 0.08 7.84 0.08 7.84 7.76 0.16 7.76"></polygon>
+                                <g id="Clipped" transform="translate(2.000000, 2.666667)">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <g id="keyboard_arrow_down-a"></g>
+                                    <rect id="Rectangle" fill="#080808" fill-rule="nonzero" mask="url(#mask-2)" x="-2" y="-2.66666667" width="8" height="8"></rect>
+                                </g>
+                            </g>
+                        </g>
+                        <g id="icon/keyboard_arrow_up">
+                            <g id="keyboard_arrow_up">
+                                <polygon id="Path" points="0 0 8 0 8 8 0 8"></polygon>
+                                <g id="Clipped" transform="translate(2.000000, 2.666667)">
+                                    <mask id="mask-4" fill="white">
+                                        <use xlink:href="#path-3"></use>
+                                    </mask>
+                                    <g id="keyboard_arrow_up-a"></g>
+                                    <rect id="Rectangle" fill="#080808" fill-rule="nonzero" mask="url(#mask-4)" x="-2" y="-2.66666667" width="8" height="8"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

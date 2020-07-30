@@ -1,0 +1,303 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="filtros filtro-clientes">
+            <div class="ident-admin">
+                <div class="div-imagen">
+                    <img src="/assets/img/iniciales_dm_azul.svg" alt="">
+                </div>
+                <div class="div-datos">
+                    <!-- <p>Bejarano Garavito Bladimiro Alfonso</p> -->
+                    <p>{{ info.nombres }}</p>
+                    <p>Cliente No. 338294840</p>
+                </div>
+            </div>
+            <div class="div-edit-boton">
+                <div class="box-editar">
+                    <div class="icono-editar">
+                        <img src="/N-1009/assets/img/editar.svg" alt="">
+                    </div>
+                    <p class="texto-editar">Editar</p>
+                    <div class="icono-puntos">
+                        <img src="/N-1009/assets/img/edit_points.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cliente-detalle">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+        
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="title-tus-finanzas">Tus finanzas</h2>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <p> <strong>Último crédito:</strong> 25 de junio de 2020</p>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <p> <strong>Próximo pago:</strong> 30 de julio de 2020</p>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cupo-preaprobado">
+                                <p>Cupo preaprobado</p>
+                                <p>$15.000.000</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cupo-disponible">
+                                <p>Cupo disponible</p>
+                                <p>$6.000.000</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <div class="total-deuda">
+                                <p>Saldo total de la deuda</p>
+                                <p>$9.000.000</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-6">
+                            <div class="saldo-en-mora">
+                                <p>Saldo en mora</p>
+                                <p>$4.500.000</p>
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <div class="row">
+        
+                        <div class="col-sm-12">
+                            <h2 class="title-datos-personales">Datos personales</h2>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Nombres</p>
+                            <p>{{ info.nombres }}</p>
+                        </div>
+                        
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Apellidos</p>
+                            <p>{{ info.apellidos }}</p>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Tipo de documento</p>
+                            <p>{{ info.tipo_doc }}</p>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Número de documento</p>
+                            <p>{{ info.num_doc }}</p>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Teléfono</p>
+                            <p>{{ info.telefono }}</p>
+                        </div>
+                        
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Correo electrónico</p>
+                            <p>{{ info.email }}</p>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Ciudad</p>
+                            <p>{{ info.ciudad }}</p>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Nit</p>
+                            <p>{{ info.nit }}</p>
+                        </div>
+        
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="title-credenciales">Credenciales</h2>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-4 datos">
+                            <p>Usuario</p>
+                            <p>{{ info.email }}</p>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Contraseña</p>
+                            <p>**************</p>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-sm-12 row-vendedor-asignado">
+                            <h2 class="title-vendedor-asignado">Vendedor asignado</h2>
+                            <div class="btn-whatsapp">
+                                <div class="icon-ws">
+                                    <img src="" alt="" class="icon">
+                                </div>
+                                <p>Contactar vía WhatsApp</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 datos">
+                            <p>Nombre del vendedor</p>
+                            <p>Noreña Loaiza William</p>
+                        </div>
+                        <div class="col-md-2 datos">
+                            <p>Código</p>
+                            <p>40</p>
+                        </div>
+                        <div class="col-md-4 datos">
+                            <p>Correo electrónico</p>
+                            <p class="color-email">noreña.loaiza@neuromedia.co</p>
+                        </div>
+                        <div class="col-md-3 datos">
+                            <p>Teléfono</p>
+                            <p>3217552803</p>
+                        </div>
+                    </div>
+        
+                    <div class="row row-clientes">
+                        <div class="col-sm-12">
+                            <h2 class="title-tiendas">Tiendas</h2>
+                        </div>
+        
+                        <div class="col-sm-12">
+                            <table class="tabla-clientes-en-vendedores">
+                                <thead>
+                                    <th></th>
+                                    <th>Nombre de la tienda</th>
+                                    <th>Código</th>
+                                    <th>Ciudad</th>
+                                    <th>Dirección</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>CC San Andresito Local 127</td>
+                                        <td>17</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                        <td>Calle 13 No. 4 - 109</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>CC San Andresito Local 127</td>
+                                        <td>17</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                        <td>Calle 13 No. 4 - 109</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>CC San Andresito Local 127</td>
+                                        <td>17</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                        <td>Calle 13 No. 4 - 109</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>CC San Andresito Local 127</td>
+                                        <td>17</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                        <td>Calle 13 No. 4 - 109</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+        
+                </div>
+        
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <div class="actions">
+                        <a class="pedidos" href="#">Pedidos</a>
+                        <a class="solicitar" href="#">Solicitar cupo</a>
+                    </div>
+                    <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/N-1009/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/N-1009/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/N-1009/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+            </div>
+        </div>
+        
+    </div>
+</div>
+

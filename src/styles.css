@@ -1,0 +1,211 @@
+*{
+    border: 0;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Source Sans Pro', sans-serif;
+    overflow-x: hidden;
+    color: #323E4A;
+}
+
+img{
+    max-width: 100%;
+}
+
+.area-admin{
+    margin-left: 230px;
+    padding-top: 70px;
+}
+
+.workplace{
+    display: flex;
+    position: relative;
+}
+
+.workplace .slide-menu{
+    position: relative;
+}
+
+.workplace .area{
+    padding: 4em 2em 3em 0px;
+    width: 100%;
+    position: relative;
+    margin-left: 240px;
+}
+
+/* Estilos generales de las tablas */
+.filtros{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+.box-buscador{
+    position: relative;
+}
+.lupa{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+.box-buscador .buscador{
+    background: transparent;
+    border: 1px solid #FF596A;
+    border-radius: 15px;
+    padding: 3px 10px;
+}
+
+.box-editar{
+    align-items: center;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    font-weight: 600;
+    padding: 0px 40px;
+    position: relative;
+    border-radius: 15px;
+    margin: 0px 18px;
+}
+
+.icono-editar{
+    position: absolute;
+    left: 10px;
+}
+
+.icono-puntos{
+    position: absolute;
+    right: 10px;
+    border-left: 1px solid #FF596A;
+    padding-left: 8px;
+}
+
+.box-buscador,
+.box-editar,
+.box-create-new{
+    display: flex;
+    position: relative;
+}
+
+.box-create-new{
+    /* margin-right: 32px; */
+}
+
+.btn-nuevo-cliente{
+    background: #FF596A;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: 0.84px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 4px 40px;
+    padding-right: 20px;
+    transition: all .3s ease;
+}
+
+.btn-nuevo-cliente:hover{
+    background: #ec5362;
+    box-shadow: 0px 1px 3px #1e29336c;
+}
+
+.box-mas{
+    position: absolute;
+    background-image: linear-gradient(180deg, #FF596A 0%, #F51A3C 100%);
+    border-radius: 50%;
+    left: 0%;
+    height: 31px;
+    width: 31px;
+}
+
+.mas{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
+.table-data{
+    background: white;
+    padding-left: 15px;
+    color: #444A4F;
+}
+
+.table-data table{
+    margin-top: 1.5em;
+}
+
+.tabla-fila-datos .imagen-nombre .imagen,
+.tabla-fila-datos .imagen-nombre .nombre{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tabla-fila-datos .imagen-nombre .imagen,
+.tabla-fila-datos .imagen-nombre .nombre{
+    margin-left: 15px;
+}
+
+.tabla-fila-cabecera{
+    font-size: 14px;
+    color: #1E2933;
+    text-align: left;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.tabla-fila-cabecera th{
+    padding: 20px 10px;
+}
+
+.tabla-fila-cabecera th img{
+    margin: 0 1em;
+}
+
+.tabla-fila-datos{
+    transition: background-color .6s ease;
+}
+
+.tabla-fila-datos:hover{
+    cursor: pointer;
+}
+
+.tabla-fila-datos td{
+    border-bottom: 1px solid #D8D8D8;
+    padding: 15px 10px;
+}
+
+.tabla-fila-datos:hover{
+    background-color: #ff596a2c;
+}
+/* Fin estilos generales */
+
+
+.administrador-detalle,
+.cliente-detalle{
+    background: white;
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+input[type="text"],input[type="email"],input[type="number"],input[type="tel"]{
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+}
+
+#wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#wrapper .contenido{
+    background: #F4F8FB;
+    width: 100%;
+    padding-left: 209px;
+    padding-top: 60px;
+}

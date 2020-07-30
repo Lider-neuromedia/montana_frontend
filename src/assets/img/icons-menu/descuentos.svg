@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>descuentos</title>
+    <g id="descuentos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="promo">
+            <path d="M8.39229251,-2.24312848 L8.53036148,-2.24255079 C8.80486888,-2.24140222 9.02711651,-2.0191546 9.02826507,-1.7446472 L9.10979515,17.7410408 C9.11095055,18.0171808 8.88803152,18.2419731 8.61189156,18.2431285 C8.61049688,18.2431343 8.60910218,18.2431343 8.60770749,18.2431285 L8.46963852,18.2425508 C8.19513112,18.2414022 7.97288349,18.0191546 7.97173493,17.7446472 L7.89020485,-1.74104083 C7.88904945,-2.01718079 8.11196848,-2.24197309 8.38810844,-2.24312848 C8.38950312,-2.24313432 8.39089782,-2.24313432 8.39229251,-2.24312848 Z" id="Rectangle" fill="#FFFFFF" transform="translate(8.500000, 8.000000) rotate(-315.000000) translate(-8.500000, -8.000000) "></path>
+            <circle id="Oval" stroke="#FFFFFF" cx="13" cy="13" r="2.5"></circle>
+            <circle id="Oval-Copy-4" stroke="#FFFFFF" cx="4" cy="3" r="2.5"></circle>
+        </g>
+    </g>
+</svg>

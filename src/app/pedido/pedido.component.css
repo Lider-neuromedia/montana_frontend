@@ -1,0 +1,71 @@
+.row-producto{
+    align-items: flex-end;
+    background: white;
+    padding: 1em .6em;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+    margin-bottom: 2em;
+}
+
+.info-interna .codigo,
+.info-interna .referencia{
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    line-height: 17px;
+}
+
+.info-interna .marca{
+    color: #969696;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.3px;
+    margin: 8px 0px;
+}
+
+.info-interna .nombre{
+    color: #353435;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.03px;
+    line-height: 17px;
+}
+
+.info-interna .stock{
+    color: #1E2933;
+    font-size: 16px;
+    letter-spacing: 0.03px;
+    margin: 1em 0em;
+}
+
+.info-interna .precio{
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.05px;
+}
+
+.ver-producto{
+    cursor: pointer;
+    color: #919191;
+    border: 1px solid #919191;
+    display: flex;
+    height: 45px;
+    width: 200px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.anadir-a-pedido{
+    color: #FF596A;
+    cursor: pointer;
+    border: 1px solid #FF596A;
+    display: flex;
+    height: 45px;
+    width: 200px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}

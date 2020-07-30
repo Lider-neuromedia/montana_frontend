@@ -1,0 +1,223 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="overview"></div>
+<div class="nuevo-cliente">
+    <div class="header-form">
+        <h2>Nuevo cliente</h2>
+        <img (click)="cerrarFormCliente()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
+    </div>
+
+    <div class="info-row">
+        <div class="tabs">
+            <ul>
+                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                <li><a [class.activeclasstab]="activeTienda" (click)="crearTienda()">Crear Tienda</a></li>
+                <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un vendedor</a></li>
+            </ul>
+        </div>
+        <div class="fields">
+
+            <div *ngIf="generales" class="field-datos-generales">
+                <div class="label-field">
+                    <label for="">Nombres</label>
+                    <input type="text" class="">
+                </div>
+            
+                <div class="label-field">
+                    <label for="">Apellidos</label>
+                    <input type="text" class="">
+                </div>
+
+                <div class="label-field">
+                    <label for="">Tipo de documento</label>
+                    <select name="" id="">
+                        <option value="">Selecciones tipo de documento</option>
+                        <option value="">Cédula de ciudadanía</option>
+                        <option value="">Cédula de extranjería</option>
+                        <option value="">Pasaporte</option>
+                    </select>
+                </div>
+
+                <div class="label-field">
+                    <label for="">Número de documento</label>
+                    <input type="number" class="">
+                </div>
+
+                <div class="label-field">
+                    <label for="">Nit</label>
+                    <input type="text" class="">
+                </div>
+                
+                <div class="acciones-form-adminitrador">
+                    <a class="agregar" href="">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Agregar
+                    </a>
+            
+                    <a class="cancelar" (click)="cerrarFormVendedor()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf="credenciales" class="credenciales">
+                <div class="label-field">
+                    <label for="">Usuario</label>
+                    <input type="text" class="">
+                </div>
+            
+                <div class="label-field">
+                    <label for="">Contraseña</label>
+                    <input type="password" class="">
+                </div>
+            
+                <div class="label-field">
+                    <label for="">Confirmar contraseña</label>
+                    <input type="password" class="">
+                </div>
+
+                <div class="acciones-form-adminitrador">
+                    <a class="agregar" href="">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Agregar
+                    </a>
+            
+                    <a class="cancelar" (click)="cerrarFormVendedor()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Cancelar
+                    </a>
+                </div>        
+            </div>
+            <div *ngIf="tienda" class="tienda">
+                <div class="label-field">
+                    <label for="">Nombre de la tienda</label>
+                    <input type="text" class="">
+                </div>
+
+                <div class="label-field two-fields">
+                    <div class="label-field-two">
+                        <label for="">Lugar</label>
+                        <input type="text" class="">
+                    </div>
+                    <div class="label-field-two">
+                        <label for="">Número de local</label>
+                        <input type="number" class="">
+                    </div>
+                </div>
+                <div class="label-field">
+                    <label for="">Dirección</label>
+                    <input type="text" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Teléfono</label>
+                    <input type="tel" class="">
+                </div>
+
+                <div class="acciones-form-adminitrador">
+                    <a class="agregar" href="">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Agregar
+                    </a>
+            
+                    <a class="cancelar" (click)="cerrarFormVendedor()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Cancelar
+                    </a>
+                </div> 
+            </div>
+            <div *ngIf="asignar" class="asignar-cliente">
+                <h3>Eligue un vendedor</h3>
+
+                <div class="acciones-form-adminitrador">
+                    <a class="agregar" href="">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Agregar
+                    </a>
+            
+                    <a class="cancelar" (click)="cerrarFormVendedor()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Cancelar
+                    </a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="filtros">
+    <div class="box-buscador">
+        <img class="lupa" src="{{ templateImage.lupa }}" alt="">
+        <input class="buscador" type="text">
+    </div>
+    <div (click)="accionesCliente()" class="box-editar">
+        <div class="icono-editar">
+            <img src="{{ templateImage.lapiz }}" alt="">
+        </div>
+        <p class="texto-editar">Editar</p>
+        <div class="icono-puntos">
+            <img src="{{ templateImage.points }}" alt="">
+        </div>
+        <!-- Pop up editar -->
+        <ul class="acciones-cliente">
+            <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+            <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+        </ul>
+    </div>
+    <div class="box-create-new">
+        <div class="box-mas">
+            <img class="mas" src="{{ templateImage.mas }}" alt="">
+        </div>
+        <a class="btn-nuevo-cliente" (click)="nuevoCliente()">Nuevo cliente</a>
+    </div>
+</div>
+
+<section class="table-data">
+
+    <table style="width:100%">
+
+        <tr class="tabla-fila-cabecera">
+            <th style="padding-left: 38px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
+            <th>Nit<img src="{{ templateImage.ordenar }}" alt=""></th>
+            <th>Vendedor<img src="{{ templateImage.ordenar }}" alt=""></th>
+            <th>Correo<img src="{{ templateImage.ordenar }}" alt=""></th>
+        </tr>
+
+        <tr *ngFor="let cliente of clientes" class="tabla-fila-datos" (click)="clienteDetalle(cliente.id)">
+            <td class="imagen-nombre">
+                <input class="check-nombre" type="checkbox" name="" id="">
+                <img class="imagen" src="{{ templateImage.dmRojo }}" alt="">
+                <p class="nombre">{{ cliente.name }}</p>
+            </td>
+            <td class="telefono">1115072011-8</td>
+            <td class="vendedor">Noreña Loaiza William</td>
+            <td class="correo">{{ cliente.email }}</td>
+        </tr>
+
+    </table>
+
+</section>
+    </div>
+</div>

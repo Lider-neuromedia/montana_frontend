@@ -1,0 +1,216 @@
+<div class="overpedido">
+    <div class="pop-up-pedido">
+
+        <div (click)="showOverPedido()" class="bar-close">cerrar</div>
+        <h2>Comienza tu pedido</h2>
+
+        <div class="label-field">
+            <label >Cliente</label>
+            <select name="" id="">
+                <option value="">Noreña Loaiza William</option>
+                <option value="">William Noreña Loaiza</option>
+                <option value="">Loaiza William Noreña </option>
+            </select>
+        </div>
+
+        <div class="label-field">
+            <label >Vendedor</label>
+            <select name="" id="">
+                <option value="">Noreña Loaiza William</option>
+                <option value="">William Noreña Loaiza</option>
+                <option value="">Loaiza William Noreña </option>
+            </select>
+        </div>
+
+        <div class="label-field">
+            <label >Catálogo</label>
+            <select name="" id="">
+                <option value="">-</option>
+                <option value="">Primavera 2020</option>
+                <option value="">Diciembre 2019</option>
+                <option value="">Vacaciones medio año</option>
+            </select>
+        </div>
+
+        <div class="label-field">
+            <a (click)="continuarPedido()" class="continuar-pedido">
+                Continuar
+            </a>
+        </div>
+
+        
+    </div>
+</div>
+
+<app-header></app-header>
+
+<div class="workplace">
+    <div class="slide-menu">
+        <app-menu></app-menu>
+    </div>
+    <div class="area">
+        <!-- <router-outlet></router-outlet> -->
+        <div class="row">
+            <div class="filtros">
+                <div class="fechas">
+                    <p class="hoy">Hoy</p>
+                    <p class="ayer">Ayer</p>
+                    <p class="todos">Todos</p>
+                </div>
+                <div class="box-buscador">
+                    <img class="lupa" src="/N-1009/assets/img/search.svg" alt="">
+                    <input class="buscador" type="text">
+                </div>
+            
+                <div (click)="accionesPedido()" class="box-editar">
+                    <div class="icono-editar">
+                        <img src="/N-1009/assets/img/editar.svg" alt="">
+                    </div>
+                    <p class="texto-editar">Editar</p>
+                    <div class="icono-puntos">
+                        <img src="/N-1009/assets/img/edit_points.svg" alt="">
+                    </div>
+            
+                    <!-- Pop up editar -->
+                    <ul class="acciones-pedidos">
+                        <li>Exportar</li>
+                        <li>Eliminar</li>
+                    </ul>
+                </div>
+            
+                <div class="box-create-new">
+                    <div class="box-mas">
+                        <img class="mas" src="/N-1009/assets/img/mas.svg" alt="">
+                    </div>
+                    <a class="btn-nuevo-cliente" (click)="nuevoPedido()">Nuevo pedido</a>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="table-data">
+
+            <table style="width:100%">
+        
+                <tr class="tabla-fila-cabecera">
+                    <th></th>
+                    <th>Fecha <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Código <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Vendedor <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Cliente <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Valor <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                    <th class="head-state">Estado del pedido <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
+                </tr>
+        
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-aprobado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-rechazado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-pendiente"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-aprobado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-rechazado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-pendiente"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-aprobado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-rechazado"></div></td>
+                </tr>
+
+                <tr class="tabla-fila-datos">
+                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                    <td class="imagen-nombre">
+                        <p class="nombre">01 / 04 / 2020</p>
+                    </td>
+                    <td class="telefono">3298</td>
+                    <td class="correo">1115072011-8</td>
+                    <td class="correo">Noreña Loaiza William</td>
+                    <td class="correo">$450.000</td>
+                    <td class="status"><div class="estado estado-pendiente"></div></td>
+                </tr>
+
+            </table>
+        </section>
+    </div>
+</div>

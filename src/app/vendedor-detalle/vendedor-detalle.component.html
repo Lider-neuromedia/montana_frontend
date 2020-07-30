@@ -1,0 +1,254 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="filtros filtro-vendedores">
+            <div class="ident-admin">
+                <div class="div-imagen">
+                    <img src="/assets/img/iniciales_dm_azul.svg" alt="">
+                </div>
+                <div class="div-datos">
+                    <p> <strong>{{ usuario.nombres }}</strong> </p>
+                    <p>Código: 40</p>
+                </div>
+            </div>
+            <div class="div-edit-boton">
+                <div (click)="editarVendedor()" class="box-editar">
+                    <div class="icono-editar">
+                        <img src="/assets/img/editar.svg" alt="">
+                    </div>
+                    <p class="texto-editar">Editar</p>
+                    <div class="icono-puntos">
+                        <img src="/assets/img/edit_points.svg" alt="">
+                    </div>
+                    <!-- Pop up editar -->
+                    <ul class="editar-vendedor">
+                        <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                        <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="administrador-detalle">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+        
+                    <div class="row row-finanzas">
+                        <div class="col-sm-12">
+                            <h2 class="title-tus-finanzas">Tus finanzas</h2>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-4">
+                            <div class="comisiones comisiones-ganadas">
+                                <p class="comisiones">Comisiones ganadas</p>
+                                <hr class="division-comisiones">
+                                <p class="total-fecha">Total 2020</p>
+                                <p class="valor-comision">$2.300.400</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-4">
+                            <div class="comisiones comisiones-perdidas">
+                                <p class="comisiones">Comisiones perdidas</p>
+                                <hr class="division-comisiones">
+                                <p class="total-fecha">Junio</p>
+                                <p class="valor-comision">$1.300.400</p>
+                            </div>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-4">
+                            <div class="comisiones comisiones-a-perder">
+                                <p class="comisiones">Comisiones próximas a perder</p>
+                                <hr class="division-comisiones">
+                                <p class="total-fecha">Total 2020</p>
+                                <p class="valor-comision">$4.300.400</p>
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <div class="row row-datos">
+        
+                        <div class="col-sm-12">
+                            <h2 class="title-datos-personales">Datos personales</h2>
+                        </div>
+        
+                        <div style="padding-left: 15px" class="datos">
+                            <p>Nombres</p>
+                            <p>{{ usuario.nombres }}</p>
+                        </div>
+                        
+                        <div class="datos">
+                            <p>Apellidos</p>
+                            <p>{{ usuario.apellidos }}</p>
+                        </div>
+                    
+                        <div class="datos">
+                            <p>Teléfono</p>
+                            <p>{{ usuario.telefono }}</p>
+                        </div>
+                        
+                        <div class="datos">
+                            <p>Correo electrónico</p>
+                            <p>{{ usuario.email }}</p>
+                        </div>
+                    
+                        <div class="datos">
+                            <p>Ciudad</p>
+                            <p>{{ usuario.ciudad }}</p>
+                        </div>
+                    
+                    </div>
+        
+                    <div class="row row-credenciales">
+                        <div class="col-sm-12">
+                            <h2 class="title-credenciales">Credenciales</h2>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-4 datos">
+                            <p>Usuario</p>
+                            <p>{{ usuario.email }}</p>
+                        </div>
+        
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Contraseña</p>
+                            <p>**************</p>
+                        </div>
+                    </div>
+        
+                    <div class="row row-clientes">
+                        <div class="col-sm-12">
+                            <h2 class="title-tiendas">Tiendas</h2>
+                        </div>
+        
+                        <div class="col-sm-12">
+                            <table class="tabla-clientes-en-vendedores">
+                                <thead>
+                                    <th></th>
+                                    <th>Nombre del cliente</th>
+                                    <th>Nit</th>
+                                    <th>Ciudad</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
+                                        <td>1115072011-8</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
+                                        <td>1115072011-8</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
+                                        <td>1115072011-8</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
+                                        <td>1115072011-8</td>
+                                        <td>Cali, Valle del Cauca</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+        
+                    </div>
+        
+                </div>
+        
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <div class="actions">
+                        <a href="#">Pedidos</a>
+                        <hr class="line-pedidos">
+                    </div>
+                    <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+                    <div class="box-pedidos">
+                        <div class="foto-referencia">
+                            <img src="/assets/img/image1.png" alt="">
+                            <p>Ref: ASN-154764676</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                        <div class="list-tienda">
+                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
+                            <p class="cantidad">23</p>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

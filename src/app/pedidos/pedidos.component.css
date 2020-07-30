@@ -1,0 +1,150 @@
+.head-state{
+    text-align: center;
+}
+.estado{
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.estado-aprobado{
+    background: #11bc4a;
+}
+.estado-rechazado{
+    background: #FF596A;
+}
+.estado-pendiente{
+    background: #979797;
+}
+
+.fechas{
+    display: flex;
+    margin: 0px 15px;
+    align-items: center;
+    border: 1px solid #FF596A;
+    border-radius: 16px;
+}
+
+.hoy{
+    display: block;
+    color: white;
+    background: #FF596A;
+    padding: 6px 15px;
+    border-radius: 15px 0px 0px 15px;
+    cursor: pointer;
+}
+
+.ayer{
+    display: block;
+    color: #FF596A;
+    border-right: 1px solid #FF596A;
+    cursor: pointer;
+    padding: 6px 15px;
+}
+
+.todos{
+    display: block;
+    color: #FF596A;
+    padding: 6px 15px;
+    border-radius: 15px 0px 0px 15px;
+    cursor: pointer;
+}
+
+.acciones-pedidos{
+    display: none;
+    position: absolute;
+    top: 35px;
+    list-style: none;
+    opacity: 0;
+    transition: all .1s ease;
+    background: white;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+
+.acciones-pedidos li{
+    color: #959BA0;
+    margin: 8px 0px;
+}
+
+.open-acciones{
+    display: block;
+    opacity: 1;
+}
+
+.overpedido{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 8000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.4);
+}
+
+.pop-up-pedido{
+    width: 50%;
+    background: white;
+    padding: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.bar-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.pop-up-pedido h2{
+    font-size: 36px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.label-field{
+    width: 70%;
+    margin-bottom: 1em;
+}
+
+.label-field label,
+.label-field select{
+    width: 100%;
+}
+
+.label-field label{
+    color: #FF596A;
+    text-transform: uppercase;
+    margin-bottom: .6em;
+}
+
+.label-field select{
+    padding: 1em;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+}
+
+.overpedido{
+    display: none;
+}
+
+.continuar-pedido{
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+    text-align: center;
+    background: #FF596A;
+    width: 50%;
+    color: white;
+    padding: 7px;
+    border-radius: 15px;
+    margin-top: 1em;
+}

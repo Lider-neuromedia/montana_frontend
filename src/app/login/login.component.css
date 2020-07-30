@@ -1,0 +1,117 @@
+.bg-login{
+    background-image: url('src/assets/img/bg_login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+}
+
+.bg-login .content-login{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+}
+
+.bg-login .col-title{
+    color: white;
+    grid-column: 1 / 7;
+    height: 100vh;
+}
+
+.bg-login .plataforma{
+    font-size: 64px;
+    font-weight: 700;
+    margin-top: 81px;
+    margin-left: 55px;
+    letter-spacing: 3.84px;
+    text-transform: uppercase;
+    line-height: 64px;
+}
+.bg-login .gestion{
+    margin-left: 55px;
+    letter-spacing: -0.31px;
+    font-weight: 600;
+    font-size: 31px;
+    line-height: 31px;
+}
+
+.bg-login .col-login{
+    background-color: #FF596A;
+    opacity: 0.9588681175595238;
+    grid-column: 7 / 13;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-login .box-input-label{
+    position: relative;
+}
+
+.box-input-label label{
+    color: white;
+    position: absolute;
+    opacity: 0.56;
+}
+
+.box-input-label input{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #D8D8D8 !important;
+    border-radius: 0px;
+    max-width: 100%;
+    margin-bottom: 39px;
+    padding: 7px 0px;
+    width: 430px;
+}
+
+.box-input-label.last-label input{
+    margin-bottom: 8px !important;
+}
+
+.bg-login .recuperar-contrasena{
+    text-align: right;
+    text-decoration: none;
+    color: white;
+}
+
+.bg-login .box-recuperar-contrasena{
+    position: relative;
+}
+
+.bg-login .recuperar-contrasena{
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    right: 0;
+}
+
+.bg-login .box-btn-iniciar-sesion{
+    margin-top: 59px;
+}
+
+.box-btn-iniciar-sesion a{
+    cursor: pointer;
+    background: white;
+    color: #FF596A;
+    border-radius: 4px;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+    font-weight: 700;
+}
+
+::placeholder {
+    color: #E3E3E3;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #E3E3E3;
+}
+
+::-ms-input-placeholder {
+    color: #E3E3E3;
+}
