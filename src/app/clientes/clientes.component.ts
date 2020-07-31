@@ -39,20 +39,43 @@ export class ClientesComponent implements OnInit {
   };
 
   clientes = [];
+  rol = localStorage.getItem('rol');
+
+  info = {};
 
   constructor( private clients: UsersService, private route: Router) {
 
-    // this.clients.getAllClients().subscribe( (data:any) =>{
-    //   console.log(data);
-    //   this.clientes = data;
-    // });
+    let user_vendedor =  localStorage.getItem('userdata');
+    let dataString = user_vendedor;
+    let dataJson = JSON.parse(dataString);
+
+    if(this.rol == 1){
+      this.clients.getUserForRol(3).subscribe( (data:any) =>{
+        this.clientes = data;
+      })
+    }
 
     let id = localStorage.getItem('user_id');
+
+    if(this.rol == 2){
+      this.clients.clientesAsignados(id).subscribe( (data:any) =>{
+        this.clientes = data;
+
+        for(var i = 0; i <= dataJson.length - 1; i++){
+          var turnAround = dataJson[i].field_key;
+          this.info[turnAround] = dataJson[i].value_key;
+        }
+        console.log(this.info);
+      });
+
+    }
+
+    // let id = localStorage.getItem('user_id');
     
-    this.clients.clientesAsignados(id).subscribe( (data:any) =>{
-      this.clientes = data;
-      console.log(this.clientes);
-    });
+    // this.clients.clientesAsignados(id).subscribe( (data:any) =>{
+    //   this.clientes = data;
+    //   console.log(this.clientes);
+    // });
 
 
   }

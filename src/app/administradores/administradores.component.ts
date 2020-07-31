@@ -50,7 +50,7 @@ export class AdministradoresComponent implements OnInit {
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
 
     this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
-      //console.log(data);
+      console.log(data);
       this.usuarios = data;
     })
  

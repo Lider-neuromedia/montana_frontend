@@ -39,6 +39,7 @@ export class VendedoresComponent implements OnInit {
 
   vendedor = {
     /* datos modelo usuario */
+    "id": null,
     "rol_id": 2,
     "name": null,
     "email": null,
@@ -50,10 +51,31 @@ export class VendedoresComponent implements OnInit {
     }
   };
 
+  tmp = localStorage.getItem('tmp_user');
+
+  masDatos = {
+    "user_id": parseInt(this.tmp),
+    "nombres": null,
+    "apellidos": null,
+    "tipo_documento": null,
+    "numero_documento": null,
+    "celular": null,
+    "codigo": null
+  }
+
+  datos:any = [];
+
+  rol = localStorage.getItem('rol');
+
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
 
-    //
+    console.log(this.tmp);
 
+    let id = localStorage.getItem('user_id');
+
+    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
+      this.vendedores = data;
+    });
   }
 
   ngOnInit(): void {
@@ -106,8 +128,17 @@ export class VendedoresComponent implements OnInit {
   }
 
   agregarVendedor(){
-    console.log(this.vendedor);
     this.userService.createUser(this.vendedor).subscribe( (data) =>{
+      console.log(data);
+      let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
+      console.log(tmpUser);
+    });
+  }
+
+  agregarMasDatos(){
+    this.datos = Object.values(this.masDatos)
+    console.log( this.datos);
+    this.userService.setUserData(this.datos).subscribe( (data) =>{
       console.log(data);
     });
   }

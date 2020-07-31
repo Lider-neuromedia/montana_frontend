@@ -11,9 +11,29 @@ export class UsersService {
 
   constructor( private http: HttpClient ) {}
 
-  getRoles(){
+  /* Traer todos los usuarios */
+  getAllUsers(){
+    return this.http.get(`${this.url}/users`);
+  }
+
+  /* Traer todos los roles */
+  getRoles(rol){
     return this.http.get(`${this.url}/roles`);
   }
+
+  /* Traer usuarios por rol */
+  getUserForRol(id){
+    return this.http.get(`${this.web}/users-for-rol/${id}`);
+  }
+
+  /* Agregar información adicional del usuario */
+  setUserData(data){
+    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
+    return this.http.post(`${this.url}/userdata`,data, {headers: headers});
+  }
+
+
+
 
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
@@ -27,20 +47,14 @@ export class UsersService {
 
 
 
-
-
   createAdmin(admin){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
     return this.http.post(`${this.url}/create-admin`,admin, {headers: headers});
   }
 
-  getAllUsers(){
-    return this.http.get(`${this.url}/users`);
-  }
   
-  getUserForRol(id){
-    return this.http.get(`${this.web}/user-rol/${id}`);
-  }
+  
+  
 
   getAllSellers(){
     return this.http.get(`${this.web}/vendedores`);

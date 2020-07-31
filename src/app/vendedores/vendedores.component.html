@@ -24,31 +24,40 @@
             <div *ngIf="generales" class="field-datos-generales">
                 <div class="label-field">
                     <label for="">Nombres</label>
-                    <input type="text" class="">
+                    <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
                 </div>
             
                 <div class="label-field">
                     <label for="">Apellidos</label>
-                    <input type="text" class="">
+                    <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
+                </div>
+
+                <div class="label-field">
+                    <label for="">Tipo de documento</label>
+                    <select [(ngModel)]="masDatos.tipo_documento" name="tipo_documento" id="">
+                        <option value="cedula">Cédula de ciudadanía</option>
+                        <option value="extranjeria">Cédula de extranjería</option>
+                        <option value="pasaporte">Pasaporte</option>
+                    </select>
                 </div>
 
                 <div class="label-field">
                     <label for="">Cédula de ciudadanía</label>
-                    <input type="number" class="">
+                    <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
                 </div>
             
                 <div class="label-field">
                     <label for="">Celulares</label>
-                    <input type="tel" class="">
+                    <input [(ngModel)]="masDatos.celular" name="celuar" type="tel" class="">
                 </div>
 
                 <div class="label-field">
                     <label for="">Código de vendedor</label>
-                    <input type="number" class="">
+                    <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
                 </div>
 
                 <div class="acciones-form-adminitrador">
-                    <a class="agregar" href="">
+                    <a (click)="agregarMasDatos()" class="agregar">
                         <span class="mas">
                             <img src="" alt="">
                         </span>

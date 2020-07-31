@@ -110,6 +110,13 @@
     padding: 10px;
 }
 
+select{
+    padding: 1em;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    width: 100%;
+}
+
 .agregar, .cancelar {
     cursor: pointer;
     text-align: center;

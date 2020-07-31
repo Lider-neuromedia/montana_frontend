@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit {
   logout() {
     const headers = new HttpHeaders( {'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     localStorage.removeItem('access_token');
+    localStorage.removeItem('userdata');
+    localStorage.removeItem('user_id');
     localStorage.removeItem('rol');
     this.route.navigate(['/login']);
     return this.http.get(this.logoutUrl, {headers: headers});
