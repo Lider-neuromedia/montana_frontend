@@ -15,8 +15,8 @@
     <div class="info-row">
         <div class="tabs">
             <ul>
-                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
                 <li><a [class.activeclasstab]="activeUsuario"  (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
                 <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
             </ul>
         </div>
@@ -40,11 +40,6 @@
                 <div class="label-field">
                     <label for="">Celulares</label>
                     <input type="tel" class="">
-                </div>
-            
-                <div class="label-field">
-                    <label for="">Correo electrónico</label>
-                    <input type="email" class="">
                 </div>
 
                 <div class="label-field">
@@ -71,21 +66,26 @@
             <div *ngIf="credenciales" class="credenciales">
                 <div class="label-field">
                     <label for="">Usuario</label>
-                    <input type="text" class="">
+                    <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
+                </div>
+
+                <div class="label-field">
+                    <label for="">Correo electrónico</label>
+                    <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
                 </div>
             
                 <div class="label-field">
                     <label for="">Contraseña</label>
-                    <input type="password" class="">
+                    <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
                 </div>
             
-                <div class="label-field">
+                <!-- <div class="label-field">
                     <label for="">Confirmar contraseña</label>
                     <input type="password" class="">
-                </div>
+                </div> -->
 
                 <div class="acciones-form-adminitrador">
-                    <a class="agregar" href="">
+                    <a (click)="agregarVendedor()" class="agregar">
                         <span class="mas">
                             <img src="" alt="">
                         </span>

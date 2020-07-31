@@ -17,10 +17,6 @@
 
     <form action="">
 
-        <!-- <div class="label-field">
-            <input [(ngModel)]="admin.rol_id" name="rol_id" type="hidden" value="1">
-        </div> -->
-
         <div class="label-field">
             <label for="">Nombres</label>
             <input [(ngModel)]="admin.name" name="name" type="text" class="">
@@ -28,24 +24,22 @@
 
         <div class="label-field">
             <label for="">Apellidos</label>
-            <!-- <input type="hidden" name="apellidos[]"> -->
-            <input name="apellido" name="apellidos" type="text" class="">
-        </div>
-
-        <div class="label-field">
-            <label for="">Password</label>
-            <input [(ngModel)]="admin.password" name="password" type="password" class="">
+            <input [(ngModel)]="admin.userdata.apellido" name="apellido" type="text" class="">
         </div>
 
         <div class="label-field">
             <label for="">Teléfono</label>
-            <!-- <input type="hidden" name="telefono[]"> -->
-            <input [(ngModel)]="admin.telefono" name="telefono" type="tel" class="">
+            <input [(ngModel)]="admin.userdata.telefono" name="telefono" type="tel" class="">
         </div>
 
         <div class="label-field">
             <label for="">Correo electrónico</label>
             <input [(ngModel)]="admin.email" name="email" type="email" class="">
+        </div>
+
+        <div class="label-field">
+            <label for="">Password</label>
+            <input [(ngModel)]="admin.password" name="password" type="password" class="">
         </div>
 
         <div class="acciones-form-adminitrador">

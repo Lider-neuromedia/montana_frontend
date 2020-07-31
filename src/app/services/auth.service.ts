@@ -7,8 +7,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AuthService {
 
 
-  authUrl = 'http://localhost/athletic-api/public/api/auth/login';
-  apiUrl = 'http://localhost/athletic-api/public/api';
+  authUrl = 'http://localhost/montana_backend/public/api/auth/login';
+  apiUrl = 'http://localhost/montana_backend/public/api';
   options: any;
 
   constructor( private http: HttpClient ) {

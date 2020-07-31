@@ -7,7 +7,7 @@
 
     <ul class="firts-menu">
         <li> <a class="das" href="#"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
-        <li (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
+        <li *ngIf="notAdmin" (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
             <a routerLinkActive="active-menu" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
         </li>
         <!-- <li> <a [routerLink]="['/roles']"> <img src="" alt=""> Roles</a></li> -->
@@ -24,7 +24,7 @@
 </div>
 
 <ul class="child-menu">
-    <li *ngIf="notAdmin"><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/administradores']">Administradores</a></li>
-    <li *ngIf="notAdmin"><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/vendedores']">Vendedores</a></li>
+    <li><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/administradores']">Administradores</a></li>
+    <li><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/vendedores']">Vendedores</a></li>
     <li><a routerLinkActive="active-child-menu" (click)="showChildMenu()" [routerLink]="['/users/clientes']">Clientes</a></li>
 </ul>

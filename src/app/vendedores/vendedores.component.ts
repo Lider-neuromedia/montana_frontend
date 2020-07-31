@@ -13,12 +13,12 @@ declare var $:any;
 })
 export class VendedoresComponent implements OnInit {
 
-  generales = true;
-  credenciales = false;
+  generales = false;
+  credenciales = true;
   asignar = false;
 
-  activeDatos = true;
-  activeUsuario = false;
+  activeDatos = false;
+  activeUsuario = true;
   asignarCliente = false;
 
   templateImage = {
@@ -37,7 +37,20 @@ export class VendedoresComponent implements OnInit {
 
   vendedores = [];
 
-  constructor( private sellers: UsersService, private route: Router) {
+  vendedor = {
+    /* datos modelo usuario */
+    "rol_id": 2,
+    "name": null,
+    "email": null,
+    "password": null,
+    /* datos modelo usuario */
+    "userdata": {
+      "apellido": null,
+      "telefono": null,
+    }
+  };
+
+  constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
     this.sellers.getAllSellers().subscribe( (data:any) =>{
       console.log(data);
       this.vendedores = data;
@@ -91,6 +104,13 @@ export class VendedoresComponent implements OnInit {
 
   vendedorDetalle(id){
     this.route.navigate(['/users/vendedores',id]);
+  }
+
+  agregarVendedor(){
+    console.log(this.vendedor);
+    this.userService.createUser(this.vendedor).subscribe( (data) =>{
+      console.log(data);
+    });
   }
 
 }

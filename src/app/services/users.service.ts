@@ -6,10 +6,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsersService {
 
-  url = 'http://localhost/athletic-api/public/api';
-  web = 'http://localhost/athletic-api/public';
+  url = 'http://localhost/montana_backend/public/api';
+  web = 'http://localhost/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
+
+  createUser(user){
+    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
+    return this.http.post(`${this.url}/users`,user, {headers: headers});
+  }
 
   createAdmin(admin){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );

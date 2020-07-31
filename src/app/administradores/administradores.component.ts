@@ -34,53 +34,17 @@ export class AdministradoresComponent implements OnInit {
 
   rol = localStorage.getItem('rol');
 
-  campos = [
-    {
-        "id"  : 1,
-        "name" : "name",
-        "name_public" : "Nombre",
-        "type" : "text",
-        "group" : 0
-    },
-    {
-        "id"  : 2,
-        "name" : "ciudad",
-        "name_public" : "Ciudad",
-        "type" : "text",
-        "group" : 0
-    },
-    {
-        "id"  : 3,
-        "name" : "email",
-        "name_public" : "Email",
-        "type" : "email",
-        "group" : 0
-    },
-    {
-        "id"  : 1,
-        "name" : "telefono",
-        "name_public" : "Telefono",
-        "type" : "text",
-        "group" : 0
-    }
-
-  ]
-
-  // campos = [
-  //   {
-  //     "name": "name",
-  //     "name_public": "Nombre",
-  //     "type": "text",
-  //     "grupo": 0
-  //   }
-  // ] 
-  
-
   admin = {
+    /* datos modelo usuario */
     "rol_id": 1,
     "name": null,
     "email": null,
-    "password": null
+    "password": null,
+    /* datos modelo usuario */
+    "userdata": {
+      "apellido": null,
+      "telefono": null,
+    }
   };
 
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
@@ -119,10 +83,10 @@ export class AdministradoresComponent implements OnInit {
   }
 
   agregarAdmin(){
-    console.log(this.admin);
-    this.userService.createAdmin(this.admin).subscribe( (data) =>{
+    // console.log(this.admin);
+    this.userService.createUser(this.admin).subscribe( (data) =>{
       console.log(data);
-    })
+    });
   }
 
 }
