@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,13 @@ export class LoginComponent implements OnInit {
 
   token:any;
 
-  constructor(private route: Router, private auth: AuthService) { }
+  roles = [];
+
+  constructor(private route: Router, private auth: AuthService, private userService: UsersService) {
+    this.userService.getRoles().subscribe( (data:any) =>{
+      this.roles = data;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -36,17 +43,18 @@ export class LoginComponent implements OnInit {
         
 
         localStorage.setItem('rol', res.rol);
+        localStorage.setItem('user_id', res.id);
         localStorage.setItem('email', res.email);
         localStorage.setItem('userdata', JSON.stringify(dataJson));
 
         let rol = localStorage.getItem('rol');
         let name = localStorage.getItem('user');
 
-        if( rol == 3){
+        if( rol == this.roles[2].id){
           this.route.navigate(['/users/clientes',rol]);
-        } else if( rol == 2){
-          this.route.navigate(['/users/vendedores']);
-        } else if( rol == 1 ){
+        } else if( rol == this.roles[1].id){
+          this.route.navigate(['/users/clientes']);
+        } else if( rol == this.roles[0].id ){
           this.route.navigate(['/users/administradores']);
         } else {
           alert('Hubo un error');

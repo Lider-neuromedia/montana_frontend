@@ -41,10 +41,20 @@ export class ClientesComponent implements OnInit {
   clientes = [];
 
   constructor( private clients: UsersService, private route: Router) {
-    this.clients.getAllClients().subscribe( (data:any) =>{
-      console.log(data);
+
+    // this.clients.getAllClients().subscribe( (data:any) =>{
+    //   console.log(data);
+    //   this.clientes = data;
+    // });
+
+    let id = localStorage.getItem('user_id');
+    
+    this.clients.clientesAsignados(id).subscribe( (data:any) =>{
       this.clientes = data;
+      console.log(this.clientes);
     });
+
+
   }
 
   ngOnInit(): void {

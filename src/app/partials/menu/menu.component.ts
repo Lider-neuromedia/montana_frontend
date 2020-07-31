@@ -26,22 +26,38 @@ export class MenuComponent implements OnInit {
   }
 
   rol:any;
-  notAdmin:any = true;
 
-  //admin = 11;
+  roles = [];
+
+  admin:any = false;
+  vendedor:any =  false;
+  cliente:any = false;
 
   constructor( private users: UsersService ) {
-    // this.users.getAllAdministrators().subscribe( (data) =>{
-    //   console.log(data);
-    // })
-    // if(this.permisos.administardor){
-    //   //
-    // }
+
     this.rol = localStorage.getItem('rol');
 
-    if(this.rol != 1){
-      this.notAdmin = false;
-    }
+    this.users.getRoles().subscribe( (data:any) =>{
+      this.roles = data;
+
+      if( this.rol == this.roles[2].id){
+        this.admin = false;
+        this.vendedor = false;
+        this.cliente = true;
+      } else if( this.rol == this.roles[1].id){
+        this.admin = false;
+        this.vendedor = true;
+        this.cliente = false;
+      } else if( this.rol == this.roles[0].id ){
+        this.admin = true;
+        this.vendedor = true;
+        this.cliente = false;
+      } else {
+        alert('Hubo un error');
+      }
+
+    })
+
   }
 
   ngOnInit(): void {

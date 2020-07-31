@@ -51,10 +51,9 @@ export class VendedoresComponent implements OnInit {
   };
 
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
-    this.sellers.getAllSellers().subscribe( (data:any) =>{
-      console.log(data);
-      this.vendedores = data;
-    })
+
+    //
+
   }
 
   ngOnInit(): void {

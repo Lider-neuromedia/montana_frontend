@@ -11,10 +11,23 @@ export class UsersService {
 
   constructor( private http: HttpClient ) {}
 
+  getRoles(){
+    return this.http.get(`${this.url}/roles`);
+  }
+
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
     return this.http.post(`${this.url}/users`,user, {headers: headers});
   }
+
+  /* Clientes asianados */
+  clientesAsignados(id){
+    return this.http.get(`${this.web}/relacion/${id}`);
+  }
+
+
+
+
 
   createAdmin(admin){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
