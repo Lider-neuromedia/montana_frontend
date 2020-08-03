@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UsersService } from '../services/users.service';
 
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,7 +33,19 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar(){
+
+    Swal.fire({
+      title: 'Espere por favor',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      timer: 2000,
+      onOpen: () => {
+        Swal.showLoading();
+      }
+    })
+    
     this.auth.login(this.user).subscribe(
+      
       (res: any) => {
 
         console.log(res);
@@ -50,6 +64,8 @@ export class LoginComponent implements OnInit {
         let rol = localStorage.getItem('rol');
         let name = localStorage.getItem('user');
 
+        
+
         if( rol == this.roles[2].id){
           this.route.navigate(['/users/clientes',rol]);
         } else if( rol == this.roles[1].id){
@@ -62,7 +78,11 @@ export class LoginComponent implements OnInit {
 
       },
       (err: any) => {
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          text: 'Algo salió mal, introduce tú correo y contraseña'
+        })
       });
   }
 

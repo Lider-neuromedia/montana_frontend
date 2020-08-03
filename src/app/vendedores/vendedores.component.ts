@@ -51,10 +51,8 @@ export class VendedoresComponent implements OnInit {
     }
   };
 
-  tmp = localStorage.getItem('tmp_user');
-
   masDatos = {
-    "user_id": parseInt(this.tmp),
+    // "user_id": parseInt(this.tmp),
     "nombres": null,
     "apellidos": null,
     "tipo_documento": null,
@@ -64,18 +62,18 @@ export class VendedoresComponent implements OnInit {
   }
 
   datos:any = [];
+  info = {
+    'user_id': null,
+    'field_key': null,
+    'value_key': null
+  };
 
   rol = localStorage.getItem('rol');
+  tmp = localStorage.getItem('tmp_user');
 
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
-
-    console.log(this.tmp);
-
     let id = localStorage.getItem('user_id');
-
-    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
-      this.vendedores = data;
-    });
+    this.traerVendedores();
   }
 
   ngOnInit(): void {
@@ -108,6 +106,12 @@ export class VendedoresComponent implements OnInit {
     this.asignarCliente = true;
   }
 
+  traerVendedores(){
+    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
+      this.vendedores = data;
+    });
+  }
+
   nuevoVendedor(){
     $('.nuevo-vendedor').toggleClass('open');
     $('.overview').css('display','block');
@@ -128,19 +132,35 @@ export class VendedoresComponent implements OnInit {
   }
 
   agregarVendedor(){
-    this.userService.createUser(this.vendedor).subscribe( (data) =>{
+    this.userService.createUser(this.vendedor).subscribe( (data:any) =>{
       console.log(data);
       let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
-      console.log(tmpUser);
     });
   }
 
   agregarMasDatos(){
-    this.datos = Object.values(this.masDatos)
-    console.log( this.datos);
-    this.userService.setUserData(this.datos).subscribe( (data) =>{
+
+    this.datos = this.masDatos;
+    var objeto = [];
+
+    for (const key in this.masDatos) {
+      if (this.masDatos.hasOwnProperty(key)) {
+        // console.log(key + " -> " + masDatos[key]);
+        objeto.push({
+            user_id: this.tmp,
+            field_key : key,
+            value : this.masDatos[key]
+        });
+      }
+    }
+
+    this.userService.setUserData(objeto).subscribe( (data) =>{
       console.log(data);
+      this.traerVendedores();
     });
+
+    
+
   }
 
 }

@@ -62,8 +62,8 @@
 
 <div class="filtros">
     <div class="box-buscador">
-        <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-        <input class="buscador" type="text">
+        <img (click)="buscarAdmin()" class="lupa" src="{{ templateImage.lupa }}" alt="">
+        <input [(ngModel)]="buscador" name="buscador" class="buscador" type="text">
     </div>
 
     <div (click)="accionesAdministrador()" class="box-editar">

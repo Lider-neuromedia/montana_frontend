@@ -47,9 +47,16 @@ export class AdministradoresComponent implements OnInit {
     }
   };
 
+  buscador = '';
+
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
 
-    this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
+    // this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
+    //   console.log(data);
+    //   this.usuarios = data;
+    // })
+
+    this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
       console.log(data);
       this.usuarios = data;
     })
@@ -65,6 +72,12 @@ export class AdministradoresComponent implements OnInit {
     //   console.log(params);
     // })
     this.route.navigate(['/users/administradores',1]);
+  }
+
+  buscarAdmin(){
+    this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
+      //console.log(data);
+    })
   }
 
   nuevoAdmin(){
@@ -85,7 +98,7 @@ export class AdministradoresComponent implements OnInit {
   agregarAdmin(){
     // console.log(this.admin);
     this.userService.createUser(this.admin).subscribe( (data) =>{
-      console.log(data);
+      //console.log(data);
     });
   }
 

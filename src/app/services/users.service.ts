@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   /* Traer todos los roles */
-  getRoles(rol){
+  getRoles(){
     return this.http.get(`${this.url}/roles`);
   }
 
@@ -32,9 +32,12 @@ export class UsersService {
     return this.http.post(`${this.url}/userdata`,data, {headers: headers});
   }
 
+  searchAdmin(name){
+    return this.http.get(`${this.web}/users-admin`,name);
+  }
 
 
-
+  /* Crear usuario */
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
     return this.http.post(`${this.url}/users`,user, {headers: headers});
