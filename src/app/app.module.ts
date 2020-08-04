@@ -24,6 +24,8 @@ import { PedidoInternaComponent } from './pedido-interna/pedido-interna.componen
 import { RolesComponent } from './roles/roles.component';
 import { RolesFormComponent } from './roles-form/roles-form.component';
 
+import { Select2Module } from 'ng2-select2';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import { RolesFormComponent } from './roles-form/roles-form.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Select2Module
   ],
   providers: [],
   bootstrap: [AppComponent]

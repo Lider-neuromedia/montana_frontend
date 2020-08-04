@@ -25,11 +25,13 @@
                 <div class="label-field">
                     <label for="">Nombres</label>
                     <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
+                    <small style="color: red;">{{ errors.nombres }}</small>
                 </div>
             
                 <div class="label-field">
                     <label for="">Apellidos</label>
                     <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
+                    <small style="color: red;">{{ errors.apellidos }}</small>
                 </div>
 
                 <div class="label-field">
@@ -39,21 +41,25 @@
                         <option value="extranjeria">Cédula de extranjería</option>
                         <option value="pasaporte">Pasaporte</option>
                     </select>
+                    <small style="color: red;">{{ errors.tipo_documento }}</small>
                 </div>
 
                 <div class="label-field">
                     <label for="">Cédula de ciudadanía</label>
                     <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
+                    <small style="color: red;">{{ errors.numero_documento }}</small>
                 </div>
             
                 <div class="label-field">
                     <label for="">Celulares</label>
-                    <input [(ngModel)]="masDatos.celular" name="celuar" type="tel" class="">
+                    <input [(ngModel)]="masDatos.celular" name="celular" type="tel" class="">
+                    <small style="color: red;">{{ errors.celular }}</small>
                 </div>
 
                 <div class="label-field">
                     <label for="">Código de vendedor</label>
                     <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
+                    <small style="color: red;">{{ errors.codigo }}</small>
                 </div>
 
                 <div class="acciones-form-adminitrador">
@@ -76,16 +82,19 @@
                 <div class="label-field">
                     <label for="">Usuario</label>
                     <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
+                    <small style="color: red;">{{ errors.name }}</small>
                 </div>
 
                 <div class="label-field">
                     <label for="">Correo electrónico</label>
                     <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
+                    <small style="color: red;">{{ errors.email }}</small>
                 </div>
             
                 <div class="label-field">
                     <label for="">Contraseña</label>
                     <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
+                    <small style="color: red;">{{ errors.password }}</small>
                 </div>
             
                 <!-- <div class="label-field">
@@ -111,6 +120,25 @@
             </div>
             <div *ngIf="asignar" class="asignar-cliente">
                 <h3>Eligue un cliente</h3>
+                <select class="select-client">
+                    <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
+                </select>
+
+                <div class="acciones-form-adminitrador">
+                    <a (click)="asignarCliente()" class="agregar">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Asignar
+                    </a>
+            
+                    <a class="cancelar" (click)="cerrarFormVendedor()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span>
+                        Cancelar
+                    </a>
+                </div> 
             </div>
         </div>
     </div>
@@ -160,7 +188,7 @@
                 <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
                 <p class="nombre">{{ vendedor.name }}</p>
             </td>
-            <td class="telefono">3016382553</td>
+            <td class="telefono">{{ vendedor.value_key }}</td>
             <td class="codigo"><p class="codigo">40</p></td>
             <td class="correo">{{ vendedor.email }}</td>
         </tr>

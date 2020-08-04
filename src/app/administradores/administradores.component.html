@@ -13,51 +13,57 @@
         <img (click)="cerrarFormAdmin()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
     </div>
 
-    <h3 class="datos-generales">Datos generales</h3>
-
     <form action="">
+
+        <h3 class="datos-generales">Datos generales</h3>
 
         <div class="label-field">
             <label for="">Nombres</label>
             <input [(ngModel)]="admin.name" name="name" type="text" class="">
+            <small style="color: red;">{{ errors.name }}</small>
         </div>
 
         <div class="label-field">
             <label for="">Apellidos</label>
-            <input [(ngModel)]="admin.userdata.apellido" name="apellido" type="text" class="">
+            <input [(ngModel)]="admin.userdata.apellido" name="apellido" type="text" class="" required>
+            <small style="color: red;">{{ errors.apellido }}</small>
         </div>
 
         <div class="label-field">
             <label for="">Teléfono</label>
-            <input [(ngModel)]="admin.userdata.telefono" name="telefono" type="tel" class="">
+            <input [(ngModel)]="admin.userdata.telefono" name="telefono" type="tel" class="" required>
+            <small style="color: red;">{{ errors.telefono }}</small>
         </div>
 
         <div class="label-field">
             <label for="">Correo electrónico</label>
             <input [(ngModel)]="admin.email" name="email" type="email" class="">
+            <small style="color: red;">{{ errors.email }}</small>
         </div>
 
         <div class="label-field">
             <label for="">Password</label>
             <input [(ngModel)]="admin.password" name="password" type="password" class="">
+            <small style="color: red;">{{ errors.password }}</small>
         </div>
 
-        <div class="acciones-form-adminitrador">
-            <a (click)="agregarAdmin()" class="agregar">
-                <span class="mas">
-                    <img src="" alt="">
-                </span>
-                Agregar
-            </a>
-
-            <a class="cancelar" (click)="cerrarFormAdmin()">
-                <span class="mas">
-                    <img src="" alt="">
-                </span>
-                Cancelar
-            </a>
-        </div>
     </form>
+
+    <div class="acciones-form-adminitrador">
+        <a (click)="agregarAdmin()" class="agregar">
+            <span class="mas">
+                <img src="" alt="">
+            </span>
+            Agregar
+        </a>
+
+        <a class="cancelar" (click)="cerrarFormAdmin()">
+            <span class="mas">
+                <img src="" alt="">
+            </span>
+            Cancelar
+        </a>
+    </div>
 </div>
 
 <div class="filtros">
@@ -107,7 +113,7 @@
                 <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
                 <p class="nombre">{{ usuario.name }}</p>
             </td>
-            <td class="telefono"></td>
+            <td class="telefono">{{ usuario.value_key }}</td>
             <td class="correo">{{ usuario.email }}</td>
         </tr>
 

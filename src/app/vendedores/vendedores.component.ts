@@ -6,6 +6,8 @@ import { UsersService } from '../services/users.service';
 declare var jQuery:any;
 declare var $:any;
 
+
+
 @Component({
   selector: 'app-vendedores',
   templateUrl: './vendedores.component.html',
@@ -71,9 +73,34 @@ export class VendedoresComponent implements OnInit {
   rol = localStorage.getItem('rol');
   tmp = localStorage.getItem('tmp_user');
 
+  buscador = '';
+
+  errors = {
+    name: null,
+    apellido: null,
+    telefono: null,
+    email: null,
+    password: null,
+
+    nombres: null,
+    apellidos: null,
+    tipo_documento: null,
+    numero_documento: null,
+    celular: null,
+    codigo: null
+  }
+
+  options:any = [];
+
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
     let id = localStorage.getItem('user_id');
     this.traerVendedores();
+
+    this.sellers.getAllClients().subscribe( (data:any) =>{
+      this.options = data;
+      console.log(this.options);
+    })
+    
   }
 
   ngOnInit(): void {
@@ -106,12 +133,6 @@ export class VendedoresComponent implements OnInit {
     this.asignarCliente = true;
   }
 
-  traerVendedores(){
-    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
-      this.vendedores = data;
-    });
-  }
-
   nuevoVendedor(){
     $('.nuevo-vendedor').toggleClass('open');
     $('.overview').css('display','block');
@@ -127,15 +148,35 @@ export class VendedoresComponent implements OnInit {
     $('.box-editar').toggleClass('box-editar-open');
   }
 
+  traerVendedores(){
+    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
+      this.vendedores = data;
+    });
+  }
+
+  cliente(){
+
+  }
+
   vendedorDetalle(id){
     this.route.navigate(['/users/vendedores',id]);
   }
 
   agregarVendedor(){
-    this.userService.createUser(this.vendedor).subscribe( (data:any) =>{
-      console.log(data);
-      let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
-    });
+    this.userService.createUser(this.vendedor).subscribe(
+      (data:any) =>{
+        console.log(data);
+        let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
+      },
+      (error) =>{
+        this.errors.name = error.error.errors.name;
+        this.errors.email = error.error.errors.email;
+        this.errors.password = error.error.errors.password;
+
+        console.log( this.errors.name );
+        console.log( this.errors.email );
+        console.log( this.errors.password );
+      });
   }
 
   agregarMasDatos(){
@@ -154,12 +195,19 @@ export class VendedoresComponent implements OnInit {
       }
     }
 
-    this.userService.setUserData(objeto).subscribe( (data) =>{
-      console.log(data);
-      this.traerVendedores();
-    });
-
-    
+    this.userService.setUserData(objeto).subscribe(
+      (data) =>{
+        console.log(data);
+        this.traerVendedores();
+      },
+      (error) =>{
+        this.errors.nombres = error.error.errors.nombres;
+        this.errors.apellidos = error.error.errors.apellidos;
+        this.errors.tipo_documento = error.error.errors.tipo_documento;
+        this.errors.numero_documento = error.error.errors.numero_documento;
+        this.errors.celular = error.error.errors.celular;
+        this.errors.codigo = error.error.errors.codigo;
+      });
 
   }
 

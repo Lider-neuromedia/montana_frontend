@@ -6,6 +6,8 @@ import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 declare var jQuery:any;
 declare var $:any;
 
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-administradores',
@@ -35,19 +37,34 @@ export class AdministradoresComponent implements OnInit {
   rol = localStorage.getItem('rol');
 
   admin = {
-    /* datos modelo usuario */
     "rol_id": 1,
     "name": null,
     "email": null,
     "password": null,
-    /* datos modelo usuario */
     "userdata": {
       "apellido": null,
       "telefono": null,
     }
   };
 
+  // admin = {
+  //   "rol_id": 1,
+  //   "name": null,
+  //   "email": null,
+  //   "password": null,
+  //   "apellido": null,
+  //   "telefono": null
+  // };
+
   buscador = '';
+
+  errors = {
+    name: null,
+    apellido: null,
+    telefono: null,
+    email: null,
+    password: null
+  }
 
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
 
@@ -97,9 +114,34 @@ export class AdministradoresComponent implements OnInit {
 
   agregarAdmin(){
     // console.log(this.admin);
-    this.userService.createUser(this.admin).subscribe( (data) =>{
-      //console.log(data);
-    });
+    this.userService.createUser(this.admin).subscribe(
+      (data) =>{
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha creado un nuevo administrador'
+        });
+        console.log(data)
+        this.buscarAdmin();
+      },
+      (error) =>{
+
+        console.log(error);
+
+        // apellido
+        if( this.errors.apellido == null || this.errors.apellido == '' ){
+          this.errors.apellido = 'El apellido es obligatorio';
+        } else {
+        }
+        // telefono
+        if( this.errors.telefono == null || this.errors.telefono == '' ){
+          this.errors.telefono = 'El teléfono es obligatorio';
+        }
+        
+        this.errors.name = error.error.errors.name;
+        this.errors.email = error.error.errors.email;
+        this.errors.password = error.error.errors.password;
+      }
+      );
   }
 
 }
