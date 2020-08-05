@@ -3,10 +3,8 @@ import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
 
-declare var jQuery:any;
+import Swal from 'sweetalert2'
 declare var $:any;
-
-
 
 @Component({
   selector: 'app-vendedores',
@@ -91,6 +89,9 @@ export class VendedoresComponent implements OnInit {
   }
 
   options:any = [];
+  removeItemsUsers = [];
+
+  
 
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
     let id = localStorage.getItem('user_id');
@@ -98,7 +99,7 @@ export class VendedoresComponent implements OnInit {
 
     this.sellers.getAllClients().subscribe( (data:any) =>{
       this.options = data;
-      console.log(this.options);
+      console.log( this.options );
     })
     
   }
@@ -154,8 +155,9 @@ export class VendedoresComponent implements OnInit {
     });
   }
 
-  cliente(){
-
+  removeUsers(id){
+    this.removeItemsUsers.push(id);
+    console.log( this.removeItemsUsers );
   }
 
   vendedorDetalle(id){
@@ -209,6 +211,45 @@ export class VendedoresComponent implements OnInit {
         this.errors.codigo = error.error.errors.codigo;
       });
 
+  }
+
+
+  getUsersAndDelete(){
+
+    Swal.fire({
+      title: 'Está seguro que desea eleiminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Completado',
+          'El usuario ha sido eliminado',
+          'success'
+        )
+        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+        this.userService.deleteUsers(this.removeItemsUsers).subscribe( (data:any) =>{
+          console.log(data);
+        })
+      }
+    })
+    
+  }
+
+  cliente($event){
+
+    let clienteID = $event.target.value;
+    let datoCliente = {
+      "vendedor_id": parseInt(this.tmp),
+      "cliente_id": clienteID
+    }
+
+    this.userService.clientesAsignados(datoCliente).subscribe( (data) =>{
+      console.log(data);
+    })
   }
 
 }

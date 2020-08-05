@@ -6,19 +6,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsersService {
 
-  url = 'http://localhost/montana_backend/public/api';
+  api = 'http://localhost/montana_backend/public/api';
   web = 'http://localhost/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
 
   /* Traer todos los usuarios */
   getAllUsers(){
-    return this.http.get(`${this.url}/users`);
+    return this.http.get(`${this.api}/users`);
   }
 
   /* Traer todos los roles */
   getRoles(){
-    return this.http.get(`${this.url}/roles`);
+    return this.http.get(`${this.api}/roles`);
   }
 
   /* Traer usuarios por rol */
@@ -29,7 +29,7 @@ export class UsersService {
   /* Agregar información adicional del usuario */
   setUserData(data){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.url}/userdata`,data, {headers: headers});
+    return this.http.post(`${this.api}/userdata`,data, {headers: headers});
   }
 
   searchAdmin(name){
@@ -40,19 +40,32 @@ export class UsersService {
   /* Crear usuario */
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.url}/users`,user, {headers: headers});
+    return this.http.post(`${this.api}/users`,user, {headers: headers});
+  }
+
+  /* Eliminar un usuario */
+  deleteUser(users){
+    return this.http.delete(`${this.api}/users/${users}`,users);
+  }
+
+  /* Eliminar varios usuario */
+  deleteUsers(users){
+    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
+    return this.http.post(`${this.api}/delete-users`,users,{headers: headers});
   }
 
   /* Clientes asianados */
-  clientesAsignados(id){
-    return this.http.get(`${this.web}/relacion/${id}`);
+  clientesAsignados(cliente){
+    // return this.http.get(`${this.web}/relacion/${id}`);
+    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
+    return this.http.post(`${this.api}/asignar-cliente`,cliente,{headers: headers});
   }
 
 
 
   createAdmin(admin){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.url}/create-admin`,admin, {headers: headers});
+    return this.http.post(`${this.api}/create-admin`,admin, {headers: headers});
   }
 
   
@@ -76,25 +89,25 @@ export class UsersService {
   }
 
   getOneAdministor(id){
-    return this.http.get(`${this.url}/administradores/${id}`);
+    return this.http.get(`${this.api}/administradores/${id}`);
   }
 
   createRol(rol){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.url}/roles`,rol, {headers: headers});
+    return this.http.post(`${this.api}/roles`,rol, {headers: headers});
   }
 
   readRoles(){
-    return this.http.get(`${this.url}/roles`);
+    return this.http.get(`${this.api}/roles`);
   }
 
   updateRol(rol){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.put(`${this.url}/roles/${rol.id}`,rol, {headers: headers});
+    return this.http.put(`${this.api}/roles/${rol.id}`,rol, {headers: headers});
   }
 
 	deleteRol(id){
-		return this.http.delete(`${this.url}/roles/${id}`,id);
+		return this.http.delete(`${this.api}/roles/${id}`,id);
 	}
 
 }

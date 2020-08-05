@@ -47,15 +47,6 @@ export class AdministradoresComponent implements OnInit {
     }
   };
 
-  // admin = {
-  //   "rol_id": 1,
-  //   "name": null,
-  //   "email": null,
-  //   "password": null,
-  //   "apellido": null,
-  //   "telefono": null
-  // };
-
   buscador = '';
 
   errors = {
@@ -66,6 +57,8 @@ export class AdministradoresComponent implements OnInit {
     password: null
   }
 
+  removeItemsUsers = [];
+
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
 
     // this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
@@ -74,7 +67,7 @@ export class AdministradoresComponent implements OnInit {
     // })
 
     this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
-      console.log(data);
+      //console.log(data);
       this.usuarios = data;
     })
  
@@ -142,6 +135,36 @@ export class AdministradoresComponent implements OnInit {
         this.errors.password = error.error.errors.password;
       }
       );
+  }
+
+  removeUsers(id){
+    this.removeItemsUsers.push(id);
+    console.log( this.removeItemsUsers );
+  }
+
+  getUsersAndDelete(){
+
+    Swal.fire({
+      title: 'Está seguro que desea eleiminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Completado',
+          'El usuario ha sido eliminado',
+          'success'
+        )
+        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+        this.userService.deleteUsers(this.removeItemsUsers).subscribe( (data:any) =>{
+          console.log(data);
+        })
+      }
+    })
+    
   }
 
 }

@@ -120,12 +120,13 @@
             </div>
             <div *ngIf="asignar" class="asignar-cliente">
                 <h3>Eligue un cliente</h3>
-                <select class="select-client">
+                <select (change)="cliente($event)" class="select-client">
+                    <option value="0">Selecciones un cliente</option>
                     <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
                 </select>
 
                 <div class="acciones-form-adminitrador">
-                    <a (click)="asignarCliente()" class="agregar">
+                    <a (click)="cliente()" class="agregar">
                         <span class="mas">
                             <img src="" alt="">
                         </span>
@@ -160,7 +161,7 @@
         <!-- Pop up editar -->
         <ul class="acciones-vendedor">
             <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
-            <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+            <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
         </ul>
     </div>
     <div class="box-create-new">
@@ -176,21 +177,22 @@
     <table style="width:100%">
 
         <tr class="tabla-fila-cabecera">
+            <td></td>
             <th style="padding-left: 38px;">Nombre <img src="/assets/img/arrows_orden.svg" alt=""></th>
             <th>Cel <img src="/assets/img/arrows_orden.svg" alt=""></th>
             <th>Código <img src="/assets/img/arrows_orden.svg" alt=""></th>
             <th>Correo <img src="/assets/img/arrows_orden.svg" alt=""></th>
         </tr>
 
-        <tr *ngFor="let vendedor of vendedores" class="tabla-fila-datos" (click)="vendedorDetalle(vendedor.id)">
-            <td class="imagen-nombre">
-                <input class="check-nombre" type="checkbox" name="" id="">
+        <tr *ngFor="let vendedor of vendedores" class="tabla-fila-datos" >
+            <td><input (click)="removeUsers(vendedor.id)" class="check-nombre" type="checkbox" name="check" id=""></td>
+            <td (click)="vendedorDetalle(vendedor.id)" class="imagen-nombre">
                 <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
                 <p class="nombre">{{ vendedor.name }}</p>
             </td>
-            <td class="telefono">{{ vendedor.value_key }}</td>
-            <td class="codigo"><p class="codigo">40</p></td>
-            <td class="correo">{{ vendedor.email }}</td>
+            <td (click)="vendedorDetalle(vendedor.id)" class="telefono">{{ vendedor.value_key }}</td>
+            <td (click)="vendedorDetalle(vendedor.id)" class="codigo"><p class="codigo">40</p></td>
+            <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
         </tr>
 
         </table>
