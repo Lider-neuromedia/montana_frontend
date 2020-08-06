@@ -3,6 +3,10 @@ import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
 
+import { FormControl } from "@angular/forms";
+
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
 import Swal from 'sweetalert2'
 declare var $:any;
 
@@ -102,9 +106,12 @@ export class VendedoresComponent implements OnInit {
 
   habilitado = true;
 
+
+  angForm: FormGroup;
+
   
 
-  constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
+  constructor( private sellers: UsersService, private route: Router, private userService: UsersService, private fb: FormBuilder) {
     let id = localStorage.getItem('user_id');
     this.traerVendedores();
 
@@ -112,10 +119,31 @@ export class VendedoresComponent implements OnInit {
       this.options = data;
       // console.log( this.options );
     })
+
+    this.createForm();
     
   }
 
   ngOnInit(): void {
+  }
+
+  createForm() {
+    this.angForm = this.fb.group({
+      nombres: ["", Validators.required]
+    });
+  }
+
+  onSubmit(){
+    if(this.angForm.valid) {
+      // console.log(this.angForm.value);
+      console.log(this.angForm);
+      // this.angForm = this.fb.group({
+      //   nombres: ["", Validators.required]
+      // });
+    } else {
+      // alert("FILL ALL FIELDS");
+      console.log(this.angForm);
+    }
   }
 
   datosGenerales(){
@@ -178,6 +206,10 @@ export class VendedoresComponent implements OnInit {
   agregarVendedor(){
     this.userService.createUser(this.vendedor).subscribe(
       (data:any) =>{
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha creado un nuevo vendedor'
+        });
         console.log(data);
         let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
       },
@@ -213,16 +245,20 @@ export class VendedoresComponent implements OnInit {
     this.userService.setUserData(objeto).subscribe(
       (data) =>{
         console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'La información fue guardada correctamente'
+        });
         this.traerVendedores();
       },
       (error) =>{
         console.log(error);
-        // this.errorsDos.nombres = error.error.errors.nombres;
-        // this.errors.apellidos = error.error.errors.apellidos;
-        // this.errors.tipo_documento = error.error.errors.tipo_documento;
-        // this.errors.numero_documento = error.error.errors.numero_documento;
-        // this.errors.celular = error.error.errors.celular;
-        // this.errors.codigo = error.error.errors.codigo;
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error',
+          text: 'Dirígete al apartado de usuario y contraseña'
+        });
+        // ## Code here ##
       });
 
   }
@@ -274,9 +310,8 @@ export class VendedoresComponent implements OnInit {
       (error) =>{
         Swal.fire({
           icon: 'error',
-          title: 'Hubo un error en la asignación del cliente',
-          showConfirmButton: false,
-          timer: 1500
+          title: 'Hubo un error',
+          text: 'Dirígete al apartado de usuario y contraseña'
         })
       })
   }

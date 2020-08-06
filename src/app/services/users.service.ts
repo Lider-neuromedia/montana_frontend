@@ -6,8 +6,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsersService {
 
+  // Local
   api = 'http://localhost/montana_backend/public/api';
   web = 'http://localhost/montana_backend/public';
+  
+  // Producción
+  // api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+  // web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
 
@@ -35,7 +40,6 @@ export class UsersService {
   searchAdmin(name){
     return this.http.get(`${this.web}/users-admin`,name);
   }
-
 
   /* Crear usuario */
   createUser(user){

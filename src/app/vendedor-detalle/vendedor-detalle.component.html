@@ -12,7 +12,7 @@
                 </div>
                 <div class="div-datos">
                     <!-- <p> <strong>{{ usuario.nombres }}</strong> </p> -->
-                    <p> <strong>{{ info.nombres }} {{ info.apellidos }}</strong> </p>
+                    <p *ngIf="show"> <strong>{{ info.nombres }} {{ info.apellidos }}</strong> </p>
                     <p>Código: 40</p>
                 </div>
             </div>
@@ -80,27 +80,27 @@
         
                         <div style="padding-left: 15px" class="datos">
                             <p>Nombres</p>
-                            <p>{{ info.nombres }}</p>
+                            <p *ngIf="show">{{ info.nombres }}</p>
                         </div>
                         
                         <div class="datos">
                             <p>Apellidos</p>
-                            <p>{{ info.apellidos }}</p>
+                            <p *ngIf="show">{{ info.apellidos }}</p>
                         </div>
                     
                         <div class="datos">
                             <p>Teléfono</p>
-                            <p>{{ info.telefono }}</p>
+                            <p *ngIf="show">{{ info.telefono }}</p>
                         </div>
                         
                         <div class="datos">
                             <p>Correo electrónico</p>
-                            <p>{{ info.email }}</p>
+                            <p *ngIf="show">{{ info.email }}</p>
                         </div>
                     
                         <div class="datos">
                             <p>Ciudad</p>
-                            <p>{{ info.ciudad }}</p>
+                            <p *ngIf="show">{{ info.ciudad }}</p>
                         </div>
                     
                     </div>
@@ -112,7 +112,7 @@
         
                         <div class="col-sm-12 col-md-4 datos">
                             <p>Usuario</p>
-                            <p>{{ info.email }}</p>
+                            <p *ngIf="show">{{ info.email }}</p>
                         </div>
         
                         <div class="col-sm-12 col-md-3 datos">

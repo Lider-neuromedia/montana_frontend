@@ -24,6 +24,18 @@
 
             <!-- Datos generales -->
             <div *ngIf="generales" class="field-datos-generales">
+
+                <!-- <form [formGroup]="angForm" novalidate>
+                    <label class="center-block">FirstName:
+                        <input class="form-control" formControlName="firtsname" />
+                    </label>
+                    <div *ngIf=" angForm.controls['firtsname'].invalid && (angForm.controls['firtsname'].dirty || angForm.controls['firtsname'].touched)" class="alert alert-danger">
+                        <div *ngIf="angForm.controls['firtsname'].errors.required">
+                            Name is required.
+                        </div>
+                    </div>
+                </form> -->
+
                 <div class="label-field">
                     <label for="">Nombres</label>
                     <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
@@ -79,49 +91,52 @@
                         Cancelar
                     </a>
                 </div>
+
             </div>
             <!-- ...# -->
 
             <!-- Credenciales -->
             <div *ngIf="credenciales" class="credenciales">
-                <div class="label-field">
-                    <label for="">Usuario</label>
-                    <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
-                    <small style="color: red;">{{ errors.name }}</small>
-                </div>
 
-                <div class="label-field">
-                    <label for="">Correo electrónico</label>
-                    <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
-                    <small style="color: red;">{{ errors.email }}</small>
-                </div>
-            
-                <div class="label-field">
-                    <label for="">Contraseña</label>
-                    <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
-                    <small style="color: red;">{{ errors.password }}</small>
-                </div>
-            
-                <!-- <div class="label-field">
+                    <div class="label-field">
+                        <label for="">Usuario</label>
+                        <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
+                        <small style="color: red;">{{ errors.name }}</small>
+                    </div>
+    
+                    <div class="label-field">
+                        <label for="">Correo electrónico</label>
+                        <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
+                        <small style="color: red;">{{ errors.email }}</small>
+                    </div>
+                
+                    <div class="label-field">
+                        <label for="">Contraseña</label>
+                        <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
+                        <small style="color: red;">{{ errors.password }}</small>
+                    </div>
+    
+                    <div class="acciones-form-adminitrador">
+                        <a (click)="agregarVendedor()" class="agregar">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span>
+                            Agregar
+                        </a>
+                
+                        <a class="cancelar" (click)="cerrarFormVendedor()">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span>
+                            Cancelar
+                        </a>
+                    </div>
+
+                 <!-- <div class="label-field">
                     <label for="">Confirmar contraseña</label>
                     <input type="password" class="">
                 </div> -->
 
-                <div class="acciones-form-adminitrador">
-                    <a (click)="agregarVendedor()" class="agregar">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span>
-                        Agregar
-                    </a>
-            
-                    <a class="cancelar" (click)="cerrarFormVendedor()">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span>
-                        Cancelar
-                    </a>
-                </div>        
             </div>
             <!-- ...# -->
 

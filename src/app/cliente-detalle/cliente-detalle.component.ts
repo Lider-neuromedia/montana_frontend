@@ -28,17 +28,38 @@ export class ClienteDetalleComponent implements OnInit {
   usuario:any = [];
 
   info = {};
+  show = true;
 
   constructor(private activatedRoute: ActivatedRoute, private user: UsersService) {
 
     this.id = this.activatedRoute.snapshot.params['id'];
-    this.user.getClient(this.id).subscribe( (data:any) =>{
-      for(var i = 0; i <= data.length - 1; i++){
-        var turnAround = data[i].field_key;
-        this.info[turnAround] = data[i].value_key;
-      }
-      console.log(this.info);
-    })
+
+    if(this.info != null){
+      this.user.getSeller(this.id).subscribe(
+        (data:any) =>{
+          this.usuario = data;
+          console.log( this.usuario );
+          for(var i = 0; i <= data.length - 1; i++){
+            var turnAround = data[i].field_key;
+            this.info[turnAround] = data[i].value_key;
+          }
+          console.log(this.info);
+        },
+        (error) =>{
+          this.show = false;
+        })
+    }
+
+
+
+
+    // this.user.getClient(this.id).subscribe( (data:any) =>{
+    //   for(var i = 0; i <= data.length - 1; i++){
+    //     var turnAround = data[i].field_key;
+    //     this.info[turnAround] = data[i].value_key;
+    //   }
+    //   console.log(this.info);
+    // })
 
     this.datos.nombres = localStorage.getItem('user');
     this.datos.email = localStorage.getItem('email');

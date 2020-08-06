@@ -6,9 +6,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthService {
 
-
+  // Local
   authUrl = 'http://localhost/montana_backend/public/api/auth/login';
   apiUrl = 'http://localhost/montana_backend/public/api';
+
+  // Producción
+  // authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
+  // apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+
   options: any;
 
   constructor( private http: HttpClient ) {
