@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
 
-declare var jQuery:any;
+import Swal from 'sweetalert2'
 declare var $:any;
 
 
@@ -14,13 +14,13 @@ declare var $:any;
 })
 export class ClientesComponent implements OnInit {
 
-  generales = true;
-  credenciales = false;
+  generales = false;
+  credenciales = true;
   tienda = false;
   asignar = false;
 
-  activeDatos = true;
-  activeUsuario = false;
+  activeDatos = false;
+  activeUsuario = true;
   activeTienda = false;
   asignarCliente = false;
 
@@ -38,12 +38,36 @@ export class ClientesComponent implements OnInit {
     "eliminar": "assets/img/icons-filter/trash.svg"
   };
 
+  errors = {
+    name: null,
+    apellido: null,
+    telefono: null,
+    email: null,
+    password: null,
+
+    // nombres: null,
+    // apellidos: null,
+    // tipo_documento: null,
+    // numero_documento: null,
+    // celular: null,
+    // codigo: null
+  }
+
+  cliente = {
+    "id": null,
+    "rol_id": 3,
+    "name": null,
+    "email": null,
+    "password": null,
+  };
+
   clientes = [];
   rol = localStorage.getItem('rol');
 
   info = {};
 
   roles = [];
+  removeItemsUsers = [];
 
   constructor( private clients: UsersService, private route: Router) {
 
@@ -55,16 +79,16 @@ export class ClientesComponent implements OnInit {
       let dataString = user_vendedor;
       let dataJson = JSON.parse(dataString);
 
-      if(this.rol == this.roles[1].id){
+      let id = localStorage.getItem('user_id');
+
+      if(this.rol == this.roles[0].id){
         this.clients.getUserForRol(3).subscribe( (data:any) =>{
           console.log(data);
           this.clientes = data;
         })
       }
 
-      let id = localStorage.getItem('user_id');
-
-      if(this.rol == this.roles[2].id){
+      if(this.rol == this.roles[1].id){
         this.clients.clientesAsignados(id).subscribe( (data:any) =>{
           this.clientes = data;
 
@@ -77,16 +101,6 @@ export class ClientesComponent implements OnInit {
 
       }
     })
-
-    
-
-    // let id = localStorage.getItem('user_id');
-    
-    // this.clients.clientesAsignados(id).subscribe( (data:any) =>{
-    //   this.clientes = data;
-    //   console.log(this.clientes);
-    // });
-
 
   }
 
@@ -158,6 +172,53 @@ export class ClientesComponent implements OnInit {
 
   clienteDetalle(id){
     this.route.navigate(['/users/clientes',id]);
+  }
+
+  agregarCliente(){
+    this.clients.createUser(this.cliente).subscribe(
+      (data:any) =>{
+        console.log(data);
+        let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
+      },
+      (error) =>{
+        this.errors.name = error.error.errors.name;
+        this.errors.email = error.error.errors.email;
+        this.errors.password = error.error.errors.password;
+
+        console.log( this.errors.name );
+        console.log( this.errors.email );
+        console.log( this.errors.password );
+      });
+  }
+
+  removeUsers(id){
+    this.removeItemsUsers.push(id);
+    console.log( this.removeItemsUsers );
+  }
+
+  getUsersAndDelete(){
+
+    Swal.fire({
+      title: 'Está seguro que desea eleiminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Completado',
+          'El usuario ha sido eliminado',
+          'success'
+        )
+        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+        this.clients.deleteUsers(this.removeItemsUsers).subscribe( (data:any) =>{
+          console.log(data);
+        })
+      }
+    })
+    
   }
 
 }

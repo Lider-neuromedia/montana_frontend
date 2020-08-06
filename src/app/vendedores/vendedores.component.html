@@ -21,17 +21,19 @@
             </ul>
         </div>
         <div class="fields">
+
+            <!-- Datos generales -->
             <div *ngIf="generales" class="field-datos-generales">
                 <div class="label-field">
                     <label for="">Nombres</label>
                     <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
-                    <small style="color: red;">{{ errors.nombres }}</small>
+                    <small *ngIf="" style="color: red;">{{ errorsDos.nombres }}</small>
                 </div>
             
                 <div class="label-field">
                     <label for="">Apellidos</label>
                     <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
-                    <small style="color: red;">{{ errors.apellidos }}</small>
+                    <small style="color: red;">{{ errorsDos.apellidos }}</small>
                 </div>
 
                 <div class="label-field">
@@ -41,25 +43,25 @@
                         <option value="extranjeria">Cédula de extranjería</option>
                         <option value="pasaporte">Pasaporte</option>
                     </select>
-                    <small style="color: red;">{{ errors.tipo_documento }}</small>
+                    <small style="color: red;">{{ errorsDos.tipo_documento }}</small>
                 </div>
 
                 <div class="label-field">
                     <label for="">Cédula de ciudadanía</label>
                     <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
-                    <small style="color: red;">{{ errors.numero_documento }}</small>
+                    <small style="color: red;">{{ errorsDos.numero_documento }}</small>
                 </div>
             
                 <div class="label-field">
                     <label for="">Celulares</label>
                     <input [(ngModel)]="masDatos.celular" name="celular" type="tel" class="">
-                    <small style="color: red;">{{ errors.celular }}</small>
+                    <small style="color: red;">{{ errorsDos.celular }}</small>
                 </div>
 
                 <div class="label-field">
                     <label for="">Código de vendedor</label>
                     <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
-                    <small style="color: red;">{{ errors.codigo }}</small>
+                    <small style="color: red;">{{ errorsDos.codigo }}</small>
                 </div>
 
                 <div class="acciones-form-adminitrador">
@@ -78,6 +80,9 @@
                     </a>
                 </div>
             </div>
+            <!-- ...# -->
+
+            <!-- Credenciales -->
             <div *ngIf="credenciales" class="credenciales">
                 <div class="label-field">
                     <label for="">Usuario</label>
@@ -118,6 +123,9 @@
                     </a>
                 </div>        
             </div>
+            <!-- ...# -->
+
+            
             <div *ngIf="asignar" class="asignar-cliente">
                 <h3>Eligue un cliente</h3>
                 <select (change)="cliente($event)" class="select-client">

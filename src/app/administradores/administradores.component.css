@@ -166,3 +166,8 @@
     border-radius: 0px 0px 15px 15px;
     opacity: 1;
 }
+
+/* desahabilitar enlaces en la creación de usuarios */
+.disabled:disabled{
+
+}

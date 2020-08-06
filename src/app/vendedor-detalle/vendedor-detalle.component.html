@@ -1,4 +1,4 @@
-<!-- <app-header></app-header>
+<app-header></app-header>
 
 <div id="wrapper">
     <div class="opciones">
@@ -11,7 +11,8 @@
                     <img src="/assets/img/iniciales_dm_azul.svg" alt="">
                 </div>
                 <div class="div-datos">
-                    <p> <strong>{{ usuario.nombres }}</strong> </p>
+                    <!-- <p> <strong>{{ usuario.nombres }}</strong> </p> -->
+                    <p> <strong>{{ info.nombres }} {{ info.apellidos }}</strong> </p>
                     <p>Código: 40</p>
                 </div>
             </div>
@@ -79,27 +80,27 @@
         
                         <div style="padding-left: 15px" class="datos">
                             <p>Nombres</p>
-                            <p>{{ usuario.nombres }}</p>
+                            <p>{{ info.nombres }}</p>
                         </div>
                         
                         <div class="datos">
                             <p>Apellidos</p>
-                            <p>{{ usuario.apellidos }}</p>
+                            <p>{{ info.apellidos }}</p>
                         </div>
                     
                         <div class="datos">
                             <p>Teléfono</p>
-                            <p>{{ usuario.telefono }}</p>
+                            <p>{{ info.telefono }}</p>
                         </div>
                         
                         <div class="datos">
                             <p>Correo electrónico</p>
-                            <p>{{ usuario.email }}</p>
+                            <p>{{ info.email }}</p>
                         </div>
                     
                         <div class="datos">
                             <p>Ciudad</p>
-                            <p>{{ usuario.ciudad }}</p>
+                            <p>{{ info.ciudad }}</p>
                         </div>
                     
                     </div>
@@ -111,7 +112,7 @@
         
                         <div class="col-sm-12 col-md-4 datos">
                             <p>Usuario</p>
-                            <p>{{ usuario.email }}</p>
+                            <p>{{ info.email }}</p>
                         </div>
         
                         <div class="col-sm-12 col-md-3 datos">
@@ -251,4 +252,4 @@
 
 
 
- -->
+

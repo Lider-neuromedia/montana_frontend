@@ -80,6 +80,15 @@ export class VendedoresComponent implements OnInit {
     email: null,
     password: null,
 
+    // nombres: null,
+    // apellidos: null,
+    // tipo_documento: null,
+    // numero_documento: null,
+    // celular: null,
+    // codigo: null
+  }
+
+  errorsDos = {
     nombres: null,
     apellidos: null,
     tipo_documento: null,
@@ -91,6 +100,8 @@ export class VendedoresComponent implements OnInit {
   options:any = [];
   removeItemsUsers = [];
 
+  habilitado = true;
+
   
 
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService) {
@@ -99,7 +110,7 @@ export class VendedoresComponent implements OnInit {
 
     this.sellers.getAllClients().subscribe( (data:any) =>{
       this.options = data;
-      console.log( this.options );
+      // console.log( this.options );
     })
     
   }
@@ -197,18 +208,21 @@ export class VendedoresComponent implements OnInit {
       }
     }
 
+    // console.log( objeto );
+
     this.userService.setUserData(objeto).subscribe(
       (data) =>{
         console.log(data);
         this.traerVendedores();
       },
       (error) =>{
-        this.errors.nombres = error.error.errors.nombres;
-        this.errors.apellidos = error.error.errors.apellidos;
-        this.errors.tipo_documento = error.error.errors.tipo_documento;
-        this.errors.numero_documento = error.error.errors.numero_documento;
-        this.errors.celular = error.error.errors.celular;
-        this.errors.codigo = error.error.errors.codigo;
+        console.log(error);
+        // this.errorsDos.nombres = error.error.errors.nombres;
+        // this.errors.apellidos = error.error.errors.apellidos;
+        // this.errors.tipo_documento = error.error.errors.tipo_documento;
+        // this.errors.numero_documento = error.error.errors.numero_documento;
+        // this.errors.celular = error.error.errors.celular;
+        // this.errors.codigo = error.error.errors.codigo;
       });
 
   }
@@ -247,9 +261,24 @@ export class VendedoresComponent implements OnInit {
       "cliente_id": clienteID
     }
 
-    this.userService.clientesAsignados(datoCliente).subscribe( (data) =>{
-      console.log(data);
-    })
+    this.userService.clientesAsignados(datoCliente).subscribe(
+      (data) =>{
+        Swal.fire({
+          icon: 'success',
+          title: 'El cliente fue asignado con éxito!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        console.log(data);
+      },
+      (error) =>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error en la asignación del cliente',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
   }
 
 }

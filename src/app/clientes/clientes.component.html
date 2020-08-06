@@ -15,8 +15,8 @@
     <div class="info-row">
         <div class="tabs">
             <ul>
-                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
                 <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
                 <li><a [class.activeclasstab]="activeTienda" (click)="crearTienda()">Crear Tienda</a></li>
                 <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un vendedor</a></li>
             </ul>
@@ -74,21 +74,26 @@
             <div *ngIf="credenciales" class="credenciales">
                 <div class="label-field">
                     <label for="">Usuario</label>
-                    <input type="text" class="">
+                    <input [(ngModel)]="cliente.name" name="name" type="text" class="">
+                </div>
+
+                <div class="label-field">
+                    <label for="">Correo electrónico</label>
+                    <input [(ngModel)]="cliente.email" name="email" type="email" class="">
                 </div>
             
                 <div class="label-field">
                     <label for="">Contraseña</label>
-                    <input type="password" class="">
+                    <input [(ngModel)]="cliente.password" name="password" type="password" class="">
                 </div>
             
-                <div class="label-field">
+                <!-- <div class="label-field">
                     <label for="">Confirmar contraseña</label>
                     <input type="password" class="">
-                </div>
+                </div> -->
 
                 <div class="acciones-form-adminitrador">
-                    <a class="agregar" href="">
+                    <a (click)="agregarCliente()" class="agregar">
                         <span class="mas">
                             <img src="" alt="">
                         </span>
@@ -183,7 +188,7 @@
         <!-- Pop up editar -->
         <ul class="acciones-cliente">
             <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
-            <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+            <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
         </ul>
     </div>
     <div class="box-create-new">
@@ -199,21 +204,22 @@
     <table style="width:100%">
 
         <tr class="tabla-fila-cabecera">
+            <th></th>
             <th style="padding-left: 38px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
             <th>Nit<img src="{{ templateImage.ordenar }}" alt=""></th>
             <th>Vendedor<img src="{{ templateImage.ordenar }}" alt=""></th>
             <th>Correo<img src="{{ templateImage.ordenar }}" alt=""></th>
         </tr>
 
-        <tr *ngFor="let cliente of clientes" class="tabla-fila-datos" (click)="clienteDetalle(cliente.id)">
-            <td class="imagen-nombre">
-                <input class="check-nombre" type="checkbox" name="" id="">
+        <tr *ngFor="let cliente of clientes" class="tabla-fila-datos">
+            <td><input (click)="removeUsers(cliente.id)" class="check-nombre" type="checkbox" name="" id=""></td>
+            <td (click)="clienteDetalle(cliente.id)" class="imagen-nombre">
                 <img class="imagen" src="{{ templateImage.dmRojo }}" alt="">
                 <p class="nombre">{{ cliente.name }}</p>
             </td>
-            <td class="telefono">1115072011-8</td>
-            <td class="vendedor">{{ info.nombres }} {{ info.apellidos }}</td>
-            <td class="correo">{{ cliente.email }}</td>
+            <td (click)="clienteDetalle(cliente.id)" class="telefono">1115072011-8</td>
+            <td (click)="clienteDetalle(cliente.id)" class="vendedor">{{ info.nombres }} {{ info.apellidos }}</td>
+            <td (click)="clienteDetalle(cliente.id)" class="correo">{{ cliente.email }}</td>
         </tr>
 
     </table>
