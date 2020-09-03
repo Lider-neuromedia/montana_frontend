@@ -3,10 +3,12 @@ import { UsersService } from '../services/users.service';
 
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
+
 declare var jQuery:any;
 declare var $:any;
 
 import Swal from 'sweetalert2'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -15,7 +17,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./administradores.component.css']
 })
 export class AdministradoresComponent implements OnInit {
-
+  
   templateImage = {
     "lupa": "assets/img/search.svg",
     "lapiz": "assets/img/editar.svg",
@@ -48,6 +50,10 @@ export class AdministradoresComponent implements OnInit {
   };
 
   buscador = '';
+  letra = "";
+
+  usersAdmins:any = [];
+  admins:any = [];
 
   errors = {
     name: null,
@@ -59,45 +65,72 @@ export class AdministradoresComponent implements OnInit {
 
   removeItemsUsers = [];
 
-  constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute  ) {
+  current: number = 1;
+
+  constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService  ) {
 
     // this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
     //   console.log(data);
     //   this.usuarios = data;
     // })
 
-    this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
-      //console.log(data);
-      this.usuarios = data;
-    })
- 
+    // this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
+    //   this.usuarios = data;
+    // });
+
+    // this.userService.getUsersAdmin(this.usersAdmin).subscribe( (data:any) =>{
+    //   this.usuarios = data;
+    // });
+    
+
   }
 
   ngOnInit(): void {
+    this.showAdmins();
+  }
+
+  showAdmins(){
+    this.userService.getUsersAdmin().subscribe(
+      res =>{
+        this.usersAdmins = res;
+      }
+    );
+  }
+
+  administradorDetalle(id:number){
+    this.route.navigate(['/users/administradores', id]);
+  }
+
+  buscarAdmin(text:string){
+    this.route.navigate(['/users/buscar', text]);
   }
 
 
-  administradorDetalle(){
-    // this.activatedRoute.params.subscribe( (params : Params) =>{
-    //   console.log(params);
-    // })
-    this.route.navigate(['/users/administradores',1]);
-  }
 
-  buscarAdmin(){
-    this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
-      //console.log(data);
-    })
-  }
+
+
+
+  // administradorDetalle(){
+  //   // this.activatedRoute.params.subscribe( (params : Params) =>{
+  //   //   console.log(params);
+  //   // })
+  //   this.route.navigate(['/users/administradores',1]);
+  // }
+
+  // buscarAdmin(){
+  //   this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
+  //     console.log(data);
+  //   })
+  // }
 
   nuevoAdmin(){
     $('.nuevo-administrador').toggleClass('open');
-    $('.overview').css('display','block');
+    $('.overview').css('display', 'block');
   }
 
   cerrarFormAdmin(){
     $('.nuevo-administrador').toggleClass('open');
-    $('.overview').css('display','none');
+    $('.overview').css('display', 'none');
   }
 
   accionesAdministrador(){
@@ -106,20 +139,18 @@ export class AdministradoresComponent implements OnInit {
   }
 
   agregarAdmin(){
-    // console.log(this.admin);
     this.userService.createUser(this.admin).subscribe(
       (data) =>{
+        this.showAdmins();
         Swal.fire({
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
         });
         console.log(data)
-        this.buscarAdmin();
+        // this.buscarAdmin();
       },
       (error) =>{
-
         console.log(error);
-
         // apellido
         if( this.errors.apellido == null || this.errors.apellido == '' ){
           this.errors.apellido = 'El apellido es obligatorio';
@@ -129,7 +160,6 @@ export class AdministradoresComponent implements OnInit {
         if( this.errors.telefono == null || this.errors.telefono == '' ){
           this.errors.telefono = 'El teléfono es obligatorio';
         }
-        
         this.errors.name = error.error.errors.name;
         this.errors.email = error.error.errors.email;
         this.errors.password = error.error.errors.password;
@@ -143,9 +173,8 @@ export class AdministradoresComponent implements OnInit {
   }
 
   getUsersAndDelete(){
-
     Swal.fire({
-      title: 'Está seguro que desea eleiminar?',
+      title: 'Está seguro que desea eliminar?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -157,14 +186,14 @@ export class AdministradoresComponent implements OnInit {
           'Completado',
           'El usuario ha sido eliminado',
           'success'
-        )
+        );
         // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
-        this.userService.deleteUsers(this.removeItemsUsers).subscribe( (data:any) =>{
+        this.userService.deleteUsers(this.removeItemsUsers).subscribe(
+          (data:any) =>{
           console.log(data);
-        })
+          }
+        );
       }
-    })
-    
+    });
   }
-
 }

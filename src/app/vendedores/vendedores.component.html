@@ -6,26 +6,25 @@
     </div>
     <div class="contenido">
         <div class="overview"></div>
-<div class="nuevo-vendedor">
-    <div class="header-form">
-        <h2>Nuevo vendedor</h2>
-        <img (click)="cerrarFormVendedor()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
-    </div>
+        <div class="nuevo-vendedor">
+            <div class="header-form">
+                <h2>Nuevo vendedor</h2>
+                <img (click)="cerrarFormVendedor()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
+            </div>
 
-    <div class="info-row">
-        <div class="tabs">
-            <ul>
-                <li><a [class.activeclasstab]="activeUsuario"  (click)="datosCredenciales()">Usuario y contraseña</a></li>
-                <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
-                <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
-            </ul>
-        </div>
-        <div class="fields">
+            <div class="info-row">
+                <div class="tabs">
+                    <ul>
+                        <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                        <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                        <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
+                    </ul>
+                </div>
+                <div class="fields">
 
-            <!-- Datos generales -->
-            <div *ngIf="generales" class="field-datos-generales">
-
-                <!-- <form [formGroup]="angForm" novalidate>
+                    <!-- Datos generales -->
+                    <div *ngIf="generales" class="field-datos-generales">
+                        <!-- <form [formGroup]="angForm" novalidate>
                     <label class="center-block">FirstName:
                         <input class="form-control" formControlName="firtsname" />
                     </label>
@@ -36,190 +35,185 @@
                     </div>
                 </form> -->
 
-                <div class="label-field">
-                    <label for="">Nombres</label>
-                    <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
-                    <small *ngIf="" style="color: red;">{{ errorsDos.nombres }}</small>
-                </div>
-            
-                <div class="label-field">
-                    <label for="">Apellidos</label>
-                    <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
-                    <small style="color: red;">{{ errorsDos.apellidos }}</small>
-                </div>
+                        <div class="label-field">
+                            <label for="">Nombres</label>
+                            <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
+                            <small *ngIf="" style="color: red;">{{ errorsDos.nombres }}</small>
+                        </div>
 
-                <div class="label-field">
-                    <label for="">Tipo de documento</label>
-                    <select [(ngModel)]="masDatos.tipo_documento" name="tipo_documento" id="">
+                        <div class="label-field">
+                            <label for="">Apellidos</label>
+                            <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
+                            <small style="color: red;">{{ errorsDos.apellidos }}</small>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Tipo de documento</label>
+                            <select [(ngModel)]="masDatos.tipo_documento" name="tipo_documento" id="">
                         <option value="cedula">Cédula de ciudadanía</option>
                         <option value="extranjeria">Cédula de extranjería</option>
                         <option value="pasaporte">Pasaporte</option>
                     </select>
-                    <small style="color: red;">{{ errorsDos.tipo_documento }}</small>
-                </div>
+                            <small style="color: red;">{{ errorsDos.tipo_documento }}</small>
+                        </div>
 
-                <div class="label-field">
-                    <label for="">Cédula de ciudadanía</label>
-                    <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
-                    <small style="color: red;">{{ errorsDos.numero_documento }}</small>
-                </div>
-            
-                <div class="label-field">
-                    <label for="">Celulares</label>
-                    <input [(ngModel)]="masDatos.celular" name="celular" type="tel" class="">
-                    <small style="color: red;">{{ errorsDos.celular }}</small>
-                </div>
+                        <div class="label-field">
+                            <label for="">Cédula de ciudadanía</label>
+                            <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
+                            <small style="color: red;">{{ errorsDos.numero_documento }}</small>
+                        </div>
 
-                <div class="label-field">
-                    <label for="">Código de vendedor</label>
-                    <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
-                    <small style="color: red;">{{ errorsDos.codigo }}</small>
-                </div>
+                        <div class="label-field">
+                            <label for="">Celulares</label>
+                            <input [(ngModel)]="masDatos.celular" name="celular" type="tel" class="">
+                            <small style="color: red;">{{ errorsDos.celular }}</small>
+                        </div>
 
-                <div class="acciones-form-adminitrador">
-                    <a (click)="agregarMasDatos()" class="agregar">
-                        <span class="mas">
+                        <div class="label-field">
+                            <label for="">Código de vendedor</label>
+                            <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
+                            <small style="color: red;">{{ errorsDos.codigo }}</small>
+                        </div>
+
+                        <div class="acciones-form-adminitrador">
+                            <a (click)="agregarMasDatos()" class="agregar">
+                                <span class="mas">
                             <img src="" alt="">
-                        </span>
-                        Agregar
-                    </a>
-            
-                    <a class="cancelar" (click)="cerrarFormVendedor()">
-                        <span class="mas">
+                        </span> Agregar
+                            </a>
+
+                            <a class="cancelar" (click)="cerrarFormVendedor()">
+                                <span class="mas">
                             <img src="" alt="">
-                        </span>
-                        Cancelar
-                    </a>
-                </div>
+                        </span> Cancelar
+                            </a>
+                        </div>
 
-            </div>
-            <!-- ...# -->
+                    </div>
+                    <!-- ...# -->
 
-            <!-- Credenciales -->
-            <div *ngIf="credenciales" class="credenciales">
+                    <!-- Credenciales -->
+                    <div *ngIf="credenciales" class="credenciales">
 
-                    <div class="label-field">
-                        <label for="">Usuario</label>
-                        <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
-                        <small style="color: red;">{{ errors.name }}</small>
-                    </div>
-    
-                    <div class="label-field">
-                        <label for="">Correo electrónico</label>
-                        <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
-                        <small style="color: red;">{{ errors.email }}</small>
-                    </div>
-                
-                    <div class="label-field">
-                        <label for="">Contraseña</label>
-                        <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
-                        <small style="color: red;">{{ errors.password }}</small>
-                    </div>
-    
-                    <div class="acciones-form-adminitrador">
-                        <a (click)="agregarVendedor()" class="agregar">
-                            <span class="mas">
+                        <div class="label-field">
+                            <label for="">Usuario</label>
+                            <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
+                            <small style="color: red;">{{ errors.name }}</small>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Correo electrónico</label>
+                            <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
+                            <small style="color: red;">{{ errors.email }}</small>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Contraseña</label>
+                            <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
+                            <small style="color: red;">{{ errors.password }}</small>
+                        </div>
+
+                        <div class="acciones-form-adminitrador">
+                            <a (click)="agregarVendedor()" class="agregar">
+                                <span class="mas">
                                 <img src="" alt="">
-                            </span>
-                            Agregar
-                        </a>
-                
-                        <a class="cancelar" (click)="cerrarFormVendedor()">
-                            <span class="mas">
-                                <img src="" alt="">
-                            </span>
-                            Cancelar
-                        </a>
-                    </div>
+                            </span> Agregar
+                            </a>
 
-                 <!-- <div class="label-field">
+                            <a class="cancelar" (click)="cerrarFormVendedor()">
+                                <span class="mas">
+                                <img src="" alt="">
+                            </span> Cancelar
+                            </a>
+                        </div>
+
+                        <!-- <div class="label-field">
                     <label for="">Confirmar contraseña</label>
                     <input type="password" class="">
                 </div> -->
 
-            </div>
-            <!-- ...# -->
+                    </div>
+                    <!-- ...# -->
 
-            
-            <div *ngIf="asignar" class="asignar-cliente">
-                <h3>Eligue un cliente</h3>
-                <select (change)="cliente($event)" class="select-client">
+
+                    <div *ngIf="asignar" class="asignar-cliente">
+                        <h3>Eligue un cliente</h3>
+                        <select (change)="cliente($event)" class="select-client">
                     <option value="0">Selecciones un cliente</option>
                     <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
                 </select>
 
-                <div class="acciones-form-adminitrador">
-                    <a (click)="cliente()" class="agregar">
-                        <span class="mas">
+                        <div class="acciones-form-adminitrador">
+                            <a (click)="cliente()" class="agregar">
+                                <span class="mas">
                             <img src="" alt="">
-                        </span>
-                        Asignar
-                    </a>
-            
-                    <a class="cancelar" (click)="cerrarFormVendedor()">
-                        <span class="mas">
+                        </span> Asignar
+                            </a>
+
+                            <a class="cancelar" (click)="cerrarFormVendedor()">
+                                <span class="mas">
                             <img src="" alt="">
-                        </span>
-                        Cancelar
-                    </a>
-                </div> 
+                        </span> Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="filtros">
+            <div class="box-buscador">
+                <img class="lupa" src="{{ templateImage.lupa }}" alt="">
+                <input class="buscador" type="text">
+            </div>
+            <div (click)="accionesVendedor()" class="box-editar">
+                <div class="icono-editar">
+                    <img src="{{ templateImage.lapiz }}" alt="">
+                </div>
+                <p class="texto-editar">Editar</p>
+                <div class="icono-puntos">
+                    <img src="{{ templateImage.points }}" alt="">
+                </div>
+                <!-- Pop up editar -->
+                <ul class="acciones-vendedor">
+                    <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                    <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+                </ul>
+            </div>
+            <div class="box-create-new">
+                <div class="box-mas">
+                    <img class="mas" src="/assets/img/mas.svg" alt="">
+                </div>
+                <a class="btn-nuevo-cliente" (click)="nuevoVendedor()">Nuevo vendedor</a>
+            </div>
+        </div>
+
+        <section class="table-data">
+
+            <table style="width:100%">
+
+                <tr class="tabla-fila-cabecera">
+                    <td></td>
+                    <th style="padding-left: 38px;">Nombre <img src="/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Cel <img src="/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Código <img src="/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Correo <img src="/assets/img/arrows_orden.svg" alt=""></th>
+                </tr>
+
+                <tr *ngFor="let vendedor of vendedores" class="tabla-fila-datos">
+                    <td><input (click)="removeUsers(vendedor.id)" class="check-nombre" type="checkbox" name="check" id=""></td>
+                    <td (click)="vendedorDetalle(vendedor.id)" class="imagen-nombre">
+                        <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
+                        <p class="nombre">{{ vendedor.name }}</p>
+                    </td>
+                    <td (click)="vendedorDetalle(vendedor.id)" class="telefono">{{ vendedor.value_key }}</td>
+                    <td (click)="vendedorDetalle(vendedor.id)" class="codigo">
+                        <p class="codigo">40</p>
+                    </td>
+                    <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
+                </tr>
+
+            </table>
+        </section>
     </div>
 </div>
-
-<div class="filtros">
-    <div class="box-buscador">
-        <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-        <input class="buscador" type="text">
-    </div>
-    <div (click)="accionesVendedor()" class="box-editar">
-        <div class="icono-editar">
-            <img src="{{ templateImage.lapiz }}" alt="">
-        </div>
-        <p class="texto-editar">Editar</p>
-        <div class="icono-puntos">
-            <img src="{{ templateImage.points }}" alt="">
-        </div>
-        <!-- Pop up editar -->
-        <ul class="acciones-vendedor">
-            <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
-            <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
-        </ul>
-    </div>
-    <div class="box-create-new">
-        <div class="box-mas">
-            <img class="mas" src="/assets/img/mas.svg" alt="">
-        </div>
-        <a class="btn-nuevo-cliente" (click)="nuevoVendedor()">Nuevo vendedor</a>
-    </div>
-</div>
-
-<section class="table-data">
-
-    <table style="width:100%">
-
-        <tr class="tabla-fila-cabecera">
-            <td></td>
-            <th style="padding-left: 38px;">Nombre <img src="/assets/img/arrows_orden.svg" alt=""></th>
-            <th>Cel <img src="/assets/img/arrows_orden.svg" alt=""></th>
-            <th>Código <img src="/assets/img/arrows_orden.svg" alt=""></th>
-            <th>Correo <img src="/assets/img/arrows_orden.svg" alt=""></th>
-        </tr>
-
-        <tr *ngFor="let vendedor of vendedores" class="tabla-fila-datos" >
-            <td><input (click)="removeUsers(vendedor.id)" class="check-nombre" type="checkbox" name="check" id=""></td>
-            <td (click)="vendedorDetalle(vendedor.id)" class="imagen-nombre">
-                <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
-                <p class="nombre">{{ vendedor.name }}</p>
-            </td>
-            <td (click)="vendedorDetalle(vendedor.id)" class="telefono">{{ vendedor.value_key }}</td>
-            <td (click)="vendedorDetalle(vendedor.id)" class="codigo"><p class="codigo">40</p></td>
-            <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
-        </tr>
-
-        </table>
-</section>
-    </div>
-</div>
-

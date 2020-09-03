@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "admin-athletic"
+    }
+  },
+  "defaultProject": "admin-athletic",
+  "cli": {
+    "analytics": false
+  }
 }

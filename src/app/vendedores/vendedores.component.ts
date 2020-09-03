@@ -66,6 +66,7 @@ export class VendedoresComponent implements OnInit {
   }
 
   datos:any = [];
+
   info = {
     'user_id': null,
     'field_key': null,
@@ -106,7 +107,6 @@ export class VendedoresComponent implements OnInit {
 
   habilitado = true;
 
-
   angForm: FormGroup;
 
   
@@ -115,7 +115,8 @@ export class VendedoresComponent implements OnInit {
     let id = localStorage.getItem('user_id');
     this.traerVendedores();
 
-    this.sellers.getAllClients().subscribe( (data:any) =>{
+    this.sellers.getAllClients().subscribe(
+      data =>{
       this.options = data;
       // console.log( this.options );
     })
@@ -125,6 +126,11 @@ export class VendedoresComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sellers.getUserForRol(2).subscribe(
+      (data:any) =>{
+        this.vendedores = data;
+      }
+    )
   }
 
   createForm() {
@@ -189,9 +195,7 @@ export class VendedoresComponent implements OnInit {
   }
 
   traerVendedores(){
-    this.sellers.getUserForRol(2).subscribe( (data:any) =>{
-      this.vendedores = data;
-    });
+    
   }
 
   removeUsers(id){
@@ -199,8 +203,8 @@ export class VendedoresComponent implements OnInit {
     console.log( this.removeItemsUsers );
   }
 
-  vendedorDetalle(id){
-    this.route.navigate(['/users/vendedores',id]);
+  vendedorDetalle(id:number){
+    this.route.navigate(['/users/vendedores', id]);
   }
 
   agregarVendedor(){

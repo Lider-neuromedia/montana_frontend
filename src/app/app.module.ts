@@ -23,6 +23,12 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoInternaComponent } from './pedido-interna/pedido-interna.component';
 import { RolesComponent } from './roles/roles.component';
 import { RolesFormComponent } from './roles-form/roles-form.component';
+import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
+
+// import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // import { Select2Module } from 'ng2-select2';
 
@@ -46,14 +52,19 @@ import { RolesFormComponent } from './roles-form/roles-form.component';
     PedidoComponent,
     PedidoInternaComponent,
     RolesComponent,
-    RolesFormComponent
+    RolesFormComponent,
+    AdministradoresBuscadorComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    // InfiniteScrollModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
     // Select2Module
   ],
   providers: [],

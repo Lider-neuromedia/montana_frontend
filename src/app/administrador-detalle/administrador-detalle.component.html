@@ -6,16 +6,15 @@
     </div>
     <div class="contenido">
         <div class="filtros">
-            <div class="ident-admin">
+            <div class="ident-admin col">
                 <div class="div-imagen">
-                    <img src="/assets/img/iniciales_dm_azul.svg" alt="">
+                    <span class="bg-name-blue">{{ letra }}</span>
                 </div>
                 <div class="div-datos">
-                    <p>Bejarano Garavito Bladimiro Alfonso</p>
-                    <p>Cliente No. 338294840</p>
+                    <p style="padding-top:10px">{{ info.name }} </p>
                 </div>
             </div>
-            <div class="div-edit-boton">
+            <!-- <div class="div-edit-boton">
                 <div class="box-editar">
                     <div class="icono-editar">
                         <img src="/assets/img/editar.svg" alt="">
@@ -31,146 +30,143 @@
                     </div>
                     <a class="btn-nuevo-cliente" href="#">Tienda</a>
                 </div>
-            </div>
+            </div> -->
         </div>
-        
+
         <div class="administrador-detalle">
             <div class="row">
-                <div class="col-sm-12 col-md-9 datos-personales">
-        
+                <div class="col-sm-12 col-md-12 datos-personales">
+
                     <div class="row">
-        
+
                         <div class="col-sm-12">
                             <h2 class="title-datos-personales">Datos personales</h2>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Nombres</p>
-                            <p>Bladimiro Alfontso</p>
+                            <p>{{ info.name }}</p>
                         </div>
-                        
-                        <div class="col-sm-12 col-md-3 datos">
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Apellidos</p>
                             <p>Bejarano Garavito</p>
-                        </div>
-                    
-                        <div class="col-sm-12 col-md-3 datos">
+                        </div> -->
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Tipo de documento</p>
                             <p>Cédula de ciudadadía</p>
-                        </div>
-                    
-                        <div class="col-sm-12 col-md-3 datos">
+                        </div> -->
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Número de documento</p>
                             <p>1113756927</p>
-                        </div>
-        
-                        <div class="col-sm-12 col-md-3 datos">
+                        </div> -->
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Teléfono</p>
-                            <p>3134569809</p>
-                        </div>
-                        
+                            <p>{{ info.value_key }}</p>
+                        </div> -->
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Correo electrónico</p>
-                            <p>info@neuromedia.com.co</p>
+                            <p>{{ info.email }}</p>
                         </div>
-                    
-                        <div class="col-sm-12 col-md-3 datos">
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Ciudad</p>
                             <p>Cali</p>
-                        </div>
-                    
-                        <div class="col-sm-12 col-md-3 datos">
+                        </div> -->
+
+                        <!-- <div class="col-sm-12 col-md-3 datos">
                             <p>Nit</p>
                             <p>1115072011-8</p>
-                        </div>
-        
+                        </div> -->
+
                     </div>
-        
-                    <div class="row">
+
+                    <!-- <div class="row">
                         <div class="col-sm-12">
                             <h2 class="title-tiendas">Tiendas</h2>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Nombre de la tienda</p>
                             <p>C.C Suba local 2</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Punto de venta</p>
                             <p>17</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Ciudad</p>
                             <p>Palmira Valle del Cauca</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Dirección</p>
                             <p>Calle 31 No. 16 - 32</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Nombre de la tienda</p>
                             <p>C.C Suba local 2</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Punto de venta</p>
                             <p>17</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Ciudad</p>
                             <p>Palmira Valle del Cauca</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Dirección</p>
                             <p>Calle 31 No. 16 - 32</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Nombre de la tienda</p>
                             <p>C.C Suba local 2</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Punto de venta</p>
                             <p>17</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Ciudad</p>
                             <p>Palmira Valle del Cauca</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Dirección</p>
                             <p>Calle 31 No. 16 - 32</p>
                         </div>
-        
-        
-                    </div>
-        
+                    </div> -->
                     <div class="row">
                         <div class="col-sm-12">
                             <h2 class="title-credenciales">Credenciales</h2>
                         </div>
-        
-                        <div class="col-sm-12 col-md-4 datos">
+
+                        <div class="col-sm-12 col-md-3 datos">
                             <p>Usuario</p>
-                            <p>Williamno880@hotmail.com</p>
+                            <p>{{ info.email }}</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Contraseña</p>
                             <p>**************</p>
                         </div>
                     </div>
-        
-                    <div class="row">
+
+                    <!-- <div class="row">
                         <div class="col-sm-12">
                             <h2 class="title-vendedor-asignado">Vendedor asignado</h2>
                         </div>
@@ -190,64 +186,50 @@
                             <p>Teléfono</p>
                             <p>3217552803</p>
                         </div>
-                    </div>
-        
-                    <div class="row">
+                    </div> -->
+                    <!-- <div class="row">
                         <div class="col-sm-12">
                             <h2 class="title-tus-finanzas">Tus finanzas</h2>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <p>Último crédito: 25 de junio de 2020</p>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <p>Próximo pago: 30 de julio de 2020</p>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <div class="cupo-preaprobado">
                                 <p>Cupo preaprobado</p>
                                 <p>$15.000.000</p>
                             </div>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <div class="cupo-disponible">
                                 <p>Cupo disponible</p>
                                 <p>$6.000.000</p>
                             </div>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <div class="total-deuda">
                                 <p>Saldo total de la deuda</p>
                                 <p>$9.000.000</p>
                             </div>
                         </div>
-        
                         <div class="col-sm-12 col-md-6">
                             <div class="saldo-en-mora">
                                 <p>Saldo en mora</p>
                                 <p>$4.500.000</p>
                             </div>
                         </div>
-        
-                    </div>
-        
-        
+                    </div> -->
                 </div>
-                <div class="col-sm-12 col-md-3">
+                <!-- <div class="col-sm-12 col-md-3">
                     <div class="actions">
                         <a href="#">Pedidos</a>
                         <a href="#">Solicitar cupo</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
-        
     </div>
 </div>
-
-
-

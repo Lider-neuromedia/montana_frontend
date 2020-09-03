@@ -6,29 +6,39 @@
         </div>
         <div class="col-login">
             <div class="box-login">
-                <img src="" alt="">
-                <form action="">
+                <p class="text-center p-b5rem">
+                    <img src="./assets/img/logo_txt.png" alt="" class="img-fluid">
+                </p>
+                <form (ngSubmit)="ingresar()" [formGroup]="formLogin" class="animated fadeInLeft">
                     <div class="box-input-label">
                         <!-- <label for="">Usuario</label> -->
-                        <input [(ngModel)]="user.email" name="email" type="text" placeholder="Usuario">
-                    </div>
-    
-                    <div class="box-input-label last-label">
-                        <!-- <label for="">Contraseña</label> -->
-                        <input [(ngModel)]="user.password" name="password" type="password" placeholder="Contraseña">
+                        <input name="email" type="text" placeholder="Correo electrónico" formControlName="email" [class.is-invalid]="emailNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="emailNoValid">
+                            El correo es obligatorio
+                        </small>
                     </div>
 
-                    <div class="box-recuperar-contrasena">
+                    <div class="box-input-label last-label">
+                        <!-- <label for="">Contraseña</label> -->
+                        <input name="password" type="password" placeholder="Contraseña" formControlName="password" [class.is-invalid]="passNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
+                            La contraseña es obligatorio
+                        </small>
+                    </div>
+
+                    <div class="box-input-label box-recuperar-contrasena">
                         <a class="recuperar-contrasena" href="#">Recuperar contraseña</a>
                     </div>
 
                     <div class="box-btn-iniciar-sesion">
                         <a (click)="ingresar()">Iniciar Session</a>
+                        <!-- <button type="submit" class="btn btn-outline-primary btn-block">
+                            Iniciar Session
+                        </button> -->
                     </div>
-
                 </form>
-            </div> 
+            </div>
         </div>
     </div>
-    
+
 </div>

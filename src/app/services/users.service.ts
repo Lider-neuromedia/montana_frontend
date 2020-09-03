@@ -6,15 +6,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsersService {
 
+
   // Local
   api = 'http://localhost/montana_backend/public/api';
   web = 'http://localhost/montana_backend/public';
-  
+
   // Producción
   // api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
   // web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
+
+  admins:any = [];
 
   /* Traer todos los usuarios */
   getAllUsers(){
@@ -37,11 +40,36 @@ export class UsersService {
     return this.http.post(`${this.api}/userdata`,data, {headers: headers});
   }
 
-  searchAdmin(name){
-    return this.http.get(`${this.web}/users-admin`,name);
+  getUsersAdmin(){
+    return this.http.get(`${this.web}/admins`);
   }
 
-  /* Crear usuario */
+  getUserAdmin(id){
+    return this.http.get(`${this.web}/admin/${id}`);
+  }
+  
+  buscarAdmin(text:string){
+    let AdminArr = [];
+    text = text.toLowerCase();
+    this.admins = this.http.get(`${this.web}/admins`).subscribe(
+      res =>{
+        this.admins = res;
+        for(let admin of this.admins){
+          let nombre = admin.name.toLowerCase();
+          if( nombre.indexOf(text) >= 0 ){
+            AdminArr.push(admin);
+          }
+        }
+      }
+    )
+    return AdminArr;
+  }
+
+  // searchAdmin(name){
+  //   return this.http.get(`${this.web}/users-admin`,name);
+  // }
+
+  /* Crear usuario admin */
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
     return this.http.post(`${this.api}/users`,user, {headers: headers});
@@ -54,27 +82,21 @@ export class UsersService {
 
   /* Eliminar varios usuario */
   deleteUsers(users){
-    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.api}/delete-users`,users,{headers: headers});
+    const headers = new HttpHeaders( {'Content-Type': 'application/json'} );
+    return this.http.post(`${this.api}/delete-users`, users,{ headers:headers });
   }
 
   /* Clientes asianados */
   clientesAsignados(cliente){
     // return this.http.get(`${this.web}/relacion/${id}`);
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.api}/asignar-cliente`,cliente,{headers: headers});
+    return this.http.post(`${this.api}/asignar-cliente`, cliente,{ headers:headers });
   }
-
-
 
   createAdmin(admin){
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
     return this.http.post(`${this.api}/create-admin`,admin, {headers: headers});
   }
-
-  
-  
-  
 
   getAllSellers(){
     return this.http.get(`${this.web}/vendedores`);
@@ -113,5 +135,4 @@ export class UsersService {
 	deleteRol(id){
 		return this.http.delete(`${this.api}/roles/${id}`,id);
 	}
-
 }

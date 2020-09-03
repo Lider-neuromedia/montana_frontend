@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,10 @@ export class AuthService {
 
   options: any;
 
+  userToken: string;
+
   constructor( private http: HttpClient ) {
+    this.seeToken();
     this.options = {
       headers: new HttpHeaders({
         Accept: 'application/json',
@@ -40,12 +45,35 @@ export class AuthService {
 
   login(credenciales) {
     const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.authUrl}`,credenciales,{headers: headers});
+    return this.http.post(`${this.authUrl}`,credenciales,{headers: headers}).pipe(
+      map(res=>{
+        this.saveToken(res['access_token']);
+        return res;
+      })
+    );
   }
 
   logout() {
     this.options.headers.Authorization = 'Bearer ' + localStorage.getItem('access_token');
     return this.http.get(this.apiUrl + '/token/revoke', this.options);
+  }
+
+  private saveToken(idToken: string){
+    this.userToken = idToken;
+    localStorage.setItem('access_token', idToken);
+  }
+
+  seeToken(){
+    if(localStorage.getItem('access_token')){
+      this.userToken = localStorage.getItem('access_token');
+    }else{
+      this.userToken = '';
+    }
+    return this.userToken;
+  }
+
+  authOn(): boolean{
+    return this.userToken.length > 2;
   }
 
 

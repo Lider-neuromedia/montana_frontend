@@ -29,14 +29,14 @@ export class VendedorDetalleComponent implements OnInit {
 
   id:any;
 
-  usuarios = [];
-  info = {};
+  usuarios:any = {};
+  info:any = {};
 
   show = true;
 
   constructor(private activatedRoute: ActivatedRoute, private user: UsersService) {
 
-    this.id = this.activatedRoute.snapshot.params['id'];
+    const id = this.activatedRoute.snapshot.params['id'];
 
     // this.user.getSeller(this.id).subscribe(
     //   (data:any) =>{
@@ -54,23 +54,22 @@ export class VendedorDetalleComponent implements OnInit {
     //     console.log(error);
     //   })
 
-    if(this.info != null){
-      this.user.getSeller(this.id).subscribe(
+    if(id != null){
+      this.user.getSeller(id).subscribe(
         (data:any) =>{
           this.usuarios = data;
-          console.log( this.usuarios );
           for(var i = 0; i <= data.length - 1; i++){
             var turnAround = data[i].field_key;
             this.info[turnAround] = data[i].value_key;
+            // this.info = data[i];
           }
+          this.info;
           console.log(this.info);
         },
         (error) =>{
           this.show = false;
         })
     }
-
-    
   }
 
   ngOnInit(): void {

@@ -27,8 +27,8 @@ export class ClienteDetalleComponent implements OnInit {
   id:any;
   usuario:any = [];
 
-  info = {};
-  show = true;
+  info:any = {};
+  show:boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute, private user: UsersService) {
 

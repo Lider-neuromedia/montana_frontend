@@ -1,4 +1,4 @@
-*{
+* {
     border: 0;
     margin: 0;
     outline: none;
@@ -6,60 +6,65 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     font-family: 'Source Sans Pro', sans-serif;
     overflow-x: hidden;
     color: #323E4A;
 }
 
-img{
+img {
     max-width: 100%;
 }
 
-.area-admin{
+.area-admin {
     margin-left: 230px;
     padding-top: 70px;
 }
 
-.workplace{
+.workplace {
     display: flex;
     position: relative;
 }
 
-.workplace .slide-menu{
+.workplace .slide-menu {
     position: relative;
 }
 
-.workplace .area{
+.workplace .area {
     padding: 4em 2em 3em 0px;
     width: 100%;
     position: relative;
     margin-left: 240px;
 }
 
+
 /* Estilos generales de las tablas */
-.filtros{
+
+.filtros {
     display: flex;
     width: 100%;
     justify-content: flex-end;
     padding-right: 25px;
 }
-.box-buscador{
+
+.box-buscador {
     position: relative;
 }
-.lupa{
+
+.lupa {
     position: absolute;
     top: 8px;
     right: 10px;
 }
-.box-buscador .buscador{
+
+.box-buscador .buscador {
     background: transparent;
     border: 1px solid #FF596A;
     border-radius: 15px;
-    padding: 3px 10px;
+    padding: 5px 10px;
 }
 
-.box-editar{
+.box-editar {
     align-items: center;
     border: 1px solid #FF596A;
     color: #FF596A;
@@ -70,12 +75,48 @@ img{
     margin: 0px 18px;
 }
 
-.icono-editar{
+.imagen-nombre {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.bg-name-blue {
+    background: #34BDF7;
+    color: #fff;
+    width: 40px;
+    border-radius: 50px;
+    height: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.bg-name-red {
+    background: #FF596A;
+    color: #fff;
+    width: 40px;
+    border-radius: 50px;
+    height: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.icono-editar {
     position: absolute;
     left: 10px;
 }
 
-.icono-puntos{
+.icono-puntos {
     position: absolute;
     right: 10px;
     border-left: 1px solid #FF596A;
@@ -84,16 +125,16 @@ img{
 
 .box-buscador,
 .box-editar,
-.box-create-new{
+.box-create-new {
     display: flex;
     position: relative;
 }
 
-.box-create-new{
+.box-create-new {
     /* margin-right: 32px; */
 }
 
-.btn-nuevo-cliente{
+.btn-nuevo-cliente {
     background: #FF596A;
     color: white;
     cursor: pointer;
@@ -108,12 +149,12 @@ img{
     transition: all .3s ease;
 }
 
-.btn-nuevo-cliente:hover{
+.btn-nuevo-cliente:hover {
     background: #ec5362;
     box-shadow: 0px 1px 3px #1e29336c;
 }
 
-.box-mas{
+.box-mas {
     position: absolute;
     background-image: linear-gradient(180deg, #FF596A 0%, #F51A3C 100%);
     border-radius: 50%;
@@ -122,88 +163,92 @@ img{
     width: 31px;
 }
 
-.mas{
+.mas {
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     position: absolute;
 }
 
-.table-data{
+.table-data {
     background: white;
     padding-left: 15px;
     color: #444A4F;
 }
 
-.table-data table{
+.table-data table {
     margin-top: 1.5em;
 }
 
 .tabla-fila-datos .imagen-nombre .imagen,
-.tabla-fila-datos .imagen-nombre .nombre{
+.tabla-fila-datos .imagen-nombre .nombre {
     display: inline-block;
     vertical-align: middle;
 }
 
 .tabla-fila-datos .imagen-nombre .imagen,
-.tabla-fila-datos .imagen-nombre .nombre{
+.tabla-fila-datos .imagen-nombre .nombre {
     margin-left: 15px;
 }
 
-.tabla-fila-cabecera{
+.tabla-fila-cabecera {
     font-size: 14px;
     color: #1E2933;
     text-align: left;
     border-bottom: 1px solid #D8D8D8;
 }
 
-.tabla-fila-cabecera th{
+.tabla-fila-cabecera th {
     padding: 20px 10px;
 }
 
-.tabla-fila-cabecera th img{
+.tabla-fila-cabecera th img {
     margin: 0 1em;
 }
 
-.tabla-fila-datos{
+.tabla-fila-datos {
     transition: background-color .6s ease;
 }
 
-.tabla-fila-datos:hover{
+.tabla-fila-datos:hover {
     cursor: pointer;
 }
 
-.tabla-fila-datos td{
+.tabla-fila-datos td {
     border-bottom: 1px solid #D8D8D8;
     padding: 15px 10px;
 }
 
-.tabla-fila-datos:hover{
+.tabla-fila-datos:hover {
     background-color: #ff596a2c;
 }
+
+
 /* Fin estilos generales */
 
-
 .administrador-detalle,
-.cliente-detalle{
+.cliente-detalle {
     background: white;
     padding-top: 2em;
     padding-left: 2em;
 }
 
-input[type="text"],input[type="email"],input[type="number"],input[type="tel"]{
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"] {
     border: 1px solid #D7D7D7;
     border-radius: 6px;
     padding: 10px;
     width: 100%;
 }
 
-#wrapper{
+#wrapper {
     display: flex;
     flex-wrap: wrap;
 }
 
-#wrapper .contenido{
+#wrapper .contenido {
     background: #F4F8FB;
     width: 100%;
     padding-left: 209px;

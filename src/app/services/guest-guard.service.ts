@@ -9,9 +9,9 @@ export class GuestGuardService {
   constructor( private router: Router ) { }
 
   canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot) {
-    if (!localStorage.getItem('access_token')) { return true; }
-    this.router.navigateByUrl('/');
-    return false;
+    // if (!localStorage.getItem('access_token')) { return true; }
+    // this.router.navigateByUrl('/');
+    // return false;
   }
 
 }

@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
 import { AdministradorDetalleComponent } from './administrador-detalle/administrador-detalle.component';
+import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
+
+
 
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteDetalleComponent } from './cliente-detalle/cliente-detalle.component';
@@ -27,24 +30,27 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoInternaComponent } from './pedido-interna/pedido-interna.component';
 
-import { AuthGuardService } from './services/auth-guard.service';
-import { GuestGuardService } from './services/guest-guard.service';
+import { AuthGuard } from './guards/auth.guard';
+// import { AuthGuardService } from './services/auth-guard.service';
+// import { GuestGuardService } from './services/guest-guard.service';
 
 const routes : Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent,},
   { path: 'productos', component: InternaCatalogoComponent },
   { path: 'producto-detalle', component: ProductoDetalleComponent },
   {
-    path: 'users', component: UsersComponent,
+    path: 'users', component: UsersComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'administradores', component: AdministradoresComponent,  },
-      { path: 'administradores/:name', component: AdministradorDetalleComponent, },
-      { path: 'vendedores', component: VendedoresComponent,  },
+      { path: 'administradores', component: AdministradoresComponent, canActivate: [AuthGuard] },
+      { path: 'administradores/:id', component: AdministradorDetalleComponent},
+      { path: 'buscar/:text', component: AdministradoresBuscadorComponent},
+      { path: 'vendedores', component: VendedoresComponent, },
       { path: 'vendedores/:id', component: VendedorDetalleComponent,  },
       { path: 'clientes', component: ClientesComponent,  },
-      { path: 'clientes/:id', component: ClienteDetalleComponent,  }
+      { path: 'clientes/:id', component: ClienteDetalleComponent,  },
+      // { path: '**', pathMatch: 'full', redirectTo: 'login'}
     ]
   },
   { path: 'roles', component: RolesComponent },
@@ -59,6 +65,7 @@ const routes : Routes = [
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'pedido-interna', component: PedidoInternaComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
 @NgModule({

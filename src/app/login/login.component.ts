@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { UsersService } from '../services/users.service';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -20,41 +21,55 @@ export class LoginComponent implements OnInit {
   }
 
   token:any;
-
+  formLogin: FormGroup;
   roles = [];
 
-  constructor(private route: Router, private auth: AuthService, private userService: UsersService) {
+  constructor(private route: Router, private auth: AuthService, private userService: UsersService, private formb: FormBuilder) {
     this.userService.getRoles().subscribe( (data:any) =>{
       this.roles = data;
     })
+    this.FormLogin();
   }
 
   ngOnInit(): void {
   }
 
-  ingresar(){
+  get emailNoValid(){
+    return this.formLogin.get('email').invalid && this.formLogin.get('email').touched;
+  }
 
+  get passNoValid(){
+    return this.formLogin.get('password').invalid && this.formLogin.get('password').touched;
+  }
+
+  FormLogin(){
+    this.formLogin = this.formb.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['', Validators.required],
+    });
+  }
+
+  ingresar(){
+    if(this.formLogin.invalid){
+      return Object.values(this.formLogin.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
     Swal.fire({
-      title: 'Espere por favor',
+      icon: 'info',
+      title: 'Un momento por favor',
       allowEscapeKey: false,
       allowOutsideClick: false,
       timer: 2000,
-      onOpen: () => {
-        Swal.showLoading();
-      }
-    })
-    
-    this.auth.login(this.user).subscribe(
-      
+    });
+    Swal.showLoading();
+
+    this.auth.login(this.formLogin.value).subscribe(
       (res: any) => {
-
-        console.log(res);
+        Swal.close();
         localStorage.setItem('access_token', res.access_token);
-
         let dataString = JSON.stringify(res.userdata);
         let dataJson = JSON.parse(dataString);
-        //console.log( dataJson );
-        
 
         localStorage.setItem('rol', res.rol);
         localStorage.setItem('user_id', res.id);
@@ -64,16 +79,14 @@ export class LoginComponent implements OnInit {
         let rol = localStorage.getItem('rol');
         let name = localStorage.getItem('user');
 
-        
-
         if( rol == this.roles[2].id){
-          this.route.navigate(['/users/clientes',rol]);
+          this.route.navigateByUrl('/users/clientes');
         } else if( rol == this.roles[1].id){
-          this.route.navigate(['/users/clientes']);
+          this.route.navigateByUrl('/users/clientes');
         } else if( rol == this.roles[0].id ){
-          this.route.navigate(['/users/administradores']);
+          this.route.navigateByUrl('/users/administradores');
         } else {
-          alert('Hubo un error');
+          this.route.navigateByUrl('/login');
         }
 
       },

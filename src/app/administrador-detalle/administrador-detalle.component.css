@@ -2,66 +2,71 @@
 .title-tiendas,
 .title-credenciales,
 .title-vendedor-asignado,
-.title-tus-finanzas{
+.title-tus-finanzas {
     font-size: 26px;
     letter-spacing: 0.74px;
     font-weight: 700;
     margin: .6em 0em;
 }
 
-.ident-admin{
+.ident-admin {
     display: flex;
+    margin-bottom: 10px;
 }
 
-.div-imagen img{
+.div-imagen img {
     margin-right: 10px;
 }
 
-.filtros{
+.filtros {
     justify-content: space-between;
 }
 
-.div-edit-boton{
+.div-edit-boton {
     display: flex;
 }
 
 .box-editar,
-.box-create-new{
+.box-create-new {
     height: max-content;
 }
-.texto-editar{
+
+.texto-editar {
     padding: 5px;
 }
-.title-datos-personales{
+
+.title-datos-personales {
     margin: .8em 0em;
 }
-.datos{
+
+.datos {
     margin-bottom: 1em;
 }
-.datos p:nth-child(2){
+
+.datos p:nth-child(2) {
     font-weight: 800;
 }
 
-.color-email{
+.color-email {
     color: #FF596A;
 }
 
 .cupo-preaprobado,
 .cupo-disponible,
 .total-deuda,
-.saldo-en-mora{
+.saldo-en-mora {
     background: white;
     margin: 1em 0em;
     border-radius: 8px;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.cupo-preaprobado{
+.cupo-preaprobado {
     border-top: 4px solid #FFCF27;
     border-radius: 8px;
 }
 
-.cupo-preaprobado p:nth-child(1){
+.cupo-preaprobado p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
@@ -69,7 +74,7 @@
     padding-bottom: 10px;
 }
 
-.cupo-preaprobado p:nth-child(2){
+.cupo-preaprobado p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
@@ -77,12 +82,12 @@
     padding-bottom: 30px;
 }
 
-.cupo-disponible{
+.cupo-disponible {
     border-top: 4px solid #95D5C1;
     border-radius: 8px;
 }
 
-.cupo-disponible p:nth-child(1){
+.cupo-disponible p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
@@ -90,7 +95,7 @@
     padding-bottom: 10px;
 }
 
-.cupo-disponible p:nth-child(2){
+.cupo-disponible p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
@@ -98,12 +103,12 @@
     padding-bottom: 30px;
 }
 
-.total-deuda{
+.total-deuda {
     border-top: 4px solid #EB1EC3;
     border-radius: 8px;
 }
 
-.total-deuda p:nth-child(1){
+.total-deuda p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
@@ -111,7 +116,7 @@
     padding-bottom: 10px;
 }
 
-.total-deuda p:nth-child(2){
+.total-deuda p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
@@ -119,12 +124,12 @@
     padding-bottom: 30px;
 }
 
-.saldo-en-mora{
+.saldo-en-mora {
     border-top: 4px solid #E31D31;
     border-radius: 8px;
 }
 
-.saldo-en-mora p:nth-child(1){
+.saldo-en-mora p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
@@ -132,7 +137,7 @@
     padding-bottom: 10px;
 }
 
-.saldo-en-mora p:nth-child(2){
+.saldo-en-mora p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
@@ -140,12 +145,12 @@
     padding-bottom: 30px;
 }
 
-.actions{
+.actions {
     display: flex;
     justify-content: space-between;
 }
 
-.actions a{
+.actions a {
     text-align: center;
     text-decoration: none;
     width: 50%;
