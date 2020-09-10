@@ -75,6 +75,10 @@ img {
     margin: 0px 18px;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .imagen-nombre {
     display: flex;
     justify-content: start;
@@ -147,6 +151,14 @@ img {
     padding: 4px 40px;
     padding-right: 20px;
     transition: all .3s ease;
+}
+
+.box-input-label small,
+.label-field small {
+    background: #fff;
+    color: #F85C6C;
+    padding: 5px;
+    display: block;
 }
 
 .btn-nuevo-cliente:hover {

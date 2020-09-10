@@ -5,7 +5,7 @@
         <app-menu></app-menu>
     </div>
     <div class="contenido">
-        <div class="overview"></div>
+        <div class="overview" (click)="cerrarFormAdmin()"></div>
 
         <div class="nuevo-administrador">
             <div class="header-form">
@@ -81,7 +81,7 @@
                 <button type="button" class="hidden"></button>
             </div>
 
-            <!-- <div (click)="accionesAdministrador()" class="box-editar">
+            <div (click)="accionesAdministrador()" class="box-editar">
                 <div class="icono-editar">
                     <img src="{{ templateImage.lapiz }}" alt="">
                 </div>
@@ -101,7 +101,7 @@
                     <img class="mas" src="{{ templateImage.mas }}" alt="">
                 </div>
                 <a class="btn-nuevo-cliente" (click)="nuevoAdmin()">Nuevo administrador</a>
-            </div> -->
+            </div>
         </div>
 
 
@@ -127,7 +127,7 @@
                     <td (click)="administradorDetalle(usuario.id)" class="correo">{{ usuario.email }}</td>
                 </tr> -->
 
-                <tr *ngFor="let usuario of admins" class="tabla-fila-datos">
+                <tr *ngFor="let usuario of admins | paginate: { itemsPerPage: 5, currentPage: current }" class="tabla-fila-datos">
                     <td><input class="check-nombre" type="checkbox" name="check[]" id=""></td>
                     <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
                         <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
@@ -137,6 +137,9 @@
                     <td class="correo">{{ usuario.email }}</td>
                 </tr>
             </table>
+            <div class="pt-3 pb-3 pagination">
+                <pagination-controls (pageChange)="current = $event" previousLabel="Antes" nextLabel="Después" responsive="true"></pagination-controls>
+            </div>
         </section>
 
         <!-- <div class="paginador">

@@ -23,18 +23,29 @@
     z-index: 500;
 }
 
+.pagination /deep/ .ngx-pagination .current {
+    background: #FF596A !important;
+    border-radius: 5px;
+}
+
+
+/* 
+.loading-text {
+    top: 85% !important;
+} */
+
 .header-form {
     display: flex;
     color: #323E4A;
     justify-content: space-between;
     background: #F6FBFF;
-    padding: 8px 10px;
+    padding: 15px 20px;
     letter-spacing: 0.54px;
 }
 
 .nuevo-administrador h2 {
     font-size: 19px;
-    padding: 0px 20px;
+    padding: 0px;
 }
 
 .cerrar-form-admin {
@@ -75,3 +86,100 @@
     border-radius: 6px;
     padding: 10px;
 }
+
+.acciones-form-adminitrador {
+    display: flex;
+    position: fixed;
+    bottom: 50px;
+    padding: 0px 20px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.agregar,
+.cancelar {
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+
+.agregar {
+    background: #FF596A;
+    padding: 6px 0px;
+    color: white;
+    transition: all .5s ease;
+}
+
+.agregar:hover {
+    background: #da4e5c;
+}
+
+.cancelar {
+    background: white;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    padding: 6px 0px;
+    transition: all .5s ease;
+}
+
+.cancelar:hover {
+    background: #ec5362;
+    color: white;
+}
+
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-administrador {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    width: 101%;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administrador li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administrador li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+
+/* desahabilitar enlaces en la creación de usuarios */
+
+.disabled:disabled {}

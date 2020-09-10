@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class UsersService {
 
 
   // Local
-  api = 'http://localhost/montana_backend/public/api';
+  api = 'http://127.0.0.1:8000/api';
   web = 'http://localhost/montana_backend/public';
 
   // Producción
@@ -17,7 +18,7 @@ export class UsersService {
 
   constructor( private http: HttpClient ) {}
 
-  admins:any = [];
+  admins:any = {};
 
   /* Traer todos los usuarios */
   getAllUsers(){
@@ -41,7 +42,8 @@ export class UsersService {
   }
 
   getUsersAdmin(){
-    return this.http.get(`${this.web}/admins`);
+    const headers = new HttpHeaders( {'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/admins`, {headers: headers});
   }
 
   getUserAdmin(id){
@@ -51,10 +53,11 @@ export class UsersService {
   buscarAdmin(text:string){
     let AdminArr = [];
     text = text.toLowerCase();
-    this.admins = this.http.get(`${this.web}/admins`).subscribe(
+    const headers = new HttpHeaders( {'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    this.admins = this.http.get(`${this.api}/admins`, {headers: headers}).subscribe(
       res =>{
-        this.admins = res;
-        for(let admin of this.admins){
+        this.admins['fields'] = res;
+        for(let admin of this.admins.fields['admins']){
           let nombre = admin.name.toLowerCase();
           if( nombre.indexOf(text) >= 0 ){
             AdminArr.push(admin);
@@ -71,13 +74,18 @@ export class UsersService {
 
   /* Crear usuario admin */
   createUser(user){
-    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.api}/users`,user, {headers: headers});
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.post(`${this.api}/users`, user, {headers: headers});
+  }
+
+  updateUser(user, id){
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.post(`${this.api}/update-user/${id}`, user, {headers: headers});
   }
 
   /* Eliminar un usuario */
   deleteUser(users){
-    return this.http.delete(`${this.api}/users/${users}`,users);
+    return this.http.delete(`${this.api}/users/${users}`, users);
   }
 
   /* Eliminar varios usuario */

@@ -6,71 +6,123 @@
     </div>
     <div class="contenido">
         <div class="overview" (click)="cerrarFormAdmin()"></div>
+        <div class="overview2" (click)="cerrarFormAdminEditar()"></div>
 
         <div class="nuevo-administrador">
             <div class="header-form">
                 <h2>Nuevo administrador</h2>
                 <img (click)="cerrarFormAdmin()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
             </div>
-
-            <form action="">
-
+            <form (ngSubmit)="agregarAdmin()" [formGroup]="formCreateAdmin">
                 <h3 class="datos-generales">Datos generales</h3>
-
                 <div class="label-field">
-                    <label for="">Nombres</label>
-                    <input [(ngModel)]="admin.name" name="name" type="text" class="">
-                    <small style="color: red;">{{ errors.name }}</small>
+                    <label for="">Nombre completo</label>
+                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="nameNoValid">
+                        El nombre es obligatorio
+                    </small>
                 </div>
-
-                <div class="label-field">
-                    <label for="">Apellidos</label>
-                    <input [(ngModel)]="admin.userdata.apellido" name="apellido" type="text" class="" required>
-                    <small style="color: red;">{{ errors.apellido }}</small>
+                <div formGroupName="userdata">
+                    <div class="label-field">
+                        <label for="">Apellidos</label>
+                        <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="apellidosNoValid">
+                            El apellido es obligatorio
+                        </small>
+                    </div>
+                    <div class="label-field">
+                        <label for="">Teléfono</label>
+                        <input name="telefono" type="number" formControlName="telefono" [class.is-invalid]="telefonoNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="telefonoNoValid">
+                            El teléfono es obligatorio
+                        </small>
+                    </div>
                 </div>
-
-                <div class="label-field">
-                    <label for="">Teléfono</label>
-                    <input [(ngModel)]="admin.userdata.telefono" name="telefono" type="tel" class="" required>
-                    <small style="color: red;">{{ errors.telefono }}</small>
-                </div>
-
                 <div class="label-field">
                     <label for="">Correo electrónico</label>
-                    <input [(ngModel)]="admin.email" name="email" type="email" class="">
-                    <small style="color: red;">{{ errors.email }}</small>
+                    <input name="email" type="email" formControlName="email" [class.is-invalid]="emailNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="emailNoValid">
+                        El correo es obligatorio
+                    </small>
                 </div>
-
                 <div class="label-field">
                     <label for="">Password</label>
-                    <input [(ngModel)]="admin.password" name="password" type="password" class="">
-                    <small style="color: red;">{{ errors.password }}</small>
+                    <input name="password" type="password" formControlName="password" [class.is-invalid]="passNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
+                        El password es obligatorio
+                    </small>
                 </div>
-
             </form>
-
             <div class="acciones-form-adminitrador">
                 <a (click)="agregarAdmin()" class="agregar">
                     <span class="mas">
                         <img src="" alt="">
                     </span> Agregar
                 </a>
-
                 <a class="cancelar" (click)="cerrarFormAdmin()">
                     <span class="mas">
                         <img src="" alt="">
                     </span> Cancelar
                 </a>
-                <!-- <a class="agregar">
+            </div>
+        </div>
+
+        <div class="editar-administrador">
+            <div class="header-form">
+                <h2>Editar administrador</h2>
+                <img (click)="cerrarFormAdminEditar()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
+            </div>
+            <form (ngSubmit)="updateAdmin()" [formGroup]="formCreateAdmin">
+                <h3 class="datos-generales">Datos generales</h3>
+                <div class="label-field">
+                    <label for="">Nombre completo</label>
+                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="nameNoValid">
+                        El nombre es obligatorio
+                    </small>
+                </div>
+                <div formGroupName="userdata">
+                    <div class="label-field">
+                        <label for="">Apellidos</label>
+                        <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="apellidosNoValid">
+                            El apellido es obligatorio
+                        </small>
+                    </div>
+                    <div class="label-field">
+                        <label for="">Teléfono</label>
+                        <input name="telefono" type="number" formControlName="telefono" [class.is-invalid]="telefonoNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="telefonoNoValid">
+                            El teléfono es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <div class="label-field">
+                    <label for="">Correo electrónico</label>
+                    <input name="email" type="email" formControlName="email" [class.is-invalid]="emailNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="emailNoValid">
+                        El correo es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Password</label>
+                    <input name="password" type="password" formControlName="password" [class.is-invalid]="passNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
+                        El password es obligatorio
+                    </small>
+                </div>
+            </form>
+            <div class="acciones-form-adminitrador">
+                <a (click)="editarAdmin()" class="agregar">
                     <span class="mas">
                         <img src="" alt="">
                     </span> Agregar
                 </a>
-                <a class="cancelar">
+                <a class="cancelar" (click)="cerrarFormAdminEditar()">
                     <span class="mas">
                         <img src="" alt="">
                     </span> Cancelar
-                </a> -->
+                </a>
             </div>
         </div>
 
@@ -82,15 +134,16 @@
             </div>
 
             <div (click)="accionesAdministrador()" class="box-editar">
-                <div class="icono-editar">
+                <!-- <div class="icono-editar">
                     <img src="{{ templateImage.lapiz }}" alt="">
-                </div>
-                <p class="texto-editar">Editar</p>
+                </div> -->
+                <p class="texto-editar">Acción de</p>
                 <div class="icono-puntos">
                     <img src="{{ templateImage.points }}" alt="">
                 </div>
 
                 <ul class="acciones-administrador">
+                    <li (click)="editarAdmin()" [ngClass]="active"><img src="{{ templateImage.lapiz }}" alt=""> Editar</li>
                     <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
                     <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                 </ul>
@@ -110,9 +163,21 @@
 
                 <tr class="tabla-fila-cabecera">
                     <th></th>
-                    <th style="padding-left: 95px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
+                    <!-- <th style="padding-left: 95px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
                     <th>Cel <img src="{{ templateImage.ordenar }}" alt=""></th>
-                    <th>Correo <img src="{{ templateImage.ordenar }}" alt=""></th>
+                    <th>Correo <img src="{{ templateImage.ordenar }}" alt=""></th> -->
+                    <th>
+                        Nombres <img src="{{ templateImage.ordenar }}" alt="">
+                    </th>
+                    <th>
+                        {{ apellidos }} <img src="{{ templateImage.ordenar }}" alt="">
+                    </th>
+                    <th>
+                        {{ telefono }} <img src="{{ templateImage.ordenar }}" alt="">
+                    </th>
+                    <th>
+                        Email <img src="{{ templateImage.ordenar }}" alt="">
+                    </th>
                 </tr>
 
                 <!-- TABLA DINÁMICA -->
@@ -126,14 +191,17 @@
                     <td (click)="administradorDetalle(usuario.id)" class="correo">{{ usuario.email }}</td>
                 </tr> -->
                 <tr *ngFor="let usuario of usersAdmins | paginate: { itemsPerPage: 5, currentPage: current }" class="tabla-fila-datos">
-                    <td>
-                        <input class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
+                    <td class="text-center">
+                        <input (change)="checkAdmin($event, usuario, active)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
                     </td>
                     <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
                         <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
                         <p class="nombre">{{ usuario.name }}</p>
                     </td>
-                    <td class="telefono">{{ usuario.value_key }}</td>
+                    <td *ngFor="let data of usuario.user_data">
+                        {{ data.value_key }}
+                    </td>
+                    <!-- <td class="telefono">{{ usuario.value_key }}</td> -->
                     <td class="correo">{{ usuario.email }}</td>
                 </tr>
             </table>

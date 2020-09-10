@@ -37,15 +37,15 @@ import { AuthGuard } from './guards/auth.guard';
 const routes : Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent,},
+  { path: 'login', component: LoginComponent },
   { path: 'productos', component: InternaCatalogoComponent },
   { path: 'producto-detalle', component: ProductoDetalleComponent },
   {
-    path: 'users', component: UsersComponent, canActivate: [AuthGuard],
+    path: 'users', component: UsersComponent,
     children: [
       { path: 'administradores', component: AdministradoresComponent, canActivate: [AuthGuard] },
-      { path: 'administradores/:id', component: AdministradorDetalleComponent},
-      { path: 'buscar/:text', component: AdministradoresBuscadorComponent},
+      { path: 'administradores/:id', component: AdministradorDetalleComponent, canActivate: [AuthGuard]},
+      { path: 'buscar/:text', component: AdministradoresBuscadorComponent,canActivate: [AuthGuard]},
       { path: 'vendedores', component: VendedoresComponent, },
       { path: 'vendedores/:id', component: VendedorDetalleComponent,  },
       { path: 'clientes', component: ClientesComponent,  },

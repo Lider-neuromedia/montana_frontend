@@ -66,12 +66,6 @@
     font-size: 18px;
 }
 
-.box-input-label small {
-    background: #fff;
-    color: #F85C6C;
-    padding: 5px;
-}
-
 .box-input-label input {
     background: transparent;
     border: none;

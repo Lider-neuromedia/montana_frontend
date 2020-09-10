@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { NgForm, FormGroup, FormBuilder, Validators,FormArray } from '@angular/forms';
 
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
@@ -53,6 +54,8 @@ export class AdministradoresComponent implements OnInit {
   letra = "";
 
   usersAdmins:any = [];
+  userColumns:any = [];
+
   admins:any = [];
 
   errors = {
@@ -67,7 +70,17 @@ export class AdministradoresComponent implements OnInit {
 
   current: number = 1;
 
-  constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService  ) {
+  formCreateAdmin: FormGroup;
+
+  nombres;
+  email;
+  telefono;
+  apellidos;
+
+  check_user:any = [];
+  active:string = "activeOff";
+
+  constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService, private formb: FormBuilder  ) {
 
     // this.userService.getUserForRol(this.rol).subscribe( (data:any) =>{
     //   console.log(data);
@@ -81,18 +94,52 @@ export class AdministradoresComponent implements OnInit {
     // this.userService.getUsersAdmin(this.usersAdmin).subscribe( (data:any) =>{
     //   this.usuarios = data;
     // });
-    
-
+    this.FormCreateAdmin();
   }
 
   ngOnInit(): void {
     this.showAdmins();
   }
 
+  get nameNoValid(){
+    return this.formCreateAdmin.get('name').invalid && this.formCreateAdmin.get('name').touched;
+  }
+  get apellidosNoValid(){
+    return this.formCreateAdmin.get('userdata.apellidos').invalid && this.formCreateAdmin.get('userdata.apellidos').touched;
+  }
+  get telefonoNoValid(){
+    return this.formCreateAdmin.get('userdata.telefono').invalid && this.formCreateAdmin.get('userdata.telefono').touched;
+  }
+  get emailNoValid(){
+    return this.formCreateAdmin.get('email').invalid && this.formCreateAdmin.get('email').touched;
+  }
+  get passNoValid(){
+    return this.formCreateAdmin.get('password').invalid && this.formCreateAdmin.get('password').touched;
+  }
+
+  FormCreateAdmin(){
+    this.formCreateAdmin = this.formb.group({
+      rol_id: [1],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['', Validators.required],
+      userdata: this.formb.group({
+        apellidos: ['', Validators.required],
+        telefono: ['', Validators.required],
+      })
+    });
+  }
+
   showAdmins(){
     this.userService.getUsersAdmin().subscribe(
       res =>{
-        this.usersAdmins = res;
+        this.usersAdmins = res['admins'];
+        // console.log(this.usersAdmins);
+        // console.log(res['admins']);
+        // this.nombres = this.userColumns = res['fields'][0];
+        // this.email = this.userColumns = res['fields'][1];
+        this.telefono = this.userColumns = res['fields'][0];
+        this.apellidos = this.userColumns = res['fields'][1];
       }
     );
   }
@@ -105,66 +152,73 @@ export class AdministradoresComponent implements OnInit {
     this.route.navigate(['/users/buscar', text]);
   }
 
-
-
-
-
-
-  // administradorDetalle(){
-  //   // this.activatedRoute.params.subscribe( (params : Params) =>{
-  //   //   console.log(params);
-  //   // })
-  //   this.route.navigate(['/users/administradores',1]);
-  // }
-
-  // buscarAdmin(){
-  //   this.userService.searchAdmin(this.buscador).subscribe( (data:any) =>{
-  //     console.log(data);
-  //   })
-  // }
-
-  nuevoAdmin(){
-    $('.nuevo-administrador').toggleClass('open');
-    $('.overview').css('display', 'block');
-  }
-
-  cerrarFormAdmin(){
-    $('.nuevo-administrador').toggleClass('open');
-    $('.overview').css('display', 'none');
-  }
-
-  accionesAdministrador(){
-    $('.acciones-administrador').toggleClass('open-acciones');
-    $('.box-editar').toggleClass('box-editar-open');
-  }
-
   agregarAdmin(){
-    this.userService.createUser(this.admin).subscribe(
-      (data) =>{
+    if(this.formCreateAdmin.invalid){
+      return Object.values(this.formCreateAdmin.controls).forEach(control => {
+        if (control instanceof FormGroup){
+          Object.values(control.controls).forEach(control => control.markAsTouched());
+        }else{
+          control.markAsTouched();
+        }
+      });
+    }
+    console.log(this.formCreateAdmin.value);
+    this.userService.createUser(this.formCreateAdmin.value).subscribe(
+      (data:any) =>{
+        console.log(data);
         this.showAdmins();
+        this.formCreateAdmin.reset();
         Swal.fire({
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
         });
-        console.log(data)
         // this.buscarAdmin();
       },
-      (error) =>{
+      (error:any) =>{
         console.log(error);
-        // apellido
-        if( this.errors.apellido == null || this.errors.apellido == '' ){
-          this.errors.apellido = 'El apellido es obligatorio';
-        } else {
-        }
-        // telefono
-        if( this.errors.telefono == null || this.errors.telefono == '' ){
-          this.errors.telefono = 'El teléfono es obligatorio';
-        }
-        this.errors.name = error.error.errors.name;
-        this.errors.email = error.error.errors.email;
-        this.errors.password = error.error.errors.password;
       }
-      );
+    );
+  }
+
+  updateAdmin(){
+    console.log(this.usersAdmins);
+  }
+
+  checkAdmin(e, data, active){
+
+    let obj = {
+      "data" : data
+    }
+
+    let removeIndex = this.check_user.findIndex(x => x.data === data);
+
+    if (e.target.checked){
+      this.check_user.push(obj);
+      if(this.check_user.length == 1){
+        // console.log(this.check_user.length);
+        this.active = "activeOn";
+        this.editarAdmin();
+        // console.log(this.active);
+      }else{
+        this.active = "activeOff";
+        // console.log(this.active);
+      }
+    }else {
+      // console.log(removeIndex);
+      if (removeIndex !== -1){
+        this.check_user.splice(removeIndex, 1);
+      }
+      if(removeIndex == 0){
+        this.active = "activeOff";
+        // console.log(this.active);
+      }
+      if(removeIndex == 1){
+        this.active = "activeOn";
+        this.editarAdmin();
+        // console.log(this.active);
+      }
+    }
+    // console.log(this.check_user);
   }
 
   removeUsers(id){
@@ -195,5 +249,37 @@ export class AdministradoresComponent implements OnInit {
         );
       }
     });
+  }
+
+  nuevoAdmin(){
+    $('.nuevo-administrador').toggleClass('open');
+    $('.overview').css('display', 'block');
+  }
+  editarAdmin(){
+    if($('.open-acciones li:first-child').hasClass('activeOn')){
+      $('.editar-administrador').toggleClass('open');
+      $('.overview2').css('display', 'block');
+    }else if($('.open-acciones li:first-child').hasClass('activeOff')){
+      $('.overview2').css('display', 'none');
+      Swal.fire(
+        'Tienes problemas?',
+        'Asegurate de seleccionar algun usuario o tener solo 1 seleccionado',
+        'warning'
+      );
+    }
+    
+  }
+  cerrarFormAdmin(){
+    $('.nuevo-administrador').toggleClass('open');
+    $('.overview').css('display', 'none');
+  }
+  cerrarFormAdminEditar(){
+    $('.editar-administrador').toggleClass('open');
+    $('.overview2').css('display', 'none');
+  }
+
+  accionesAdministrador(){
+    $('.acciones-administrador').toggleClass('open-acciones');
+    $('.box-editar').toggleClass('box-editar-open');
   }
 }

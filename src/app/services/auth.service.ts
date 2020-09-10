@@ -9,7 +9,10 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   // Local
-  authUrl = 'http://localhost/montana_backend/public/api/auth/login';
+  // authUrl = 'http://localhost/montana_backend/public/api/auth/login';
+  // apiUrl = 'http://localhost/montana_backend/public/api';
+
+  authUrl = 'http://127.0.0.1:8000/api/auth/login';
   apiUrl = 'http://localhost/montana_backend/public/api';
 
   // Producción
@@ -44,10 +47,10 @@ export class AuthService {
   // }
 
   login(credenciales) {
-    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.post(`${this.authUrl}`,credenciales,{headers: headers}).pipe(
-      map(res=>{
-        this.saveToken(res['access_token']);
+    const headers = new HttpHeaders( {'Content-Type': 'application/json'} );
+    return this.http.post(`${this.authUrl}`, credenciales, { headers:headers }).pipe(
+      map( res => {
+        this.saveToken(res[' access_token ']);
         return res;
       })
     );
@@ -73,7 +76,7 @@ export class AuthService {
   }
 
   authOn(): boolean{
-    return this.userToken.length > 2;
+    return this.seeToken().length > 2;
   }
 
 

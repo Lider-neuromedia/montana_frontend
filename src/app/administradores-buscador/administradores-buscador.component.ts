@@ -4,6 +4,7 @@ import { UsersService } from '../services/users.service';
 
 declare var jQuery:any;
 declare var $:any;
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-administradores-buscador',
@@ -48,6 +49,9 @@ export class AdministradoresBuscadorComponent implements OnInit {
 
   buscador = '';
   usersAdmins:any = [];
+  removeItemsUsers = [];
+  current: number = 1;
+  vacio: number = 0;
 
   constructor(private activatedRoute: ActivatedRoute,private userService: UsersService, private route: Router) { }
 
@@ -73,5 +77,40 @@ export class AdministradoresBuscadorComponent implements OnInit {
   accionesAdministrador(){
     $('.acciones-administrador').toggleClass('open-acciones');
     $('.box-editar').toggleClass('box-editar-open');
+  }
+  nuevoAdmin(){
+    $('.nuevo-administrador').toggleClass('open');
+    $('.overview').css('display', 'block');
+  }
+
+
+
+  removeUsers(id){
+    this.removeItemsUsers.push(id);
+    console.log( this.removeItemsUsers );
+  }
+  getUsersAndDelete(){
+    Swal.fire({
+      title: 'Está seguro que desea eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Completado',
+          'El usuario ha sido eliminado',
+          'success'
+        );
+        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+        this.userService.deleteUsers(this.removeItemsUsers).subscribe(
+          (data:any) =>{
+          console.log(data);
+          }
+        );
+      }
+    });
   }
 }
