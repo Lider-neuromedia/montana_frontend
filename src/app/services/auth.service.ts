@@ -80,5 +80,4 @@ export class AuthService {
     return this.seeToken().length > 2;
   }
 
-
 }
