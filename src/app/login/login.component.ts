@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_token', res.access_token);
         let dataString = JSON.stringify(res.userdata);
         let dataJson = JSON.parse(dataString);
-
         localStorage.setItem('rol', res.rol);
         localStorage.setItem('user_id', res.id);
         localStorage.setItem('email', res.email);

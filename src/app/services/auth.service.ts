@@ -13,7 +13,7 @@ export class AuthService {
   // apiUrl = 'http://localhost/montana_backend/public/api';
 
   authUrl = 'http://127.0.0.1:8000/api/auth/login';
-  apiUrl = 'http://localhost/montana_backend/public/api';
+  // apiUrl = 'http://localhost/montana_backend/public/api';
 
   // Producción
   // authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
@@ -52,13 +52,14 @@ export class AuthService {
       map( res => {
         this.saveToken(res[' access_token ']);
         return res;
+        // console.log(res);
       })
     );
   }
 
   logout() {
     this.options.headers.Authorization = 'Bearer ' + localStorage.getItem('access_token');
-    return this.http.get(this.apiUrl + '/token/revoke', this.options);
+    return this.http.get(this.authUrl + '/token/revoke', this.options);
   }
 
   private saveToken(idToken: string){

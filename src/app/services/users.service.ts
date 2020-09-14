@@ -78,9 +78,9 @@ export class UsersService {
     return this.http.post(`${this.api}/users`, user, {headers: headers});
   }
 
-  updateUser(user, id){
+  updateUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.post(`${this.api}/update-user/${id}`, user, {headers: headers});
+    return this.http.post(`${this.api}/update-user`, user, {headers: headers});
   }
 
   /* Eliminar un usuario */
