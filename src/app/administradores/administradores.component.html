@@ -74,7 +74,40 @@
             </div>
             <form (ngSubmit)="updatedAdmin()" [formGroup]="formUpdatedAdmin">
                 <h3 class="datos-generales">Datos generales</h3>
+                <!-- <div *ngFor="let userAdmins of check_user">
+                    <label for="userAdmin">{{ userAdmins.name }}</label>
+                    <input name="{{ userAdmins.name }}" type="text" formControlName="{{ userAdmins.name }}" value="{{ check_user.name }}" placeholder="{{ check_user.name }}">
+                </div> -->
+                <!-- <div *ngFor="let data of check_user"> -->
+                <!-- </div> -->
+                <!-- {{user_data}} -->
                 <div class="label-field">
+                    <label for="">Nombre completo</label>
+                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_user['name'] }}" placeholder="{{ check_user['name'] }}">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="nameUpdatedNoValid">
+                        El nombre es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Apellidos</label>
+                    <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosUpdatedNoValid" value="{{ check_user.apellidos }}" placeholder="{{ check_user.apellidos }}">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="apellidosUpdatedNoValid">
+                        El apellido es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Correo eletrónico</label>
+                    <input name="email" type="text" formControlName="email" [class.is-invalid]="emailUpdatedNoValid" value="{{ check_user.email }}" placeholder="{{ check_user.email }}">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="apellidosUpdatedNoValid">
+                        El correo electrónico es obligatorio
+                    </small>
+                </div>
+                <div *ngFor="let data of check_user.user_data" class="label-field">
+                    <label for="">{{ data.field_key }}</label>
+                    <input name="{{ data.field_key }}" type="text" value="{{ data.value_key }}" placeholder="{{ data.value_key }}">
+                </div>
+
+                <!-- <div class="label-field">
                     <label for="">Nombre completo</label>
                     <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_user.name }}" placeholder="{{ check_user.name }}">
                     <small class="form-text text-danger animated fadeIn" *ngIf="nameUpdatedNoValid">
@@ -112,7 +145,7 @@
                     <small class="form-text text-danger animated fadeIn" *ngIf="passUpdatedNoValid">
                         El password es obligatorio
                     </small>
-                </div>
+                </div> -->
             </form>
             <div class="acciones-form-adminitrador">
                 <a (click)="updatedAdmin()" class="agregar">
@@ -169,13 +202,13 @@
                     <th>Cel <img src="{{ templateImage.ordenar }}" alt=""></th>
                     <th>Correo <img src="{{ templateImage.ordenar }}" alt=""></th> -->
                     <th>
-                        Nombres <img src="{{ templateImage.ordenar }}" alt="">
+                        Nombre completo <img src="{{ templateImage.ordenar }}" alt="">
                     </th>
                     <th>
-                        {{ apellidos }} <img src="{{ templateImage.ordenar }}" alt="">
+                        Apellidos <img src="{{ templateImage.ordenar }}" alt="">
                     </th>
-                    <th>
-                        {{ telefono }} <img src="{{ templateImage.ordenar }}" alt="">
+                    <th *ngFor="let data of user_data">
+                        {{ data }} <img src="{{ templateImage.ordenar }}" alt="">
                     </th>
                     <th>
                         Email <img src="{{ templateImage.ordenar }}" alt="">
@@ -199,6 +232,9 @@
                     <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
                         <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
                         <p class="nombre">{{ usuario.name }}</p>
+                    </td>
+                    <td>
+                        <p class="apelidos">{{ usuario.apellidos }}</p>
                     </td>
                     <td *ngFor="let data of usuario.user_data">
                         {{ data.value_key }}

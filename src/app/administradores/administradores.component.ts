@@ -121,15 +121,16 @@ export class AdministradoresComponent implements OnInit {
     return this.formCreateAdmin.get('password').invalid && this.formCreateAdmin.get('password').touched;
   }
 
+  /* UPDATE ADMIN */
   get nameUpdatedNoValid(){
     return this.formUpdatedAdmin.get('name').invalid;
   }
   get apellidosUpdatedNoValid(){
-    return this.formUpdatedAdmin.get('user_data.apellidos').invalid;
+    return this.formUpdatedAdmin.get('apellidos').invalid;
   }
-  get telefonoUpdatedNoValid(){
-    return this.formUpdatedAdmin.get('user_data.telefono').invalid;
-  }
+  // get telefonoUpdatedNoValid(){
+  //   return this.formUpdatedAdmin.get('user_data('field_key')').invalid;
+  // }
   get emailUpdatedNoValid(){
     return this.formUpdatedAdmin.get('email').invalid;
   }
@@ -155,18 +156,19 @@ export class AdministradoresComponent implements OnInit {
       id: [1],
       rol_id: [1],
       name: ['', [Validators.required]],
+      apellidos: [''],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: [''],
-      user_data: this.formb.array([this.createUser_data() ])
+      user_data: this.formb.group({
+        id_field: [1],
+        field_key: [''],
+        value_key: ['']
+      })
     });
   }
-  createUser_data(): FormGroup{
-    return this.formb.group({
-      id_field: [1],
-      apellidos: [''],
-      telefono: [''],
-    });
-  }
+  // createUser_data(): FormGroup{
+  //   return 
+  // }
 
   // addItem(): void {
   //   this.user_data = this.formUpdatedAdmin.get('user_data') as FormArray;
@@ -177,8 +179,7 @@ export class AdministradoresComponent implements OnInit {
     this.userService.getUsersAdmin().subscribe(
       res =>{
         this.usersAdmins = res['admins'];
-        this.telefono = this.userColumns = res['fields'][0];
-        this.apellidos = this.userColumns = res['fields'][1];
+        this.user_data = this.userColumns = res['fields'];
       }
     );
   }
@@ -192,7 +193,6 @@ export class AdministradoresComponent implements OnInit {
   }
 
   agregarAdmin(){
-    // console.log('actualizo');
     if(this.formCreateAdmin.invalid){
       return Object.values(this.formCreateAdmin.controls).forEach(control => {
         if (control instanceof FormGroup){
@@ -251,6 +251,8 @@ export class AdministradoresComponent implements OnInit {
     // this.arrayUdateAdmins.push(this.formUpdatedAdmin.value['usar_data']);
     // console.log(this.arrayUdateAdmins);
     
+    console.log(this.check_user.user_data);
+
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
         console.log(data);
@@ -272,7 +274,6 @@ export class AdministradoresComponent implements OnInit {
     let obj = {
       "data" : data
     }
-
     let removeIndex = this.check_user.findIndex(x => x.data === data);
     
     if (e.target.checked){
@@ -280,15 +281,22 @@ export class AdministradoresComponent implements OnInit {
       if(this.check_user.length == 1){
         // console.log(this.check_user);
         // console.log(removeIndex);
+        // this.check_user;
+        this.check_user = this.check_user;
+        // this.check_user = JSON.stringify(this.check_user);
+        this.check_user.forEach(e => {
+          this.check_user = e.data;
+          console.log(this.check_user);
+        });
         this.active = "activeOn";
         this.editarAdmin();
         // if(removeIndex < 1){
-          // this.check_user.forEach(e => {
-          //   this.check_user = e.data;
-            // this.check_user.user_data.forEach(element => {
-            // });
-            // console.log(this.check_user.user_data);
-          // });
+        //   this.check_user.forEach(e => {
+        //     this.check_user = e.data;
+        //     this.check_user.user_data.forEach(element => {
+        //     });
+        //     console.log(this.check_user.user_data);
+        //   });
         // }
       }else{
         this.active = "activeOff";
