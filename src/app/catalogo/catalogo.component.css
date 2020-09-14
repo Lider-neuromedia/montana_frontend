@@ -7,9 +7,13 @@
 .box-imagen-estado-descuento{
     cursor: pointer;
 }
-
+/* 
 .catalogo-column{
     overflow: hidden;
+} */
+
+.box-catalogo{
+    position: relative;
 }
 
 .box-catalogo .box-imagen-estado-descuento{
@@ -24,6 +28,7 @@
     background: white;
     color: #FF596A;
     border-radius: 10px 0px 0px 10px;
+    text-transform: capitalize;
     padding: 3px 6px;
     position: absolute;
     padding-left: 25px;
@@ -53,18 +58,20 @@
     align-items: center;
 }
 
-.box-catalogo .box-titulo-cantidad-opciones ul{
+.box-catalogo ul{
     border-radius: 15px 15px 0px 0px;
     position: absolute;
     list-style: none;
     background: white;
-    width: 100%;
+    left: 0;
+    right: 0;
     text-align: center;
     bottom: -10px;
     z-index: 200;
+    animation: bottonTop 1s;
 }
 
-.box-catalogo .box-titulo-cantidad-opciones li{
+.box-catalogo li{
     margin: 6px 0px;
     padding: 6px 0px;
     width: 100%;
@@ -72,7 +79,7 @@
     position: relative;
 }
 
-.box-catalogo .box-titulo-cantidad-opciones a{
+.box-catalogo a{
     text-decoration: none;
     color: #959BA0;
 }
@@ -91,16 +98,16 @@
 
 .overblock{
     position: absolute;
-    background: rgba(0, 0, 0, .2);
+    background: #1e2933b8;
     display: block;
     top: 0;
     bottom: 0;
-    left: 15px;
-    right: 15px;
-    z-index: 200
+    left: 0;
+    right: 0;
+    z-index: 200;
 }
 
-.box-catalogo .box-titulo-cantidad-opciones ul,
+.box-catalogo ul,
 .overblock{
     display: none;
 }
@@ -109,3 +116,160 @@
 .show-options{
     display: block !important;
 }
+
+/* MENU HEADER. */
+
+/* SIDE RIGTH */
+
+
+.header-form {
+    display: flex;
+    color: #323E4A;
+    justify-content: space-between;
+    background: #F6FBFF;
+    padding: 15px 20px;
+    letter-spacing: 0.54px;
+}
+
+.datos-generales {
+    padding: 0px 20px;
+    color: #323E4A;
+    margin-top: 15px;
+    margin-bottom: 22px;
+    letter-spacing: 0.54px;
+}
+
+.nuevo-administrador h2 {
+    font-size: 19px;
+    padding: 0px;
+}
+
+.nuevo-administrador {
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, .2);
+    width: 423px;
+    position: fixed;
+    right: 0%;
+    z-index: 10;
+    top: 0;
+    background: white;
+    height: 100vh;
+    transition: all .5s ease;
+    transform: translateX(100%);
+    z-index: 510;
+}
+
+.open {
+    transform: translateX(0%);
+}
+
+
+.overview {
+    background: rgba(0, 0, 0, .4);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 500;
+}
+
+
+.label-field {
+    padding: 0px 20px;
+    margin-bottom: 16px;
+}
+
+.label-field label,
+.label-field input {
+    display: block;
+    width: 100%;
+}
+
+.label-field label {
+    font-size: 14px;
+    color: #FF596A;
+    margin-bottom: 5px;
+}
+
+.label-field input {
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.acciones-form-adminitrador {
+    display: flex;
+    position: fixed;
+    bottom: 50px;
+    padding: 0px 20px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.agregar,
+.cancelar {
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+
+.agregar {
+    background: #FF596A;
+    padding: 6px 0px;
+    color: white;
+    transition: all .5s ease;
+}
+
+.agregar:hover {
+    background: #da4e5c;
+}
+
+.cancelar {
+    background: white;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    padding: 6px 0px;
+    transition: all .5s ease;
+}
+
+.cancelar:hover {
+    background: #ec5362;
+    color: white;
+}
+
+.flx-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-options a{
+    cursor: pointer;
+}
+
+.btn-options:hover a{
+    color: #ff596a !important;
+}
+
+/* STYLES MATERIAL */
+.mat-button-toggle-checked{
+    background-color: #ff596a !important;
+}
+
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard{
+    color: #fff;
+}
+
+.mat-button-toggle{
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ANIMATES */
+@keyframes bottonTop {
+    0%   {  transform: translateY(70%);}
+    100% { transform: translateY(0%);}
+  } 

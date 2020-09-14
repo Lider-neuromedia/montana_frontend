@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SendHttpData } from '../app/services/SendHttpData';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -24,11 +25,15 @@ import { PedidoInternaComponent } from './pedido-interna/pedido-interna.componen
 import { RolesComponent } from './roles/roles.component';
 import { RolesFormComponent } from './roles-form/roles-form.component';
 import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
+import {MaterialModule} from './material/material.module';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
+
 
 // import { Select2Module } from 'ng2-select2';
 
@@ -54,6 +59,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     RolesComponent,
     RolesFormComponent,
     AdministradoresBuscadorComponent,
+    DrawerRigthComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,12 +68,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    // InfiniteScrollModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
-    // Select2Module
+    BrowserAnimationsModule,
+    MaterialModule,
+    NgxDropzoneModule
   ],
-  providers: [],
+  providers: [SendHttpData],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

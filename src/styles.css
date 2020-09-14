@@ -254,3 +254,15 @@ input[type="tel"] {
     padding-left: 209px;
     padding-top: 60px;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Material */
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+    line-height: 36px !important;
+}
+
+.mat-button-toggle-label-content{
+    font-size: 14px !important;
+}
+    

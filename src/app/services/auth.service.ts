@@ -76,5 +76,4 @@ export class AuthService {
     return this.userToken.length > 2;
   }
 
-
 }
