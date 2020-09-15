@@ -128,14 +128,14 @@ export class AdministradoresComponent implements OnInit {
   get apellidosUpdatedNoValid(){
     return this.formUpdatedAdmin.get('apellidos').invalid;
   }
-  // get telefonoUpdatedNoValid(){
-  //   return this.formUpdatedAdmin.get('user_data('field_key')').invalid;
-  // }
   get emailUpdatedNoValid(){
     return this.formUpdatedAdmin.get('email').invalid;
   }
   get passUpdatedNoValid(){
     return this.formUpdatedAdmin.get('password').invalid;
+  }
+  get userData(): FormArray {
+    return this.formUpdatedAdmin.get('user_data') as FormArray;
   }
 
   FormCreateAdmin(){
@@ -159,16 +159,31 @@ export class AdministradoresComponent implements OnInit {
       apellidos: [''],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: [''],
-      user_data: this.formb.group({
-        id_field: [1],
-        field_key: [''],
-        value_key: ['']
-      })
+      user_data: this.formb.array([this.createUser_data()],[Validators.required])
     });
   }
-  // createUser_data(): FormGroup{
-  //   return 
-  // }
+  createUser_data(): FormGroup{
+    if (typeof this.check_user.user_data !== 'undefined') {
+      var user_data;
+      var objet;
+      this.check_user.user_data.forEach(element => {
+        user_data = this.formUpdatedAdmin.get('user_data') as FormArray;
+        objet = this.formb.group({
+          id_field: element.id,
+          field_key: element.field_key,
+          value_key: [element.value_key, Validators.required]
+        });
+      });
+    }else{
+      objet = this.formb.group({
+        id_field: '',
+        field_key: '',
+        value_key: ['',Validators.required]
+      })
+    }
+
+    return objet;
+  }
 
   // addItem(): void {
   //   this.user_data = this.formUpdatedAdmin.get('user_data') as FormArray;
@@ -229,39 +244,16 @@ export class AdministradoresComponent implements OnInit {
         }
       });
     }
-    // console.log(this.formUpdatedAdmin.value);
-    // console.log(this.formUpdatedAdmin.value.user_data);
-    // this.formUpdatedAdmin.value.forEach(element => {
-    //   var arrayAdmins = {
-    //     id : 1,
-    //     email : element.email,
-    //     name : element.name,
-    //     password: element.password,
-    //     rol_id : element.rol_id
-    //   };
-    //   console.log(arrayAdmins);
-      // var array_userdata = [{
-      //   id_field : element.id_field,
-      //   fields_key : element.apellidos,
-      //   value_key : element.telefono,
-      // }];
-      // this.formUpdatedAdmin.value.user_data = array_userdata;
-    // });
-
-    // this.arrayUdateAdmins.push(this.formUpdatedAdmin.value['usar_data']);
-    // console.log(this.arrayUdateAdmins);
-    
-    console.log(this.check_user.user_data);
 
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
-        console.log(data);
-        // this.showAdmins();
-        // this.formUpdatedAdmin.reset();
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: 'Se ha actualizado correctamente'
-        // });
+        this.showAdmins();
+        this.formUpdatedAdmin.reset();
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha actualizado correctamente'
+        });
+        this.cerrarFormAdminEditar();
         // this.buscarAdmin();
       },
       (error:any) =>{
@@ -286,7 +278,7 @@ export class AdministradoresComponent implements OnInit {
         // this.check_user = JSON.stringify(this.check_user);
         this.check_user.forEach(e => {
           this.check_user = e.data;
-          console.log(this.check_user);
+          this.FormUpdateAdmin();
         });
         this.active = "activeOn";
         this.editarAdmin();

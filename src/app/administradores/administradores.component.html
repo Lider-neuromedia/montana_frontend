@@ -81,6 +81,7 @@
                 <!-- <div *ngFor="let data of check_user"> -->
                 <!-- </div> -->
                 <!-- {{user_data}} -->
+               
                 <div class="label-field">
                     <label for="">Nombre completo</label>
                     <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_user['name'] }}" placeholder="{{ check_user['name'] }}">
@@ -102,50 +103,16 @@
                         El correo electrónico es obligatorio
                     </small>
                 </div>
-                <div *ngFor="let data of check_user.user_data" class="label-field">
-                    <label for="">{{ data.field_key }}</label>
-                    <input name="{{ data.field_key }}" type="text" value="{{ data.value_key }}" placeholder="{{ data.value_key }}">
-                </div>
 
-                <!-- <div class="label-field">
-                    <label for="">Nombre completo</label>
-                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_user.name }}" placeholder="{{ check_user.name }}">
-                    <small class="form-text text-danger animated fadeIn" *ngIf="nameUpdatedNoValid">
-                        El nombre es obligatorio
-                    </small>
-                </div>
-                <div formArrayName="user_data" *ngFor="let user of formUpdatedAdmin; let i = index;">
-                    {{ user }}
-                    <div class="label-field">
-                        <label for="">Apellidos</label>
-                        <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosUpdatedNoValid">
-                        <small class="form-text text-danger animated fadeIn" *ngIf="apellidosUpdatedNoValid">
-                                El apellido es obligatorio
-                            </small>
+                <div formArrayName="user_data" *ngFor="let user of formUpdatedAdmin.controls['user_data']['controls']; let i = index;">
+                    <div [formGroupName]="i" class="label-field">
+                        <label for="">{{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}}</label>
+                        <input name="telefono" type="number" formControlName="value_key">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="userData.controls[i].get('value_key').errors?.required">
+                            El {{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}} es obligatorio
+                        </small>
                     </div>
-                    <div class="label-field">
-                        <label for="">Teléfono</label>
-                        <input name="telefono" type="number" formControlName="telefono" [class.is-invalid]="telefonoUpdatedNoValid">
-                        <small class="form-text text-danger animated fadeIn" *ngIf="telefonoUpdatedNoValid">
-                                El teléfono es obligatorio
-                            </small>
-                    </div>
-
                 </div>
-                <div class="label-field">
-                    <label for="">Correo electrónico</label>
-                    <input name="email" type="email" formControlName="email" [class.is-invalid]="emailUpdatedNoValid" value="{{ check_user.email }}" placeholder="{{ check_user.email }}">
-                    <small class="form-text text-danger animated fadeIn" *ngIf="emailUpdatedNoValid">
-                        El correo es obligatorio
-                    </small>
-                </div>
-                <div class="label-field">
-                    <label for="">Password</label>
-                    <input name="password" type="password" formControlName="password" [class.is-invalid]="passUpdatedNoValid">
-                    <small class="form-text text-danger animated fadeIn" *ngIf="passUpdatedNoValid">
-                        El password es obligatorio
-                    </small>
-                </div> -->
             </form>
             <div class="acciones-form-adminitrador">
                 <a (click)="updatedAdmin()" class="agregar">
