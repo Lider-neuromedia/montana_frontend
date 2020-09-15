@@ -4,10 +4,9 @@
     <div class="slide-menu">
         <app-menu></app-menu>
     </div>
-    <div class="area">
+    <div class="area" (click)="hideActions()">
 
-        <app-drawer-rigth name="create-catalogo" title="Nuevo catálogo" [open]="openDrawer"
-            (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateCat()">
+        <app-drawer-rigth name="create-catalogo" title="Nuevo catálogo" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateCat()">
             <form action="">
                 <div class="label-field">
                     <label for="">Nombres</label>
@@ -41,15 +40,13 @@
 
                 <div class="label-field">
                     <label for="">Imagen destacada</label>
-                    <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
-                        (change)="onSelect($event)">
+                    <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
                         <ngx-dropzone-label>
                             <div>
                                 <h2>My custom dropzone</h2>
                             </div>
                         </ngx-dropzone-label>
-                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                             <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                         </ngx-dropzone-image-preview>
                     </div>
@@ -57,8 +54,7 @@
             </form>
         </app-drawer-rigth>
 
-        <app-drawer-rigth name="update-catalogo" title="Editar catálogo" [open]="updateDrawer"
-            (close)="openDrawerRigth(false, 'edit')" (submit)="submitCreateCat()">
+        <app-drawer-rigth name="update-catalogo" title="Editar catálogo" [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="submitCreateCat()">
             <form action="">
                 <div class="label-field">
                     <label for="">Nombres</label>
@@ -93,15 +89,13 @@
 
                 <div class="label-field">
                     <label for="">Imagen destacada</label>
-                    <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
-                        (change)="onSelect($event)">
+                    <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false" (change)="onSelect($event)">
                         <ngx-dropzone-label>
                             <div>
                                 <h2>My custom dropzone</h2>
                             </div>
                         </ngx-dropzone-label>
-                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                             <img src="{{catalogoEdit.imagen}}">
                             <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                         </ngx-dropzone-image-preview>
@@ -123,10 +117,9 @@
         <div class="row">
             <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos">
                 <div id="{{catalogo.id_catalogo}}-box-catalogo" class="box-catalogo">
-                    <div (click)="closeCatOptions(catalogo.id_catalogo)" id="{{catalogo.id_catalogo}}-overblock"
-                        class="overblock"></div>
-                    <div class="box-imagen-estado-descuento">
-                        <img (click)="verDetalle()" src="{{catalogo.imagen}}" alt="">
+                    <div (click)="closeCatOptions(catalogo.id_catalogo)" id="{{catalogo.id_catalogo}}-overblock" class="overblock"></div>
+                    <div class="box-imagen-estado-descuento" style="background: url({{catalogo.imagen}});">
+                        <!-- <img (click)="verDetalle()" src="" alt=""> -->
                         <div class="estado">{{catalogo.estado}}</div>
                         <div class="descuento" *ngIf="catalogo.descuento != null">-{{catalogo.descuento}}%</div>
                     </div>
@@ -148,10 +141,13 @@
                                 <img class="icon-edit" src="assets/img/editar.svg" alt="">Editar
                             </a>
                         </li>
-                        <li class="btn-options"><a><img src=""> Exportar</a>
+                        <li class="btn-options">
+                            <a><img src=""> Exportar</a>
                         </li>
-                        <li class="btn-options"><a (click)="deleteCatalogo(catalogo.id_catalogo)"><img src="">
-                                Eliminar</a></li>
+                        <li class="btn-options">
+                            <a (click)="deleteCatalogo(catalogo.id_catalogo)"><img src=""> Eliminar
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

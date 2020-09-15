@@ -50,7 +50,13 @@
     color: white;
     width: 50px;
 }
-
+.box-imagen-estado-descuento{
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 370px;
+    overflow: hidden;
+}
 .box-catalogo .box-titulo-cantidad-opciones{
     display: flex;
     justify-content: space-between;

@@ -53,15 +53,18 @@ export class CatalogoComponent implements OnInit {
   }
 
   showCatOptions(id){
-    $('#'+ id + '-overblock').addClass('show-over');
+    $('#'+ id + '-overblock').addClass('show-over animated fadeIn');
     $('#'+ id + '-box-catalogo ul').addClass('show-options');
   }
 
   closeCatOptions(id){
-    $('#'+ id + '-overblock').removeClass('show-over');
+    $('#'+ id + '-overblock').removeClass('show-over animated fadeIn');
     $('#'+ id + '-box-catalogo ul').removeClass('show-options');
   }
-
+  hideActions(id){
+    $('.overblock').removeClass('show-over');
+    // $('.show-options').removeClass('show-options');
+  }
   openDrawerRigth(action : boolean, type : string){
     if (type == 'create') {
       this.openDrawer = action;
