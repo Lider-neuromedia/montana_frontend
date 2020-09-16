@@ -41,9 +41,13 @@ export class SendHttpData {
   }
 
   // Peticion Http PUT
-  httpPut(route:string, data:any):Observable<any>{
-    var url = this.baseUrl + route;
-    return this._http.put(url, data);
+  httpPut(route:string, id:any, data:any, headers = false):Observable<any>{
+    var url = this.baseUrl + route + '/' + id;
+    if (headers) {
+      return this._http.put(url, data, this.options);
+    }else{
+      return this._http.put(url, data);
+    }
   }
 
   /* Peticion Http Delete */

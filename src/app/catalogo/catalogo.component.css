@@ -7,10 +7,25 @@
 .box-imagen-estado-descuento{
     cursor: pointer;
 }
-/* 
-.catalogo-column{
-    overflow: hidden;
-} */
+
+.title-catalogo{
+    color: #1E2933;
+    font-size: 14px;
+    letter-spacing: 0.97px;
+    line-height: 20.11px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.subtitle-catalogo{
+    color: #1E2933;
+    font-size: 14px;
+    letter-spacing: 0.97px;
+    line-height: 20.11px;
+    text-align: left;
+}
 
 .box-catalogo{
     position: relative;
@@ -20,9 +35,6 @@
     position: relative;
 }
 
-.box-imagen-estado-descuento img{
-    border-radius: 4px;
-}
 
 .box-catalogo .estado{
     background: white;
@@ -33,6 +45,22 @@
     position: absolute;
     padding-left: 25px;
     font-weight: bold;
+    top: 10px;
+    right: 0px;
+    z-index: 2;
+}
+
+.box-catalogo .show-room{
+    background: #1e2933;
+    color: #f8e341;
+    border-radius: 10px 0px 0px 10px;
+    border: 1px solid #f8e341;
+    text-transform: capitalize;
+    padding: 3px 6px;
+    position: absolute;
+    padding-left: 25px;
+    font-weight: 400;
+    font-size: 14px;
     top: 10px;
     right: 0px;
     z-index: 2;
@@ -50,13 +78,25 @@
     color: white;
     width: 50px;
 }
+
 .box-imagen-estado-descuento{
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;
-    height: 370px;
+    height: 250px;
     overflow: hidden;
+    border-radius: 10px;
 }
+
+.box-image-edit{
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
 .box-catalogo .box-titulo-cantidad-opciones{
     display: flex;
     justify-content: space-between;
@@ -74,7 +114,7 @@
     text-align: center;
     bottom: -10px;
     z-index: 200;
-    animation: bottonTop 1s;
+    animation: bottonTop 0.5s;
 }
 
 .box-catalogo li{
@@ -86,6 +126,37 @@
 }
 
 .box-catalogo a{
+    text-decoration: none;
+    color: #959BA0;
+}
+
+.image-edit{
+    width: 100%;
+    height: 100%;
+}
+
+.box-image-edit ul{
+    border-radius: 15px 15px 0px 0px;
+    position: absolute;
+    list-style: none;
+    background: white;
+    left: 0;
+    right: 0;
+    text-align: center;
+    bottom: -6px;
+    z-index: 200;
+    animation: bottonTop 0.5s;
+}
+
+.box-image-edit li{
+    margin: 6px 0px;
+    padding: 6px 0px;
+    width: 100%;
+    border-bottom: 1px solid #D8D8D8;
+    position: relative;
+}
+
+.box-image-edit a{
     text-decoration: none;
     color: #959BA0;
 }
@@ -113,8 +184,19 @@
     z-index: 200;
 }
 
-.box-catalogo ul,
-.overblock{
+.overblock-edit{
+    position: absolute;
+    background: #1e2933b8;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+}
+
+.box-catalogo ul, .box-image-edit ul,
+.overblock, .overblock-edit{
     display: none;
 }
 
@@ -261,6 +343,13 @@
     color: #ff596a !important;
 }
 
+.custom-dropzone{
+    color: #D7D7D7;
+    border: 2px dashed #D7D7D7;
+    display: flex;
+    justify-content: center;
+}
+
 /* STYLES MATERIAL */
 .mat-button-toggle-checked{
     background-color: #ff596a !important;
@@ -272,7 +361,15 @@
 
 .mat-button-toggle{
     box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
+
+.mat-button-toggle-group{
+    width: 100%;
+}
+
+
+
 
 /* ANIMATES */
 @keyframes bottonTop {

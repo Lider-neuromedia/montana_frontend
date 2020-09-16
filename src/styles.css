@@ -134,9 +134,6 @@ img {
     position: relative;
 }
 
-.box-create-new {
-    /* margin-right: 32px; */
-}
 
 .btn-nuevo-cliente {
     background: #FF596A;
@@ -275,6 +272,33 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-button-toggle-label-content{
-    font-size: 14px !important;
+    font-size: 12px !important;
 }
-    
+
+.mat-form-field-appearance-outline .mat-form-field-infix{
+    padding: 5px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper{
+    margin: 0 !important;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){
+    background: #F85C6C;
+}
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #fff;
+}
+
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    padding: 0 2.4rem !important;
+}
+
+.mat-button-toggle-group-appearance-standard {
+    border-radius: 10px !important;
+}
+

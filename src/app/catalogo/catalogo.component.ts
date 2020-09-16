@@ -17,17 +17,20 @@ export class CatalogoComponent implements OnInit {
   files: File[] = [];
   catalogo = {
     "nombre": null,
-    "descuento": null,
-    "estado": null,
+    "descuento": 0,
+    "estado": 'activo',
+    "tipo": 'general',
     "image": null
   };
   catalogoEdit = {
     "id_catalogo": null,
     "titulo": null,
-    "descuento": null,
+    "descuento": 0,
     "estado": null,
+    "tipo": null,
     "imagen": null
   };
+  showEditDropzone = false;
 
 
   constructor(private route: Router, private http : SendHttpData) { }
@@ -61,10 +64,8 @@ export class CatalogoComponent implements OnInit {
     $('#'+ id + '-overblock').removeClass('show-over animated fadeIn');
     $('#'+ id + '-box-catalogo ul').removeClass('show-options');
   }
-  hideActions(id){
-    $('.overblock').removeClass('show-over');
-    // $('.show-options').removeClass('show-options');
-  }
+
+
   openDrawerRigth(action : boolean, type : string){
     if (type == 'create') {
       this.openDrawer = action;
@@ -75,10 +76,14 @@ export class CatalogoComponent implements OnInit {
     }
   }
 
-  onSelect(event) {
+  onSelect(event, edit = false) {
     this.files = event.addedFiles;
     this.readFile(this.files[0]).then(fileContents => {
-      this.catalogo.image = fileContents;
+      if (edit) {
+        this.catalogoEdit.imagen = fileContents;
+      }else{
+        this.catalogo.image = fileContents;
+      }
     });
   }
   
@@ -113,7 +118,8 @@ export class CatalogoComponent implements OnInit {
     this.catalogo = {
       "nombre": null,
       "descuento": null,
-      "estado": null,
+      "estado": 'activo',
+      "tipo": 'general',
       "image": null
     };
     this.files = [];
@@ -152,5 +158,34 @@ export class CatalogoComponent implements OnInit {
     this.openDrawerRigth(true, 'edit');
     this.catalogoEdit = catalogo;  
   }
+
+  submitUpdateCatalogo(){
+    var data = this.catalogoEdit;
+    this.http.httpPut('catalogos', data.id_catalogo ,data, true).subscribe(
+      response => {
+        console.log(response);
+        if (response.status == 200 && response.response == 'success') {
+          this.openDrawer = false;
+          this.getCatalogos();
+          this.resetForm();
+        }
+      }, 
+      error => {
+        console.error(error);
+      }
+    )
+  }
+
+  showEditImageOptions(){
+    $('.overblock-edit').addClass('show-over');
+    $('.box-image-edit ul').addClass('show-options');
+  }
+  
+  hideEditImageOptions(){
+    $('.overblock-edit').removeClass('show-over');
+    $('.box-image-edit ul').removeClass('show-options');
+  }
+
+  changeImageEdit(){ this.showEditDropzone = true; }
 
 }
