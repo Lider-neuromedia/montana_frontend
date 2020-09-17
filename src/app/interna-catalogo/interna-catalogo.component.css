@@ -1,9 +1,17 @@
 .row-producto{
-    align-items: flex-end;
     background: white;
-    padding: 1em .6em;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+    padding: 2em .6em;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
     margin-bottom: 2em;
+}
+
+.end-content{
+    align-self: flex-end;
+    direction: rtl;
+}
+
+.info-interna{
+    padding-left: 2rem;
 }
 
 .info-interna .codigo,
@@ -19,6 +27,7 @@
     line-height: 16px;
     letter-spacing: 0.3px;
     margin: 8px 0px;
+    margin-top: 15px;
 }
 
 .info-interna .nombre{
@@ -27,6 +36,7 @@
     font-weight: bold;
     letter-spacing: 0.03px;
     line-height: 17px;
+    margin-bottom: 35px;
 }
 
 .info-interna .stock{
@@ -68,4 +78,18 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.border-rh-lft{
+    border-right: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+}
+
+.no-products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    color: #ccc;
 }

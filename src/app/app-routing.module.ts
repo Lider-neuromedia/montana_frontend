@@ -38,7 +38,7 @@ const routes : Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'productos', component: InternaCatalogoComponent },
+  { path: 'productos/:id', component: InternaCatalogoComponent },
   { path: 'producto-detalle', component: ProductoDetalleComponent },
   {
     path: 'users', component: UsersComponent,

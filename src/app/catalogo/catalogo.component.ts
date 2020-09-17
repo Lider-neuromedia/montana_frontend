@@ -51,8 +51,8 @@ export class CatalogoComponent implements OnInit {
     );
   }
 
-  verDetalle(){
-    this.route.navigate(['/productos']);
+  verDetalle(id){
+    this.route.navigate(['/productos/' + id]);
   }
 
   showCatOptions(id){

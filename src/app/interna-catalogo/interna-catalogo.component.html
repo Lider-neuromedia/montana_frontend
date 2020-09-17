@@ -12,28 +12,33 @@
                     <div class="box-mas">
                         <img class="mas" src="assets/img/mas.svg" alt="">
                     </div>
-                    <a class="btn-nuevo-cliente" >Nuevo Producto</a>
+                    <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo Producto</a>
                 </div>
             </div>
         </div>
 
+        <app-drawer-rigth name="create-producto" title="Nuevo producto" [open]="openDrawer"
+        (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateProduct()">
+            <h1>Content</h1>
+        </app-drawer-rigth>
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngFor="let producto of productos">
                 <div class="row row-producto">
                     <div class="col-md-4">
-                        <img src="assets/img/image1.png" alt="">
+                        <img src="{{producto.image}}" alt="{{producto.nombre}}">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 border-rh-lft">
                         <div class="info-interna">
-                            <p class="codigo">Cod: 7818137912</p>
-                            <p class="referencia">Ref: UIL-39238230</p>
-                            <p class="marca">New Balance</p>
-                            <p class="nombre">Fresh Foam Arishi</p>
-                            <p class="stock">Stock: 324 cajas</p>
-                            <p class="precio">$730.000</p>
+                            <p class="codigo">Cod: {{producto.codigo}}</p>
+                            <p class="referencia">Ref: {{producto.referencia}}</p>
+                            <p class="marca">{{producto.nombre_marca}}</p>
+                            <p class="nombre">{{producto.nombre}}</p>
+                            <p class="stock">Stock: {{producto.stock}} cajas</p>
+                            <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 end-content">
                         <a (click)="verProducto()" class="ver-producto">
                             <span>
                                 <img src="" alt="">
@@ -49,104 +54,12 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-12">
-                <div class="row row-producto">
-                    <div class="col-md-4">
-                        <img src="assets/img/image2.png" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-interna">
-                            <p class="codigo">Cod: 7818137912</p>
-                            <p class="referencia">Ref: UIL-39238230</p>
-                            <p class="marca">New Balance</p>
-                            <p class="nombre">Fresh Foam Arishi</p>
-                            <p class="stock">Stock: 324 cajas</p>
-                            <p class="precio">$730.000</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a (click)="verProducto()" class="ver-producto">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Ver producto
-                        </a>
-                        <a class="anadir-a-pedido" href="#">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Añadir a pedido
-                        </a>
-                    </div>
-                </div>
+            <div class="col-md-12 no-products" *ngIf="productos.length == 0">
+                <p>
+                    <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
+                </p>
+                <h2>No has registrado productos aun...</h2>
             </div>
-
-            <div class="col-md-12">
-                <div class="row row-producto">
-                    <div class="col-md-4">
-                        <img src="assets/img/image1.png" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-interna">
-                            <p class="codigo">Cod: 7818137912</p>
-                            <p class="referencia">Ref: UIL-39238230</p>
-                            <p class="marca">New Balance</p>
-                            <p class="nombre">Fresh Foam Arishi</p>
-                            <p class="stock">Stock: 324 cajas</p>
-                            <p class="precio">$730.000</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a (click)="verProducto()" class="ver-producto">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Ver producto
-                        </a>
-                        <a class="anadir-a-pedido" href="#">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Añadir a pedido
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="row row-producto">
-                    <div class="col-md-4">
-                        <img src="assets/img/image2.png" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-interna">
-                            <p class="codigo">Cod: 7818137912</p>
-                            <p class="referencia">Ref: UIL-39238230</p>
-                            <p class="marca">New Balance</p>
-                            <p class="nombre">Fresh Foam Arishi</p>
-                            <p class="stock">Stock: 324 cajas</p>
-                            <p class="precio">$730.000</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a (click)="verProducto()" class="ver-producto">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Ver producto
-                        </a>
-                        <a class="anadir-a-pedido" href="#">
-                            <span>
-                                <img src="" alt="">
-                            </span>
-                            Añadir a pedido
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 </div>

@@ -150,7 +150,7 @@
                         class="overblock"></div>
                     <div class="box-imagen-estado-descuento"
                         style="background: url({{catalogo.imagen}});background-size: cover;background-repeat: no-repeat;"
-                        (click)="verDetalle()">
+                        (click)="verDetalle(catalogo.id_catalogo)">
                         <!-- <img (click)="verDetalle()" src="" alt=""> -->
                         <div class="estado" *ngIf="catalogo.tipo == 'general'">{{catalogo.estado}}</div>
                         <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
