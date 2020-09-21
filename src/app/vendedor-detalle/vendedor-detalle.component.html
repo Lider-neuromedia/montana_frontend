@@ -12,8 +12,11 @@
                 </div>
                 <div class="div-datos">
                     <!-- <p> <strong>{{ usuario.nombres }}</strong> </p> -->
-                    <p *ngIf="show"> <strong>{{ info.nombres }} {{ info.apellidos }}</strong> </p>
-                    <p>Código: 40</p>
+                    <p *ngIf="show"> <strong>{{ usuarios.name }} {{ usuarios.apellidos }}</strong> </p>
+                    <td class="datos" *ngFor="let data of usuarios.data_user">
+                        <p *ngIf="data.field_key == 'codigo'">Código: {{ data.value_key }}</p>
+                    </td>
+                    <!-- <p>Código: 40</p> -->
                 </div>
             </div>
             <div class="div-edit-boton">
@@ -33,16 +36,16 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="administrador-detalle">
             <div class="row">
                 <div class="col-sm-12 col-md-8 datos-personales">
-        
+
                     <div class="row row-finanzas">
                         <div class="col-sm-12">
                             <h2 class="title-tus-finanzas">Tus finanzas</h2>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-4">
                             <div class="comisiones comisiones-ganadas">
                                 <p class="comisiones">Comisiones ganadas</p>
@@ -51,7 +54,7 @@
                                 <p class="valor-comision">$2.300.400</p>
                             </div>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-4">
                             <div class="comisiones comisiones-perdidas">
                                 <p class="comisiones">Comisiones perdidas</p>
@@ -60,7 +63,7 @@
                                 <p class="valor-comision">$1.300.400</p>
                             </div>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-4">
                             <div class="comisiones comisiones-a-perder">
                                 <p class="comisiones">Comisiones próximas a perder</p>
@@ -69,63 +72,64 @@
                                 <p class="valor-comision">$4.300.400</p>
                             </div>
                         </div>
-        
+
                     </div>
-        
+
                     <div class="row row-datos">
-        
+
                         <div class="col-sm-12">
                             <h2 class="title-datos-personales">Datos personales</h2>
                         </div>
-        
+
                         <div style="padding-left: 15px" class="datos">
                             <p>Nombres</p>
-                            <p *ngIf="show">{{ info.nombres }}</p>
+                            <p *ngIf="show">{{ usuarios.name }}</p>
                         </div>
-                        
+
                         <div class="datos">
                             <p>Apellidos</p>
-                            <p *ngIf="show">{{ info.apellidos }}</p>
+                            <p *ngIf="show">{{ usuarios.apellidos }}</p>
                         </div>
-                    
-                        <div class="datos">
+
+                        <!-- <div class="datos">
                             <p>Teléfono</p>
-                            <p *ngIf="show">{{ info.telefono }}</p>
-                        </div>
-                        
+                            <p *ngIf="show">{{ usuarios.telefono }}</p>
+                        </div> -->
+
                         <div class="datos">
                             <p>Correo electrónico</p>
-                            <p *ngIf="show">{{ info.email }}</p>
+                            <p *ngIf="show">{{ usuarios.email }}</p>
                         </div>
-                    
-                        <div class="datos">
-                            <p>Ciudad</p>
-                            <p *ngIf="show">{{ info.ciudad }}</p>
-                        </div>
-                    
+
+                        <td class="datos" *ngFor="let data of usuarios.data_user">
+                            <p *ngIf="data.field_key == 'celular'" style="display:grid"><span>Celular</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
+                            <p *ngIf="data.field_key == 'cedula'" style="display:grid"><span>Cédula</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
+                        </td>
+
+
                     </div>
-        
+
                     <div class="row row-credenciales">
                         <div class="col-sm-12">
                             <h2 class="title-credenciales">Credenciales</h2>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-4 datos">
                             <p>Usuario</p>
                             <p *ngIf="show">{{ info.email }}</p>
                         </div>
-        
+
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Contraseña</p>
                             <p>**************</p>
                         </div>
                     </div>
-        
+
                     <div class="row row-clientes">
                         <div class="col-sm-12">
                             <h2 class="title-tiendas">Tiendas</h2>
                         </div>
-        
+
                         <div class="col-sm-12">
                             <table class="tabla-clientes-en-vendedores">
                                 <thead>
@@ -162,18 +166,18 @@
                                 </tbody>
                             </table>
                         </div>
-        
+
                     </div>
-        
+
                 </div>
-        
+
                 <div class="col-sm-12 col-md-4 aside-pedidos">
                     <div class="actions">
                         <a href="#">Pedidos</a>
                         <hr class="line-pedidos">
                     </div>
                     <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
-        
+
                     <div class="box-pedidos">
                         <div class="foto-referencia">
                             <img src="/assets/img/image1.png" alt="">
@@ -196,7 +200,7 @@
                             <p class="cantidad">23</p>
                         </div>
                     </div>
-        
+
                     <div class="box-pedidos">
                         <div class="foto-referencia">
                             <img src="/assets/img/image1.png" alt="">
@@ -219,7 +223,7 @@
                             <p class="cantidad">23</p>
                         </div>
                     </div>
-        
+
                     <div class="box-pedidos">
                         <div class="foto-referencia">
                             <img src="/assets/img/image1.png" alt="">
@@ -242,14 +246,9 @@
                             <p class="cantidad">23</p>
                         </div>
                     </div>
-        
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-

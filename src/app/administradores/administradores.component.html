@@ -81,29 +81,28 @@
                 <!-- <div *ngFor="let data of check_user"> -->
                 <!-- </div> -->
                 <!-- {{user_data}} -->
-               
+
                 <div class="label-field">
                     <label for="">Nombre completo</label>
-                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_user['name'] }}" placeholder="{{ check_user['name'] }}">
+                    <input name="name" type="text" formControlName="name" [class.is-invalid]="nameUpdatedNoValid" value="{{ check_Update['name'] }}" placeholder="{{ check_user['name'] }}">
                     <small class="form-text text-danger animated fadeIn" *ngIf="nameUpdatedNoValid">
                         El nombre es obligatorio
                     </small>
                 </div>
                 <div class="label-field">
                     <label for="">Apellidos</label>
-                    <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosUpdatedNoValid" value="{{ check_user.apellidos }}" placeholder="{{ check_user.apellidos }}">
+                    <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosUpdatedNoValid" value="{{ check_Update.apellidos }}" placeholder="{{ check_user.apellidos }}">
                     <small class="form-text text-danger animated fadeIn" *ngIf="apellidosUpdatedNoValid">
                         El apellido es obligatorio
                     </small>
                 </div>
                 <div class="label-field">
                     <label for="">Correo eletrónico</label>
-                    <input name="email" type="text" formControlName="email" [class.is-invalid]="emailUpdatedNoValid" value="{{ check_user.email }}" placeholder="{{ check_user.email }}">
-                    <small class="form-text text-danger animated fadeIn" *ngIf="apellidosUpdatedNoValid">
+                    <input name="email" type="text" formControlName="email" [class.is-invalid]="emailUpdatedNoValid" value="{{ check_Update.email }}" placeholder="{{ check_user.email }}">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="emailUpdatedNoValid">
                         El correo electrónico es obligatorio
                     </small>
                 </div>
-
                 <div formArrayName="user_data" *ngFor="let user of formUpdatedAdmin.controls['user_data']['controls']; let i = index;">
                     <div [formGroupName]="i" class="label-field">
                         <label for="">{{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}}</label>
@@ -192,9 +191,9 @@
                     <td (click)="administradorDetalle(usuario.id)" class="telefono">{{ usuario.value_key }}</td>
                     <td (click)="administradorDetalle(usuario.id)" class="correo">{{ usuario.email }}</td>
                 </tr> -->
-                <tr *ngFor="let usuario of usersAdmins | paginate: { itemsPerPage: 5, currentPage: current }" class="tabla-fila-datos">
+                <tr *ngFor="let usuario of usersAdmins | paginate: { itemsPerPage: 5, currentPage: current }; let i = index " class="tabla-fila-datos">
                     <td class="text-center">
-                        <input (change)="checkAdmin($event, usuario, active)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
+                        <input (change)="checkAdmin($event, usuario, i)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
                     </td>
                     <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
                         <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">

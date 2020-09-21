@@ -39,7 +39,7 @@ export class VendedoresComponent implements OnInit {
     "eliminar": "assets/img/icons-filter/trash.svg"
   };
 
-  vendedores = [];
+  // vendedores = [];
 
   vendedor = {
     /* datos modelo usuario */
@@ -102,7 +102,7 @@ export class VendedoresComponent implements OnInit {
     codigo: null
   }
 
-  options:any = [];
+  vendedores:any = [];
   removeItemsUsers = [];
 
   habilitado = true;
@@ -115,22 +115,19 @@ export class VendedoresComponent implements OnInit {
     let id = localStorage.getItem('user_id');
     this.traerVendedores();
 
-    this.sellers.getAllClients().subscribe(
+    this.sellers.getAllSellers().subscribe(
       data =>{
-      this.options = data;
-      // console.log( this.options );
-    })
-
+      this.vendedores = data;
+    });
     this.createForm();
-    
   }
 
   ngOnInit(): void {
-    this.sellers.getUserForRol(2).subscribe(
-      (data:any) =>{
-        this.vendedores = data;
-      }
-    )
+    // this.sellers.getUserForRol(2).subscribe(
+    //   (data:any) =>{
+    //     this.vendedores = data;
+    //   }
+    // )
   }
 
   createForm() {

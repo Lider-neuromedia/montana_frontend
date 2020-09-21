@@ -18,7 +18,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./administradores.component.css']
 })
 export class AdministradoresComponent implements OnInit {
-  
+
   templateImage = {
     "lupa": "assets/img/search.svg",
     "lapiz": "assets/img/editar.svg",
@@ -80,6 +80,7 @@ export class AdministradoresComponent implements OnInit {
   apellidos;
 
   check_user:any = [];
+  check_Update:any = [];
   active:string = "activeOff";
   user_data : FormArray;
 
@@ -155,18 +156,19 @@ export class AdministradoresComponent implements OnInit {
     this.formUpdatedAdmin = this.formb.group({
       id: [1],
       rol_id: [1],
-      name: ['', [Validators.required]],
-      apellidos: [''],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      name: [this.check_Update.name, [Validators.required]],
+      apellidos: [this.check_Update.apellidos, [Validators.required]],
+      email: [this.check_Update.email, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: [''],
       user_data: this.formb.array([this.createUser_data()],[Validators.required])
     });
   }
+
   createUser_data(): FormGroup{
-    if (typeof this.check_user.user_data !== 'undefined') {
+    if (typeof this.check_Update.user_data !== 'undefined') {
       var user_data;
       var objet;
-      this.check_user.user_data.forEach(element => {
+      this.check_Update.user_data.forEach(element => {
         user_data = this.formUpdatedAdmin.get('user_data') as FormArray;
         objet = this.formb.group({
           id_field: element.id,
@@ -235,15 +237,16 @@ export class AdministradoresComponent implements OnInit {
   }
 
   updatedAdmin(){
-    if(this.formUpdatedAdmin.invalid){
-      return Object.values(this.formUpdatedAdmin.controls).forEach(control => {
-        if (control instanceof FormGroup){
-          Object.values(control.controls).forEach(control => control.markAsTouched());
-        }else{
-          control.markAsTouched();
-        }
-      });
-    }
+    // if(this.formUpdatedAdmin.invalid){
+      // return Object.values(this.formUpdatedAdmin.controls).forEach(control => {
+      //   if (control instanceof FormGroup){
+      //     Object.values(control.controls).forEach(control => control.markAsTouched());
+      //   }else{
+      //     control.markAsTouched();
+      //   }
+      // });
+      // console.log('error');
+    // }
 
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
@@ -254,6 +257,7 @@ export class AdministradoresComponent implements OnInit {
           title: 'Se ha actualizado correctamente'
         });
         this.cerrarFormAdminEditar();
+        this.check_user = [];
         // this.buscarAdmin();
       },
       (error:any) =>{
@@ -266,49 +270,36 @@ export class AdministradoresComponent implements OnInit {
     let obj = {
       "data" : data
     }
-    let removeIndex = this.check_user.findIndex(x => x.data === data);
-    
     if (e.target.checked){
       this.check_user.push(obj);
       if(this.check_user.length == 1){
-        // console.log(this.check_user);
-        // console.log(removeIndex);
-        // this.check_user;
         this.check_user = this.check_user;
-        // this.check_user = JSON.stringify(this.check_user);
         this.check_user.forEach(e => {
-          this.check_user = e.data;
+          this.check_Update = e.data;
           this.FormUpdateAdmin();
         });
+        console.log(this.check_Update);
         this.active = "activeOn";
         this.editarAdmin();
-        // if(removeIndex < 1){
-        //   this.check_user.forEach(e => {
-        //     this.check_user = e.data;
-        //     this.check_user.user_data.forEach(element => {
-        //     });
-        //     console.log(this.check_user.user_data);
-        //   });
-        // }
       }else{
         this.active = "activeOff";
       }
     }else {
+      
+      let removeIndex = this.check_user.findIndex(x => x.data === data);
+      console.log(removeIndex);
       if (removeIndex !== -1){
         this.check_user.splice(removeIndex, 1);
       }
       if(removeIndex == 0){
         this.active = "activeOff";
-        // console.log(this.active);
       }
       if(removeIndex == 1){
         this.active = "activeOn";
         console.log(removeIndex);
         this.editarAdmin();
-        // console.log(this.active);
       }
     }
-    // console.log(this.check_user);
   }
 
 
@@ -318,28 +309,28 @@ export class AdministradoresComponent implements OnInit {
   }
 
   getUsersAndDelete(){
-    Swal.fire({
-      title: 'Está seguro que desea eliminar?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminar'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Completado',
-          'El usuario ha sido eliminado',
-          'success'
-        );
-        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
-        this.userService.deleteUsers(this.removeItemsUsers).subscribe(
-          (data:any) =>{
-          console.log(data);
-          }
-        );
-      }
-    });
+    // Swal.fire({
+    //   title: 'Está seguro que desea eliminar?',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Si, Eliminar'
+    // }).then((result) => {
+    //   if (result.value) {
+    //     Swal.fire(
+    //       'Completado',
+    //       'El usuario ha sido eliminado',
+    //       'success'
+    //     );
+    //     // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+    //     this.userService.deleteUsers(this.removeItemsUsers).subscribe(
+    //       (data:any) =>{
+    //       console.log(data);
+    //       }
+    //     );
+    //   }
+    // });
   }
 
   nuevoAdmin(){
