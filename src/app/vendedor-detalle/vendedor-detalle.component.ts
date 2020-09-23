@@ -57,14 +57,14 @@ export class VendedorDetalleComponent implements OnInit {
     if(id != null){
       this.user.getSeller(id).subscribe(
         (data:any) =>{
+          console.log(data);
           this.usuarios = data;
-          for(var i = 0; i <= data.length - 1; i++){
-            var turnAround = data[i].field_key;
-            this.info[turnAround] = data[i].value_key;
-            // this.info = data[i];
-          }
-          this.info;
-          console.log(this.info);
+          // for(var i = 0; i <= data.length - 1; i++){
+          //   var turnAround = data[i].field_key;
+          //   this.info[turnAround] = data[i].value_key;
+          //   // this.info = data[i];
+          // }
+          // this.info;
         },
         (error) =>{
           this.show = false;

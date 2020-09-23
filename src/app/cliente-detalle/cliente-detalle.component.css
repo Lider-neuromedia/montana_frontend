@@ -2,74 +2,130 @@
 .title-tiendas,
 .title-credenciales,
 .title-vendedor-asignado,
-.title-tus-finanzas{
+.title-tus-finanzas {
     font-size: 26px;
     letter-spacing: 0.74px;
     font-weight: 700;
     margin: .6em 0em;
 }
 
-.filtro-clientes{
+.filtro-clientes {
     justify-content: space-between;
     margin-bottom: 1em;
     padding: 0 2em;
 }
 
-.filtro-clientes .box-editar{
+.filtro-clientes .box-editar {
     margin-right: 0;
 }
 
-.ident-admin{
+hr {
+    border-top: 1px solid #EEEEEE;
+    margin: auto;
+    margin-right: 0;
+}
+
+.width-75 {
+    width: 75%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ident-admin {
     display: flex;
 }
 
-.div-imagen img{
+.div-imagen img {
     margin-right: 10px;
 }
 
-.filtros{
+.filtros {
     justify-content: space-between;
 }
 
-.div-edit-boton{
+.div-edit-boton {
     display: flex;
 }
 
 .box-editar,
-.box-create-new{
+.box-create-new {
     height: max-content;
 }
-.texto-editar{
+
+.texto-editar {
     padding: 5px;
 }
 
-.datos{
+.datos {
     margin-bottom: 1em;
 }
-.datos p:nth-child(2){
+
+.datos p:nth-child(2) {
     font-weight: 800;
 }
 
-.color-email{
+.color-email {
     color: #FF596A;
+}
+
+.pt-2 {
+    padding-top: 2rem;
+}
+
+.pt-3 {
+    padding-top: 3rem;
+}
+
+.pt-4 {
+    padding-top: 4rem;
+}
+
+.pt-5 {
+    padding-top: 5rem;
+}
+
+.pb-2 {
+    padding-bottom: 2rem;
+}
+
+.pb-3 {
+    padding-bottom: 3rem;
+}
+
+.pb-4 {
+    padding-bottom: 4rem;
+}
+
+.pb-5 {
+    padding-bottom: 5rem;
+}
+
+.card {
+    box-shadow: 1px 1px 5px 1px rgba(125, 125, 125, .2);
+    margin: 0;
+    border-radius: 8px;
 }
 
 .cupo-preaprobado,
 .cupo-disponible,
 .total-deuda,
-.saldo-en-mora{
+.saldo-en-mora {
     background: white;
     margin: 1em 0em;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.cupo-preaprobado{
+.cupo-preaprobado {
     border-top: 4px solid #FFCF27;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
 }
 
-.cupo-preaprobado p:nth-child(1){
+.cupo-preaprobado p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
@@ -77,90 +133,96 @@
     /* padding-bottom: 10px; */
 }
 
-.cupo-preaprobado p:nth-child(2){
+.cupo-preaprobado p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
     padding-left: 30px;
     padding-bottom: 30px;
+    padding-top: 10px;
 }
 
-.cupo-disponible{
+.cupo-disponible {
     border-top: 4px solid #95D5C1;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
 }
 
-.cupo-disponible p:nth-child(1){
+.cupo-disponible p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
     margin: 0px 10px 15px;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
-.cupo-disponible p:nth-child(2){
+.cupo-disponible p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
     padding-left: 30px;
     padding-bottom: 30px;
+    padding-top: 10px;
 }
 
-.total-deuda{
+.total-deuda {
     border-top: 4px solid #EB1EC3;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
 }
 
-.total-deuda p:nth-child(1){
+.total-deuda p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
     margin: 0px 10px 15px;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
-.total-deuda p:nth-child(2){
+.total-deuda p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
     padding-left: 30px;
     padding-bottom: 30px;
+    padding-top: 10px;
 }
 
-.saldo-en-mora{
+.saldo-en-mora {
     border-top: 4px solid #E31D31;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
 }
 
-.saldo-en-mora p:nth-child(1){
+.saldo-en-mora p:nth-child(1) {
     padding: 10px 15px;
     font-weight: 600;
     border-bottom: 1px solid #D8D8D8;
     margin: 0px 10px 15px;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 
-.saldo-en-mora p:nth-child(2){
+.saldo-en-mora p:nth-child(2) {
     color: #FF596A;
     font-size: 26px;
     font-weight: 700;
     padding-left: 30px;
     padding-bottom: 30px;
+    padding-top: 10px;
 }
 
-.actions{
+.actions {
     display: flex;
     justify-content: space-between;
 }
 
-.actions a{
+.actions a {
     text-align: center;
     text-decoration: none;
     width: 50%;
 }
 
-
-.buscador-pedido{
+.buscador-pedido {
     border: 1px solid #FF596A;
     width: 100%;
     border-radius: 15px;
@@ -168,42 +230,42 @@
     margin-bottom: 1.2em;
 }
 
-.box-pedidos{
+.box-pedidos {
     background: #E4E4E4;
     border-radius: 7px;
     padding: .3em .6em;
     margin: 1em 0em;
 }
 
-.foto-referencia{
+.foto-referencia {
     display: flex;
     padding-bottom: 7px;
     border-bottom: 1px solid #D7D7D7;
     align-items: center;
 }
 
-.foto-referencia p{
+.foto-referencia p {
     font-size: 22px;
     margin-left: 15px;
 }
 
-.list-tienda{
+.list-tienda {
     display: flex;
     justify-content: space-between;
     margin: .6em 0em;
 }
 
-.list-tienda .cantidad{
+.list-tienda .cantidad {
     color: #FF596A;
     font-weight: bold;
 }
 
-.foto-referencia img{
+.foto-referencia img {
     height: 55px;
     width: 50px;
 }
 
-.vendedor-detalle .actions{
+.vendedor-detalle .actions {
     padding: 8px 10px;
     border-bottom: 1px solid #c7c7c7;
     margin-bottom: 15px;
@@ -211,14 +273,14 @@
     position: relative;
 }
 
-.vendedor-detalle .actions a{
+.vendedor-detalle .actions a {
     color: #1E2933;
     font-size: 16px;
     text-decoration: none;
     font-weight: bold;
 }
 
-.line-pedidos{
+.line-pedidos {
     background: #FF596A;
     height: 3px;
     width: 200px;
@@ -227,65 +289,95 @@
     left: 0;
 }
 
-.tabla-clientes-en-vendedores{
+.tabla-clientes-en-vendedores {
     width: 100%;
 }
 
-.tabla-clientes-en-vendedores thead{
+.tabla-clientes-en-vendedores thead {
     text-align: left;
 }
 
-.tabla-clientes-en-vendedores td{
+.tabla-clientes-en-vendedores td {
     padding: 2em 0em;
     border-bottom: 1px solid #e4e4e4;
 }
 
-.actions{
+.tabla-clientes-en-vendedores tr:last-child td {
+    border-bottom: 0px !important;
+}
+
+.actions {
     margin-bottom: 1.5em;
     border-bottom: 1px solid #D7D7D7;
 }
 
-.actions a{
+.actions a {
     color: #1E2933;
     display: block;
     font-weight: 600;
     padding: .8em 0em;
 }
 
-.actions .pedidos{
+.actions .pedidos {
     border-bottom: 3px solid #FF596A;
 }
 
-.row-vendedor-asignado{
+.row-vendedor-asignado {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.btn-whatsapp{
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.btn-whatsapp {
     background: #1CD34D;
     cursor: pointer;
     border-radius: 15px;
     color: white;
     display: flex;
-    height: 30px;
+    height: 32px;
     line-height: 30px;
-    padding: 0px 30px;
+    padding-right: 15px;
 }
 
-.aside-pedidos{
+.btn-whatsapp a {
+    color: #fff;
+    text-decoration: none;
+    ;
+}
+
+.btn-whatsapp img {
+    padding-right: 10px;
+}
+
+.aside-pedidos {
     padding-right: 2em;
     border-left: 1px solid #D8D8D8;
 }
+
 .title-datos-personales,
 .title-credenciales,
 .title-vendedor-asignado,
-.title-tiendas{
+.title-tiendas {
     margin: .8em 0em;
     margin-bottom: 1.2em;
 }
 
- /* Cambiar color del placeholder */
+
+/* Cambiar color del placeholder */
+
 ::placeholder {
     color: #E3E3E3;
     opacity: 1;
@@ -297,4 +389,29 @@
 
 ::-ms-input-placeholder {
     color: #E3E3E3;
+}
+
+.acciones-administrador {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    width: 101%;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administrador li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administrador li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
 }

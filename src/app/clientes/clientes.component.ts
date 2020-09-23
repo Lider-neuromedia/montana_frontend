@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
+import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 
 import { UsersService } from '../services/users.service';
 
@@ -14,13 +15,13 @@ declare var $:any;
 })
 export class ClientesComponent implements OnInit {
 
-  generales = false;
-  credenciales = true;
+  generales = true;
+  credenciales = false;
   tienda = false;
   asignar = false;
 
-  activeDatos = false;
-  activeUsuario = true;
+  activeDatos = true;
+  activeUsuario = false;
   activeTienda = false;
   asignarCliente = false;
 
@@ -69,37 +70,45 @@ export class ClientesComponent implements OnInit {
   roles = [];
   removeItemsUsers = [];
 
+  openDrawer = false;
+  updateDrawer = false;
+
+  formCreateClient: FormGroup;
+
   constructor( private clients: UsersService, private route: Router) {
 
-    this.clients.getRoles().subscribe( (data:any) =>{
+    this.clients.getAllClients().subscribe( (data:any) =>{
 
-      this.roles = data;
+      // this.clientes = data;
+      this.clientes = data['admins'];
+      // this.user_data = this.userColumns = res['fields'];
+      console.log(this.clientes);
 
-      let user_vendedor =  localStorage.getItem('userdata');
-      let dataString = user_vendedor;
-      let dataJson = JSON.parse(dataString);
+      // let user_vendedor =  localStorage.getItem('userdata');
+      // let dataString = user_vendedor;
+      // let dataJson = JSON.parse(dataString);
 
-      let id = localStorage.getItem('user_id');
+      // let id = localStorage.getItem('user_id');
 
-      if(this.rol == this.roles[0].id){
-        this.clients.getUserForRol(3).subscribe( (data:any) =>{
-          console.log(data);
-          this.clientes = data;
-        })
-      }
+      // if(this.rol == this.roles[0].id){
+      //   this.clients.getUserForRol(3).subscribe( (data:any) =>{
+      //     console.log(data);
+      //     this.clientes = data;
+      //   })
+      // }
 
-      if(this.rol == this.roles[1].id){
-        this.clients.clientesAsignados(id).subscribe( (data:any) =>{
-          this.clientes = data;
+      // if(this.rol == this.roles[1].id){
+      //   this.clients.clientesAsignados(id).subscribe( (data:any) =>{
+      //     this.clientes = data;
 
-          for(var i = 0; i <= dataJson.length - 1; i++){
-            var turnAround = dataJson[i].field_key;
-            this.info[turnAround] = dataJson[i].value_key;
-          }
-          console.log(this.info);
-        });
+      //     for(var i = 0; i <= dataJson.length - 1; i++){
+      //       var turnAround = dataJson[i].field_key;
+      //       this.info[turnAround] = dataJson[i].value_key;
+      //     }
+      //     console.log(this.info);
+      //   });
 
-      }
+      // }
     })
 
   }
@@ -171,7 +180,7 @@ export class ClientesComponent implements OnInit {
   }
 
   clienteDetalle(id){
-    this.route.navigate(['/users/clientes',id]);
+    this.route.navigate(['/users/clientes', id]);
   }
 
   agregarCliente(){
@@ -219,6 +228,33 @@ export class ClientesComponent implements OnInit {
       }
     })
     
+  }
+
+  openDrawerRigth(action : boolean, type : string){
+    if (type == 'create') {
+      this.openDrawer = action;
+      (!action) ? this.updateDrawer = false : '';
+    }else{
+      this.updateDrawer = action;
+      (!action) ? this.openDrawer = false : '';
+    }
+  }
+
+  submitCreateUser(){
+    console.log('entro');
+    // var data = this.catalogo;
+    // this.http.httpPost('catalogos', data, true).subscribe(
+    //   response => {
+    //     if (response.status == 200 && response.response == 'success') {
+    //       this.openDrawer = false;
+    //       this.getCatalogos();
+    //       this.resetForm();
+    //     }
+    //   }, 
+    //   error => {
+    //     console.error(error);
+    //   }
+    // )
   }
 
 }

@@ -140,9 +140,8 @@
                         <h3>Eligue un cliente</h3>
                         <select (change)="cliente($event)" class="select-client">
                     <option value="0">Selecciones un cliente</option>
-                    <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
+                    <option *ngFor="let option of vendedores" [value]="option.id">{{ option.name }}</option>
                 </select>
-
                         <div class="acciones-form-adminitrador">
                             <a (click)="cliente()" class="agregar">
                                 <span class="mas">

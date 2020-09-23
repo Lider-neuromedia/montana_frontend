@@ -19,7 +19,7 @@ export class UsersService {
   constructor( private http: HttpClient ) {}
 
   admins:any = {};
-
+  
   /* Traer todos los usuarios */
   getAllUsers(){
     return this.http.get(`${this.api}/users`);
@@ -32,7 +32,8 @@ export class UsersService {
 
   /* Traer usuarios por rol */
   getUserForRol(id){
-    return this.http.get(`${this.web}/users-for-rol/${id}`);
+    const headers = new HttpHeaders( {'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/users-for-rol/${id}`, {headers: headers});
   }
 
   /* Agregar información adicional del usuario */
@@ -107,19 +108,23 @@ export class UsersService {
   }
 
   getAllSellers(){
-    return this.http.get(`${this.web}/vendedores`);
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/vendedores`, {headers: headers});
   }
 
   getSeller(id){
-    return this.http.get(`${this.web}/vendedor/${id}`);
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/vendedor/${id}`, {headers: headers});
   }
 
   getAllClients(){
-    return this.http.get(`${this.web}/clientes`);
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/clientes`, {headers: headers});
   }
 
   getClient(id){
-    return this.http.get(`${this.web}/cliente/${id}`);
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/cliente/${id}`,{headers: headers});
   }
 
   getOneAdministor(id){

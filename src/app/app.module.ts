@@ -34,6 +34,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
+import { DrawerAdvancedComponent } from './drawer-advanced/drawer-advanced.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -61,6 +62,7 @@ import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
     RolesFormComponent,
     AdministradoresBuscadorComponent,
     DrawerRigthComponent,
+    DrawerAdvancedComponent,
   ],
   imports: [
     BrowserModule,
