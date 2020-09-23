@@ -93,3 +93,7 @@
     margin-top: 40px;
     color: #ccc;
 }
+
+.text-area{
+    width: 100% !important;
+}

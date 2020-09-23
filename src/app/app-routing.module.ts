@@ -39,7 +39,7 @@ const routes : Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'productos/:id', component: InternaCatalogoComponent },
-  { path: 'producto-detalle', component: ProductoDetalleComponent },
+  { path: 'producto-detalle/:id', component: ProductoDetalleComponent },
   {
     path: 'users', component: UsersComponent,
     children: [

@@ -1,3 +1,11 @@
+
+.pad-30{ padding: 30px;}
+
+.valoraciones-column{
+    padding: 30px;
+    position: relative;
+}
+
 .detalle{
     padding: 1.5em .6em;
     margin-bottom: 2em;
@@ -68,7 +76,7 @@
 .ver-valoraciones{
     background: #FF596A;
     position: absolute;
-    bottom: 80px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -82,7 +90,13 @@
     font-size: 14px;
 }
 
-.aside-detalle-producto{}
+.aside-detalle-producto{
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .2);
+    padding: 50px 30px;
+    position: relative;
+}
 
 .aside-detalle-producto .nombre{
     font-size: 24px;
@@ -131,4 +145,65 @@
 
 .opiniones .valoraciones-column{
     height: 487px;
+}
+
+.ngx-gallery { display: inline-block; margin-bottom: 20px; }
+
+.content-gallery{
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.acciones {
+    display: flex;
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    padding: 0px 20px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.agregar,
+.cancelar {
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+
+.agregar {
+    background: #68BE8E;
+    padding: 6px 0px;
+    color: white;
+    transition: all .5s ease;
+    font-size: 14px;
+    letter-spacing: 0.84px;
+    line-height: 17.6px;
+}
+
+.agregar:hover {
+    background: #5aa97d;
+}
+
+.cancelar {
+    background: white;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    padding: 6px 0px;
+    transition: all .5s ease;
+    font-size: 14px;
+    letter-spacing: 0.84px;
+    line-height: 17.6px;
+}
+
+.cancelar:hover {
+    background: #ec5362;
+    color: white;
 }

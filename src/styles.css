@@ -263,6 +263,30 @@ input[type="tel"] {
     padding-left: 209px;
     padding-top: 60px;
 }
+
+.label-field {
+    padding: 0px 20px;
+    margin-bottom: 16px;
+}
+
+.label-field label,
+.label-field input, textarea {
+    display: block;
+    width: 100%;
+}
+
+.label-field label {
+    font-size: 14px;
+    color: #FF596A;
+    margin-bottom: 5px;
+}
+
+.label-field input, textarea {
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    padding: 10px;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -302,3 +326,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 10px !important;
 }
 
+.ngx-gallery-thumbnails .ngx-gallery-thumbnail.ngx-gallery-active{
+    border: 1px double #fff !important;
+}
+
+.ngx-gallery-thumbnails .ngx-gallery-thumbnail{
+    border: 1px double #fff !important;
+}
+
+.ngx-gallery-icon{
+    color: #000000 !important;
+}
+
+ngx-gallery-preview .ngx-gallery-icon{
+    color: #fff !important;
+}

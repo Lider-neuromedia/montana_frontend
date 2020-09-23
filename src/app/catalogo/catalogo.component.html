@@ -6,35 +6,31 @@
     </div>
     <div class="area">
         <app-drawer-rigth name="create-catalogo" title="Nuevo catálogo" [open]="openDrawer"
-            (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateCat()">
+            (close)="openDrawerRight(false, 'create')" (submit)="submitCreateCat()">
             <form action="">
                 <div class="label-field">
                     <label for="">Nombres</label>
                     <input [(ngModel)]="catalogo.nombre" name="name" type="text" class="">
                 </div>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="label-field" style="padding: 0px 0px 0px 20px;">
-                            <label for="">Descuento</label>
-                            <mat-form-field appearance="outline" style="width: 100%;">
-                                <!-- <mat-label>Descuento</mat-label> -->
-                                <mat-select name="food" [(ngModel)]="catalogo.descuento"  [(value)]="catalogo.descuento">
-                                    <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
-                                        {{i}}%
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+                <div class="label-field" style="display: flex;">
+                    <div class="col-md-4" style="padding-left: 0;">
+                        <label for="">Descuento</label>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <!-- <mat-label>Descuento</mat-label> -->
+                            <mat-select name="food" [(ngModel)]="catalogo.descuento"  [(value)]="catalogo.descuento">
+                                <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
+                                    {{i}}%
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-                    <div class="col-md-8">
-                        <div class="label-field">
-                            <label for="">Estado del cátalogo</label>
-                            <mat-button-toggle-group [(ngModel)]="catalogo.estado" name="estado" aria-label="Estado">
-                                <mat-button-toggle value="activo" checked="true">Activo</mat-button-toggle>
-                                <mat-button-toggle value="privado">Privado</mat-button-toggle>
-                            </mat-button-toggle-group>
-                        </div>
+                    <div class="col-md-8" style="padding-right: 0;">
+                        <label for="">Estado del cátalogo</label>
+                        <mat-button-toggle-group [(ngModel)]="catalogo.estado" name="estado" aria-label="Estado">
+                            <mat-button-toggle value="activo" checked="true">Activo</mat-button-toggle>
+                            <mat-button-toggle value="privado">Privado</mat-button-toggle>
+                        </mat-button-toggle-group>
                     </div>
                 </div>
                 <div class="label-field">
@@ -64,15 +60,15 @@
         </app-drawer-rigth>
 
         <app-drawer-rigth name="update-catalogo" title="Editar catálogo" [open]="updateDrawer"
-            (close)="openDrawerRigth(false, 'edit')" (submit)="submitUpdateCatalogo()">
+            (close)="openDrawerRight(false, 'edit')" (submit)="submitUpdateCatalogo()">
             <form action="">
                 <div class="label-field">
                     <label for="">Nombres</label>
                     <input [(ngModel)]="catalogoEdit.titulo" name="name" type="text" class="">
                     <!-- <small style="color: red;">{{ errors.name }}</small> -->
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="label-field" style="display: flex;">
+                    <div class="col-md-4" style="padding-left: 0;">
                         <div class="label-field" style="padding: 0px 0px 0px 20px;">
                             <label for="">Descuento</label>
                             <mat-form-field appearance="outline"  style="width: 100%;">
@@ -84,7 +80,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" style="padding-right: 0;">
                         <div class="label-field">
                             <label for="">Estado del cátalogo</label>
                             <mat-button-toggle-group [(ngModel)]="catalogoEdit.estado" name="estado"
@@ -139,7 +135,7 @@
                     <div class="box-mas">
                         <img class="mas" src="assets/img/mas.svg" alt="">
                     </div>
-                    <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo catálogo</a>
+                    <a class="btn-nuevo-cliente" (click)="openDrawerRight(true, 'create')">Nuevo catálogo</a>
                 </div>
             </div>
         </div>

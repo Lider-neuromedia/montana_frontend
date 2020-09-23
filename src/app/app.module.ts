@@ -27,6 +27,7 @@ import { RolesFormComponent } from './roles-form/roles-form.component';
 import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
 import {MaterialModule} from './material/material.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -71,7 +72,8 @@ import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgxGalleryModule
   ],
   providers: [SendHttpData],
   bootstrap: [AppComponent]

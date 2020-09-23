@@ -66,7 +66,7 @@ export class CatalogoComponent implements OnInit {
   }
 
 
-  openDrawerRigth(action : boolean, type : string){
+  openDrawerRight(action : boolean, type : string){
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';
@@ -134,7 +134,7 @@ export class CatalogoComponent implements OnInit {
           this.getCatalogos();
           this.resetForm();
         }
-      }, 
+      },
       error => {
         console.error(error);
       }
@@ -155,7 +155,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   editCatalogo(catalogo){
-    this.openDrawerRigth(true, 'edit');
+    this.openDrawerRight(true, 'edit');
     this.catalogoEdit = catalogo;  
   }
 

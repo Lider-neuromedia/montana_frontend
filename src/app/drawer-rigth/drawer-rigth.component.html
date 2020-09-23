@@ -6,7 +6,9 @@
         <img class="close-drawer" src="assets/img/cerrar.svg" (click)="closeDrawer()" alt="">
     </div>
     <h3 class="subtitle">{{subtitle}}</h3>
-    <ng-content></ng-content>
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
     <div class="acciones-form-adminitrador">
         <a class="agregar" (click)="submitCatalogo()">
             <span class="mas">
@@ -19,15 +21,5 @@
                 <img src="" alt="">
             </span> Cancelar
         </a>
-        <!-- <a class="agregar">
-                    <span class="mas">
-                        <img src="" alt="">
-                    </span> Agregar
-                </a>
-                <a class="cancelar">
-                    <span class="mas">
-                        <img src="" alt="">
-                    </span> Cancelar
-                </a> -->
     </div>
 </div>

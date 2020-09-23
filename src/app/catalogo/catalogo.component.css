@@ -262,30 +262,6 @@
     z-index: 500;
 }
 
-
-.label-field {
-    padding: 0px 20px;
-    margin-bottom: 16px;
-}
-
-.label-field label,
-.label-field input {
-    display: block;
-    width: 100%;
-}
-
-.label-field label {
-    font-size: 14px;
-    color: #FF596A;
-    margin-bottom: 5px;
-}
-
-.label-field input {
-    border: 1px solid #D7D7D7;
-    border-radius: 6px;
-    padding: 10px;
-}
-
 .acciones-form-adminitrador {
     display: flex;
     position: fixed;
