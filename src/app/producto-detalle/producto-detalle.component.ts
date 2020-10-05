@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
 import {NgxGalleryImage} from '@kolkov/ngx-gallery';
 import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
+import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component';
+
+import Swal from 'sweetalert2'
+declare var $:any;
 
 @Component({
   selector: 'app-producto-detalle',
   templateUrl: './producto-detalle.component.html',
   styleUrls: ['./producto-detalle.component.css']
 })
+
 export class ProductoDetalleComponent implements OnInit {
+
+  @ViewChild(DialogPedidoComponent) dialogPedido: DialogPedidoComponent;
 
   id_producto : any;
   files_1: File[] = [];
@@ -90,9 +97,7 @@ export class ProductoDetalleComponent implements OnInit {
           });
         }
       }, 
-      error => {
-
-      }
+      error => {    }
     )
   }
 
@@ -105,6 +110,7 @@ export class ProductoDetalleComponent implements OnInit {
       // (!action) ? this.openDrawer = false : '';
     }
   }
+  
   submitEditProduct(){
     var data = this.producto;
     this.http.httpPut('producto', this.id_producto, data, true).subscribe(
@@ -160,5 +166,50 @@ export class ProductoDetalleComponent implements OnInit {
     this.files_1.splice(this.files_1.indexOf(event), 1);
   }
 
+  deleteProduct(){
 
+    Swal.fire({
+      title: 'Está seguro que desea eleiminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        this.http.httpDelete('producto', this.id_producto).subscribe(
+          response => {
+            if(response.status == 200 && response.response == 'success'){
+              this.route.navigate(['/productos/' + this.producto.catalogo]);
+            }else{
+              Swal.fire(
+                'Error',
+                response.message,
+                'error'
+              )
+            }
+          },
+          error => {
+            Swal.fire(
+              'Error',
+              'Error en el servidor.',
+              'error'
+            )
+          }
+        );
+      }
+    })
+
+  }
+
+  // Metodos boton acciones.
+  accionesAdministrador(){
+    $('.acciones-administrador').toggleClass('open-acciones');
+    $('.box-editar').toggleClass('box-editar-open');
+  }
+
+  
+  openDialogPedido(){
+    this.dialogPedido.openDialog();
+  }
 }

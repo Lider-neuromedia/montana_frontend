@@ -2,7 +2,7 @@
     align-items: flex-end;
     background: white;
     padding: 1em .6em;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, .2);
     margin-bottom: 2em;
 }
 
@@ -68,4 +68,160 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+
+.input-cantidad{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.add{
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background: #ff596ad6;
+}
+
+.remove{
+    position: absolute;
+    top: 35%;
+    right: 80px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.remove:hover{
+    background: #ff596ad6;
+}
+
+.icon-tienda { font-size: 20px !important; }
+
+.cantidad {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    right: 35px;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.title {
+    font-size: 14px;
+}
+
+.detalle-pedido{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #D7D7D7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.detalle-pedido:hover {
+    background: #d7d7d74d;
+}
+
+.title-detalle {
+    display: flex;
+    justify-content: center;
+    padding: 10px 5px 15px 5px;
+    border-bottom: 1px solid #D7D7D7;
+    position: relative;
+}
+
+.title-detalle img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+.title-detalle p {
+    color: #1E2933;
+    font-size: 21px;
+    letter-spacing: 0.6px;
+    line-height: 28.64px;
+}
+
+.tiendas-detalle {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.tiendas-detalle p{
+    font-size: 14px;
+}
+
+.tiendas-detalle > span {
+    color: #FF596A;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.title-pedido{
+    margin-bottom: 20px;
+    font-size: 17px;
+    letter-spacing: 0.54px;
+    line-height: 25.92px;    
+}
+
+.title-pedido span{
+    font-weight: 400;
+}
+
+.text-area{
+    width: 100% !important;
+}
+
+.total-pedido {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-top: 1px solid #D7D7D7;
+}
+
+.total-pedido span{
+    color: #FF596A;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+/* STYLES MATERIAL */
+.mat-button-toggle-checked{
+    background-color: #ff596a !important;
+}
+
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard{
+    color: #fff;
+}
+
+.mat-button-toggle{
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.mat-button-toggle-group{
+    width: 100%;
 }

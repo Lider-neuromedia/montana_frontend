@@ -7,20 +7,35 @@
     <div class="area">
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
-            <div class="col-md-9">
-                <div>
-                    <img src="assets/img/producto-interna.png" alt="">
+            <div class="col-md-8">
+                <div class="content-gallery">
+                    <!-- <img src="{{producto.destacada}}" alt=""> -->
+                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
                 </div>
 
                 <div class="info-pedido-interna">
-                    <div class="nombre-precio">
-                        <div class="nombre">
-                            <h2>Tenis Puma Hombre Moda BMW MMS Roma</h2>
-                            <p>Puma</p>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2>{{producto.nombre}}</h2>
+                            <p class="marca">{{producto.nombre_marca}}</p>
                         </div>
-                        <div class="precio">
-                            <p>$730.000</p>
-                            <p>$970.000</p>
+                        <div class="col-md-4">
+                            <p class="precio-real">{{producto.total  |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                            <!-- <p class="precio-anterior">$970.000</p> -->
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 3rem; margin-bottom: 3rem;">
+                        <div class="col-md-4">
+                            <h2 class="title-info">Código</h2>
+                            <p class="info">{{producto.codigo}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="title-info">Referencia</h2>
+                            <p class="info">{{producto.referencia}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="title-info">Stock</h2>
+                            <p class="info">{{producto.stock}} cajas</p>
                         </div>
                     </div>
                 </div>
@@ -184,22 +199,42 @@
 
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="aside-interna-pedido">
-                    <h3 class="nombre">Tu pedido</h3>
-
-                    <p class="pedido-referencia">Referencia</p>
-                    <p class="numero-referencia">KLI-1263813764</p>
-
-                    <p class="pedido-referencia">Tiendas</p>
-                    <div class="tienda-cantidad">
-                        <p class="tienda"><strong>CC Único</strong> L 204</p>
-                        <div class="cantidad">
-                            <span (click)="menosCantidad()" class="menos-productos">-</span>
-                            <input [(ngModel)]="cantidad" name="cantidad" type="number">
-                            <span (click)="masCantidad()" class="mas-productos">+</span>
+                    <h3 class="nombre" style="margin-bottom: 15px;">Tu pedido</h3>
+                    <form>
+                        <div class="label-field">
+                            <label for="">REFERENCIA</label>
+                            <input name="referencia" type="text" [(ngModel)]="producto.referencia" class="">
                         </div>
-                    </div>
+                        <div class="label-field">
+                            <label for="">TIENDAS</label>
+                            <div class="input-cantidad" *ngFor="let tienda of tiendas; let i = index">
+                                <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                                <a class="remove" type="button" (click)="resCantidad(i)">
+                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
+                                </a>
+                                <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                                <a class="add" type="button" (click)="sumCantidad(i)">
+                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Footer actions. -->
+                <div class="acciones">
+                    <a class="agregar" (click)="addProducto()">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span> Agregar producto
+                    </a>
+            
+                    <a class="cancelar">
+                        <span class="mas">
+                            <img src="" alt="">
+                        </span> Cancelar
+                    </a>
                 </div>
             </div>
         </div>

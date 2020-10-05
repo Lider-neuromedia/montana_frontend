@@ -64,7 +64,7 @@ const routes : Routes = [
   },
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedido', component: PedidoComponent },
-  { path: 'pedido-interna', component: PedidoInternaComponent },
+  { path: 'pedido-interna/:id', component: PedidoInternaComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

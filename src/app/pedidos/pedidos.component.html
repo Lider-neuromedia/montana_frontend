@@ -1,34 +1,39 @@
 <div class="overpedido">
     <div class="pop-up-pedido">
-
-        <div (click)="showOverPedido()" class="bar-close">cerrar</div>
+        <div class="bar-close">
+            <button (click)="showOverPedido()" mat-icon-button aria-label="Menu opciones">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
         <h2>Comienza tu pedido</h2>
 
         <div class="label-field">
             <label >Cliente</label>
-            <select name="" id="">
-                <option value="">Noreña Loaiza William</option>
-                <option value="">William Noreña Loaiza</option>
-                <option value="">Loaiza William Noreña </option>
+            <select name="cliente" id="" [(ngModel)]="crear_pedido.cliente">
+                <option value="">Seleccione...</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.id">
+                    {{cliente.name + ' ' + cliente.apellidos}}
+                </option>
             </select>
         </div>
 
         <div class="label-field">
             <label >Vendedor</label>
-            <select name="" id="">
-                <option value="">Noreña Loaiza William</option>
-                <option value="">William Noreña Loaiza</option>
-                <option value="">Loaiza William Noreña </option>
+            <select name="vendedor" id="" [(ngModel)]="crear_pedido.vendedor">
+                <option value="">Seleccione...</option>
+                <option *ngFor="let vendedor of vendedores" [value]="vendedor.id">
+                    {{vendedor.name + ' ' + vendedor.apellidos}}
+                </option>
             </select>
         </div>
 
         <div class="label-field">
             <label >Catálogo</label>
-            <select name="" id="">
+            <select name="catalogo" id="" [(ngModel)]="crear_pedido.catalogo">
                 <option value="">-</option>
-                <option value="">Primavera 2020</option>
-                <option value="">Diciembre 2019</option>
-                <option value="">Vacaciones medio año</option>
+                <option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">
+                    {{catalogo.titulo}}
+                </option>
             </select>
         </div>
 
@@ -37,8 +42,6 @@
                 Continuar
             </a>
         </div>
-
-        
     </div>
 </div>
 
@@ -91,7 +94,6 @@
         <section class="table-data">
 
             <table style="width:100%">
-        
                 <tr class="tabla-fila-cabecera">
                     <th></th>
                     <th>Fecha <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
@@ -101,115 +103,22 @@
                     <th>Valor <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
                     <th class="head-state">Estado del pedido <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
                 </tr>
-        
-                <tr class="tabla-fila-datos">
+
+                <tr class="tabla-fila-datos" *ngFor="let pedido of pedidos">
                     <td><input class="check-nombre" type="checkbox" name="" id=""></td>
                     <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
+                        <p class="nombre">{{pedido.fecha}}</p>
                     </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-aprobado"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
+                    <td class="telefono">{{pedido.codigo}}</td>
+                    <td class="correo">{{pedido.name_vendedor + " " + pedido.apellido_vendedor}}</td>
+                    <td class="correo">{{pedido.name_cliente + " " + pedido.apellido_cliente}}</td>
+                    <td class="correo">{{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</td>
+                    <td class="status">
+                        <div class="estado estado-aprobado" *ngIf="pedido.estado == 1"></div>
+                        <div class="estado estado-pendiente" *ngIf="pedido.estado == 2"></div>
+                        <div class="estado estado-rechazado" *ngIf="pedido.estado == 3"></div>
                     </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-rechazado"></div></td>
                 </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-pendiente"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-aprobado"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-rechazado"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-pendiente"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-aprobado"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-rechazado"></div></td>
-                </tr>
-
-                <tr class="tabla-fila-datos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">01 / 04 / 2020</p>
-                    </td>
-                    <td class="telefono">3298</td>
-                    <td class="correo">1115072011-8</td>
-                    <td class="correo">Noreña Loaiza William</td>
-                    <td class="correo">$450.000</td>
-                    <td class="status"><div class="estado estado-pendiente"></div></td>
-                </tr>
-
             </table>
         </section>
     </div>

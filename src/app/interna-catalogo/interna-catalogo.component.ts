@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
+import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component';
 
 @Component({
   selector: 'app-interna-catalogo',
@@ -9,7 +10,10 @@ import { SendHttpData } from '../services/SendHttpData';
 })
 export class InternaCatalogoComponent implements OnInit {
 
+  @ViewChild(DialogPedidoComponent) dialogPedido: DialogPedidoComponent;
+
   id_catalogo : any;
+  id_producto : any;
   productos = [];
   openDrawer = false;
   files_1: File[] = [];
@@ -83,7 +87,6 @@ export class InternaCatalogoComponent implements OnInit {
   verProducto(id){
     this.route.navigate(['/producto-detalle/' + id]);
   }
-
   
   onSelect(event, edit = false, fileSelect) {
     this[fileSelect] = event.addedFiles;
@@ -125,6 +128,11 @@ export class InternaCatalogoComponent implements OnInit {
   onRemove(event) {
     console.log(event);
     this.files_1.splice(this.files_1.indexOf(event), 1);
+  }
+
+  openDialogPedido(id){
+    this.id_producto = id;
+    this.dialogPedido.openDialog();
   }
 
 }

@@ -1,4 +1,5 @@
 <app-header></app-header>
+<app-dialog-pedido [id_catalogo]="producto.catalogo" [id_producto]="producto.id_producto"></app-dialog-pedido>
 
 <div class="workplace">
     <div class="slide-menu">
@@ -8,11 +9,21 @@
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
             <div class="filtros" style="margin-bottom: 15px;">
-                <div class="box-create-new">
-                    <div class="box-mas">
-                        <img class="mas" src="assets/img/mas.svg" alt="">
+                <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar">
+                    <!-- <div class="icono-editar">
+                        <img src="{{ templateImage.lapiz }}" alt="">
+                    </div> -->
+                    <p class="texto-editar">Acción de</p>
+                    <div class="icono-puntos">
+                        <img src="assets/img/edit_points.svg" alt="">
                     </div>
-                    <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'edit')">Editar</a>
+    
+                    <ul class="acciones-administrador">
+                        <li (click)="openDrawerRigth(true, 'edit')">
+                            <img src="assets/img/editar.svg" alt=""> Editar
+                        </li>
+                        <li (click)="deleteProduct()"><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -200,7 +211,7 @@
 
                     <!-- Footer actions. -->
                     <div class="acciones">
-                        <a class="agregar">
+                        <a class="agregar" (click)="openDialogPedido()">
                             <span class="mas">
                                 <img src="" alt="">
                             </span> Agregar Pedido

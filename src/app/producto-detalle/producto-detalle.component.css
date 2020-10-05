@@ -157,53 +157,55 @@
     padding: 20px;
 }
 
+/* BOTON ACCIONES PARA EDITAR, ELIMINAR, ETC. */
 
-.acciones {
-    display: flex;
-    position: absolute;
-    bottom: 25px;
-    right: 0;
-    padding: 0px 20px;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.agregar,
-.cancelar {
+.box-editar {
+    position: relative;
     cursor: pointer;
-    text-align: center;
-    border-radius: 15px;
-    display: block;
-    text-decoration: none;
-    width: 45%;
+    transition: all .3s ease;
 }
 
-.agregar {
-    background: #68BE8E;
-    padding: 6px 0px;
-    color: white;
-    transition: all .5s ease;
-    font-size: 14px;
-    letter-spacing: 0.84px;
-    line-height: 17.6px;
-}
-
-.agregar:hover {
-    background: #5aa97d;
-}
-
-.cancelar {
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
     background: white;
-    border: 1px solid #FF596A;
-    color: #FF596A;
-    padding: 6px 0px;
-    transition: all .5s ease;
-    font-size: 14px;
-    letter-spacing: 0.84px;
-    line-height: 17.6px;
+    opacity: 1;
 }
 
-.cancelar:hover {
-    background: #ec5362;
-    color: white;
+.acciones-administrador {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    /* width: 101%; */
+    left: -1px;
+    right: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administrador li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administrador li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+    z-index: 1000;
 }

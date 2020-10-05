@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
 import { DrawerAdvancedComponent } from './drawer-advanced/drawer-advanced.component';
+import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -63,6 +64,7 @@ import { DrawerAdvancedComponent } from './drawer-advanced/drawer-advanced.compo
     AdministradoresBuscadorComponent,
     DrawerRigthComponent,
     DrawerAdvancedComponent,
+    DialogPedidoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 <app-header></app-header>
 
+<app-dialog-pedido [id_catalogo]="id_catalogo" [id_producto]="id_producto"></app-dialog-pedido>
+
 <div class="workplace">
     <div class="slide-menu">
         <app-menu></app-menu>
@@ -176,7 +178,7 @@
                             </span>
                             Ver producto
                         </a>
-                        <a class="anadir-a-pedido" href="#">
+                        <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
                             <span>
                                 <img src="" alt="">
                             </span>
