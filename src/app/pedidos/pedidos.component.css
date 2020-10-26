@@ -1,3 +1,5 @@
+button:focus{ outline: none !important;}
+
 .head-state{
     text-align: center;
 }
@@ -6,13 +8,14 @@
     width: 13px;
     border-radius: 50%;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .estado-aprobado{
     background: #11bc4a;
 }
 .estado-rechazado{
-    background: #FF596A;
+    background: #ff293f;
 }
 .estado-pendiente{
     background: #979797;
@@ -24,15 +27,21 @@
     align-items: center;
     border: 1px solid #FF596A;
     border-radius: 16px;
+    height: 31px;
 }
 
 .hoy{
     display: block;
-    color: white;
-    background: #FF596A;
-    padding: 6px 15px;
+    color: #FF596A;
+    border-right: 1px solid #FF596A;
+    padding: 3px 15px;
     border-radius: 15px 0px 0px 15px;
     cursor: pointer;
+}
+
+.fecha-active{
+    color: white !important;
+    background: #FF596A !important;
 }
 
 .ayer{
@@ -40,33 +49,30 @@
     color: #FF596A;
     border-right: 1px solid #FF596A;
     cursor: pointer;
-    padding: 6px 15px;
+    padding: 3px 15px;
 }
 
 .todos{
     display: block;
     color: #FF596A;
-    padding: 6px 15px;
-    border-radius: 15px 0px 0px 15px;
+    padding: 3px 15px;
+    border-radius: 0px 15px 15px 0px;
     cursor: pointer;
 }
 
-.acciones-pedidos{
-    display: none;
-    position: absolute;
-    top: 35px;
-    list-style: none;
-    opacity: 0;
-    transition: all .1s ease;
-    background: white;
-    width: 100%;
-    left: 0;
-    text-align: center;
+
+/* BOTON ACCIONES PARA EDITAR, ELIMINAR, ETC. */
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
 }
 
-.acciones-pedidos li{
-    color: #959BA0;
-    margin: 8px 0px;
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
 }
 
 .open-acciones{
@@ -103,6 +109,12 @@
     right: 15px;
 }
 
+.close-dialog{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .pop-up-pedido h2{
     font-size: 36px;
     text-align: center;
@@ -110,10 +122,7 @@
     margin-bottom: 1em;
 }
 
-.label-field{
-    width: 70%;
-    margin-bottom: 1em;
-}
+.w-70{ width: 70% !important;}
 
 .label-field label,
 .label-field select{
@@ -147,4 +156,146 @@
     padding: 7px;
     border-radius: 15px;
     margin-top: 1em;
+}
+
+
+/* Editar */
+
+.detalle-pedido{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #D7D7D7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.detalle-pedido:hover {
+    background: #d7d7d74d;
+}
+
+.title-detalle {
+    display: flex;
+    justify-content: center;
+    padding: 10px 5px 15px 5px;
+    border-bottom: 1px solid #D7D7D7;
+    position: relative;
+}
+
+.title-detalle img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+.title-detalle p {
+    color: #1E2933;
+    font-size: 21px;
+    letter-spacing: 0.6px;
+    line-height: 28.64px;
+}
+
+.tiendas-detalle {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.tiendas-detalle p{
+    font-size: 14px;
+}
+
+.tiendas-detalle > span {
+    color: #FF596A;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+
+.input-cantidad{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.add{
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background: #ff596ad6;
+}
+
+.remove{
+    position: absolute;
+    top: 30%;
+    right: 80px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.remove:hover{
+    background: #ff596ad6;
+}
+
+.icon-tienda { font-size: 20px !important; }
+
+.cantidad {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    right: 35px;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+
+.total-pedido {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-top: 1px solid #D7D7D7;
+}
+
+.total-pedido span{
+    color: #FF596A;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+/* STYLES MATERIAL */
+.mat-button-toggle-checked{
+    background-color: #ff596a !important;
+}
+
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard{
+    color: #fff;
+}
+
+.mat-button-toggle{
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.mat-button-toggle-group{
+    width: 100%;
 }

@@ -7,7 +7,7 @@
         </div>
         <h2>Comienza tu pedido</h2>
 
-        <div class="label-field">
+        <div class="label-field w-70">
             <label >Cliente</label>
             <select name="cliente" id="" [(ngModel)]="crear_pedido.cliente">
                 <option value="">Seleccione...</option>
@@ -17,7 +17,7 @@
             </select>
         </div>
 
-        <div class="label-field">
+        <div class="label-field w-70">
             <label >Vendedor</label>
             <select name="vendedor" id="" [(ngModel)]="crear_pedido.vendedor">
                 <option value="">Seleccione...</option>
@@ -27,7 +27,7 @@
             </select>
         </div>
 
-        <div class="label-field">
+        <div class="label-field w-70">
             <label >Catálogo</label>
             <select name="catalogo" id="" [(ngModel)]="crear_pedido.catalogo">
                 <option value="">-</option>
@@ -37,13 +37,39 @@
             </select>
         </div>
 
-        <div class="label-field">
+        <div class="label-field w-70">
             <a (click)="continuarPedido()" class="continuar-pedido">
                 Continuar
             </a>
         </div>
     </div>
 </div>
+
+<!-- Dialog - Cambiar el estado del pedido. -->
+<ng-template #changeState>
+    <!-- <h2 matDialogTitle>Cambiar estado</h2> -->
+    <div class="close-dialog">
+        <button mat-icon-button aria-label="Menu opciones" (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="label-field" style="width: 100%;">
+        <label for="estados">CAMBIAR ESTADO</label>
+        <select name="estados" [(ngModel)]="change_state">
+            <option [value]="0">Seleccione el estado...</option>
+            <option [value]="1"> Activo</option>
+            <option [value]="2"> Pendiente</option>
+            <option [value]="3"> Rechazado</option>
+        </select>
+    </div>
+    <mat-dialog-actions align="end">
+        <!-- <button mat-button matDialogClose="no">Cancelar</button> -->
+        <a class="continuar-pedido" style="margin-top: 0; margin-bottom: 1em;" (click)="cambiarEstado()">
+            Cambiar
+        </a>
+    </mat-dialog-actions>
+</ng-template>
+
 
 <app-header></app-header>
 
@@ -56,70 +82,183 @@
         <div class="row">
             <div class="filtros">
                 <div class="fechas">
-                    <p class="hoy">Hoy</p>
-                    <p class="ayer">Ayer</p>
-                    <p class="todos">Todos</p>
+                    <p class="hoy" (click)="changeFilterDate('hoy')">Hoy</p>
+                    <p class="ayer" (click)="changeFilterDate('ayer')">Ayer</p>
+                    <p class="todos fecha-active" (click)="changeFilterDate('todos')">Todos</p>
                 </div>
                 <div class="box-buscador">
-                    <img class="lupa" src="/N-1009/assets/img/search.svg" alt="">
-                    <input class="buscador" type="text">
+                    <img class="lupa" src="/assets/img/search.svg" alt="">
+                    <input class="buscador" placeholder="Buscar..." (keyup.enter)="searchTable($event)" type="text">
                 </div>
             
-                <div (click)="accionesPedido()" class="box-editar">
-                    <div class="icono-editar">
-                        <img src="/N-1009/assets/img/editar.svg" alt="">
-                    </div>
-                    <p class="texto-editar">Editar</p>
+                <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar">
+                    <!-- <div class="icono-editar">
+                        <img src="{{ templateImage.lapiz }}" alt="">
+                    </div> -->
+                    <p class="texto-editar">Acción de</p>
                     <div class="icono-puntos">
-                        <img src="/N-1009/assets/img/edit_points.svg" alt="">
+                        <img src="assets/img/edit_points.svg" alt="">
                     </div>
-            
-                    <!-- Pop up editar -->
-                    <ul class="acciones-pedidos">
-                        <li>Exportar</li>
-                        <li>Eliminar</li>
+    
+                    <ul class="acciones-administrador">
+                        <li (click)="openDrawerRigth(true)">
+                            <img src="assets/img/editar.svg" alt=""> Editar
+                        </li>
+                        <li (click)="exportPedido()">
+                            <img src="assets/img/icons-filter/export.svg" alt=""> Exportar
+                        </li>
                     </ul>
                 </div>
             
                 <div class="box-create-new">
                     <div class="box-mas">
-                        <img class="mas" src="/N-1009/assets/img/mas.svg" alt="">
+                        <img class="mas" src="/assets/img/mas.svg" alt="">
                     </div>
                     <a class="btn-nuevo-cliente" (click)="nuevoPedido()">Nuevo pedido</a>
                 </div>
             </div>
         </div>
 
-
         <section class="table-data">
+            <table class="table">
+                <thead>
+                    <tr class="tabla-fila-cabecera">
+                        <th></th>
+                        <th>Fecha</th>
+                        <th>Código</th>
+                        <th>Vendedor</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Estado del pedido</th>
+                    </tr>
+                </thead>
 
-            <table style="width:100%">
-                <tr class="tabla-fila-cabecera">
-                    <th></th>
-                    <th>Fecha <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Código <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Vendedor <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Cliente <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Valor <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                    <th class="head-state">Estado del pedido <img src="/N-1009/assets/img/arrows_orden.svg" alt=""></th>
-                </tr>
+                <tbody>
+                    <!-- (click)="redirectDetalle(pedido.id_pedido)" -->
+                    <tr class="tabla-fila-datos" *ngFor="let pedido of pedidos | paginate:page_size:page_number">
+                        <td>
+                            <input class="check-nombre" (change)="selectPedidoCheckbox($event, pedido)" type="checkbox" name="check-pedido" id="check-pedido">
+                        </td>
+                        <td (click)="redirectDetalle(pedido.id_pedido)">
+                            <p class="nombre">{{pedido.fecha}}</p>
+                        </td>
+                        <td (click)="redirectDetalle(pedido.id_pedido)">
+                            {{pedido.codigo}}
+                        </td>
+                        <td (click)="redirectDetalle(pedido.id_pedido)">
+                            {{pedido.name_vendedor + " " + pedido.apellido_vendedor}}
+                        </td>
+                        <td (click)="redirectDetalle(pedido.id_pedido)">
+                            {{pedido.name_cliente + " " + pedido.apellido_cliente}}
+                        </td>
+                        <td (click)="redirectDetalle(pedido.id_pedido)">
+                            {{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}
+                        </td>
+                        <td>
+                            <!-- Aprobado -->
+                            <div *ngIf="pedido.estado == 1"
+                            #tooltip="matTooltip"
+                            matTooltip="Aprobado"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="1000"
+                            class="estado estado-aprobado"></div>
+                            
+                            <div *ngIf="pedido.estado == 2" 
+                            #tooltip="matTooltip"
+                            matTooltip="Pendiente"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="100000"
+                            class="estado estado-pendiente"
+                            (click)="openDialogState(pedido.id_pedido)"></div>
 
-                <tr class="tabla-fila-datos" *ngFor="let pedido of pedidos">
-                    <td><input class="check-nombre" type="checkbox" name="" id=""></td>
-                    <td class="imagen-nombre">
-                        <p class="nombre">{{pedido.fecha}}</p>
-                    </td>
-                    <td class="telefono">{{pedido.codigo}}</td>
-                    <td class="correo">{{pedido.name_vendedor + " " + pedido.apellido_vendedor}}</td>
-                    <td class="correo">{{pedido.name_cliente + " " + pedido.apellido_cliente}}</td>
-                    <td class="correo">{{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</td>
-                    <td class="status">
-                        <div class="estado estado-aprobado" *ngIf="pedido.estado == 1"></div>
-                        <div class="estado estado-pendiente" *ngIf="pedido.estado == 2"></div>
-                        <div class="estado estado-rechazado" *ngIf="pedido.estado == 3"></div>
-                    </td>
-                </tr>
+                            <div *ngIf="pedido.estado == 3"
+                            #tooltip="matTooltip"
+                            matTooltip="Rechazado"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="1000"
+                            class="estado estado-rechazado"></div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
+
         </section>
     </div>
 </div>
+    <div class="footer">
+        <div class="footer-paginate">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link paginate" (click)="changePage(null, true)">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </a>
+                    </li>
+                  <li class="page-item" *ngFor="let item of [].constructor(pages.max_pages); let i = index" [class]="(pages.first_page+i == page_number) ? 'page-item active' : 'page-item'">
+                      <a class="page-link paginate" (click)="changePage(pages.first_page+i)">
+                        {{pages.first_page+i}}
+                      </a>
+                    </li>
+                  <li class="page-item" (click)="changePage(null, false, true)">
+                        <a class="page-link paginate">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="label-field label-field-paginate">
+                <select name="changeNumberPage" id="changeNumberPage" class="select-paginate"
+                (change)="changePaginate($event)">
+                    <option [value]="5"> 5 Por página </option>
+                    <option [value]="10"> 10 Por página </option>
+                    <option [value]="15"> 15 Por página </option>
+                    <option [value]="20"> 20 Por página </option>
+                    <option [value]="30"> 30 Por página </option>
+                </select>
+            </div>   
+            
+            <!-- DRAWER EDITAR PRODUCTO. -->
+        <app-drawer-rigth name="edit-pedido" title="Editar pedido" [open]="openDrawer"
+        (close)="openDrawerRigth(false)" (submit)="submitEditPedido()" button="Actualizar">
+            <form>
+                <div class="label-field">
+                    <label for="">Metodo de pago</label>
+                    <mat-button-toggle-group  [(ngModel)]="edit_pedido.metodo_pago" name="forma_pago" aria-label="forma_pago">
+                        <mat-button-toggle checked="true" value="contado">Contado</mat-button-toggle>
+                        <mat-button-toggle value="credito">Credito 45 dias</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+                <div class="label-field">
+                    <div class="detalle-pedido" style="cursor: auto;" *ngFor="let producto of edit_pedido.productos; let iProd = index;">
+                        <div class="title-detalle">
+                            <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo">
+                            <p>Ref: {{producto.referencia}}</p>
+                        </div>
+                        <!-- <div class="tiendas-detalle" *ngFor="let tienda of producto.tiendas">
+                            <p><span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                            <span>{{tienda.cantidad_producto}}</span>
+                        </div> -->
+                        <div class="input-cantidad" *ngFor="let tienda of producto.tiendas; let iTienda = index">
+                            <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                            <a class="remove" type="button" (click)="resCantidad(iProd, iTienda)">
+                                <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
+                            </a>
+                            <input name="cantidad{{producto.producto+'-'+iTienda}}" type="text" [(ngModel)]="tienda.cantidad_producto" class="cantidad">
+                            <a class="add" type="button" (click)="sumCantidad(iProd, iTienda)">
+                                <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="total-pedido">
+                        <p>Total</p>
+                        <span>{{edit_pedido.total | currency:'COP':'symbol-narrow' :'1.0-0'}}</span>
+                    </div>
+                </div>
+            </form>
+        </app-drawer-rigth>
+        </div>
+    </div>

@@ -200,41 +200,43 @@
 
             </div>
             <div class="col-md-4">
-                <div class="aside-interna-pedido">
-                    <h3 class="nombre" style="margin-bottom: 15px;">Tu pedido</h3>
-                    <form>
-                        <div class="label-field">
-                            <label for="">REFERENCIA</label>
-                            <input name="referencia" type="text" [(ngModel)]="producto.referencia" class="">
-                        </div>
-                        <div class="label-field">
-                            <label for="">TIENDAS</label>
-                            <div class="input-cantidad" *ngFor="let tienda of tiendas; let i = index">
-                                <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
-                                <a class="remove" type="button" (click)="resCantidad(i)">
-                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
-                                </a>
-                                <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
-                                <a class="add" type="button" (click)="sumCantidad(i)">
-                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
-                                </a>
+                <div class="content-rigth">
+                    <div class="aside-interna-pedido mrg-btn-30">
+                        <h3 class="nombre" style="margin-bottom: 15px;">Tu pedido</h3>
+                        <form>
+                            <div class="label-field">
+                                <label for="">REFERENCIA</label>
+                                <input name="referencia" type="text" [(ngModel)]="producto.referencia" class="">
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- Footer actions. -->
-                <div class="acciones">
-                    <a class="agregar" (click)="addProducto()">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Agregar producto
-                    </a>
-            
-                    <a class="cancelar">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Cancelar
-                    </a>
+                            <div class="label-field">
+                                <label for="">TIENDAS</label>
+                                <div class="input-cantidad" *ngFor="let tienda of tiendas; let i = index">
+                                    <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                                    <a class="remove" type="button" (click)="resCantidad(i)">
+                                        <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
+                                    </a>
+                                    <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                                    <a class="add" type="button" (click)="sumCantidad(i)">
+                                        <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Footer actions. -->
+                    <div class="acciones">
+                        <a class="agregar" (click)="addProducto()">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Agregar producto
+                        </a>
+                
+                        <a class="cancelar">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Cancelar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

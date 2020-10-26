@@ -24,9 +24,11 @@
                         style="background: url({{catalogo.imagen}});background-size: cover;background-repeat: no-repeat;"
                         (click)="verDetalle(catalogo.id_catalogo)">
                         <!-- <img (click)="verDetalle()" src="" alt=""> -->
-                        <div class="estado" *ngIf="catalogo.tipo == 'general'">{{catalogo.estado}}</div>
+                        <div class="estado">{{catalogo.estado}}</div>
                         <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
-                        <div class="descuento" *ngIf="catalogo.descuento != null">-{{catalogo.descuento}}%</div>
+                        <div *ngIf="catalogo.descuento != null" [class]="(catalogo.tipo == 'general') ? 'descuento' : 'descuento-show-room'">
+                            -{{catalogo.descuento}}%
+                        </div>
                     </div>
                     <div class="box-titulo-cantidad-opciones">
                         <div class="info">

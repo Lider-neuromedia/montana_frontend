@@ -28,6 +28,7 @@ import { AdministradoresBuscadorComponent } from './administradores-buscador/adm
 import {MaterialModule} from './material/material.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { PaginatePipe } from './pipes/paginate.pipe';
 
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -36,6 +37,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
 import { DrawerAdvancedComponent } from './drawer-advanced/drawer-advanced.component';
 import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -65,6 +67,8 @@ import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
     DrawerRigthComponent,
     DrawerAdvancedComponent,
     DialogPedidoComponent,
+    DetallePedidoComponent,
+    PaginatePipe
   ],
   imports: [
     BrowserModule,

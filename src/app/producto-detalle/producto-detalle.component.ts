@@ -53,6 +53,7 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.getProduct();
     this.galleryOptions = [
       {
@@ -88,6 +89,7 @@ export class ProductoDetalleComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.producto = response.producto;
+          console.log(this.producto);
           this.producto.imagenes.forEach( (element) => {
               this.galleryImages.push({
                 small: element.image,
@@ -113,29 +115,26 @@ export class ProductoDetalleComponent implements OnInit {
   
   submitEditProduct(){
     var data = this.producto;
-    this.http.httpPut('producto', this.id_producto, data, true).subscribe(
-      response => {
-        if (response.status == 200 && response.response == 'success') {
-          this.openDrawerRigth(false, 'edit');
-        }
-      }, 
-      error => {
+    console.log(data);
+    // this.http.httpPut('producto', this.id_producto, data, true).subscribe(
+    //   response => {
+    //     if (response.status == 200 && response.response == 'success') {
+    //       this.openDrawerRigth(false, 'edit');
+    //     }
+    //   }, 
+    //   error => {
 
-      }
-    )
+    //   }
+    // )
   }
 
-  onSelect(event, edit = false, fileSelect) {
+  onSelect(event, fileSelect) {
     this[fileSelect] = event.addedFiles;
     this.readFile(this[fileSelect][0]).then(fileContents => {
-      if (edit) {
-        // this.catalogoEdit.imagen = fileContents;
+      if (fileSelect == 'files_1') {
+        this.producto.imagenes.push({image : fileContents, destacada : 1});
       }else{
-        if (fileSelect == 'files_1') {
-          this.producto.imagenes.push({image : fileContents, destacada : 1});
-        }else{
-          this.producto.imagenes.push({image : fileContents, destacada : 0});
-        }
+        this.producto.imagenes.push({image : fileContents, destacada : 0});
       }
     });
   }

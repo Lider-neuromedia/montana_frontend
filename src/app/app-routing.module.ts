@@ -31,6 +31,7 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoInternaComponent } from './pedido-interna/pedido-interna.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 // import { AuthGuardService } from './services/auth-guard.service';
 // import { GuestGuardService } from './services/guest-guard.service';
 
@@ -65,6 +66,7 @@ const routes : Routes = [
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'pedido-interna/:id', component: PedidoInternaComponent },
+  { path: 'pedido-detalle/:id', component: DetallePedidoComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

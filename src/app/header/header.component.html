@@ -1,6 +1,6 @@
 <header class="header">
     <div class="header-items">
-        <div class="breadcrumb">
+        <div class="breadcrumb-custom">
             <ul>
                 <li><a href="#"> Sección</a></li>
                 <li>/</li>
@@ -11,8 +11,9 @@
             <div class="notify">
                 <img src="{{ templateImage.notificacion }}" alt=""> <p>Notificaciones</p>
             </div>
-            <div (click)="logout()" class="close">
-                <img src="{{ templateImage.logout }}" alt=""> <p>Cerrar sesión</p>
+            <div (click)="logout()" class="close-custom">
+                <img src="{{ templateImage.logout }}" alt=""> 
+                <p>Cerrar sesión</p>
             </div>
             <div class="account">
                 <img src="{{ templateImage.user }}" alt=""> <p>Mi cuenta</p>

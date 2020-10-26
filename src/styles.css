@@ -6,6 +6,19 @@
     box-sizing: border-box;
 }
 
+p{
+    margin: 0;
+}
+
+ul{
+    margin: 0;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #fff;
+}
+
 html {
     font-family: 'Source Sans Pro', sans-serif;
     overflow-x: hidden;
@@ -15,6 +28,8 @@ html {
 img {
     max-width: 100%;
 }
+
+.mrg-btn-30{ margin-bottom: 30px; }
 
 .area-admin {
     margin-left: 230px;
@@ -35,6 +50,19 @@ img {
     width: 100%;
     position: relative;
     margin-left: 240px;
+}
+
+.footer {
+    padding: .5em .5em .5em 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #F4F8FB;
+}
+
+.footer-paginate {
+    margin-left: 240px;
+    display: flex;
 }
 
 
@@ -132,6 +160,7 @@ img {
 .box-create-new {
     display: flex;
     position: relative;
+    height: 31px;
 }
 
 .bold{
@@ -151,6 +180,7 @@ img {
     padding: 4px 40px;
     padding-right: 20px;
     transition: all .3s ease;
+    height: 31px;
 }
 
 .box-input-label small,
@@ -164,6 +194,8 @@ img {
 .btn-nuevo-cliente:hover {
     background: #ec5362;
     box-shadow: 0px 1px 3px #1e29336c;
+    text-decoration: none;
+    color: #fff;
 }
 
 .box-mas {
@@ -207,11 +239,10 @@ img {
     font-size: 14px;
     color: #1E2933;
     text-align: left;
-    border-bottom: 1px solid #D8D8D8;
 }
 
 .tabla-fila-cabecera th {
-    padding: 20px 10px;
+    padding: 15px 10px;
 }
 
 .tabla-fila-cabecera th img {
@@ -227,8 +258,11 @@ img {
 }
 
 .tabla-fila-datos td {
-    border-bottom: 1px solid #D8D8D8;
-    padding: 15px 10px;
+    padding: 2.5em 10px;
+    color: #444A4F;
+    font-size: 14px;
+    letter-spacing: 0.84px;
+    line-height: 17.6px;
 }
 
 .tabla-fila-datos:hover {
@@ -273,6 +307,23 @@ input[type="tel"] {
 }
 
 .label-field label,
+.label-field select{
+    width: 100%;
+}
+
+.label-field label{
+    color: #FF596A;
+    text-transform: uppercase;
+    margin-bottom: .6em;
+}
+
+.label-field select{
+    padding: 1em;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+}
+
+.label-field label,
 .label-field input, textarea {
     display: block;
     width: 100%;
@@ -290,16 +341,27 @@ input[type="tel"] {
     padding: 10px;
 }
 
+.label-field-paginate{
+    margin: 0 !important;
+    width: auto !important;
+}
+
+.select-paginate{
+    padding: .3em !important;
+}
 
 
 .acciones {
     display: flex;
     position: absolute;
-    bottom: 25px;
+    bottom: 0;
     right: 0;
     padding: 0px 20px;
     justify-content: space-around;
     width: 100%;
+    height: 60px;
+    align-items: center;
+    background: #f4f8fb;
 }
 
 .agregar,
@@ -309,6 +371,7 @@ input[type="tel"] {
     border-radius: 15px;
     display: block;
     text-decoration: none;
+    height: 33px;   
     width: 45%;
 }
 
@@ -342,9 +405,67 @@ input[type="tel"] {
     color: white;
 }   
 
+
+.acciones-administrador {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    /* width: 101%; */
+    left: -1px;
+    right: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administrador li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administrador li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+    z-index: 1000;
+}
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/* Paginacion */
+.paginate {
+    color: #000;
+    background: transparent;
+    border: 1px solid #D7D7D7;
+    padding: .3rem .6rem;
+    cursor: pointer;
+}
+.paginate:hover{
+    color: #000;
+    font-weight: 600;
+}
+
+.page-item.active .paginate{
+    background: #FF596A;
+    color: #fff;
+    border-color: #FF596A;
+}
 /* Material */
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
     line-height: 36px !important;
@@ -381,6 +502,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 10px !important;
 }
 
+.mat-tooltip {
+    background: rgb(0 0 0 / 90%);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 12px;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: #ff596a;
+}
+
+/* End Material */
+
 .ngx-gallery-thumbnails .ngx-gallery-thumbnail.ngx-gallery-active{
     border: 1px double #fff !important;
 }
@@ -395,4 +529,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ngx-gallery-preview .ngx-gallery-icon{
     color: #fff !important;
+}
+
+
+/* Bootstrap */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgb(59 59 59 / 5%);
 }

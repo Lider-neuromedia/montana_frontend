@@ -165,7 +165,7 @@ export class CatalogoComponent implements OnInit {
       response => {
         console.log(response);
         if (response.status == 200 && response.response == 'success') {
-          this.openDrawer = false;
+          this.updateDrawer = false;
           this.getCatalogos();
           this.resetForm();
         }

@@ -92,7 +92,7 @@
 
 .aside-detalle-producto{
     width: 100%;
-    height: 100%;
+    height: auto;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .2);
     padding: 50px 30px;
     position: relative;
@@ -157,55 +157,3 @@
     padding: 20px;
 }
 
-/* BOTON ACCIONES PARA EDITAR, ELIMINAR, ETC. */
-
-.box-editar {
-    position: relative;
-    cursor: pointer;
-    transition: all .3s ease;
-}
-
-.box-editar-open {
-    border-bottom: 0;
-    border-radius: 15px 15px 0px 0px;
-    background: white;
-    opacity: 1;
-}
-
-.acciones-administrador {
-    display: none;
-    position: absolute;
-    top: 30px;
-    list-style: none;
-    opacity: 0;
-    background: white;
-    /* width: 101%; */
-    left: -1px;
-    right: -1px;
-    transition: all .3s ease;
-    text-align: center;
-}
-
-.acciones-administrador li {
-    color: #959BA0;
-    margin: 8px 0px;
-    position: relative;
-}
-
-.acciones-administrador li img {
-    position: absolute;
-    left: 8px;
-    top: 3px;
-}
-
-.open-acciones {
-    display: block;
-    opacity: 1;
-    border-left: 1px solid #FF596A;
-    border-right: 1px solid #FF596A;
-    border-bottom: 1px solid #FF596A;
-    padding: 0px -6px;
-    border-radius: 0px 0px 15px 15px;
-    opacity: 1;
-    z-index: 1000;
-}

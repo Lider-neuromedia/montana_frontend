@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class SendHttpData {
 
-  // private baseUrl = 'http://pruebasneuro.co/N-1041/public/api/';
+  // private baseUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/';
   private baseUrl = 'http://127.0.0.1:8000/api/';
 
   options : any;
@@ -55,5 +55,23 @@ export class SendHttpData {
     var url = this.baseUrl + route + '/' + id;
     return this._http.delete(url, this.options);
   }
+
+  // Peticion Http Get download.
+  downloadFile(route: string, filename: string = null){
+    const headers = new HttpHeaders().set('authorization','Bearer '+ localStorage.getItem('access_token'));
+    this._http.get(this.baseUrl + route,{headers, responseType: 'blob' as 'json'}).subscribe(
+        (response: any) =>{
+            let dataType = response.type;
+            let binaryData = [];
+            binaryData.push(response);
+            let downloadLink = document.createElement('a');
+            downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+            if (filename)
+                downloadLink.setAttribute('download', filename);
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+    )
+}
 
 }
