@@ -22,21 +22,19 @@
                         El nombre es obligatorio
                     </small>
                 </div>
-                <div formGroupName="userdata">
-                    <div class="label-field">
-                        <label for="">Apellidos</label>
-                        <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosNoValid">
-                        <small class="form-text text-danger animated fadeIn" *ngIf="apellidosNoValid">
-                            El apellido es obligatorio
-                        </small>
-                    </div>
-                    <div class="label-field">
-                        <label for="">Teléfono</label>
-                        <input name="telefono" type="number" formControlName="telefono" [class.is-invalid]="telefonoNoValid">
-                        <small class="form-text text-danger animated fadeIn" *ngIf="telefonoNoValid">
-                            El teléfono es obligatorio
-                        </small>
-                    </div>
+                <div class="label-field">
+                    <label for="">Apellidos</label>
+                    <input name="apellidos" type="text" formControlName="apellidos" [class.is-invalid]="apellidosNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="apellidosNoValid">
+                        El apellido es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Numero identificación</label>
+                    <input name="dni" type="text" formControlName="dni" [class.is-invalid]="dniNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="dniNoValid">
+                        El Numero de identificación es obligatorio
+                    </small>
                 </div>
                 <div class="label-field">
                     <label for="">Correo electrónico</label>
@@ -51,6 +49,15 @@
                     <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
                         El password es obligatorio
                     </small>
+                </div>
+                <div formGroupName="userdata">
+                    <div class="label-field">
+                        <label for="">Teléfono</label>
+                        <input name="telefono" type="number" formControlName="telefono" [class.is-invalid]="telefonoNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="telefonoNoValid">
+                            El teléfono es obligatorio
+                        </small>
+                    </div>
                 </div>
             </form>
             <div class="acciones-form-adminitrador">
@@ -74,13 +81,6 @@
             </div>
             <form (ngSubmit)="updatedAdmin()" [formGroup]="formUpdatedAdmin">
                 <h3 class="datos-generales">Datos generales</h3>
-                <!-- <div *ngFor="let userAdmins of check_user">
-                    <label for="userAdmin">{{ userAdmins.name }}</label>
-                    <input name="{{ userAdmins.name }}" type="text" formControlName="{{ userAdmins.name }}" value="{{ check_user.name }}" placeholder="{{ check_user.name }}">
-                </div> -->
-                <!-- <div *ngFor="let data of check_user"> -->
-                <!-- </div> -->
-                <!-- {{user_data}} -->
 
                 <div class="label-field">
                     <label for="">Nombre completo</label>
@@ -160,68 +160,62 @@
 
 
         <section class="table-data">
-            <table style="width:100%">
-
-                <tr class="tabla-fila-cabecera">
-                    <th></th>
-                    <!-- <th style="padding-left: 95px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
-                    <th>Cel <img src="{{ templateImage.ordenar }}" alt=""></th>
-                    <th>Correo <img src="{{ templateImage.ordenar }}" alt=""></th> -->
-                    <th>
-                        Nombre completo <img src="{{ templateImage.ordenar }}" alt="">
-                    </th>
-                    <th>
-                        Apellidos <img src="{{ templateImage.ordenar }}" alt="">
-                    </th>
-                    <th *ngFor="let data of user_data">
-                        {{ data }} <img src="{{ templateImage.ordenar }}" alt="">
-                    </th>
-                    <th>
-                        Email <img src="{{ templateImage.ordenar }}" alt="">
-                    </th>
-                </tr>
-
-                <!-- TABLA DINÁMICA -->
-                <!-- <tr *ngFor="let usuario of usersAdmins" class="tabla-fila-datos">
-                    <td><input (click)="removeUsers(usuario.id)" class="check-nombre" type="checkbox" name="check[]" id=""></td>
-                    <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
-                        <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
-                        <p class="nombre">{{ usuario.name }}</p>
-                    </td>
-                    <td (click)="administradorDetalle(usuario.id)" class="telefono">{{ usuario.value_key }}</td>
-                    <td (click)="administradorDetalle(usuario.id)" class="correo">{{ usuario.email }}</td>
-                </tr> -->
-                <tr *ngFor="let usuario of usersAdmins | paginate: { itemsPerPage: 5, currentPage: current }; let i = index " class="tabla-fila-datos">
-                    <td class="text-center">
-                        <input (change)="checkAdmin($event, usuario, i)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
-                    </td>
-                    <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
-                        <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
-                        <p class="nombre">{{ usuario.name }}</p>
-                    </td>
-                    <td>
-                        <p class="apelidos">{{ usuario.apellidos }}</p>
-                    </td>
-                    <td *ngFor="let data of usuario.user_data">
-                        {{ data.value_key }}
-                    </td>
-                    <!-- <td class="telefono">{{ usuario.value_key }}</td> -->
-                    <td class="correo">{{ usuario.email }}</td>
-                </tr>
+            <table class="table">
+                <thead>
+                    <tr class="tabla-fila-cabecera">
+                        <th></th>
+                        <th>
+                            Nombre completo <img src="{{ templateImage.ordenar }}" alt="">
+                        </th>
+                        <th>
+                            Apellidos <img src="{{ templateImage.ordenar }}" alt="">
+                        </th>
+                        <th *ngFor="let data of user_data">
+                            {{ data }} <img src="{{ templateImage.ordenar }}" alt="">
+                        </th>
+                        <th>
+                            Email <img src="{{ templateImage.ordenar }}" alt="">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usersAdmins | paginate: { itemsPerPage: 5, currentPage: current }; let i = index " class="tabla-fila-datos">
+                        <td class="text-center">
+                            <input (change)="checkAdmin($event, usuario, i)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
+                        </td>
+                        <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
+                            <!-- <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt=""> -->
+                            <div class="iniciales"> {{usuario.iniciales}} </div>
+                            <p class="nombre">{{ usuario.name }}</p>
+                        </td>
+                        <td>
+                            <p class="apelidos">{{ usuario.apellidos }}</p>
+                        </td>
+                        <td *ngFor="let data of usuario.user_data">
+                            {{ data.value_key }}
+                        </td>
+                        <!-- <td class="telefono">{{ usuario.value_key }}</td> -->
+                        <td class="correo">{{ usuario.email }}</td>
+                    </tr>
+                </tbody>
             </table>
-            <div class="pt-3 pb-3 pagination">
-                <pagination-controls (pageChange)="current = $event" previousLabel="Antes" nextLabel="Después" responsive="true"></pagination-controls>
-            </div>
         </section>
+    </div>
+</div>
 
-        <!-- <div class="paginador">
-    <ul class="pages">
-        <li>atrás</li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li>adelante</li>
-    </ul>
-</div> -->
+<div class="footer">
+    <div class="footer-paginate">
+        <div class="pagination">
+            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
+        </div>
+        <div class="label-field label-field-paginate">
+            <select name="changeNumberPage" id="changeNumberPage" class="select-paginate">
+                <option [value]="5"> 5 Por página </option>
+                <option [value]="10"> 10 Por página </option>
+                <option [value]="15"> 15 Por página </option>
+                <option [value]="20"> 20 Por página </option>
+                <option [value]="30"> 30 Por página </option>
+            </select>
+        </div>   
     </div>
 </div>

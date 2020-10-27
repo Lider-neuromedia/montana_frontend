@@ -183,6 +183,25 @@
 }
 
 
-/* desahabilitar enlaces en la creación de usuarios */
+/* Iniciales del nombre. */
+.iniciales {
+    width: 2.2em;
+    height: 2.2em;
+    background: #ff596a;
+    position: absolute;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+}
 
-.disabled:disabled {}
+p.nombre {
+    margin-left: 50px !important;
+}
+.imagen-nombre{
+    position: relative;
+}
+

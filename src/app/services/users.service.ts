@@ -91,7 +91,7 @@ export class UsersService {
 
   /* Eliminar varios usuario */
   deleteUsers(users){
-    const headers = new HttpHeaders( {'Content-Type': 'application/json'} );
+    const headers = new HttpHeaders( {'Content-Type': 'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     return this.http.post(`${this.api}/delete-users`, users,{ headers:headers });
   }
 

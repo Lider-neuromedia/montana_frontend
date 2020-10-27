@@ -110,7 +110,10 @@ export class AdministradoresComponent implements OnInit {
     return this.formCreateAdmin.get('name').invalid && this.formCreateAdmin.get('name').touched;
   }
   get apellidosNoValid(){
-    return this.formCreateAdmin.get('userdata.apellidos').invalid && this.formCreateAdmin.get('userdata.apellidos').touched;
+    return this.formCreateAdmin.get('apellidos').invalid && this.formCreateAdmin.get('apellidos').touched;
+  }
+  get dniNoValid(){
+    return this.formCreateAdmin.get('dni').invalid && this.formCreateAdmin.get('dni').touched;
   }
   get telefonoNoValid(){
     return this.formCreateAdmin.get('userdata.telefono').invalid && this.formCreateAdmin.get('userdata.telefono').touched;
@@ -143,10 +146,11 @@ export class AdministradoresComponent implements OnInit {
     this.formCreateAdmin = this.formb.group({
       rol_id: [1],
       name: ['', [Validators.required]],
+      apellidos: ['', Validators.required],
+      dni: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', Validators.required],
       userdata: this.formb.group({
-        apellidos: ['', Validators.required],
         telefono: ['', Validators.required],
       })
     });
@@ -223,7 +227,9 @@ export class AdministradoresComponent implements OnInit {
       (data:any) =>{
         // console.log(data);
         this.showAdmins();
-        this.formCreateAdmin.reset();
+        this.FormCreateAdmin();
+        this.cerrarFormAdmin();
+
         Swal.fire({
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
@@ -237,17 +243,6 @@ export class AdministradoresComponent implements OnInit {
   }
 
   updatedAdmin(){
-    // if(this.formUpdatedAdmin.invalid){
-      // return Object.values(this.formUpdatedAdmin.controls).forEach(control => {
-      //   if (control instanceof FormGroup){
-      //     Object.values(control.controls).forEach(control => control.markAsTouched());
-      //   }else{
-      //     control.markAsTouched();
-      //   }
-      // });
-      // console.log('error');
-    // }
-
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
         this.showAdmins();
@@ -270,6 +265,7 @@ export class AdministradoresComponent implements OnInit {
     let obj = {
       "data" : data
     }
+
     if (e.target.checked){
       this.check_user.push(obj);
       if(this.check_user.length == 1){
@@ -278,16 +274,16 @@ export class AdministradoresComponent implements OnInit {
           this.check_Update = e.data;
           this.FormUpdateAdmin();
         });
-        console.log(this.check_Update);
         this.active = "activeOn";
         this.editarAdmin();
       }else{
         this.active = "activeOff";
       }
+      // Eliminar.
+      this.removeItemsUsers.push(data.id);
     }else {
       
       let removeIndex = this.check_user.findIndex(x => x.data === data);
-      console.log(removeIndex);
       if (removeIndex !== -1){
         this.check_user.splice(removeIndex, 1);
       }
@@ -296,41 +292,51 @@ export class AdministradoresComponent implements OnInit {
       }
       if(removeIndex == 1){
         this.active = "activeOn";
-        console.log(removeIndex);
         this.editarAdmin();
+      }
+
+      // eliminar.
+      let removeDelete = this.removeItemsUsers.findIndex(x => x == data.id);
+      if (removeDelete !== -1) {
+        this.removeItemsUsers.splice(removeDelete, 1);
       }
     }
   }
 
-
-  removeUsers(id){
-    this.removeItemsUsers.push(id);
-    console.log( this.removeItemsUsers );
-  }
-
   getUsersAndDelete(){
-    // Swal.fire({
-    //   title: 'Está seguro que desea eliminar?',
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Si, Eliminar'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     Swal.fire(
-    //       'Completado',
-    //       'El usuario ha sido eliminado',
-    //       'success'
-    //     );
-    //     // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
-    //     this.userService.deleteUsers(this.removeItemsUsers).subscribe(
-    //       (data:any) =>{
-    //       console.log(data);
-    //       }
-    //     );
-    //   }
-    // });
+    Swal.fire({
+      title: 'Está seguro que desea eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        
+        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
+        var data = {usuarios : this.removeItemsUsers};
+        this.userService.deleteUsers(data).subscribe(
+          (data:any) =>{
+            if (data.response == 'success' && data.status == 200) {
+              this.showAdmins();
+              Swal.fire(
+                'Completado',
+                'Los usuarios han sido eliminados correctamente.',
+                'success'
+              );
+            }else{
+              this.showAdmins();
+              Swal.fire(
+                'Completado',
+                data.message,
+                'success'
+              );
+            }
+          }
+        );
+      }
+    });
   }
 
   nuevoAdmin(){

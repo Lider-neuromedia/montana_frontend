@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'paginate'
+  name: 'customPaginate'
 })
 export class PaginatePipe implements PipeTransform {
 

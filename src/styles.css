@@ -531,6 +531,9 @@ ngx-gallery-preview .ngx-gallery-icon{
     color: #fff !important;
 }
 
+/* NGX-pagination */
+.ngx-pagination{margin-bottom: 0 !important;}
+
 
 /* Bootstrap */
 .table-striped tbody tr:nth-of-type(odd) {
