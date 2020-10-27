@@ -89,7 +89,7 @@ export class ProductoDetalleComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.producto = response.producto;
-          console.log(this.producto);
+          (this.galleryImages.length >= 1) ? this.galleryImages = [] : '';
           this.producto.imagenes.forEach( (element) => {
               this.galleryImages.push({
                 small: element.image,
@@ -106,26 +106,22 @@ export class ProductoDetalleComponent implements OnInit {
   openDrawerRigth(action : boolean, type : string){
     if (type == 'edit') {
       this.openDrawer = action;
-      // (!action) ? this.updateDrawer = false : '';
-    }else{
-      // this.updateDrawer = action;
-      // (!action) ? this.openDrawer = false : '';
-    }
+    }else{  }
   }
-  
+
   submitEditProduct(){
     var data = this.producto;
-    console.log(data);
-    // this.http.httpPut('producto', this.id_producto, data, true).subscribe(
-    //   response => {
-    //     if (response.status == 200 && response.response == 'success') {
-    //       this.openDrawerRigth(false, 'edit');
-    //     }
-    //   }, 
-    //   error => {
+    this.http.httpPut('producto', this.id_producto, data, true).subscribe(
+      response => {
+        if (response.status == 200 && response.response == 'success') {
+          this.openDrawerRigth(false, 'edit');
+          this.getProduct();
+        }
+      },
+      error => {
 
-    //   }
-    // )
+      }
+    )
   }
 
   onSelect(event, fileSelect) {
@@ -134,8 +130,15 @@ export class ProductoDetalleComponent implements OnInit {
       if (fileSelect == 'files_1') {
         this.producto.imagenes.push({image : fileContents, destacada : 1});
       }else{
-        this.producto.imagenes.push({image : fileContents, destacada : 0});
+        var position_file = fileSelect[fileSelect.length - 1];
+        
+        if (this.producto.imagenes[position_file - 1]) {
+          this.producto.imagenes[position_file - 1].image = fileContents;
+        }else{
+          this.producto.imagenes.push({image : fileContents, destacada : 0});
+        }
       }
+      console.log(this.producto.imagenes);
     });
   }
   
@@ -166,7 +169,6 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   deleteProduct(){
-
     Swal.fire({
       title: 'Está seguro que desea eleiminar?',
       icon: 'warning',
