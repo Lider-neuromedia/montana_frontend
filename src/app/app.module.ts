@@ -13,7 +13,6 @@ import { HeaderComponent } from './header/header.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { ClientesComponent } from './clientes/clientes.component';
-import { AdministradorDetalleComponent } from './administrador-detalle/administrador-detalle.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { InternaCatalogoComponent } from './interna-catalogo/interna-catalogo.component';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
@@ -52,7 +51,6 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     AdministradoresComponent,
     VendedoresComponent,
     ClientesComponent,
-    AdministradorDetalleComponent,
     CatalogoComponent,
     InternaCatalogoComponent,
     ProductoDetalleComponent,

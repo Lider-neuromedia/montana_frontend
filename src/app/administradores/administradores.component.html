@@ -97,6 +97,13 @@
                     </small>
                 </div>
                 <div class="label-field">
+                    <label for="">Numero identificación</label>
+                    <input name="dni" type="text" formControlName="dni" [class.is-invalid]="dniUpdatedNoValid" value="{{ check_Update.dni }}" placeholder="{{ check_user.dni }}">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="dniUpdatedNoValid">
+                        El Numero de identificación es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
                     <label for="">Correo eletrónico</label>
                     <input name="email" type="text" formControlName="email" [class.is-invalid]="emailUpdatedNoValid" value="{{ check_Update.email }}" placeholder="{{ check_user.email }}">
                     <small class="form-text text-danger animated fadeIn" *ngIf="emailUpdatedNoValid">
@@ -117,7 +124,7 @@
                 <a (click)="updatedAdmin()" class="agregar">
                     <span class="mas">
                         <img src="" alt="">
-                    </span> Agregar
+                    </span> Actualizar
                 </a>
                 <a class="cancelar" (click)="cerrarFormAdminEditar()">
                     <span class="mas">
@@ -183,7 +190,7 @@
                         <td class="text-center">
                             <input (change)="checkAdmin($event, usuario, i)" class="check-nombre" type="checkbox" name="check[]" value="{{ usuario.id }}">
                         </td>
-                        <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
+                        <td class="imagen-nombre">
                             <!-- <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt=""> -->
                             <div class="iniciales"> {{usuario.iniciales}} </div>
                             <p class="nombre">{{ usuario.name }}</p>

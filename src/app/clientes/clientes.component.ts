@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
-import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
-
+import { SendHttpData } from '../services/SendHttpData';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import Swal from 'sweetalert2'
 declare var $:any;
 
@@ -11,7 +10,36 @@ declare var $:any;
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  styleUrls: ['./clientes.component.css'],
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ height: 0, opacity: 0 }),
+            animate('1s ease-out', 
+                    style({ height: '100%', opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ height: '100%', opacity: 1 }),
+            animate('.5s ease-in', 
+                    style({ height: 0, opacity: 0 }))
+          ]
+        )
+      ]
+    ),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('.5s ease-out', style({ opacity: '1' })),
+      ]),
+    ]),
+  ]
 })
 export class ClientesComponent implements OnInit {
 
@@ -24,6 +52,10 @@ export class ClientesComponent implements OnInit {
   activeUsuario = false;
   activeTienda = false;
   asignarCliente = false;
+
+  // Paginacion
+  current: number = 1;
+  itemPerPage: number = 5;
 
   templateImage = {
     "lupa": "assets/img/search.svg",
@@ -45,75 +77,58 @@ export class ClientesComponent implements OnInit {
     telefono: null,
     email: null,
     password: null,
-
-    // nombres: null,
-    // apellidos: null,
-    // tipo_documento: null,
-    // numero_documento: null,
-    // celular: null,
-    // codigo: null
   }
-
-  cliente = {
-    "id": null,
-    "rol_id": 3,
-    "name": null,
-    "email": null,
-    "password": null,
-  };
 
   clientes = [];
   rol = localStorage.getItem('rol');
 
-  info = {};
-
-  roles = [];
   removeItemsUsers = [];
 
   openDrawer = false;
   updateDrawer = false;
 
-  formCreateClient: FormGroup;
+  createClient : any;
+  createTiendas : any;
+  vendedores : [];
+  search : '';
 
-  constructor( private clients: UsersService, private route: Router) {
-
-    this.clients.getAllClients().subscribe( (data:any) =>{
-
-      // this.clientes = data;
-      this.clientes = data['admins'];
-      // this.user_data = this.userColumns = res['fields'];
-      console.log(this.clientes);
-
-      // let user_vendedor =  localStorage.getItem('userdata');
-      // let dataString = user_vendedor;
-      // let dataJson = JSON.parse(dataString);
-
-      // let id = localStorage.getItem('user_id');
-
-      // if(this.rol == this.roles[0].id){
-      //   this.clients.getUserForRol(3).subscribe( (data:any) =>{
-      //     console.log(data);
-      //     this.clientes = data;
-      //   })
-      // }
-
-      // if(this.rol == this.roles[1].id){
-      //   this.clients.clientesAsignados(id).subscribe( (data:any) =>{
-      //     this.clientes = data;
-
-      //     for(var i = 0; i <= dataJson.length - 1; i++){
-      //       var turnAround = dataJson[i].field_key;
-      //       this.info[turnAround] = dataJson[i].value_key;
-      //     }
-      //     console.log(this.info);
-      //   });
-
-      // }
-    })
-
+  constructor( private clients: UsersService, private route: Router, private http: SendHttpData) {
+    this.clients.getAllClients().subscribe( (data:any) => {
+      this.clientes = data['users'];
+    });
   }
 
   ngOnInit(): void {
+    this.asignCreateClient();
+    this.asignTiendasClient();
+  }
+
+  asignCreateClient(){
+    this.createClient = {
+      name : '',
+      apellidos : '',
+      tipo_documento : '',
+      dni : '',
+      email: '',
+      password: '',
+      nit: '',
+      vendedor : {
+        id: 0,
+        name: '',
+        apellidos: '',
+        dni : ''
+      },
+      tiendas: []
+    };
+  }
+  asignTiendasClient(){
+    this.createTiendas = {
+      nombre : '',
+      lugar : '',
+      local : '',
+      direccion : '',
+      telefono : ''
+    }
   }
 
   nuevoCliente(){
@@ -132,7 +147,7 @@ export class ClientesComponent implements OnInit {
   }
 
   datosGenerales(){
-    this.generales = !this.generales;
+    this.generales = true;
     this.credenciales = false;
     this.tienda = false;
     this.asignar = false;
@@ -145,7 +160,7 @@ export class ClientesComponent implements OnInit {
 
   datosCredenciales(){
     this.generales = false;
-    this.credenciales = !this.credenciales;
+    this.credenciales = true;
     this.tienda = false;
     this.asignar = false;
 
@@ -158,7 +173,7 @@ export class ClientesComponent implements OnInit {
   crearTienda(){
     this.generales = false;
     this.credenciales = false;
-    this.tienda = !this.tienda;
+    this.tienda = true;
     this.asignar = false;
 
     this.activeDatos = false;
@@ -171,7 +186,7 @@ export class ClientesComponent implements OnInit {
     this.generales = false;
     this.credenciales = false;
     this.tienda = false;
-    this.asignar = !this.asignar;
+    this.asignar = true;
 
     this.activeDatos = false;
     this.activeUsuario = false;
@@ -184,7 +199,7 @@ export class ClientesComponent implements OnInit {
   }
 
   agregarCliente(){
-    this.clients.createUser(this.cliente).subscribe(
+    this.clients.createUser(this.createClient).subscribe(
       (data:any) =>{
         console.log(data);
         let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
@@ -241,7 +256,6 @@ export class ClientesComponent implements OnInit {
   }
 
   submitCreateUser(){
-    console.log('entro');
     // var data = this.catalogo;
     // this.http.httpPost('catalogos', data, true).subscribe(
     //   response => {
@@ -255,6 +269,49 @@ export class ClientesComponent implements OnInit {
     //     console.error(error);
     //   }
     // )
+  }
+
+  // Change pagination
+  changeListPagination(event){
+    this.itemPerPage = event.target.value;
+    this.current = 1;
+  }
+
+  // Agregar tienda.
+  addTienda(){
+    // Validates.
+    this.createClient.tiendas.push(this.createTiendas);
+    this.asignTiendasClient();
+  }
+
+  searchVendedor(){
+    var route = 'searchVendedor?search=' + this.search;
+    this.http.httpGet(route, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.deleteVendedorSelect();
+          this.vendedores = response.vendedores;
+        }
+      },
+      error => {
+
+      }
+    )
+  }
+
+  selectVendedor(vendedor){
+    this.createClient.vendedor = vendedor;
+    this.vendedores = [];
+    this.search = '';
+  }
+  
+  deleteVendedorSelect(){
+    this.createClient.vendedor = {
+      id: 0,
+      name: '',
+      apellidos: '',
+      dni : ''
+    };
   }
 
 }

@@ -1,5 +1,5 @@
 .overview {
-    background: rgba(0, 0, 0, .4);
+    background: #bfd9ff3d;
     display: none;
     position: fixed;
     left: 0;
@@ -75,10 +75,12 @@
 .acciones-form-adminitrador {
     display: flex;
     position: fixed;
-    bottom: 25px;
-    padding: 0px 20px;
+    bottom: 0;
+    right: 0;
+    padding: 15px 20px;
     justify-content: space-around;
-    width: 100%;
+    width: 60%;
+    background: #F6FBFF;
 }
 
 .agregar,

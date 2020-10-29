@@ -67,9 +67,8 @@ export class AdministradoresComponent implements OnInit {
     password: null
   }
 
-  removeItemsUsers = [];
-
   current: number = 1;
+  itemPerPage: number = 5;
 
   formCreateAdmin: FormGroup;
   formUpdatedAdmin: FormGroup;
@@ -81,6 +80,7 @@ export class AdministradoresComponent implements OnInit {
 
   check_user:any = [];
   check_Update:any = [];
+  removeItemsUsers = [];
   active:string = "activeOff";
   user_data : FormArray;
 
@@ -135,6 +135,9 @@ export class AdministradoresComponent implements OnInit {
   get emailUpdatedNoValid(){
     return this.formUpdatedAdmin.get('email').invalid;
   }
+  get dniUpdatedNoValid(){
+    return this.formUpdatedAdmin.get('dni').invalid;
+  }
   get passUpdatedNoValid(){
     return this.formUpdatedAdmin.get('password').invalid;
   }
@@ -158,10 +161,11 @@ export class AdministradoresComponent implements OnInit {
 
   FormUpdateAdmin():any{
     this.formUpdatedAdmin = this.formb.group({
-      id: [1],
-      rol_id: [1],
+      id: [this.check_Update.id],
+      rol_id: [this.check_Update.rol_id],
       name: [this.check_Update.name, [Validators.required]],
       apellidos: [this.check_Update.apellidos, [Validators.required]],
+      dni: [this.check_Update.dni, [Validators.required]],
       email: [this.check_Update.email, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: [''],
       user_data: this.formb.array([this.createUser_data()],[Validators.required])
@@ -199,14 +203,10 @@ export class AdministradoresComponent implements OnInit {
   showAdmins(){
     this.userService.getUsersAdmin().subscribe(
       res =>{
-        this.usersAdmins = res['admins'];
+        this.usersAdmins = res['users'];
         this.user_data = this.userColumns = res['fields'];
       }
     );
-  }
-
-  administradorDetalle(id:number){
-    this.route.navigate(['/users/administradores', id]);
   }
 
   buscarAdmin(text:string){
@@ -325,6 +325,10 @@ export class AdministradoresComponent implements OnInit {
                 'Los usuarios han sido eliminados correctamente.',
                 'success'
               );
+              this.check_user = [];
+              this.check_Update = [];
+              this.removeItemsUsers = [];
+              this.active = "activeOff";
             }else{
               this.showAdmins();
               Swal.fire(

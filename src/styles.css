@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+button{
+    outline: none !important;
+}
+
 p{
     margin: 0;
 }
@@ -157,7 +161,8 @@ img {
 
 .box-buscador,
 .box-editar,
-.box-create-new {
+.box-create-new,
+.box-button-light {
     display: flex;
     position: relative;
     height: 31px;
@@ -183,6 +188,37 @@ img {
     height: 31px;
 }
 
+.btn-nuevo-cliente:hover {
+    background: #ec5362;
+    box-shadow: 0px 1px 3px #1e29336c;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-ligth {
+    background: #fff;
+    color: #FF596A;
+    border: 1px solid #FF596A;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: 0.84px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 4px 40px;
+    padding-right: 20px;
+    transition: all .3s ease;
+    height: 31px;
+}
+
+.btn-ligth:hover {
+    background: #ff596a;
+    box-shadow: 0px 1px 3px #1e29336c;
+    text-decoration: none;
+    color: #fff;
+}
+
 .box-input-label small,
 .label-field small {
     background: #fff;
@@ -191,12 +227,6 @@ img {
     display: block;
 }
 
-.btn-nuevo-cliente:hover {
-    background: #ec5362;
-    box-shadow: 0px 1px 3px #1e29336c;
-    text-decoration: none;
-    color: #fff;
-}
 
 .box-mas {
     position: absolute;
@@ -445,6 +475,29 @@ input[type="tel"] {
 }
 
 
+/* Iniciales del nombre. */
+.iniciales {
+    width: 2.2em;
+    height: 2.2em;
+    background: #ff596a;
+    position: absolute;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+p.nombre {
+    margin-left: 50px !important;
+}
+.imagen-nombre{
+    position: relative;
+}
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -483,9 +536,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 0 !important;
 }
 
-.mat-form-field-wrapper {
+
+/* .mat-form-field-wrapper {
     padding-bottom: 0 !important;
-}
+} */
+
 
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){
     background: #F85C6C;
@@ -531,6 +586,13 @@ ngx-gallery-preview .ngx-gallery-icon{
     color: #fff !important;
 }
 
+.mat-form-field.mat-focused .mat-form-field-label{
+    color: #ff596a;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple{
+    background: #ff596a;
+}
 /* NGX-pagination */
 .ngx-pagination{margin-bottom: 0 !important;}
 

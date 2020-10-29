@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 
 import { UsersComponent } from './users/users.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
-import { AdministradorDetalleComponent } from './administrador-detalle/administrador-detalle.component';
 import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
 
 
@@ -45,7 +44,6 @@ const routes : Routes = [
     path: 'users', component: UsersComponent,
     children: [
       { path: 'administradores', component: AdministradoresComponent, canActivate: [AuthGuard] },
-      { path: 'administradores/:id', component: AdministradorDetalleComponent, canActivate: [AuthGuard]},
       { path: 'buscar/:text', component: AdministradoresBuscadorComponent,canActivate: [AuthGuard]},
       { path: 'vendedores', component: VendedoresComponent, },
       { path: 'vendedores/:id', component: VendedorDetalleComponent,  },
