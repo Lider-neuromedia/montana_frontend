@@ -17,6 +17,7 @@ export class DrawerAdvancedComponent implements OnInit, OnChanges {
   @Input() open : boolean; //Controla la accion de abrir y cerrar el drawer.
   @Input() title : string; //Titulo del contenido.
   @Input() subtitle : string; //Sub titulo del contenido
+  @Input() button : string = 'Agregar'; //Titulo del contenido
   //Nombre del drawer. Nombre interno para cuando existan mas de 1 en algun componente.
   @Input() name : string; 
 

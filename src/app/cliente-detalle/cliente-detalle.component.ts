@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
-import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-
-declare var jQuery:any;
+import { SendHttpData } from '../services/SendHttpData';
+import Swal from 'sweetalert2'
 declare var $:any;
 
 @Component({
@@ -54,65 +52,48 @@ export class ClienteDetalleComponent implements OnInit {
 
   openDrawer = false;
   updateDrawer = false;
+  tiendas = [];
+  selectTiendas : any;
+  checkTiendas = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private user: UsersService) {
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService, private http: SendHttpData) {
 
     this.id = this.activatedRoute.snapshot.params['id'];
-
-    if(this.id != null){
-      this.user.getClient(this.id).subscribe(
-        (data:any) =>{
-          // this.usuario = data;
-          // console.log( this.usuario );
-          // for(var i = 0; i < data.vendedor.length; i++){
-          //   this.vendedor_asoci = data.vendedor[i];
-          // }
-          this.usuario = data;
-          this.vendedor_asoci = data.vendedor;
-          for(let tel of this.vendedor_asoci.user_data){
-            if(tel.field_key == 'celular'){
-              this.vendedor_asoci_tel = tel.value_key;
-              // console.log(this.vendedor_asoci_tel);
-            }
-          }
-          // console.log(this.vendedor_asoci);
-          // console.log(this.usuario);
-        },
-        (error) =>{
-          this.show = false;
-        })
-    }
-
-
-
-
-    // this.user.getClient(this.id).subscribe( (data:any) =>{
-    //   for(var i = 0; i <= data.length - 1; i++){
-    //     var turnAround = data[i].field_key;
-    //     this.info[turnAround] = data[i].value_key;
-    //   }
-    //   console.log(this.info);
-    // })
 
     this.datos.nombres = localStorage.getItem('user');
     this.datos.email = localStorage.getItem('email');
     this.userdata = localStorage.getItem('userdata');
     let dataJson = JSON.parse(this.userdata);
 
-    // this.datos.nombres = dataJson[2].value_key;
-    // this.datos.apellidos = dataJson[3].value_key;
-    // this.datos.tipo_doc = dataJson[4].value_key;
-    // this.datos.num_doc = '?';
-    // this.datos.telefono = dataJson[5].value_key;
-    // //this.datos.email = '?';
-    // this.datos.ciudad = dataJson[6].value_key;
-    // this.datos.nit = dataJson[7].value_key;
-
-    // console.log( dataJson );
-
   }
 
   ngOnInit(): void {
+    if(this.id != null){
+      this.getCliente();
+    }
+    this.asignTiendasClient();
+  }
+
+  getCliente(){
+    this.user.getClient(this.id).subscribe(
+      (data:any) =>{
+        this.usuario = data;
+        this.vendedor_asoci = data.vendedor;
+
+      },
+      (error) =>{
+        this.show = false;
+      })
+  }
+  
+  asignTiendasClient(){
+    this.selectTiendas = {
+      nombre : '',
+      lugar : '',
+      local : '',
+      direccion : '',
+      telefono : ''
+    }
   }
 
   openDrawerRigth(action : boolean, type : string){
@@ -124,25 +105,149 @@ export class ClienteDetalleComponent implements OnInit {
       (!action) ? this.openDrawer = false : '';
     }
   }
-
-  submitUpdateClient(){
-    // var data = this.catalogo;
-    // this.http.httpPost('catalogos', data, true).subscribe(
-    //   response => {
-    //     if (response.status == 200 && response.response == 'success') {
-    //       this.openDrawer = false;
-    //       this.getCatalogos();
-    //       this.resetForm();
-    //     }
-    //   }, 
-    //   error => {
-    //     console.error(error);
-    //   }
-    // )
+  
+  // Agregar tienda.
+  addTienda(){
+    // Validates.
+    this.tiendas.push(this.selectTiendas);
+    this.asignTiendasClient();
   }
 
-  // accionesAdministrador(){
-  //   $('.acciones-administrador').toggleClass('open-acciones');
-  //   $('.box-editar').toggleClass('box-editar-open');
-  // }
+  submitCreateStore(){
+    var data = {
+      cliente : this.id,
+      tiendas : this.tiendas
+    }
+    this.http.httpPost('tiendas', data, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            'Completado',
+            'Tienda creada de manera correcta.',
+            'success'
+          );
+          this.getCliente();
+          this.openDrawerRigth(false, 'create');
+          this.asignTiendasClient();
+        }
+      },
+      error => {
+
+      }
+    )
+  }
+
+  selectTiendaCheckbox(event, tienda){
+    if (event.target.checked) {
+      this.checkTiendas.push(tienda);
+    }else{
+      let removeIndex = this.checkTiendas.findIndex(x => x.id_tiendas === tienda.id_tiendas);
+      if (removeIndex !== -1){
+        this.checkTiendas.splice(removeIndex, 1);
+      }
+    }
+  }
+
+  editTienda(){
+    if (this.checkTiendas.length > 1 || this.checkTiendas.length === 0) {
+      Swal.fire(
+        'Tienes problemas?',
+        'Asegurate de seleccionar alguna tienda o tener solo 1 seleccionado.',
+        'warning'
+        );
+    }else{
+      this.openDrawerRigth(true, 'edit');
+      this.selectTiendas = this.checkTiendas[0];
+    }
+  }
+
+  submitUpdateTienda(){
+    this.http.httpPut('tiendas', this.selectTiendas.id_tiendas, this.selectTiendas, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            'Completado',
+            'Tienda actualizada de manera correcta.',
+            'success'
+          );
+          this.getCliente();
+          this.openDrawerRigth(false, 'edit');
+          this.asignTiendasClient();
+          this.selectTiendas = [];
+          this.checkTiendas = [];
+        }
+      },
+      error => {
+
+      }
+    )
+  }
+
+  deleteTienda(){
+    if (this.checkTiendas.length === 0) {
+      Swal.fire(
+        'Tienes problemas?',
+        'Asegurate de seleccionar alguna tienda.',
+        'warning'
+        );
+    }else{
+
+      Swal.fire({
+        title: 'Está seguro que desea eliminar estas tiendas?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar'
+      }).then((result) => {
+        if (result.value) {
+          var tiendas = [];
+          this.checkTiendas.forEach(element => {
+            tiendas.push(element.id_tiendas);
+          }); 
+          var data = {tiendas : tiendas};
+          this.http.httpPost('delete-tiendas', data, true).subscribe(
+            response =>{
+              if (response.response == 'success' && response.status == 200) {
+                Swal.fire(
+                  'Completado',
+                  'Tiendas eliminadas de manera correcta.',
+                  'success'
+                );
+                this.getCliente();
+                this.openDrawerRigth(false, 'edit');
+                this.asignTiendasClient();
+                this.selectTiendas = [];
+                this.checkTiendas = [];
+              }else{
+                Swal.fire(
+                  '¡Ups!',
+                  response.message,
+                  'error'
+                );
+                this.asignTiendasClient();
+                this.selectTiendas = [];
+                this.checkTiendas = [];
+              }
+            }, 
+            error => {
+
+            }
+          )
+        }
+      });
+      
+    }
+  }
+
+  navigatePedido(pedido){
+    this.route.navigate(['/pedido-detalle/' + pedido]);
+  }
+  
+  accionesAdministrador(){
+    $('.acciones-administrador').toggleClass('open-acciones');
+    $('.box-editar').toggleClass('box-editar-open');
+  }
+
+
 }

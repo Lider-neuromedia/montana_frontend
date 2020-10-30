@@ -88,19 +88,27 @@ export class ClientesComponent implements OnInit {
   updateDrawer = false;
 
   createClient : any;
+  updateClient : any;
   createTiendas : any;
   vendedores : [];
-  search : '';
-
+  search = '';
+  checkCliente = [];
+  selectClient : any;
   constructor( private clients: UsersService, private route: Router, private http: SendHttpData) {
-    this.clients.getAllClients().subscribe( (data:any) => {
-      this.clientes = data['users'];
-    });
+   
   }
 
   ngOnInit(): void {
     this.asignCreateClient();
+    this.asignUpdateClient();
     this.asignTiendasClient();
+    this.getClients();
+  }
+
+  getClients(){
+    this.clients.getAllClients().subscribe( (data:any) => {
+      this.clientes = data['users'];
+    });
   }
 
   asignCreateClient(){
@@ -121,6 +129,27 @@ export class ClientesComponent implements OnInit {
       tiendas: []
     };
   }
+
+  asignUpdateClient(){
+    this.updateClient = {
+      name : '',
+      apellidos : '',
+      tipo_documento : '',
+      dni : '',
+      email: '',
+      password: '',
+      nit: '',
+      vendedor : {
+        id: 0,
+        name: '',
+        apellidos: '',
+        dni : ''
+      },
+      tiendas: [],
+      data_user : []
+    };
+  }
+  
   asignTiendasClient(){
     this.createTiendas = {
       nombre : '',
@@ -199,10 +228,32 @@ export class ClientesComponent implements OnInit {
   }
 
   agregarCliente(){
-    this.clients.createUser(this.createClient).subscribe(
-      (data:any) =>{
-        console.log(data);
-        let tmpUser = localStorage.setItem('tmp_user',data.tmp_user);
+
+    var data = {
+      rol_id : 3,
+      name : this.createClient.name,
+      apellidos : this.createClient.apellidos,
+      dni : this.createClient.dni,
+      email : this.createClient.email,
+      password : this.createClient.password,
+      userdata : {
+        nit : this.createClient.nit
+      }, 
+      tiendas : this.createClient.tiendas,
+      vendedor : this.createClient.vendedor.id
+    }
+
+    this.clients.createUser(data).subscribe(
+      (response : any) => {
+        if (response.response == 'success' && response.status == 200) {
+          this.getClients();
+          this.openDrawerRigth(false, 'create');
+          Swal.fire(
+            'Completado',
+            'Usuario creado de manera correcta.',
+            'success'
+          );
+        }
       },
       (error) =>{
         this.errors.name = error.error.errors.name;
@@ -255,22 +306,6 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  submitCreateUser(){
-    // var data = this.catalogo;
-    // this.http.httpPost('catalogos', data, true).subscribe(
-    //   response => {
-    //     if (response.status == 200 && response.response == 'success') {
-    //       this.openDrawer = false;
-    //       this.getCatalogos();
-    //       this.resetForm();
-    //     }
-    //   }, 
-    //   error => {
-    //     console.error(error);
-    //   }
-    // )
-  }
-
   // Change pagination
   changeListPagination(event){
     this.itemPerPage = event.target.value;
@@ -278,9 +313,13 @@ export class ClientesComponent implements OnInit {
   }
 
   // Agregar tienda.
-  addTienda(){
+  addTienda(edit = false){
     // Validates.
-    this.createClient.tiendas.push(this.createTiendas);
+    if (edit) {
+      this.updateClient.tiendas.push(this.createTiendas);
+    }else{
+      this.createClient.tiendas.push(this.createTiendas);
+    }
     this.asignTiendasClient();
   }
 
@@ -305,13 +344,58 @@ export class ClientesComponent implements OnInit {
     this.search = '';
   }
   
-  deleteVendedorSelect(){
-    this.createClient.vendedor = {
-      id: 0,
-      name: '',
-      apellidos: '',
-      dni : ''
-    };
+  deleteVendedorSelect(edit = false){
+    if (edit) {
+      this.updateClient.vendedor = {
+        id: 0,
+        name: '',
+        apellidos: '',
+        dni : ''
+      };
+    }else{
+      this.createClient.vendedor = {
+        id: 0,
+        name: '',
+        apellidos: '',
+        dni : ''
+      };
+    }
+  }
+
+  selectClientCheckbox(event, cliente){
+    if (event.target.checked) {
+      this.checkCliente.push(cliente);
+    }else{
+      let removeIndex = this.checkCliente.findIndex(x => x.id === cliente.id);
+      if (removeIndex !== -1){
+        this.checkCliente.splice(removeIndex, 1);
+      }
+    }
+  }
+
+  editTienda(){
+    if (this.checkCliente.length > 1 || this.checkCliente.length === 0) {
+      Swal.fire(
+        'Tienes problemas?',
+        'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+        'warning'
+        );
+    }else{
+      this.openDrawerRigth(true, 'edit');
+      this.selectClient = this.checkCliente[0];
+      this.clients.getClient(this.selectClient.id).subscribe(
+        (data:any) =>{
+          this.updateClient = data;
+        },
+        (error) =>{
+          
+      })
+
+    }
+  }
+
+  submitUpdateClient(){
+    // this.http.httpPost
   }
 
 }

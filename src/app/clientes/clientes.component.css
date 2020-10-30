@@ -175,8 +175,8 @@
     list-style: none;
     opacity: 0;
     background: white;
-    width: 100%;
-    left: 0;
+    right: -1px;
+    left: -1px;
     transition: all .3s ease;
     text-align: center;
 }
@@ -225,6 +225,7 @@ select {
     padding: 0 20px;
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 10px;
 }
 
 .search-vendedor {
@@ -235,6 +236,8 @@ select {
 .list-tiendas {
     padding: 0 20px;
     margin-bottom: 2em;
+    height: 20vh;
+    overflow: auto;
 }
 
 .item-tienda {
@@ -243,6 +246,7 @@ select {
     padding: 10px 15px;
     border-radius: 8px;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .cont-item-tienda{

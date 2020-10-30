@@ -117,7 +117,7 @@ export class VendedoresComponent implements OnInit {
 
     this.sellers.getAllSellers().subscribe(
       data =>{
-      this.vendedores = data;
+      this.vendedores = data['users'];
     });
     this.createForm();
   }
