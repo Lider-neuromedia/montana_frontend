@@ -105,10 +105,14 @@ export class ClientesComponent implements OnInit {
     this.getClients();
   }
 
-  getClients(){
-    this.clients.getAllClients().subscribe( (data:any) => {
+  getClients(search = ''){
+    this.clients.getAllClients(search).subscribe( (data:any) => {
       this.clientes = data['users'];
     });
+  }
+
+  searchTable(event){
+    this.getClients(event.target.value);
   }
 
   asignCreateClient(){
@@ -281,17 +285,34 @@ export class ClientesComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, Eliminar'
     }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Completado',
-          'El usuario ha sido eliminado',
-          'success'
-        )
-        // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
-        this.clients.deleteUsers(this.removeItemsUsers).subscribe( (data:any) =>{
-          console.log(data);
-        })
-      }
+      var usuarios = [];
+      this.checkCliente.forEach(element => {
+        console.log(element);
+        usuarios.push(element.id);
+      });
+      var data = {usuarios : usuarios};
+
+      this.clients.deleteUsers(data).subscribe(
+        (data:any) =>{
+          if (data.response == 'success' && data.status == 200) {
+            this.getClients();
+            Swal.fire(
+              'Completado',
+              'Los usuarios han sido eliminados correctamente.',
+              'success'
+            );
+            this.checkCliente = [];
+          }else{
+            this.getClients();
+            Swal.fire(
+              '¡Ups!',
+              data.message,
+              'error'
+            );
+            this.checkCliente = [];
+          }
+        }
+      );
     })
     
   }

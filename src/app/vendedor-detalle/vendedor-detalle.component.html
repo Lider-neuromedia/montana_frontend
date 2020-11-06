@@ -52,6 +52,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Total 2020</p>
                                 <p class="valor-comision">$2.300.400</p>
+                                <div class="placeholder-img"><img src="assets/img/ganadas.svg" alt=""></div>
                             </div>
                         </div>
 
@@ -61,6 +62,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Junio</p>
                                 <p class="valor-comision">$1.300.400</p>
+                                <div class="placeholder-img"><img src="assets/img/perdidas.svg" alt=""></div>
                             </div>
                         </div>
 
@@ -70,6 +72,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Total 2020</p>
                                 <p class="valor-comision">$4.300.400</p>
+                                <div class="placeholder-img"><img src="assets/img/proximas.svg" alt=""></div>
                             </div>
                         </div>
 
@@ -91,21 +94,21 @@
                             <p *ngIf="show">{{ usuarios.apellidos }}</p>
                         </div>
 
-                        <!-- <div class="datos">
-                            <p>Teléfono</p>
-                            <p *ngIf="show">{{ usuarios.telefono }}</p>
-                        </div> -->
 
                         <div class="datos">
                             <p>Correo electrónico</p>
                             <p *ngIf="show">{{ usuarios.email }}</p>
                         </div>
 
-                        <td class="datos" *ngFor="let data of usuarios.data_user">
-                            <p *ngIf="data.field_key == 'celular'" style="display:grid"><span>Celular</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                            <p *ngIf="data.field_key == 'cedula'" style="display:grid"><span>Cédula</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                        </td>
+                        <div class="datos">
+                            <p>Cedula</p>
+                            <p >{{ usuarios.dni }}</p>
+                        </div>
 
+                        <div class="datos" *ngFor="let data of usuarios.data_user">
+                            <p *ngIf="data.field_key == 'telefono'">{{data.field_key}}</p>
+                            <p *ngIf="data.field_key == 'telefono'">{{ data.value_key }}</p>
+                        </div>
 
                     </div>
 
@@ -116,7 +119,7 @@
 
                         <div class="col-sm-12 col-md-4 datos">
                             <p>Usuario</p>
-                            <p *ngIf="show">{{ info.email }}</p>
+                            <p *ngIf="show">{{ usuarios.email }}</p>
                         </div>
 
                         <div class="col-sm-12 col-md-3 datos">
@@ -127,41 +130,21 @@
 
                     <div class="row row-clientes">
                         <div class="col-sm-12">
-                            <h2 class="title-tiendas">Tiendas</h2>
+                            <h2 class="title-tiendas">Clientes</h2>
                         </div>
 
                         <div class="col-sm-12">
                             <table class="tabla-clientes-en-vendedores">
                                 <thead>
-                                    <th></th>
                                     <th>Nombre del cliente</th>
                                     <th>Nit</th>
-                                    <th>Ciudad</th>
+                                    <th>Email</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
-                                        <td>1115072011-8</td>
-                                        <td>Cali, Valle del Cauca</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
-                                        <td>1115072011-8</td>
-                                        <td>Cali, Valle del Cauca</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
-                                        <td>1115072011-8</td>
-                                        <td>Cali, Valle del Cauca</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Bladimiro Alfonso Bejarano Garavito</td>
-                                        <td>1115072011-8</td>
-                                        <td>Cali, Valle del Cauca</td>
+                                    <tr *ngFor="let cliente of usuarios.clientes">
+                                        <td>{{cliente.name}}</td>
+                                        <td>{{cliente.name}}</td>
+                                        <td>{{cliente.email}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -172,80 +155,21 @@
                 </div>
 
                 <div class="col-sm-12 col-md-4 aside-pedidos">
-                    <div class="actions">
-                        <a href="#">Pedidos</a>
-                        <hr class="line-pedidos">
-                    </div>
-                    <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+                    <mat-tab-group mat-align-tabs="start">
+                        <mat-tab label="Pedidos">
+                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
 
-                    <div class="box-pedidos">
-                        <div class="foto-referencia">
-                            <img src="/assets/img/image1.png" alt="">
-                            <p>Ref: ASN-154764676</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                    </div>
-
-                    <div class="box-pedidos">
-                        <div class="foto-referencia">
-                            <img src="/assets/img/image1.png" alt="">
-                            <p>Ref: ASN-154764676</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                    </div>
-
-                    <div class="box-pedidos">
-                        <div class="foto-referencia">
-                            <img src="/assets/img/image1.png" alt="">
-                            <p>Ref: ASN-154764676</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Único</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>San Andresito</strong> L 118</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>CC Unicentro</strong> L 204</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                        <div class="list-tienda">
-                            <p class="tienda"> <strong>Granada</strong> CLL 4 No. 6 - 89</p>
-                            <p class="cantidad">23</p>
-                        </div>
-                    </div>
+                            <div class="box-pedidos" *ngFor="let pedido of usuarios.pedidos" (click)="navigatePedido(pedido.id_pedido)">
+                                <div class="foto-referencia">
+                                    <p>Pedido #{{pedido.codigo}}</p>
+                                </div>
+                                <div class="info-pedido">
+                                    <p>{{pedido.fecha}}</p>
+                                    <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
 
                 </div>
             </div>

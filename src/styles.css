@@ -593,8 +593,16 @@ ngx-gallery-preview .ngx-gallery-icon{
 .mat-form-field.mat-focused .mat-form-field-ripple{
     background: #ff596a;
 }
+
 /* NGX-pagination */
 .ngx-pagination{margin-bottom: 0 !important;}
+
+
+/* pagination */
+.pagination /deep/ .ngx-pagination .current {
+    background: #FF596A !important;
+    border-radius: 5px;
+}
 
 
 /* Bootstrap */

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
 
@@ -34,37 +34,21 @@ export class VendedorDetalleComponent implements OnInit {
 
   show = true;
 
-  constructor(private activatedRoute: ActivatedRoute, private user: UsersService) {
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService) {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
 
-    const id = this.activatedRoute.snapshot.params['id'];
+  ngOnInit(): void {
+    this.getVendedor();
+  }
 
-    // this.user.getSeller(this.id).subscribe(
-    //   (data:any) =>{
-    //     this.usuarios = data;
-    //     console.log( this.usuarios );
-    //     for(var i = 0; i <= data.length - 1; i++){
-    //       var turnAround = data[i].field_key;
-    //       this.info[turnAround] = data[i].value_key;
-    //     }
-    //     this.show;
-    //     console.log(this.info);
-    //   },
-    //   (error) =>{
-    //     this.show = false;
-    //     console.log(error);
-    //   })
+  getVendedor(){
 
-    if(id != null){
-      this.user.getSeller(id).subscribe(
+    if(this.id != null){
+      this.user.getSeller(this.id).subscribe(
         (data:any) =>{
           console.log(data);
           this.usuarios = data;
-          // for(var i = 0; i <= data.length - 1; i++){
-          //   var turnAround = data[i].field_key;
-          //   this.info[turnAround] = data[i].value_key;
-          //   // this.info = data[i];
-          // }
-          // this.info;
         },
         (error) =>{
           this.show = false;
@@ -72,12 +56,13 @@ export class VendedorDetalleComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
-
   editarVendedor(){
     $('.editar-vendedor').toggleClass('open-acciones');
     $('.box-editar').toggleClass('box-editar-open');
+  }
+
+  navigatePedido(pedido){
+    this.route.navigate(['/pedido-detalle/' + pedido]);
   }
 
 }

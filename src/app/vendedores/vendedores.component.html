@@ -6,87 +6,47 @@
     </div>
     <div class="contenido">
         <div class="overview"></div>
-        <div class="nuevo-vendedor">
-            <div class="header-form">
-                <h2>Nuevo vendedor</h2>
-                <img (click)="cerrarFormVendedor()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
-            </div>
-
-            <div class="info-row">
+        <app-drawer-advanced class="form-advanced" name="crear-vendedor" title="Crear Vendedor" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarVendedor()">
                 <div class="tabs">
                     <ul>
-                        <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
                         <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                        <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
                         <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
                     </ul>
                 </div>
-                <div class="fields">
 
+                <div class="fields">
                     <!-- Datos generales -->
                     <div *ngIf="generales" class="field-datos-generales">
-                        <!-- <form [formGroup]="angForm" novalidate>
-                    <label class="center-block">FirstName:
-                        <input class="form-control" formControlName="firtsname" />
-                    </label>
-                    <div *ngIf=" angForm.controls['firtsname'].invalid && (angForm.controls['firtsname'].dirty || angForm.controls['firtsname'].touched)" class="alert alert-danger">
-                        <div *ngIf="angForm.controls['firtsname'].errors.required">
-                            Name is required.
-                        </div>
-                    </div>
-                </form> -->
-
                         <div class="label-field">
                             <label for="">Nombres</label>
-                            <input [(ngModel)]="masDatos.nombres" name="nombres" type="text" class="">
-                            <small *ngIf="" style="color: red;">{{ errorsDos.nombres }}</small>
+                            <input [(ngModel)]="vendedor.name" name="nombres" type="text" class="">
+                            <small *ngIf="" style="color: red;">{{ errors.name }}</small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Apellidos</label>
-                            <input [(ngModel)]="masDatos.apellidos" name="apellidos" type="text" class="">
-                            <small style="color: red;">{{ errorsDos.apellidos }}</small>
+                            <input [(ngModel)]="vendedor.apellidos" name="apellidos" type="text" class="">
+                            <small style="color: red;">{{ errors.apellidos }}</small>
                         </div>
 
-                        <div class="label-field">
-                            <label for="">Tipo de documento</label>
-                            <select [(ngModel)]="masDatos.tipo_documento" name="tipo_documento" id="">
-                        <option value="cedula">Cédula de ciudadanía</option>
-                        <option value="extranjeria">Cédula de extranjería</option>
-                        <option value="pasaporte">Pasaporte</option>
-                    </select>
-                            <small style="color: red;">{{ errorsDos.tipo_documento }}</small>
-                        </div>
 
                         <div class="label-field">
                             <label for="">Cédula de ciudadanía</label>
-                            <input [(ngModel)]="masDatos.numero_documento" name="numero_documento" type="number" class="">
-                            <small style="color: red;">{{ errorsDos.numero_documento }}</small>
+                            <input [(ngModel)]="vendedor.dni" name="dni" type="number" class="">
+                            <small style="color: red;">{{ errors.dni }}</small>
                         </div>
 
                         <div class="label-field">
-                            <label for="">Celulares</label>
-                            <input [(ngModel)]="masDatos.celular" name="celular" type="tel" class="">
-                            <small style="color: red;">{{ errorsDos.celular }}</small>
+                            <label for="">Celular</label>
+                            <input [(ngModel)]="vendedor.userdata.telefono" name="celular" type="tel" class="">
+                            <!-- <small style="color: red;">{{ errorsDos.celular }}</small> -->
                         </div>
 
                         <div class="label-field">
                             <label for="">Código de vendedor</label>
-                            <input [(ngModel)]="masDatos.codigo" type="number" name="codigo" class="">
-                            <small style="color: red;">{{ errorsDos.codigo }}</small>
-                        </div>
-
-                        <div class="acciones-form-adminitrador">
-                            <a (click)="agregarMasDatos()" class="agregar">
-                                <span class="mas">
-                            <img src="" alt="">
-                        </span> Agregar
-                            </a>
-
-                            <a class="cancelar" (click)="cerrarFormVendedor()">
-                                <span class="mas">
-                            <img src="" alt="">
-                        </span> Cancelar
-                            </a>
+                            <input [(ngModel)]="vendedor.userdata.codigo" type="number" name="codigo" class="">
+                            <!-- <small style="color: red;">{{ errorsDos.codigo }}</small> -->
                         </div>
 
                     </div>
@@ -94,13 +54,6 @@
 
                     <!-- Credenciales -->
                     <div *ngIf="credenciales" class="credenciales">
-
-                        <div class="label-field">
-                            <label for="">Usuario</label>
-                            <input [(ngModel)]="vendedor.name" name="name" type="text" class="">
-                            <small style="color: red;">{{ errors.name }}</small>
-                        </div>
-
                         <div class="label-field">
                             <label for="">Correo electrónico</label>
                             <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
@@ -113,68 +66,172 @@
                             <small style="color: red;">{{ errors.password }}</small>
                         </div>
 
-                        <div class="acciones-form-adminitrador">
-                            <a (click)="agregarVendedor()" class="agregar">
-                                <span class="mas">
-                                <img src="" alt="">
-                            </span> Agregar
-                            </a>
+                        <div class="label-field">
+                            <label for="">Confirmar Contraseña</label>
+                            <input [(ngModel)]="vendedor.confirm_password" name="confirm_password" type="password"
+                                class="">
+                            <small style="color: red;">{{ errors.confirm_password }}</small>
+                        </div>
+                    </div>
+                    <!-- ...# -->
 
-                            <a class="cancelar" (click)="cerrarFormVendedor()">
-                                <span class="mas">
-                                <img src="" alt="">
-                            </span> Cancelar
-                            </a>
+                    <div *ngIf="asignar" class="asignar-cliente">
+                        <div class="search-cliente">
+                            <p>Eligue un cliente</p>
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
+                                <input matInput 
+                                    placeholder="Buscar por nombre, cedula."
+                                    style="color: #82867D;"
+                                    [(ngModel)]="search"
+                                    (keyup.enter)="searchClientes()"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                    <mat-icon matSuffix
+                                        (click)="searchClientes()"
+                                        style="color: #82867D; cursor: pointer;">
+                                        search
+                                    </mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="item-cliente-select" *ngFor="let clienteAsign of vendedor.clientes" [@inOutAnimation]>
+                            <p style="display: flex;"> 
+                                {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
+                            </p>
+                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteClientSelect(clienteAsign)">
+                                <mat-icon style="color: #ff596a;">delete</mat-icon>
+                            </button> 
+                        </div>
+                        <div class="list-vendedores">
+                            <div class="item-cliente" *ngFor="let cliente of clientes" (click)="asignCliente(cliente)" [@fadeIn]>
+                                <p> 
+                                    <span class="icon-cliente">{{cliente.name.substr(0,1) + cliente.apellidos.substr(0,1)}}</span> 
+                                    {{cliente.name + ' ' + cliente.apellidos}}
+                                </p>
+                                <p>{{vendedor.id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </app-drawer-advanced>
+
+        <app-drawer-advanced class="form-advanced" name="editar-vendedor" title="Editar Vendedor" [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="actualizarVendedor()" button="Actualizar">
+                <div class="tabs">
+                    <ul>
+                        <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                        <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                        <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
+                    </ul>
+                </div>
+
+                <div class="fields">
+                    <!-- Datos generales -->
+                    <div *ngIf="generales" class="field-datos-generales">
+                        <div class="label-field">
+                            <label for="">Nombres</label>
+                            <input [(ngModel)]="selectVendedor.name" name="nombres" type="text" class="">
+                            <small *ngIf="" style="color: red;">{{ errors.name }}</small>
                         </div>
 
-                        <!-- <div class="label-field">
-                    <label for="">Confirmar contraseña</label>
-                    <input type="password" class="">
-                </div> -->
+                        <div class="label-field">
+                            <label for="">Apellidos</label>
+                            <input [(ngModel)]="selectVendedor.apellidos" name="apellidos" type="text" class="">
+                            <small style="color: red;">{{ errors.apellidos }}</small>
+                        </div>
+
+
+                        <div class="label-field">
+                            <label for="">Cédula de ciudadanía</label>
+                            <input [(ngModel)]="selectVendedor.dni" name="dni" type="number" class="">
+                            <small style="color: red;">{{ errors.dni }}</small>
+                        </div>
+
+                        <div class="label-field" *ngFor="let userdata of selectVendedor.data_user">
+                            <label for="">{{userdata.field_key}}</label>
+                            <input [(ngModel)]="userdata.value_key" name="celular" type="tel" class="">
+                        </div>
 
                     </div>
                     <!-- ...# -->
 
+                    <!-- Credenciales -->
+                    <div *ngIf="credenciales" class="credenciales">
+                        <div class="label-field">
+                            <label for="">Correo electrónico</label>
+                            <input [(ngModel)]="selectVendedor.email" name="email" type="email" class="">
+                            <small style="color: red;">{{ errors.email }}</small>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Contraseña</label>
+                            <input [(ngModel)]="selectVendedor.password" name="password" type="password" class="">
+                            <small style="color: red;">{{ errors.password }}</small>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Confirmar Contraseña</label>
+                            <input [(ngModel)]="selectVendedor.confirm_password" name="confirm_password" type="password"
+                                class="">
+                            <small style="color: red;">{{ errors.confirm_password }}</small>
+                        </div>
+                    </div>
+                    <!-- ...# -->
 
                     <div *ngIf="asignar" class="asignar-cliente">
-                        <h3>Eligue un cliente</h3>
-                        <select (change)="cliente($event)" class="select-client">
-                    <option value="0">Selecciones un cliente</option>
-                    <option *ngFor="let option of vendedores" [value]="option.id">{{ option.name }}</option>
-                </select>
-                        <div class="acciones-form-adminitrador">
-                            <a (click)="cliente()" class="agregar">
-                                <span class="mas">
-                            <img src="" alt="">
-                        </span> Asignar
-                            </a>
-
-                            <a class="cancelar" (click)="cerrarFormVendedor()">
-                                <span class="mas">
-                            <img src="" alt="">
-                        </span> Cancelar
-                            </a>
+                        <div class="search-cliente">
+                            <p>Eligue un cliente</p>
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
+                                <input matInput 
+                                    placeholder="Buscar por nombre, cedula."
+                                    style="color: #82867D;"
+                                    [(ngModel)]="search"
+                                    (keyup.enter)="searchClientes()"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                    <mat-icon matSuffix
+                                        (click)="searchClientes()"
+                                        style="color: #82867D; cursor: pointer;">
+                                        search
+                                    </mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="item-cliente-select" *ngFor="let clienteAsign of selectVendedor.clientes" [@inOutAnimation]>
+                            <p style="display: flex;"> 
+                                {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
+                            </p>
+                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteAsignClient(clienteAsign)">
+                                <mat-icon style="color: #ff596a;">delete</mat-icon>
+                            </button> 
+                        </div>
+                        <div class="list-vendedores">
+                            <div class="item-cliente" *ngFor="let cliente of clientes" (click)="updateAsignCliente(cliente)" [@fadeIn]>
+                                <p> 
+                                    <span class="icon-cliente">{{cliente.name.substr(0,1) + cliente.apellidos.substr(0,1)}}</span> 
+                                    {{cliente.name + ' ' + cliente.apellidos}}
+                                </p>
+                                <p>{{vendedor.id}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+        </app-drawer-advanced>
 
         <div class="filtros">
             <div class="box-buscador">
                 <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-                <input class="buscador" type="text">
+                <input class="buscador" placeholder="Buscar.." (keyup.enter)="searchTable($event)"  type="text">
             </div>
             <div (click)="accionesVendedor()" class="box-editar">
-                <div class="icono-editar">
-                    <img src="{{ templateImage.lapiz }}" alt="">
-                </div>
-                <p class="texto-editar">Editar</p>
+                <p class="texto-editar">Acción de</p>
                 <div class="icono-puntos">
                     <img src="{{ templateImage.points }}" alt="">
                 </div>
                 <!-- Pop up editar -->
                 <ul class="acciones-vendedor">
+                    <li (click)="editTienda()">
+                        <img src="{{ templateImage.lapiz }}" alt=""> Editar
+                    </li>
                     <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
                     <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                 </ul>
@@ -183,36 +240,56 @@
                 <div class="box-mas">
                     <img class="mas" src="/assets/img/mas.svg" alt="">
                 </div>
-                <a class="btn-nuevo-cliente" (click)="nuevoVendedor()">Nuevo vendedor</a>
+                <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo vendedor</a>
             </div>
         </div>
 
         <section class="table-data">
-
             <table style="width:100%">
 
                 <tr class="tabla-fila-cabecera">
                     <td></td>
                     <th style="padding-left: 38px;">Nombre <img src="/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Cel <img src="/assets/img/arrows_orden.svg" alt=""></th>
+                    <th>Teléfono <img src="/assets/img/arrows_orden.svg" alt=""></th>
                     <th>Código <img src="/assets/img/arrows_orden.svg" alt=""></th>
                     <th>Correo <img src="/assets/img/arrows_orden.svg" alt=""></th>
                 </tr>
 
-                <tr *ngFor="let vendedor of vendedores" class="tabla-fila-datos">
-                    <td><input (click)="removeUsers(vendedor.id)" class="check-nombre" type="checkbox" name="check" id=""></td>
+                <tr *ngFor="let vendedor of vendedores | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
+                    <td><input class="check-nombre" (change)="selectVendCheckbox($event, vendedor)" type="checkbox" name="check"
+                            id=""></td>
                     <td (click)="vendedorDetalle(vendedor.id)" class="imagen-nombre">
-                        <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
-                        <p class="nombre">{{ vendedor.name }}</p>
+                        <div class="iniciales"> {{vendedor.iniciales}} </div>
+                        <p class="nombre">{{ vendedor.name + ' ' + vendedor.apellidos }}</p>
                     </td>
-                    <td (click)="vendedorDetalle(vendedor.id)" class="telefono">{{ vendedor.value_key }}</td>
-                    <td (click)="vendedorDetalle(vendedor.id)" class="codigo">
-                        <p class="codigo">40</p>
+                    <td (click)="vendedorDetalle(vendedor.id)" *ngFor="let data of vendedor.user_data">
+                        <p class="codigo">{{data.value_key}}</p>
                     </td>
                     <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
                 </tr>
 
             </table>
         </section>
+    </div>
+</div>
+
+
+
+<div class="footer">
+    <div class="footer-paginate">
+        <div class="pagination">
+            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
+        </div>
+        <div class="label-field label-field-paginate">
+            <select name="changeNumberPage" id="changeNumberPage" 
+            class="select-paginate"
+            (change)="changeListPagination($event)">
+                <option [value]="5"> 5 Por página </option>
+                <option [value]="10"> 10 Por página </option>
+                <option [value]="15"> 15 Por página </option>
+                <option [value]="20"> 20 Por página </option>
+                <option [value]="30"> 30 Por página </option>
+            </select>
+        </div>   
     </div>
 </div>

@@ -149,15 +149,6 @@ select{
     color: white;
 }
 
-.acciones-form-adminitrador{
-    display: flex;
-    position: fixed;
-    bottom: 50px;
-    padding: 0px 20px;
-    justify-content: space-around;
-    width: 60%;
-}
-
 .box-editar{
     position: relative;
     cursor: pointer;
@@ -178,8 +169,8 @@ select{
     list-style: none;
     opacity: 0;
     background: white;
-    width: 100%;
-    left: 0;
+    left: -1px;
+    right: -1px;
     transition: all .3s ease;
     text-align: center;
 }
@@ -205,6 +196,85 @@ select{
     padding: 0px -6px;
     border-radius: 0px 0px 15px 15px;
     opacity: 1;
+}
+
+
+.form-advanced .info-row {
+    display: flex;
+    width: 100%;
+}
+
+.form-advanced .tabs {
+    width: 40%;
+    height: 100vh;
+    border-right: 1px solid #d7d7d7;
+}
+
+.form-advanced .fields {
+    width: 60%;
+}
+
+.form-advanced .tabs ul {
+    list-style: none;
+}
+
+.form-advanced .tabs li {
+    width: 100%;
+}
+
+.form-advanced .tabs a {
+    color: #adadad;
+    padding: .7em 0em;
+    display: block;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.form-advanced .tabs a:hover {
+    background: #ff7281;
+    color: #fff !important;
+    transition: all .5s ease;
+}
+
+
+.search-cliente {
+    padding: 0 15px;
+}
+
+.item-cliente {
+    width: 100%;
+    padding: 25px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-cliente:hover {
+    background: #ff596a2c;
+    transition: all 1s ease;
+}
+
+.item-cliente p{
+    font-size: 15px;
+    color: #82867D;
+}
+
+span.icon-cliente {
+    background: #ff596a;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.item-cliente-select{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #2eb07b1f;
+    align-items: center;
+    transition: all 1s ease;
 }
 
  /* Cambiar color del placeholder */

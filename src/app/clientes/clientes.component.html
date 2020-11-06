@@ -316,7 +316,7 @@
         <div class="filtros">
             <div class="box-buscador">
                 <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-                <input class="buscador" type="text">
+                <input class="buscador" placeholder="Buscar..." (keyup.enter)="searchTable($event)" type="text">
             </div>
             <div (click)="accionesCliente()" class="box-editar">
                 <p class="texto-editar">Acción de</p>
@@ -361,7 +361,9 @@
                             <p class="nombre">{{ cliente.name + ' ' + cliente.apellidos }}</p>
                         </td>
                         <td (click)="clienteDetalle(cliente.id)" class="telefono">1115072011-8</td>
-                        <td (click)="clienteDetalle(cliente.id)" class="nombre">{{cliente.vendedor.name + ' ' + cliente.vendedor.apellidos}}</td>
+                        <td (click)="clienteDetalle(cliente.id)" class="nombre">{{ 
+                            (cliente.vendedor != null) ? cliente.vendedor.name + ' ' + cliente.vendedor.apellidos : 'Sin asignar'}}
+                        </td>
                         <td (click)="clienteDetalle(cliente.id)" class="correo">{{ cliente.email }}</td>
                     </tr>
                 </tbody>

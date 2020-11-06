@@ -5,6 +5,13 @@
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
     padding: .6em .8em;
+    position: relative;
+}
+
+.placeholder-img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .comisiones-ganadas{
@@ -92,31 +99,42 @@
     margin-bottom: 2.5em;
 }
 
-.buscador-pedido{
+.buscador-pedido {
     border: 1px solid #FF596A;
     width: 100%;
     border-radius: 15px;
-    padding: .8em 1em;
-    margin-bottom: 1.2em;
+    padding: .5em 1em;
+    margin-top: 10px;
 }
 
-.box-pedidos{
-    background: #efefef;
+.box-pedidos {
+    background: #f7f8f9;
     border-radius: 7px;
     padding: .3em .6em;
     margin: 1em 0em;
+    cursor: pointer;
 }
 
-.foto-referencia{
+.box-pedidos:hover{
+    background: #e7e7e7;
+}
+
+.info-pedido{
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+    padding: 0.2em 0;
+}
+
+.foto-referencia {
     display: flex;
     padding-bottom: 7px;
     border-bottom: 1px solid #D7D7D7;
     align-items: center;
 }
 
-.foto-referencia p{
-    font-size: 22px;
-    margin-left: 15px;
+.foto-referencia p {
+    font-size: 21px;
 }
 
 .list-tienda{
@@ -229,8 +247,9 @@
     padding-left: 2em;
 }
 
-.aside-pedidos{
+.aside-pedidos {
     padding-right: 2em;
+    border-left: 1px solid #D8D8D8;
 }
 
  /* Cambiar color del placeholder */

@@ -107,9 +107,10 @@ export class UsersService {
     return this.http.post(`${this.api}/create-admin`,admin, {headers: headers});
   }
 
-  getAllSellers(){
+  getAllSellers(search){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.get(`${this.api}/vendedores`, {headers: headers});
+    var route = 'vendedores?search=' + search;
+    return this.http.get(`${this.api}/` + route, {headers: headers});
   }
 
   getSeller(id){
@@ -117,9 +118,10 @@ export class UsersService {
     return this.http.get(`${this.api}/vendedor/${id}`, {headers: headers});
   }
 
-  getAllClients(){
+  getAllClients(search){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.get(`${this.api}/clientes`, {headers: headers});
+    var route = 'clientes?search=' + search;
+    return this.http.get(`${this.api}/` + route, {headers: headers});
   }
 
   getClient(id){

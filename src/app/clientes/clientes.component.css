@@ -12,11 +12,6 @@
     z-index: 510;
 }
 
-/* pagination */
-.pagination /deep/ .ngx-pagination .current {
-    background: #FF596A !important;
-    border-radius: 5px;
-}
 
 .cerrar-form-admin {
     cursor: pointer;
