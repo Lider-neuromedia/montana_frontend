@@ -160,7 +160,7 @@
         </app-drawer-advanced>
         <!-- Editar clientes -->
         <app-drawer-advanced class="form-advanced" name="editar-cliente" title="Editar Cliente" button="Actualizar"
-        [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="agregarCliente()">
+        [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="submitUpdateClient()">
             <div class="tabs">
                 <ul>
                     <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
@@ -266,7 +266,7 @@
                                 <div class="box-mas">
                                     <img class="mas" src="assets/img/mas.svg" alt="">
                                 </div>
-                                <a class="btn-ligth" (click)="addTienda(true)"> Agregar tienda</a>
+                                <a class="btn-ligth" (click)="createTiendaUpdateClient()"> Agregar tienda</a>
                             </div>
                         </div>
                     </div>
@@ -290,16 +290,16 @@
                                     </mat-icon>
                             </mat-form-field>
                         </div>
-                        <div class="item-vendedor-select" *ngIf="updateClient.vendedor.id != 0" [@inOutAnimation]>
+                        <div class="item-vendedor-select" *ngIf="updateClient.vendedor != null" [@inOutAnimation]>
                             <p style="display: flex;"> 
                                 {{updateClient.vendedor.name + ' ' + updateClient.vendedor.apellidos}}
                             </p>
-                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteVendedorSelect(true)">
+                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteAsignVendedor(updateClient.vendedor)">
                                 <mat-icon style="color: #ff596a;">delete</mat-icon>
                             </button> 
                         </div>
                         <div class="list-vendedores">
-                            <div class="item-vendedor" *ngFor="let vendedor of vendedores" (click)="selectVendedor(vendedor)" [@fadeIn]>
+                            <div class="item-vendedor" *ngFor="let vendedor of vendedores" (click)="updateAsignCliente(vendedor)" [@fadeIn]>
                                 <p> 
                                     <span class="icon-vendedor">{{vendedor.name.substr(0,1) + vendedor.apellidos.substr(0,1)}}</span> 
                                     {{vendedor.name + ' ' + vendedor.apellidos}}

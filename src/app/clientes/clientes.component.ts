@@ -108,6 +108,7 @@ export class ClientesComponent implements OnInit {
   getClients(search = ''){
     this.clients.getAllClients(search).subscribe( (data:any) => {
       this.clientes = data['users'];
+      this.checkCliente = [];
     });
   }
 
@@ -334,13 +335,8 @@ export class ClientesComponent implements OnInit {
   }
 
   // Agregar tienda.
-  addTienda(edit = false){
-    // Validates.
-    if (edit) {
-      this.updateClient.tiendas.push(this.createTiendas);
-    }else{
-      this.createClient.tiendas.push(this.createTiendas);
-    }
+  addTienda(){
+    this.createClient.tiendas.push(this.createTiendas);
     this.asignTiendasClient();
   }
 
@@ -365,22 +361,13 @@ export class ClientesComponent implements OnInit {
     this.search = '';
   }
   
-  deleteVendedorSelect(edit = false){
-    if (edit) {
-      this.updateClient.vendedor = {
-        id: 0,
-        name: '',
-        apellidos: '',
-        dni : ''
-      };
-    }else{
-      this.createClient.vendedor = {
-        id: 0,
-        name: '',
-        apellidos: '',
-        dni : ''
-      };
-    }
+  deleteVendedorSelect(){
+    this.createClient.vendedor = {
+      id: 0,
+      name: '',
+      apellidos: '',
+      dni : ''
+    };
   }
 
   selectClientCheckbox(event, cliente){
@@ -416,7 +403,72 @@ export class ClientesComponent implements OnInit {
   }
 
   submitUpdateClient(){
-    // this.http.httpPost
+    this.http.httpPost('update-cliente/' + this.updateClient.id, this.updateClient, true).subscribe(
+      response =>{  
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            'Completado',
+            'Cliente actualizado de manera correcta.',
+            'success'
+          );
+          this.getClients();
+          this.openDrawerRigth(false, 'edit');
+        }
+      }, 
+      error =>{
+
+      }
+    )
   }
+
+
+  updateAsignCliente(vendedor){
+
+    var route = 'updateAsignVend/' + this.updateClient.id + '/' + vendedor.id+ '/create';
+
+    this.http.httpGet(route, true).subscribe(
+      response => {    
+        this.updateClient.vendedor = vendedor;
+        this.vendedores = [];
+        this.search = '';
+        this.getClients();
+      },
+      error => {
+
+      }
+    );
+  }
+
+  deleteAsignVendedor(vendedor){
+    var idVendedor = (vendedor.id_vendedor) ? idVendedor = vendedor.id_vendedor : idVendedor = vendedor.id;
+    var route = 'updateAsignVend/' + this.updateClient.id + '/' + idVendedor + '/delete';
+    console.log(vendedor);
+    this.http.httpGet(route, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.updateClient.vendedor = null;
+          this.getClients();
+        }
+      },
+      error => {
+
+      }
+    );
+  }
+
+  createTiendaUpdateClient(){
+    var route = 'newTienda/' + this.updateClient.id;
+    this.http.httpPost(route, this.createTiendas, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.updateClient.tiendas.push(this.createTiendas);
+          this.asignTiendasClient();
+        }
+      },
+      error => {
+
+      }
+    )
+  }  
 
 }

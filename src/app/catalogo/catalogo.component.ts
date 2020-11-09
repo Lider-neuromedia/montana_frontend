@@ -31,6 +31,16 @@ export class CatalogoComponent implements OnInit {
     "imagen": null
   };
   showEditDropzone = false;
+  // Paginacion
+  current: number = 1;
+  itemPerPage: number = 8;
+  filterCatalogo = {
+    all : true,
+    general : false,
+    show_room : false,
+    public : false,
+    private : false,
+  }
 
 
   constructor(private route: Router, private http : SendHttpData) { }
@@ -40,8 +50,14 @@ export class CatalogoComponent implements OnInit {
   }
 
   // Obtener catalogos.
-  getCatalogos(){
-    this.http.httpGet('catalogos', true).subscribe(
+  getCatalogos(search = null){
+    var route = 'catalogos';
+    
+    if (search != null) {
+      route = 'catalogos?' + search;
+    }
+
+    this.http.httpGet(route, true).subscribe(
       response => {
         this.catalogos = response.catalogos;
       },
@@ -188,4 +204,29 @@ export class CatalogoComponent implements OnInit {
 
   changeImageEdit(){ this.showEditDropzone = true; }
 
+  // Change pagination
+  changeListPagination(event){
+    this.itemPerPage = event.target.value;
+    this.current = 1;
+  }
+
+  accionesCatalogos(){
+    $('.filtros-catalogo').toggleClass('open-acciones');
+    $('.box-editar').toggleClass('box-editar-open');
+  }
+
+  checkFilterCatalogo(event, type){
+    if (type != 'all') {
+      this.filterCatalogo.all = false;
+    }else{
+      if (event.target.checked) {
+        Object.assign(this.filterCatalogo, {all:true, general:true, show_room :true, public : true, private: true});
+      }else{
+        Object.assign(this.filterCatalogo, {all:false, general:false, show_room :false, public : false, private: false});
+      }
+    }
+    var search = "search=" + JSON.stringify(this.filterCatalogo);
+    this.getCatalogos(search); 
+  }
 }
+

@@ -6,17 +6,71 @@
     </div>
     <div class="area">
         <div class="row">
-            <div class="filtros" style="margin-bottom: 15px;">
+            <div class="filtros"  style="margin-bottom: 15px;">
+                <div class="box-editar">
+                    <p class="texto-editar" (click)="accionesCatalogos()">Filtros</p>
+
+                    <!-- Pop up editar -->
+                    <ul class="filtros-catalogo">
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre"  
+                                type="checkbox" 
+                                name="todos" 
+                                id="todos"
+                                [(ngModel)]="filterCatalogo.all"
+                                (change)="checkFilterCatalogo($event, 'all')"> 
+                            <label for="todos">Todos</label>
+                        </li>
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="general" 
+                                id="general"
+                                [(ngModel)]="filterCatalogo.general"
+                                (change)="checkFilterCatalogo($event, 'general')">  
+                            <label for="general">General</label>
+                        </li>
+                        <li>
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="show-room" 
+                                id="show-room"
+                                [(ngModel)]="filterCatalogo.show_room"
+                                (change)="checkFilterCatalogo($event, 'show_room')">
+                            <label for="show-room">Show Room</label>
+                        </li>
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="publicos" 
+                                id="publicos"
+                                [(ngModel)]="filterCatalogo.public"
+                                (change)="checkFilterCatalogo($event, 'public')"> 
+                            <label for="publicos">Publicos</label>
+                        </li>
+                        <li>
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="privados" 
+                                id="privados"
+                                [(ngModel)]="filterCatalogo.private"
+                                (change)="checkFilterCatalogo($event, 'private')">
+                            <label for="privados">Privados</label>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="box-create-new">
                     <div class="box-mas">
                         <img class="mas" src="assets/img/mas.svg" alt="">
                     </div>
                     <a class="btn-nuevo-cliente" (click)="openDrawerRight(true, 'create')">Nuevo catálogo</a>
-                </div>
+                </div> 
             </div>
+
         </div>
         <div class="row">
-            <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos">
+            <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos  | paginate: { itemsPerPage: itemPerPage, currentPage: current }">
                 <div id="{{catalogo.id_catalogo}}-box-catalogo" class="box-catalogo">
                     <div (click)="closeCatOptions(catalogo.id_catalogo)" id="{{catalogo.id_catalogo}}-overblock"
                         class="overblock"></div>
@@ -59,6 +113,26 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Paginacion. -->
+<div class="footer">
+    <div class="footer-paginate">
+        <div class="pagination">
+            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
+        </div>
+        <div class="label-field label-field-paginate">
+            <select name="changeNumberPage" id="changeNumberPage" 
+            class="select-paginate"
+            (change)="changeListPagination($event)"
+            >
+                <option [value]="8"> 8 Por página </option>
+                <option [value]="16"> 16 Por página </option>
+                <option [value]="24"> 24 Por página </option>
+                <option [value]="32"> 32 Por página </option>
+            </select>
+        </div>   
     </div>
 </div>
 
