@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
-declare var jQuery:any;
+import Swal from 'sweetalert2'
 declare var $:any;
 
 @Component({
@@ -158,16 +158,39 @@ export class CatalogoComponent implements OnInit {
   }
 
   deleteCatalogo(id){
-    this.http.httpDelete('catalogos', id).subscribe(
-      response => {
-        if (response.status == 200 && response.response == 'success') {
-          this.getCatalogos();
-        }
-      },
-      error => {
-        console.error(error);
+    Swal.fire({
+      title: 'Está seguro que desea eleiminar este catalogo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if(result.value){
+        this.http.httpDelete('catalogos', id).subscribe(
+          response => {
+            if (response.status == 200 && response.response == 'success') {
+              this.getCatalogos();
+              Swal.fire(
+                '¡Exito!',
+                'Catalogo eliminado de manera correcta!',
+                'success'
+              );
+            }else{
+              Swal.fire(
+                '¡Ups!',
+                response.message,
+                'error'
+              );
+            }
+          },
+          error => {
+            console.error(error);
+          }
+        );
       }
-    );
+    })
+   
   }
 
   editCatalogo(catalogo){

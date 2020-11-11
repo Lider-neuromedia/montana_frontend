@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 import { SendHttpData } from '../app/services/SendHttpData';
 
 import { AppComponent } from './app.component';
@@ -37,6 +38,8 @@ import { DrawerRigthComponent } from './drawer-rigth/drawer-rigth.component';
 import { DrawerAdvancedComponent } from './drawer-advanced/drawer-advanced.component';
 import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+import { EncuestasComponent } from './encuestas/encuestas.component';
+import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -66,7 +69,9 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     DrawerAdvancedComponent,
     DialogPedidoComponent,
     DetallePedidoComponent,
-    PaginatePipe
+    PaginatePipe,
+    EncuestasComponent,
+    DetalleEncuestaComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     BrowserAnimationsModule,
     MaterialModule,
     NgxDropzoneModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    ChartsModule
   ],
   providers: [SendHttpData],
   bootstrap: [AppComponent]

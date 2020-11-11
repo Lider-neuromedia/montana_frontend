@@ -47,6 +47,8 @@ export class ProductoDetalleComponent implements OnInit {
   };
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
+  preguntas : any = [];
+  respuesta_usuario = false; //Si el usuario respondio ya la encuesta.
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
@@ -89,6 +91,7 @@ export class ProductoDetalleComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.producto = response.producto;
+          this.getPreguntasCatalogo();
           (this.galleryImages.length >= 1) ? this.galleryImages = [] : '';
           this.producto.imagenes.forEach( (element) => {
               this.galleryImages.push({
@@ -101,6 +104,20 @@ export class ProductoDetalleComponent implements OnInit {
       }, 
       error => {    }
     )
+  }
+
+  getPreguntasCatalogo(){
+    this.http.httpGet('getPreguntas/'+ this.producto.catalogo, true).subscribe(
+      response =>{
+        if (response.response == 'success' && response.status == 200) {
+          this.preguntas = response.preguntas;
+          this.respuesta_usuario = response.respuesta_usuario;
+        }
+      },
+      error => {
+
+      }
+    );
   }
 
   openDrawerRigth(action : boolean, type : string){
@@ -138,7 +155,7 @@ export class ProductoDetalleComponent implements OnInit {
           this.producto.imagenes.push({image : fileContents, destacada : 0});
         }
       }
-      console.log(this.producto.imagenes);
+
     });
   }
   
@@ -200,7 +217,35 @@ export class ProductoDetalleComponent implements OnInit {
         );
       }
     })
+  }
 
+  createCalificacion(){
+    var data = {
+      usuario : localStorage.getItem('user_id'),
+      producto: this.producto.id_producto,
+      preguntas : []
+    };
+    this.preguntas.forEach(element => {
+      var objet = {
+        pregunta : element.id_pregunta,
+        respuesta : element.respuesta,
+      }
+      data.preguntas.push(objet);
+    });
+
+    this.http.httpPost('storeRespuestas', data, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            '¡Registro exitoso!',
+            'Calificación creada con exito. Muchas gracias por tus aportes.',
+            'success'
+          );
+          this.respuesta_usuario = true;
+        }
+      }
+    )
+    
   }
 
   // Metodos boton acciones.

@@ -303,7 +303,7 @@ img {
 /* Fin estilos generales */
 
 .administrador-detalle,
-.cliente-detalle {
+.cliente-detalle, .content-detalle {
     background: white;
     padding-top: 2em;
     padding-left: 2em;
@@ -519,6 +519,69 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff;
     border-color: #FF596A;
 }
+
+.form-advanced .info-row {
+    display: flex;
+    width: 100%;
+}
+
+.form-advanced .tabs {
+    width: 40%;
+    height: 100vh;
+    border-right: 1px solid #d7d7d7;
+}
+
+.form-advanced .fields {
+    width: 60%;
+}
+
+.form-advanced .tabs ul {
+    list-style: none;
+}
+
+.form-advanced .tabs li {
+    width: 100%;
+}
+
+.form-advanced .tabs a {
+    color: #adadad;
+    padding: .7em 0em;
+    display: block;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.form-advanced .tabs a:hover {
+    background: #ff7281;
+    color: #fff !important;
+    transition: all .5s ease;
+}
+
+.activeclasstab {
+    background: #FF596A;
+    color: white !important;
+}
+
+.activeclasstab-default {
+    background: #FF596A;
+    color: white !important;
+}
+
+.field-content {
+    padding: 0px 1.5em;
+}
+
+.overview {
+    background: rgba(0, 0, 0, .4);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 500;
+}
+
 /* Material */
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
     line-height: 36px !important;
@@ -535,11 +598,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-appearance-outline .mat-form-field-wrapper{
     margin: 0 !important;
 }
-
-
-/* .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
-} */
 
 
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){

@@ -157,3 +157,37 @@
     padding: 20px;
 }
 
+.star-active{
+    color: #ff9017;
+    font-size: 22px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.star-inactive{
+    color: #e4e4e4;
+    font-size: 22px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+
+.calificar{
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+
+.calificar {
+    background: #FF596A;
+    padding: 6px 0px;
+    color: white;
+    transition: all .5s ease;
+}
+
+.calificar:hover {
+    background: #da4e5c;
+}

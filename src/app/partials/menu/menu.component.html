@@ -12,7 +12,7 @@
         </li>
         <!-- <li> <a [routerLink]="['/roles']"> <img src="" alt=""> Roles</a></li> -->
         <li> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.catalogo }}" alt=""> Catálogo</a></li>
-        <li *ngIf="admin"> <a> <img src="{{ templateImage.encuestas }}" alt=""> Encuestas</a></li>
+        <li *ngIf="admin"> <a [routerLink]="['/encuestas']"> <img src="{{ templateImage.encuestas }}" alt=""> Encuestas</a></li>
         <li> <a [routerLink]="['/pedidos']"> <img src="{{ templateImage.pedidos }}" alt=""> Pedidos</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.ampliacion }}" alt=""> Ampliación de cupo</a></li>
         <li *ngIf="admin"> <a href="#"> <img src="{{ templateImage.pqrs }}" alt="">PQRS</a></li>

@@ -3,14 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { LoginComponent } from './login/login.component';
 
 import { UsersComponent } from './users/users.component';
 import { AdministradoresComponent } from './administradores/administradores.component';
 import { AdministradoresBuscadorComponent } from './administradores-buscador/administradores-buscador.component';
-
-
 
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteDetalleComponent } from './cliente-detalle/cliente-detalle.component';
@@ -31,6 +28,8 @@ import { PedidoInternaComponent } from './pedido-interna/pedido-interna.componen
 
 import { AuthGuard } from './guards/auth.guard';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+import { EncuestasComponent } from './encuestas/encuestas.component';
+import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
 // import { AuthGuardService } from './services/auth-guard.service';
 // import { GuestGuardService } from './services/guest-guard.service';
 
@@ -65,6 +64,8 @@ const routes : Routes = [
   { path: 'pedido', component: PedidoComponent },
   { path: 'pedido-interna/:id', component: PedidoInternaComponent },
   { path: 'pedido-detalle/:id', component: DetallePedidoComponent },
+  { path: 'encuestas', component: EncuestasComponent },
+  { path: 'detalle-encuesta/:id', component: DetalleEncuestaComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

@@ -53,84 +53,32 @@
                             <div class="valoracion-column pad-30">
                                 <h3 class="valorar-title">Valorar producto</h3>
                                 <ul class="qya-list">
-    
-                                    <li>
-                                        ¿Calidad en el servicio por parte del ejecutivo comercial?
+                                    <li *ngFor="let pregunta of preguntas">
+                                        {{pregunta.pregunta}}
                                         <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
+                                            <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 1, 
+                                                'star-inactive' : pregunta.respuesta < 1}" 
+                                            (click)="pregunta.respuesta = 1">star</mat-icon>
+                                            <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 2, 
+                                                'star-inactive' : pregunta.respuesta < 2}" 
+                                            (click)="pregunta.respuesta = 2">star</mat-icon>
+                                            <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 3, 
+                                                'star-inactive' : pregunta.respuesta < 3}" 
+                                            (click)="pregunta.respuesta = 3">star</mat-icon>
+                                            <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 4, 
+                                                'star-inactive' : pregunta.respuesta < 4}" 
+                                            (click)="pregunta.respuesta = 4">star</mat-icon>
+                                            <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 5, 
+                                                'star-inactive' : pregunta.respuesta < 5}"  
+                                            (click)="pregunta.respuesta = 5">star</mat-icon>
+                                            
                                         </div>
                                     </li>
-    
-                                    <li>
-                                        ¿Calidad del producto?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-    
-                                    <li>
-                                        ¿Calidad en el servicio por parte del área de cartera/ conciliación de la misma?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-    
-                                    <li>
-                                        ¿Diseño de tendencias?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-    
-                                    <li>
-                                        ¿Recomendaría nuestro producto?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-    
-                                    <li>
-                                        ¿Tiempos de entrega?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-    
-                                    <li>
-                                        ¿Empaque del producto?
-                                        <div class="strellas-valoracion">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                            <img src="assets/img/start-off.svg" alt="">
-                                        </div>
-                                    </li>
-                                    
+                                    <div style="display: flex; justify-content: center;">
+                                        <a class="calificar" (click)="createCalificacion()" *ngIf="!respuesta_usuario">
+                                            Calificar
+                                        </a>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
@@ -146,7 +94,7 @@
                                         <img src="assets/img/start-on.svg" alt="">
                                         <img src="assets/img/start-on.svg" alt="">
                                         <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-off.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
                                     </div>
                                 </div>
 

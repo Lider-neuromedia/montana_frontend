@@ -286,34 +286,36 @@ export class ClientesComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, Eliminar'
     }).then((result) => {
-      var usuarios = [];
-      this.checkCliente.forEach(element => {
-        console.log(element);
-        usuarios.push(element.id);
-      });
-      var data = {usuarios : usuarios};
-
-      this.clients.deleteUsers(data).subscribe(
-        (data:any) =>{
-          if (data.response == 'success' && data.status == 200) {
-            this.getClients();
-            Swal.fire(
-              'Completado',
-              'Los usuarios han sido eliminados correctamente.',
-              'success'
-            );
-            this.checkCliente = [];
-          }else{
-            this.getClients();
-            Swal.fire(
-              '¡Ups!',
-              data.message,
-              'error'
-            );
-            this.checkCliente = [];
+      if (result.value) {
+        var usuarios = [];
+        this.checkCliente.forEach(element => {
+          console.log(element);
+          usuarios.push(element.id);
+        });
+        var data = {usuarios : usuarios};
+  
+        this.clients.deleteUsers(data).subscribe(
+          (data:any) =>{
+            if (data.response == 'success' && data.status == 200) {
+              this.getClients();
+              Swal.fire(
+                'Completado',
+                'Los usuarios han sido eliminados correctamente.',
+                'success'
+              );
+              this.checkCliente = [];
+            }else{
+              this.getClients();
+              Swal.fire(
+                '¡Ups!',
+                data.message,
+                'error'
+              );
+              this.checkCliente = [];
+            }
           }
-        }
-      );
+        );
+      }
     })
     
   }
