@@ -38,6 +38,10 @@
                               [labels]="doughnutChartLabels"
                               [chartType]="doughnutChartType">
                             </canvas>
+                            <div class="txt-encuesta">
+                                <span class="porcentaje">{{porcentaje_usuarios}}%</span>
+                                <p>de los compradores a diligenciado la encuesta</p>
+                            </div>
                         </div> 
                     </div>
                 </div>
@@ -64,26 +68,31 @@
                                 {{pregunta.pregunta}}
                             </div>
                             <div class="calification-preg">
-                                <p  class="title-detalle-preg" style="color: #707579;">{{pregunta.cant_respuestas}} Respuestas</p>
+                                <p  class="title-detalle-preg" style="color: #707579;">{{(!pregunta.cant_respuestas) ? 0 : pregunta.cant_respuestas}} Respuestas</p>
                                 <mat-icon [ngClass]="{
                                     'star-active' : pregunta.promedio >= 1, 
-                                    'star-inactive' : pregunta.promedio < 1}"
+                                    'star-inactive' : pregunta.promedio < 1,
+                                    'star-inactive-promedio' : !pregunta.promedio }"
                                 > star </mat-icon>
                                 <mat-icon [ngClass]="{
                                     'star-active' : pregunta.promedio >= 2, 
-                                    'star-inactive' : pregunta.promedio < 2}"
+                                    'star-inactive' : pregunta.promedio < 2,
+                                    'star-inactive-promedio' : !pregunta.promedio}"
                                 > star </mat-icon>
                                 <mat-icon [ngClass]="{
                                     'star-active' : pregunta.promedio >= 3, 
-                                    'star-inactive' : pregunta.promedio < 3}"
+                                    'star-inactive' : pregunta.promedio < 3,
+                                    'star-inactive-promedio' : !pregunta.promedio}"
                                 > star </mat-icon>
                                 <mat-icon [ngClass]="{
                                     'star-active' : pregunta.promedio >= 4, 
-                                    'star-inactive' : pregunta.promedio < 4}"
+                                    'star-inactive' : pregunta.promedio < 4,
+                                    'star-inactive-promedio' : !pregunta.promedio}"
                                 > star </mat-icon>
                                 <mat-icon [ngClass]="{
                                     'star-active' : pregunta.promedio >= 5, 
-                                    'star-inactive' : pregunta.promedio < 5}"
+                                    'star-inactive' : pregunta.promedio < 5,
+                                    'star-inactive-promedio' : !pregunta.promedio}"
                                 > star </mat-icon>
                                 
                             </div>

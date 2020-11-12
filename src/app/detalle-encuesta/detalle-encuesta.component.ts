@@ -13,14 +13,13 @@ export class DetalleEncuestaComponent implements OnInit {
 
   id_encuesta : any;
   preguntas : any = [];
+  porcentaje_usuarios = 0;
   // Doughnut
-  public doughnutChartLabels: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: MultiDataSet = [
-    [45, 100],
-  ];
+  public doughnutChartLabels: Label[] = ['% Usuarios que diligenciaron.', '% Usuarios que no diligenciaron'];
+  public doughnutChartData: MultiDataSet = [[0,100]];
   public doughnutChartType: ChartType = 'doughnut';
 
-  // Bar
+  // Diagrama de barras.
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -32,15 +31,11 @@ export class DetalleEncuestaComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  // public barChartPlugins = [pluginDataLabels];
+  public barChartData: ChartDataSets[] = [];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
   constructor( private activatedRoute: ActivatedRoute, private http : SendHttpData ) {
     this.id_encuesta = this.activatedRoute.snapshot.params['id'];
   }
@@ -53,7 +48,40 @@ export class DetalleEncuestaComponent implements OnInit {
     this.http.httpGet('encuestas/' + this.id_encuesta, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
+          this.doughnutChartData = [[response.porcentaje_diligenciados, 100]];
+          this.porcentaje_usuarios = response.porcentaje_diligenciados;
           this.preguntas = response.preguntas;
+          var labels = [];
+          var data_temp = { one : [], two : [], three : [], for : [], five : [] };
+
+          response.preguntas.forEach((pregunta, index) => {
+            // Definir los labels.
+            labels.push('Pregunta ' + (index + 1));
+            // Recorrer los promedios y ordenarlos por estrellas.
+            pregunta.promedio_respuestas.forEach(respuesta => {
+              if(respuesta.respuesta == 1){
+                data_temp.one.push(respuesta.promedio);
+              }else if(respuesta.respuesta == 2){
+                data_temp.two.push(respuesta.promedio);
+              }else if(respuesta.respuesta == 3){
+                data_temp.three.push(respuesta.promedio);
+              }else if(respuesta.respuesta == 4){
+                data_temp.for.push(respuesta.promedio);
+              }else if(respuesta.respuesta == 5){
+                data_temp.five.push(respuesta.promedio);
+              }
+            });
+          });
+          // Ordenar la data segun la estadisitica.
+          var data_charbar = [
+            { data: data_temp.one, label: '1 Estrella' },
+            { data: data_temp.two, label: '2 Estrella' },
+            { data: data_temp.three, label: '3 Estrella' },
+            { data: data_temp.for, label: '4 Estrella' },
+            { data: data_temp.five, label: '5 Estrella' }
+          ];
+          this.barChartLabels = labels;
+          this.barChartData = data_charbar;
         }
       }, 
       error => {

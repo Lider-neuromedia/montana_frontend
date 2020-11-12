@@ -3,6 +3,7 @@
     padding-top: 2em;
     padding-left: 3em;
     padding-right: 3em;
+    padding-bottom: 1em;
 }
 
 .personal-card{
@@ -43,9 +44,30 @@
     cursor: pointer;
 }
 
-.star-inactive{
+.star-inactive, .star-inactive-promedio{
     color: #e4e4e4;
     font-size: 32px;
     margin-right: 8px;
     cursor: pointer;
+}
+
+
+.txt-encuesta {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+}
+
+span.porcentaje {
+    font-size: 38px;
+    font-weight: 600;
+    color: #ff596a;
+    margin-right: 20px;
+}
+
+.txt-encuesta p{
+    color: #1e2933;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
 }

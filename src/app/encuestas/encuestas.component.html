@@ -3,7 +3,7 @@
 <!-- Crear Encuesta. -->
 <div class="overview"></div>
 
-<app-drawer-advanced class="form-advanced" name="crear-encuesta" title="Editar pedido" [open]="openDrawer"
+<app-drawer-advanced class="form-advanced" name="crear-encuesta" title="Crear encuestas" [open]="openDrawer"
 (close)="openDrawerRigth(false, 'create')" (submit)="submitCrearEncuesta()">
     <div class="tabs">
         <ul>
@@ -70,6 +70,84 @@
     </div>
 </app-drawer-advanced>
 
+<app-drawer-advanced class="form-advanced" name="edit-encuesta" title="Editar encuesta" [open]="updateDrawer"
+(close)="openDrawerRigth(false, 'edit')" (submit)="submitEditEncuesta()" button="Actualizar">
+    <div class="tabs">
+        <ul>
+            <li><a [class.activeclasstab]="tipo" (click)="changeTab('tipo')">Tipo de encuesta</a></li>
+            <li><a [class.activeclasstab]="catalogo" (click)="changeTab('catalogo')">Elige un catálogo </a></li>
+            <li><a [class.activeclasstab]="tabPreguntas" (click)="changeTab('tabPreguntas')">Preguntas</a></li>
+        </ul>
+    </div>
+    <div class="fields">
+        <form>
+            <div *ngIf="tipo">
+                <div class="label-field">
+                    <label >Tipo de encuesta</label>
+                    <select name="tipo" [(ngModel)]="selectEncuesta.tipo" [ngModelOptions]="{standalone: true}">
+                        <option value="satisfaccion">Satisfacción</option>
+                        <option value="calidad_servicio">Calidad del servicio</option>
+                        <option value="calidad_pedido">Calidad del pedido</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="catalogo" class="field-content">
+                <div class="label-field">
+                    <label >Tipo de encuesta</label>
+                    <select name="tipo" [(ngModel)]="selectEncuesta.tipo" [ngModelOptions]="{standalone: true}">
+                        <option value="satisfaccion">Satisfacción</option>
+                        <option value="calidad_servicio">Calidad del servicio</option>
+                        <option value="calidad_pedido">Calidad del pedido</option>
+                    </select>
+                </div>
+                <div class="label-field">
+                    <label >Elige un catálogo</label>
+                    <select name="tipo" [(ngModel)]="selectEncuesta.catalogo" [ngModelOptions]="{standalone: true}">
+                        <option value=''>Seleccione...</option>
+                        <option *ngFor="let catalogo of catalogos" [value]="catalogo.id_catalogo">
+                            {{catalogo.titulo}}
+                        </option>
+                    </select>
+                </div>
+                <div class="label-field">
+                    <label >Estado</label>
+                    <select name="tipo" [(ngModel)]="selectEncuesta.estado" [ngModelOptions]="{standalone: true}">
+                        <option value="activo">
+                            Activo
+                        </option>
+                        <option value="inactivo">
+                            Inactivo
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="tabPreguntas">
+                <!-- Preguntas administradas -->
+                <div class="label-field" *ngFor="let pregunta of selectEncuesta.preguntas; index as i;" [@fadeIn]>
+                    <label for="">Pregunta No {{i + 1}}</label>
+                    <div class="pregunta-dinamica">
+                        <input type="text" class="" [(ngModel)]="pregunta.pregunta" [ngModelOptions]="{standalone: true}">
+                        <a mat-button matSuffix mat-icon-button aria-label="Clear" class="btn-delete-pregunta" (click)="deletePreguntaUpdateEn(pregunta.id_pregunta, i)">
+                            <mat-icon>close</mat-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="agregar-pregunta">
+                    <div class="box-button-light">
+                        <div class="box-mas">
+                            <img class="mas" src="assets/img/mas.svg" alt="">
+                        </div>
+                        <a class="btn-ligth" (click)="addPreguntaUpdate()"> Agregar pregunta</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</app-drawer-advanced>
+
 
 <div id="wrapper">
     <div class="opciones">
@@ -80,11 +158,11 @@
         <div class="filtros">
             <div class="box-buscador">
                 <img class="lupa" src="assets/img/search.svg" alt="">
-                <input name="buscador" class="buscador" type="text">
+                <input name="buscador" class="buscador"  (keyup.enter)="searchTable($event)" placeholder="Buscar..." type="text">
                 <button type="button" class="hidden"></button>
             </div>
 
-            <div class="box-editar">
+            <div class="box-editar" (click)="accionesEncuestas()">
                 <!-- <div class="icono-editar">
                     <img src="{{ templateImage.lapiz }}" alt="">
                 </div> -->
@@ -93,10 +171,9 @@
                     <img src="assets/img/edit_points.svg" alt="">
                 </div>
 
-                <ul class="acciones-administrador">
-                    <li><img src="assets/img/editar.svg" alt=""> Editar</li>
+                <ul class="acciones-encuestas">
+                    <li (click)="editEncuesta()"><img src="assets/img/editar.svg" alt=""> Editar</li>
                     <li><img src="assets/img/icons-filter/export.svg" alt=""> Exportar</li>
-                    <li><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
                 </ul>
             </div>
 
@@ -133,7 +210,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let encuesta of encuestas | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
-                        <td><input class="check-nombre" type="checkbox" name="" id=""></td>
+                        <td><input (change)="selectClientCheckbox($event, encuesta)" class="check-nombre" type="checkbox" name="" id=""></td>
                         <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.codigo}}</td>
                         <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.fecha_creacion}}</td>
                         <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.titulo}}</td>

@@ -3,7 +3,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+declare var $:any;
 
 @Component({
   selector: 'app-encuestas',
@@ -35,7 +35,8 @@ export class EncuestasComponent implements OnInit {
     catalogo : '',
     preguntas : []
   };
-
+  checkEncuesta = [];
+  selectEncuesta : any = [];
 
   constructor( private http : SendHttpData, private router : Router ) { }
 
@@ -45,17 +46,28 @@ export class EncuestasComponent implements OnInit {
   }
 
   // Obtener encuestas.
-  getEncuestas(){
-    this.http.httpGet('encuestas', true).subscribe(
+  getEncuestas(search = null){
+    if (search != null) {
+      var router = 'encuestas?search=' + search;
+    }else{
+      var router = 'encuestas';
+    }
+    this.http.httpGet(router, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.encuestas = response.encuestas;
+          this.checkEncuesta = [];
         }
       },
       error =>{
 
       }
     )
+  }
+  
+  //Buscar encuesta 
+  searchTable(event){
+    this.getEncuestas(event.target.value);
   }
 
   // Obtener catalogos.
@@ -153,6 +165,108 @@ export class EncuestasComponent implements OnInit {
 
   detalleEncuesta(id){
     this.router.navigate(['detalle-encuesta', id]);
+  }
+
+  // Acciones encuestas.
+  accionesEncuestas(){
+    $('.acciones-encuestas').toggleClass('open-acciones');
+    $('.box-editar').toggleClass('box-editar-open');
+  }
+  
+  selectClientCheckbox(event, encuesta){
+    if (event.target.checked) {
+      this.checkEncuesta.push(encuesta);
+    }else{
+      let removeIndex = this.checkEncuesta.findIndex(x => x.id === encuesta.id);
+      if (removeIndex !== -1){
+        this.checkEncuesta.splice(removeIndex, 1);
+      }
+    }
+  }
+
+  editEncuesta(){
+    if (this.checkEncuesta.length > 1 || this.checkEncuesta.length === 0) {
+      Swal.fire(
+        'Tienes problemas?',
+        'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+        'warning'
+        );
+    }else{
+      this.openDrawerRigth(true, 'edit');
+      this.selectEncuesta = this.checkEncuesta[0];
+      this.http.httpGet('editEncuesta/' + this.selectEncuesta.id_form, true).subscribe(
+        response => {
+          if (response.response == 'success' && response.status == 200) {
+            this.selectEncuesta = response.encuesta;
+            this.openDrawerRigth(true, 'edit');
+          }
+        },
+        error => {
+
+        }
+      )  
+    }
+  }
+
+  deletePreguntaUpdateEn(id_pregunta, index){
+    if (id_pregunta == undefined) {
+      this.selectEncuesta.preguntas.splice(index, 1);
+    }else{
+      this.http.httpGet('eliminarPregunta/' + id_pregunta, true).subscribe(
+        response => {
+          if (response.response == 'success') {
+            this.selectEncuesta.preguntas.splice(index, 1);
+          }else{
+            Swal.fire(
+              '¡Ups!',
+              response.message,
+              'error'
+            );
+          }
+        },
+        error => {
+  
+        }
+      )
+    }
+  }
+
+  
+  addPreguntaUpdate(){
+    if (this.selectEncuesta.preguntas.length == 5) {
+      Swal.fire(
+        '¡Ups!',
+        'No puedes crear más de 5 preguntas.',
+        'error'
+      );
+    }else{
+      this.selectEncuesta.preguntas.push({pregunta : ''});
+    }
+  }
+
+  submitEditEncuesta(){
+    this.http.httpPut('encuestas', this.selectEncuesta.id_form, this.selectEncuesta, true ).subscribe(
+      response => {
+        if (response.response == 'success') {
+          this.getEncuestas();
+          this.openDrawerRigth(false, 'edit');
+          this.selectEncuesta = [];
+          Swal.fire(
+            '¡Exito!',
+            'Encuesta actualizada de manera correcta',
+            'success'
+          );
+        }else{
+          Swal.fire(
+            '¡Ups!',
+            response.message,
+            'error'
+          );
+        }
+      },
+      error => {
+      }
+    )
   }
 
 }

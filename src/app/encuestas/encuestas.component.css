@@ -18,3 +18,58 @@
     top: 0.2em;
     right: 2px;
 }
+
+
+a.btn-delete-pregunta:hover{
+    text-decoration: none;
+    color: #000;
+}
+
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-encuestas {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    right: -1px;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-encuestas li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-encuestas li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}

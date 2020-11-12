@@ -9,12 +9,12 @@ export class UsersService {
 
 
   // Local
-  // api = 'http://127.0.0.1:8000/api';
-  // web = 'http://127.0.0.1:8000';
+  api = 'http://127.0.0.1:8000/api';
+  web = 'http://127.0.0.1:8000';
 
   // Producción
-  api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
-  web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
+  // api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+  // web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
 

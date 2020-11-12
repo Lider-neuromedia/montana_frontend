@@ -12,12 +12,12 @@ export class AuthService {
   // authUrl = 'http://localhost/montana_backend/public/api/auth/login';
   // apiUrl = 'http://localhost/montana_backend/public/api';
 
-  // authUrl = 'http://127.0.0.1:8000/api/auth/login';
-  // apiUrl = 'http://127.0.0.1:8000/api';
+  authUrl = 'http://127.0.0.1:8000/api/auth/login';
+  apiUrl = 'http://127.0.0.1:8000/api';
 
   // Producción
-  authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
-  apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+  // authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
+  // apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
 
   options: any;
 
