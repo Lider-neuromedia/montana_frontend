@@ -1,0 +1,112 @@
+.filtros{
+    margin-bottom: 1em;
+    padding: 0 2em;
+}
+
+/* Chat */
+.header-chat {
+    padding: 2em 1em;
+    border-bottom: 1px solid #d7d7d7;
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-user-received, .message-user-send{
+    width: 100%;
+}
+
+.message-user-send{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message-user-received{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.row-cont-chat{
+    height: 75vh;
+}
+
+.iniciales-chat {
+    width: 2em;
+    height: 2em;
+    background: #ff596a;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 auto;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.content-message{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 1.5em;
+}
+
+p.message {
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 1em;
+}
+
+p.message-send {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 1em;
+    background: #0084ff;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.user {
+    padding: .5em;
+    margin-right: 1.7em;
+}
+
+.user-send {
+    padding: .5em;
+    margin-left: 1.7em;
+}
+
+.user, .user-send p{
+    font-size: 12px;
+    color: #343c4b;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.content-chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.footer-chat {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #fafafa;
+}
+
+.mat-mini-fab.mat-primary{
+    background-color: #0058ff;
+}
+
+input.input-chat {
+    background: transparent;
+    margin-right: 15px;
+    border: none;
+    color: #757575;
+}

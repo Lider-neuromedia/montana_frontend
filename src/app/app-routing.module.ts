@@ -31,6 +31,10 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
 import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
+import { PqrsComponent } from './pqrs/pqrs.component';
+import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
+
+
 // import { AuthGuardService } from './services/auth-guard.service';
 // import { GuestGuardService } from './services/guest-guard.service';
 
@@ -68,6 +72,8 @@ const routes : Routes = [
   { path: 'encuestas', component: EncuestasComponent },
   { path: 'detalle-encuesta/:id', component: DetalleEncuestaComponent },
   { path: 'ampliacion-cupo', component: AmpliacionCupoComponent },
+  { path: 'pqrs', component: PqrsComponent },
+  { path: 'detalle-pqrs/:id', component: DetallePqrsComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

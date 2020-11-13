@@ -41,6 +41,8 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
 import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
+import { PqrsComponent } from './pqrs/pqrs.component';
+import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -73,7 +75,9 @@ import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.compo
     PaginatePipe,
     EncuestasComponent,
     DetalleEncuestaComponent,
-    AmpliacionCupoComponent
+    AmpliacionCupoComponent,
+    PqrsComponent,
+    DetallePqrsComponent
   ],
   imports: [
     BrowserModule,

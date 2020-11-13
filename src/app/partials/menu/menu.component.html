@@ -15,7 +15,7 @@
         <li *ngIf="admin"> <a [routerLink]="['/encuestas']"> <img src="{{ templateImage.encuestas }}" alt=""> Encuestas</a></li>
         <li> <a [routerLink]="['/pedidos']"> <img src="{{ templateImage.pedidos }}" alt=""> Pedidos</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/ampliacion-cupo']"> <img src="{{ templateImage.ampliacion }}" alt=""> Ampliación de cupo</a></li>
-        <li *ngIf="admin"> <a href="#"> <img src="{{ templateImage.pqrs }}" alt="">PQRS</a></li>
+        <li *ngIf="admin"> <a [routerLink]="['/pqrs']"> <img src="{{ templateImage.pqrs }}" alt="">PQRS</a></li>
         <li> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.descuento }}" alt=""> Descuento</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/catalogos']"> <img src="" alt="">Auditoria</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.show }}" alt=""> Show Room</a></li>

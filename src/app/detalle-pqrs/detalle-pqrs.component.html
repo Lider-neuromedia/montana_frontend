@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+
+        <div class="filtros">
+            <div class="box-buscador">
+                <img class="lupa" src="assets/img/search.svg" alt="">
+                <input name="buscador" class="buscador" type="text">
+                <button type="button" class="hidden"></button>
+            </div>
+
+            <div class="box-editar">
+                <!-- <div class="icono-editar">
+                    <img src="{{ templateImage.lapiz }}" alt="">
+                </div> -->
+                <p class="texto-editar">Acción de</p>
+                <div class="icono-puntos">
+                    <img src="assets/img/edit_points.svg" alt="">
+                </div>
+
+                <ul class="acciones-administrador">
+                    <li><img src="assets/img/editar.svg" alt=""> Editar</li>
+                    <li><img src="assets/img/icons-filter/export.svg" alt=""> Exportar</li>
+                    <li><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                </ul>
+            </div>
+
+            <div class="box-create-new">
+                <div class="box-mas">
+                    <img class="mas" src="assets/img/mas.svg" alt="">
+                </div>
+                <a class="btn-nuevo-cliente">Nueva Encuesta</a>
+            </div>
+        </div>
+
+        
+        <div class="cliente-detalle" style="padding-top: 0;">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="header-chat">
+                                <p>David Noreña</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cont-chat">
+                        <div class="col-sm-12">
+                            <div class="content-chat">
+                                <div class="message-user-received">
+                                    <div class="content-message">
+                                        <div class="user">
+                                            <div class="iniciales-chat"> DM </div>
+                                            <p>14:00</p>
+                                        </div>
+                                        <p class="message">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores iusto vel nesciunt dolores, illum suscipit voluptas eius.</p>
+                                    </div>
+                                </div>
+                                <div class="message-user-send">
+                                    <div class="content-message">
+                                        <p class="message-send">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores iusto vel nesciunt dolores, illum suscipit voluptas eius.</p>
+                                        <div class="user-send">
+                                            <div class="iniciales-chat"> DM </div>
+                                            <p>14:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer-chat">
+                                    <input type="text" placeholder="Escriba un mensaje" class="input-chat">
+                                    <div class="example-button-container">
+                                        <button mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                                          <mat-icon>near_me</mat-icon>
+                                        </button>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <!-- <div class="actions">
+                        <a class="pedidos" href="#">Novedades</a>
+                        <a class="solicitar" href="#">Registrar novedad</a>
+                    </div> -->
+                    <mat-tab-group mat-align-tabs="start">
+                        <mat-tab label="Novedades">
+                            sss
+                        </mat-tab>
+                      </mat-tab-group>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
