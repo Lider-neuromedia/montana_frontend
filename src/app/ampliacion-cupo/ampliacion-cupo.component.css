@@ -1,0 +1,166 @@
+
+.modal-body{
+    padding: 5.7em;
+}
+
+.custom-file-label::after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: 100%;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #ffffff;
+    content: url('../../assets/img/upload.png');
+    background-color: #ff596a;
+    border-left: inherit;
+    border-radius: 0 .25rem .25rem 0;
+    border: 1px solid #ff596a;
+}
+
+.custom-file-label{
+    height: 3em;
+    display: flex;
+    align-items: center;
+    color: #323E4A;
+}
+
+.text-ampliar-cupo{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+}
+
+.text-ampliar-cupo p {
+    width: 80%;
+}
+
+.label-field select, input{
+    padding: .5em;
+}
+
+.title-solicitud{
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #1e2933;
+    margin-bottom: 1em;
+}
+
+.enviar-solicitud{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.btn-enviar-solicitud{
+    background: #FF596A;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: 0.84px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 4px 50px;
+    transition: all .3s ease;
+    height: 31px;
+}
+
+.btn-enviar-solicitud:hover{
+    background: #ec5362;
+    box-shadow: 0px 1px 3px #1e29336c;
+    text-decoration: none;
+    color: #fff;
+}
+
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-solicitud {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    right: -1px;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-solicitud li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-solicitud li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+.tabla-fila-datos{
+    cursor: auto;
+}
+
+.txt-capitalize{
+    text-transform: capitalize;
+}
+
+a.change-state {
+    color: #ff596a;
+    cursor: pointer;
+}
+
+a.change-state:hover {
+    color: #ff596a;
+    text-decoration: underline;
+}
+
+.txt-hover-black:hover{
+    color: #000;
+}
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 660px;
+        margin: 1.75rem auto;
+    }
+}

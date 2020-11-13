@@ -30,6 +30,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
+import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
 // import { AuthGuardService } from './services/auth-guard.service';
 // import { GuestGuardService } from './services/guest-guard.service';
 
@@ -66,6 +67,7 @@ const routes : Routes = [
   { path: 'pedido-detalle/:id', component: DetallePedidoComponent },
   { path: 'encuestas', component: EncuestasComponent },
   { path: 'detalle-encuesta/:id', component: DetalleEncuestaComponent },
+  { path: 'ampliacion-cupo', component: AmpliacionCupoComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

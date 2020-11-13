@@ -40,6 +40,7 @@ import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
+import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -71,7 +72,8 @@ import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.co
     DetallePedidoComponent,
     PaginatePipe,
     EncuestasComponent,
-    DetalleEncuestaComponent
+    DetalleEncuestaComponent,
+    AmpliacionCupoComponent
   ],
   imports: [
     BrowserModule,
