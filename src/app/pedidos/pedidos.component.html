@@ -156,14 +156,14 @@
                         </td>
                         <td>
                             <!-- Aprobado -->
-                            <div *ngIf="pedido.estado == 1"
+                            <div *ngIf="pedido.id_estado == 1"
                             #tooltip="matTooltip"
                             matTooltip="Aprobado"
                             matTooltipPosition="left"
                             matTooltipHideDelay="1000"
                             class="estado estado-aprobado"></div>
                             
-                            <div *ngIf="pedido.estado == 2" 
+                            <div *ngIf="pedido.id_estado == 2" 
                             #tooltip="matTooltip"
                             matTooltip="Pendiente"
                             matTooltipPosition="left"
@@ -171,7 +171,7 @@
                             class="estado estado-pendiente"
                             (click)="openDialogState(pedido.id_pedido)"></div>
 
-                            <div *ngIf="pedido.estado == 3"
+                            <div *ngIf="pedido.id_estado == 3"
                             #tooltip="matTooltip"
                             matTooltip="Rechazado"
                             matTooltipPosition="left"

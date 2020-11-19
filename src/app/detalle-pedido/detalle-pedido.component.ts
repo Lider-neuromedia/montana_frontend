@@ -21,7 +21,7 @@ export class DetallePedidoComponent implements OnInit {
     descuento: 0,
     estado: '',
     id_estado: 0,
-    info_cliente: {name: '', apellidos: '', email: '', dni: ''},
+    info_cliente: {name: '', apellidos: '', email: '', dni: '', nit : ''},
     notas: '',
     productos: [],
     sub_total: 0,
