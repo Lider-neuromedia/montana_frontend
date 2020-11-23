@@ -149,6 +149,17 @@ export class CatalogoComponent implements OnInit {
           this.openDrawer = false;
           this.getCatalogos();
           this.resetForm();
+          Swal.fire(
+            '¡Listo!',
+            'Catalogo creado de manera existosa',
+            'success'
+          );
+        }else{
+          Swal.fire(
+            '¡Ups!',
+            response.message,
+            response.response
+          );
         }
       },
       error => {
@@ -207,6 +218,17 @@ export class CatalogoComponent implements OnInit {
           this.updateDrawer = false;
           this.getCatalogos();
           this.resetForm();
+          Swal.fire(
+            '¡Listo!',
+            'Catalogo actualizado de manera correcta.',
+            'success'
+          );
+        }else{
+          Swal.fire(
+            '¡Ups!',
+            response.message,
+            response.response
+          );
         }
       }, 
       error => {

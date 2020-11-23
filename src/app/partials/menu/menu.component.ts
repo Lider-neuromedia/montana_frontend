@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { SendHttpData } from '../../services/SendHttpData';
+import Swal from 'sweetalert2'
 
-declare var jQuery:any;
 declare var $:any;
 
 @Component({
@@ -32,8 +33,16 @@ export class MenuComponent implements OnInit {
   admin:any = false;
   vendedor:any =  false;
   cliente:any = false;
+  code : string = '';
+  pedido_descuento = {
+    id_pedido: '',
+    code : this.code,
+    descuento : 0,
+    cliente : '',
+    vendedor: ''
+  }
 
-  constructor( private users: UsersService ) {
+  constructor( private users: UsersService, private http : SendHttpData ) {
 
     this.rol = localStorage.getItem('rol');
 
@@ -75,5 +84,59 @@ export class MenuComponent implements OnInit {
     $('.child-menu').toggleClass('show-child-menu');
   }
 
+
+  getPedido(){
+    this.http.httpGet('getPedidoWithCode/' + this.code, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.pedido_descuento.id_pedido = response.pedido.id_pedido;
+          this.pedido_descuento.cliente = response.pedido.name_cliente + ' ' + response.pedido.apellido_cliente;
+          this.pedido_descuento.vendedor = response.pedido.name_vendedor + ' ' + response.pedido.apellido_vendedor;
+          this.pedido_descuento.descuento = response.pedido.descuento;
+        }else{
+          Swal.fire(
+            '¡Ups!',
+            response.message,
+            'error'
+          );
+        }
+      },
+      error => {
+
+      }
+    )
+  }
+
+  setPedido(){
+    var route = 'changeDescuentoPedido/' + this.pedido_descuento.id_pedido + '/' + this.pedido_descuento.descuento;
+    this.http.httpGet(route, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            '¡Listo!',
+            'Descuento asignado de manera correcta.',
+            'success'
+          );
+          this.pedido_descuento = {
+            id_pedido: '',
+            code : this.code,
+            descuento : 0,
+            cliente : '',
+            vendedor: ''
+          };
+          $('#descuento').modal('hide');
+        }else{
+          Swal.fire(
+            '¡Ups!',
+            response.message,
+            'error'
+          );
+        }
+      },
+      error => {
+
+      }
+    )
+  }
 
 }

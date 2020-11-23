@@ -583,6 +583,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 /* Material */
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick{
+    color: #ec5362;
+}
+
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
     line-height: 36px !important;
 }
@@ -603,6 +608,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){
     background: #F85C6C;
 }
+
+.cdk-overlay-container{
+    z-index: 2000;
+}
+
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
     color: #fff;
 }

@@ -33,6 +33,7 @@ import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.co
 import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
 import { PqrsComponent } from './pqrs/pqrs.component';
 import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
+import { ShowRoomComponent } from './show-room/show-room.component';
 
 
 // import { AuthGuardService } from './services/auth-guard.service';
@@ -74,6 +75,7 @@ const routes : Routes = [
   { path: 'ampliacion-cupo', component: AmpliacionCupoComponent },
   { path: 'pqrs', component: PqrsComponent },
   { path: 'detalle-pqrs/:id', component: DetallePqrsComponent },
+  { path: 'show-room', component: ShowRoomComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

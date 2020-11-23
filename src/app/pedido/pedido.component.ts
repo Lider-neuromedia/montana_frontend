@@ -13,6 +13,7 @@ export class PedidoComponent implements OnInit {
 
   pedido : any; 
   productos = [];
+  show_room = false;
   openDrawer = false;
   openDrawerFinallyPed = false;
   tiendas = [];
@@ -49,8 +50,8 @@ export class PedidoComponent implements OnInit {
     }
   }
 
-  pedidoInterna(){
-    this.route.navigate(['/pedido-interna']);
+  pedidoInterna(id){
+    this.route.navigate(['/pedido-interna', id]);
   }
 
   getProductos(){
@@ -58,7 +59,8 @@ export class PedidoComponent implements OnInit {
     this.http.httpGet(url, true).subscribe(
       response => {
         if (response.status == 200 && response.response == 'success') {
-          this.productos = response.productos;    
+          this.productos = response.productos;  
+          this.show_room = response.show_room;
         }
       }, 
       error => {

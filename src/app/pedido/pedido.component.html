@@ -1,126 +1,173 @@
 <app-header></app-header>
 
-<div class="workplace">
-    <div class="slide-menu">
+<div id="wrapper">
+    <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="area">
-        <!-- <router-outlet></router-outlet> -->
-        <div class="row">
-            <div class="col-md-8 producto-pedido">
-                <div class="col-md-12" *ngFor="let producto of productos;">
-                    <div class="row row-producto">
-                        <div class="col-md-5">
-                            <img src="{{producto.image}}" alt="">
+    <div class="contenido">
+        <div class="filtros">
+        </div>
+        <div class="cliente-detalle" style="padding-top: 0;">
+            <div class="row" [ngClass]="{'row-show-room' : show_room}">
+                <div class="col-sm-12 col-md-8 container-show-room" *ngIf="show_room">
+                    <div class="row">
+                        <div class="col-sm-12 cont-img-banner">
+                            <img src="assets/img/show-room-banner.png" alt="banner-show-room">
                         </div>
-                        <div class="col-md-3">
-                            <div class="info-interna">
-                                <p class="codigo">Cod: {{producto.codigo}}</p>
-                                <p class="referencia">Ref: {{producto.referencia}}</p>
-                                <p class="marca">{{producto.nombre_marca}}</p>
-                                <p class="nombre">{{producto.nombre}}</p>
-                                <p class="stock">Stock: {{producto.stock}} cajas</p>
-                                <p class="precio">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+
+                        <div class="col-sm-12">
+                            <div *ngIf="productos.length == 0">
+                                <p class="txt-sin-disponibilidad">Ningun producto disponible.</p>
+                            </div>
+                            <div class="card-show-room" *ngFor="let producto of productos">
+                                <div class="img-show-room">
+                                    <img src="assets/img/image1.png" alt="">
+                                </div>
+                                <div class="info-show-room">
+                                    <p>Cod: {{producto.codigo}}</p>
+                                    <p style="margin-bottom: 1em;">Ref: {{producto.referencia}}</p>
+
+                                    <p>Puma</p>
+                                    <p class="nombre-show-room">{{producto.nombre}}</p>
+
+                                    <p class="stock-show-room">Stock: {{producto.stock}} cajas</p>
+
+                                    <p class="price-show-room">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0' }}</p>
+                                </div>
+                                <div class="buttons-show-room">
+                                    <div class="box-create-new">
+                                        <div class="box-view-show-room">
+                                            <!-- Img icon -->
+                                        </div>
+                                        <a (click)="pedidoInterna(producto.id_producto)" class="btn-view-product-show-r">Ver producto</a>
+                                    </div>
+                                    <div class="box-create-new">
+                                        <div class="box-shop-show-room">
+                                            <!-- Img icon -->
+                                        </div>
+                                        <a (click)="openDrawerRight(true, this.producto)" class="btn-shop-product-show-r">Añadir a pedido</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <a (click)="pedidoInterna()" class="ver-producto">
-                                <span>
-                                    <img src="" alt="">
-                                </span>
-                                Ver producto
-                            </a>
-                            <a class="anadir-a-pedido" (click)="openDrawerRight(true, this.producto)">
-                                <span>
-                                    <img src="" alt="">
-                                </span>
-                                Añadir a pedido
-                            </a>
+                    </div>
+                </div>
+                <div class="col-md-8 producto-pedido" *ngIf="!show_room">
+                    <div class="col-md-12" *ngFor="let producto of productos;">
+                        <div class="row row-producto">
+                            <div class="col-md-5">
+                                <img src="{{producto.image}}" alt="">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="info-interna">
+                                    <p class="codigo">Cod: {{producto.codigo}}</p>
+                                    <p class="referencia">Ref: {{producto.referencia}}</p>
+                                    <p class="marca">{{producto.nombre_marca}}</p>
+                                    <p class="nombre_pedido">{{producto.nombre}}</p>
+                                    <p class="stock">Stock: {{producto.stock}} cajas</p>
+                                    <p class="precio">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a (click)="pedidoInterna(producto.id_producto)" class="ver-producto">
+                                    <span>
+                                        <img src="" alt="">
+                                    </span>
+                                    Ver producto
+                                </a>
+                                <a class="anadir-a-pedido" (click)="openDrawerRight(true, this.producto)">
+                                    <span>
+                                        <img src="" alt="">
+                                    </span>
+                                    Añadir a pedido
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4" *ngIf="!editPedido">
-                <h3 class="title-pedido">
-                    Tu pedido 
-                    <span>#{{pedido.codigo_pedido}}</span>
-                </h3>
-
-                <div class="detalle-pedido"  *ngFor="let buy_product of list_buy_products" (click)="editarPedido(buy_product)">
-                    <div class="title-detalle">
-                        <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo">
-                        <p>Ref: {{buy_product.referencia}}</p>
-                    </div>
-                    <div class="tiendas-detalle" *ngFor="let tienda of buy_product.tiendas">
-                        <p><span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
-                        <span>{{tienda.cantidad}}</span>
-                    </div>
-                </div>
-
-                <div class="total-pedido">
-                    <p>Total</p>
-                    <span>{{total_pedido | currency:'COP':'symbol-narrow' :'1.0-0'}}</span>
-                </div>
-                <!-- Footer actions. -->
-                <div class="acciones">
-                    <a class="agregar" (click)="openDrawerFinally(true)">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Finalizar Pedido
-                    </a>
-            
-                    <a class="cancelar">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Cancelar
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-4" *ngIf="editPedido">
-                <h3 class="title-pedido">
-                    Editar pedido
-                </h3>
-
-                <form>
-                    <div class="label-field">
-                        <label for="">REFERENCIA</label>
-                        <input name="referencia" type="text" [(ngModel)]="selectEditPedido.referencia" class="">
-                    </div>
-                    <div class="label-field">
-                        <label for="">TIENDAS</label>
-                        <div class="input-cantidad" *ngFor="let tienda of selectEditPedido.tiendas; let i = index">
-                            <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
-                            <a class="remove" type="button" (click)="resCantidad(i)">
-                                <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
-                            </a>
-                            <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
-                            <a class="add" type="button" (click)="sumCantidad(i, true)">
-                                <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
-                            </a>
+    
+                <div class="col-md-4" *ngIf="!editPedido">
+                    <h3 class="title-pedido">
+                        Tu pedido 
+                        <span>#{{pedido.codigo_pedido}}</span>
+                    </h3>
+    
+                    <div class="detalle-pedido"  *ngFor="let buy_product of list_buy_products" (click)="editarPedido(buy_product)">
+                        <div class="title-detalle">
+                            <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo">
+                            <p>Ref: {{buy_product.referencia}}</p>
+                        </div>
+                        <div class="tiendas-detalle" *ngFor="let tienda of buy_product.tiendas">
+                            <p><span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                            <span>{{tienda.cantidad}}</span>
                         </div>
                     </div>
-                </form>
-
-                <!-- Footer actions. -->
-                <div class="acciones">
-                    <a class="agregar" (click)="saveEditPedido()">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Actualizar producto
-                    </a>
-            
-                    <a class="cancelar" (click)="deleteProductPedido()">
-                        <span class="mas">
-                            <img src="" alt="">
-                        </span> Eliminar
-                    </a>
+    
+                    <div class="total-pedido">
+                        <p>Total</p>
+                        <span>{{total_pedido | currency:'COP':'symbol-narrow' :'1.0-0'}}</span>
+                    </div>
+                    <!-- Footer actions. -->
+                    <div class="acciones">
+                        <a class="agregar" (click)="openDrawerFinally(true)">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Finalizar Pedido
+                        </a>
+                
+                        <a class="cancelar">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Cancelar
+                        </a>
+                    </div>
                 </div>
+    
+                <div class="col-md-4" *ngIf="editPedido">
+                    <h3 class="title-pedido">
+                        Editar pedido
+                    </h3>
+    
+                    <form>
+                        <div class="label-field">
+                            <label for="">REFERENCIA</label>
+                            <input name="referencia" type="text" [(ngModel)]="selectEditPedido.referencia" class="">
+                        </div>
+                        <div class="label-field">
+                            <label for="">TIENDAS</label>
+                            <div class="input-cantidad" *ngFor="let tienda of selectEditPedido.tiendas; let i = index">
+                                <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                                <a class="remove" type="button" (click)="resCantidad(i)">
+                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
+                                </a>
+                                <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                                <a class="add" type="button" (click)="sumCantidad(i, true)">
+                                    <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+    
+                    <!-- Footer actions. -->
+                    <div class="acciones">
+                        <a class="agregar" (click)="saveEditPedido()">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Actualizar producto
+                        </a>
+                
+                        <a class="cancelar" (click)="deleteProductPedido()">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Eliminar
+                        </a>
+                    </div>
+                </div>
+    
+    
             </div>
-
-
         </div>
+
     </div>
 </div>
 

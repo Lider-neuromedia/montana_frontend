@@ -43,6 +43,7 @@ import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.co
 import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.component';
 import { PqrsComponent } from './pqrs/pqrs.component';
 import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
+import { ShowRoomComponent } from './show-room/show-room.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -77,7 +78,8 @@ import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
     DetalleEncuestaComponent,
     AmpliacionCupoComponent,
     PqrsComponent,
-    DetallePqrsComponent
+    DetallePqrsComponent,
+    ShowRoomComponent
   ],
   imports: [
     BrowserModule,
