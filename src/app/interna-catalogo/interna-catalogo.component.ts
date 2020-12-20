@@ -15,6 +15,7 @@ export class InternaCatalogoComponent implements OnInit {
   id_catalogo : any;
   id_producto : any;
   productos = [];
+  marcas = [];
   openDrawer = false;
   files_1: File[] = [];
   files_2: File[] = [];
@@ -41,6 +42,7 @@ export class InternaCatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+    this.getMarcas();
   }
   
   openDrawerRigth(action : boolean, type : string){
@@ -51,6 +53,19 @@ export class InternaCatalogoComponent implements OnInit {
       // this.updateDrawer = action;
       // (!action) ? this.openDrawer = false : '';
     }
+  }
+
+  getMarcas(){
+    this.http.httpGet('marcas', true).subscribe(
+      response => {
+        if(response.response == 'success' && response.status == 200){
+          this.marcas = response.marcas;
+        }
+      },
+      error => {
+
+      }
+    )
   }
 
   getProducts(){

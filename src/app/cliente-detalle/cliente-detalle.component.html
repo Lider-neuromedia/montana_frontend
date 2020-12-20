@@ -193,43 +193,29 @@
                             <p *ngIf="show">{{ usuario.apellidos }}</p>
                         </div>
 
-                        <!-- <div class="col-sm-12 col-md-3 datos">
+                        <div class="col-sm-12 col-md-3 datos">
                             <p>Tipo de documento</p>
-                            <p *ngIf="show">{{ info.tipo_doc }}</p>
+                            <p *ngIf="show">Cedula de ciudadania</p>
                         </div>
 
                         <div class="col-sm-12 col-md-3 datos">
-                            <p>Número de documento</p>
-                            <p *ngIf="show">{{ info.num_doc }}</p>
-                        </div> -->
-
-                        <!-- <div class="col-sm-12 col-md-3 datos">
-                            <p>Teléfono</p>
-                            <p *ngIf="show">{{ info.telefono }}</p>
-                        </div> -->
+                            <p>Numero de documento</p>
+                            <p *ngIf="show">{{usuario.dni}}</p>
+                        </div>
 
                         <div class="col-sm-12 col-md-3 datos">
                             <p>Correo electrónico</p>
                             <p *ngIf="show">{{ usuario.email }}</p>
                         </div>
 
-                        <!-- <div class="col-sm-12 col-md-3 datos">
-                            <p>Ciudad</p>
-                            <p *ngIf="show">{{ info.ciudad }}</p>
-                        </div> -->
-
-                        <!-- <div class="col-sm-12 col-md-3 datos">
-                            <p>Nit</p>
-                            <p *ngIf="show">{{ info.nit }}</p>
-                        </div> -->
-
                         <td class="col-sm-12 col-md-3 datos" *ngFor="let data of usuario.data_user">
-                            <p *ngIf="data.field_key == 'tipo_doc'" style="display:grid"><span>Tipo de documento</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                            <p *ngIf="data.field_key == 'cedula'" style="display:grid"><span>Número de documento</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                            <p *ngIf="data.field_key == 'nit'" style="display:grid"><span>Nit</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                            <p *ngIf="data.field_key == 'telefono'" style="display:grid"><span>Teléfono</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
-                        </td>
+                            <p *ngIf="data.field_key == 'nit'">Nit</p>
+                            <p *ngIf="data.field_key == 'telefono'">Teléfono</p>
+                            <p *ngIf="data.field_key == 'razon_social'">Razón social</p>
+                            <p *ngIf="data.field_key == 'direccion'">Dirección</p>
+                            <p style="font-weight: bold;">{{ data.value_key }}</p>
 
+                        </td>
                     </div>
 
                     <div class="row">

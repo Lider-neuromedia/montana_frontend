@@ -40,7 +40,10 @@
                 </div>
                 <div class="label-field">
                     <label for="">Marca</label>
-                    <input [(ngModel)]="crearProducto.marca" name="marca" type="text" class="">
+                    <select [(ngModel)]="crearProducto.marca" name="marca" type="text" class="">
+                        <option>Seleccione...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_marca"> {{marca.nombre_marca}}</option>
+                    </select>
                 </div>
                 <div class="label-field">
                     <label for="">Precio</label>

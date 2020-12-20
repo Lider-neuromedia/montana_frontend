@@ -1,4 +1,5 @@
 <app-header></app-header>
+<app-dialog-pedido [id_catalogo]="selectCatalogo" [id_producto]="selectProduct"></app-dialog-pedido>
 
 <div id="wrapper">
     <div class="opciones">
@@ -48,7 +49,7 @@
                                         <div class="box-shop-show-room">
                                             <!-- Img icon -->
                                         </div>
-                                        <a class="btn-shop-product-show-r">Añadir a pedido</a>
+                                        <a  (click)="addPedido(producto)" class="btn-shop-product-show-r">Añadir a pedido</a>
                                     </div>
                                 </div>
                             </div>

@@ -144,6 +144,9 @@ export class ClientesComponent implements OnInit {
       email: '',
       password: '',
       nit: '',
+      razon_social: '',
+      direccion: '',
+      telefono: '',
       vendedor : {
         id: 0,
         name: '',
@@ -242,7 +245,11 @@ export class ClientesComponent implements OnInit {
       email : this.createClient.email,
       password : this.createClient.password,
       userdata : {
-        nit : this.createClient.nit
+        nit : this.createClient.nit,
+        razon_social : this.createClient.razon_social,
+        direccion : this.createClient.direccion,
+        telefono : this.createClient.telefono,
+
       }, 
       tiendas : this.createClient.tiendas,
       vendedor : this.createClient.vendedor.id

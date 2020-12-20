@@ -39,13 +39,13 @@
                 <div class="label-field" style="display: flex; margin: 0;">
                     <div class="col-md-6" style="padding-left: 0;">
                         <label style="text-transform: capitalize;">Número del pedido</label>
-                        <input type="text" name="code" (keyup.enter)="getPedido()" [(ngModel)]="code">
+                        <input type="text" [(ngModel)]="code" name="code" (keyup.enter)="getPedido()">
                     </div>
                     <div class="col-md-6" style="padding-right: 0;">
                         <label style="text-transform: capitalize;">Descuento</label>
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <!-- <mat-label>Descuento</mat-label> -->
-                            <mat-select name="food" [(ngModel)]="pedido_descuento.descuento"  [(value)]="pedido_descuento.descuento">
+                            <mat-select  [(ngModel)]="pedido_descuento.descuento" name="descuento"  [(value)]="pedido_descuento.descuento">
                                 <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
                                     {{i}}%
                                 </mat-option>
@@ -55,14 +55,14 @@
                 </div>
                 <div class="label-field">
                     <label style="text-transform: capitalize;">Cliente</label>
-                    <select [(ngModel)]="pedido_descuento.cliente">
+                    <select [(ngModel)]="pedido_descuento.cliente" name="cliente">
                         <option value="" *ngIf="pedido_descuento.cliente == ''">Ningun cliente seleccionado...</option>
                         <option value="" *ngIf="pedido_descuento.cliente != ''">{{pedido_descuento.cliente}}</option>
                     </select>
                 </div>
                 <div class="label-field">
                     <label style="text-transform: capitalize;">Vendedor</label>
-                    <select [(ngModel)]="pedido_descuento.vendedor">
+                    <select [(ngModel)]="pedido_descuento.vendedor" name="vendedor">
                         <option value="" *ngIf="pedido_descuento.vendedor == ''">Ningun vendedor seleccionado...</option>
                         <option value="" *ngIf="pedido_descuento.vendedor != ''">{{pedido_descuento.vendedor}}</option>
                     </select>

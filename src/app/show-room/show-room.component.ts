@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SendHttpData } from '../services/SendHttpData';
+import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 
@@ -10,7 +11,11 @@ import Swal from 'sweetalert2'
 })
 export class ShowRoomComponent implements OnInit {
 
+  @ViewChild(DialogPedidoComponent) dialogPedido: DialogPedidoComponent;
+
   productos : any = [];
+  selectCatalogo : number = 0;
+  selectProduct : number = 0;
 
   constructor( private http : SendHttpData, private router : Router) { }
 
@@ -24,7 +29,6 @@ export class ShowRoomComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.productos = response.productos;
-          console.log(response.productos);
         }else{
           Swal.fire(
             '¡Ups!',
@@ -42,6 +46,12 @@ export class ShowRoomComponent implements OnInit {
 
   pedidoInterna(id){
     this.router.navigate(['/producto-detalle', id]);
+  }
+
+  addPedido(producto){
+    this.selectCatalogo = producto.catalogo;
+    this.selectProduct = producto.id_producto;
+    this.dialogPedido.openDialog();
   }
 
 }

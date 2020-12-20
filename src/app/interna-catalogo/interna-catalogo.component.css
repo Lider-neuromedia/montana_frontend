@@ -97,3 +97,7 @@
 .text-area{
     width: 100% !important;
 }
+
+.label-field select{
+    padding: 10px !important;
+}
