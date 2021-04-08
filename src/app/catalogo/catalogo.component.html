@@ -103,10 +103,10 @@
                             </a>
                         </li>
                         <li class="btn-options">
-                            <a><img src=""> Exportar</a>
+                            <a (click)="tableExport(catalogo.id_catalogo)"><img class="icon-edit" src="./assets/img/icons-filter/export.svg"> Exportar</a>
                         </li>
                         <li class="btn-options">
-                            <a (click)="deleteCatalogo(catalogo.id_catalogo)"><img src=""> Eliminar
+                            <a (click)="deleteCatalogo(catalogo.id_catalogo)"><img class="icon-edit" src="./assets/img/icons-filter/trash.svg"> Eliminar
                             </a>
                         </li>
                     </ul>

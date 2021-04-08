@@ -47,6 +47,7 @@ import { RestablecerComponent } from './restablecer/restablecer.component';
 import { TablaAdministradoresComponent } from './tabla-administradores/tabla-administradores.component';
 import { TablaVendedorComponent } from './tabla-vendedor/tabla-vendedor.component';
 import { RatingModule } from 'ng-starrating';
+import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -85,7 +86,8 @@ import { RatingModule } from 'ng-starrating';
     ShowRoomComponent,
     RestablecerComponent,
     TablaAdministradoresComponent,
-    TablaVendedorComponent
+    TablaVendedorComponent,
+    DialogCatalogoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
 import { NgForm } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { DialogCatalogoComponent } from '../dialog-catalogo/dialog-catalogo.component';
 declare var $:any;
 
 @Component({
@@ -46,7 +50,7 @@ export class CatalogoComponent implements OnInit {
   flagNombreCatalogo: boolean;
 
 
-  constructor(private route: Router, private http : SendHttpData) { }
+  constructor(private route: Router, private http : SendHttpData, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getCatalogos();
@@ -211,11 +215,38 @@ export class CatalogoComponent implements OnInit {
                 'success'
               );
             }else{
-              Swal.fire(
-                '¡Ups!',
-                response.message,
-                'error'
-              );
+              // console.log(response);
+            Swal.fire({
+              title: 'Este catalogo tiene productos registrados',
+              text: 'Quieres seguir con la eliminación?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, Eliminar'
+            }).then(result => {
+              if(result.isConfirmed){
+                this.http.httpGet( `productos/${id}`, true).subscribe(resp => {
+                  
+                  for (const iterator of resp['productos']) {
+                    console.log(iterator);
+                    this.http.httpDelete('producto', iterator.id_producto).subscribe(resp => {
+                    });    
+                  }
+                  this.http.httpDelete('catalogos', id).subscribe(resp => {
+                    Swal.fire('¡Exito!',
+                    'Catalogo eliminado de manera correcta!',
+                    'success');
+                  });
+                  
+                });
+              }
+            })
+              // Swal.fire(
+              //   '¡Ups!',
+              //   response.message,
+              //   'error'
+              // );
             }
           },
           error => {
@@ -225,6 +256,19 @@ export class CatalogoComponent implements OnInit {
       }
     })
    
+  }
+
+  tableExport(id: number): void{
+    const dialogRef = this.dialog.open(DialogCatalogoComponent, {
+      width: '100%',
+      height: '60%',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(resp => {
+      if(resp.length > 0){
+        Swal.fire('Exportado correctamente', '', 'success');
+      }
+    })
   }
 
   editCatalogo(catalogo){

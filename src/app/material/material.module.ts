@@ -32,7 +32,6 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 
-
 @NgModule({
   imports: [
      CommonModule,
