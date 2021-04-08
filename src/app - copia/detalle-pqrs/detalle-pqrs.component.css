@@ -1,0 +1,308 @@
+.filtros{
+    margin-bottom: 1em;
+    padding: 0 2em;
+    justify-content: space-between;
+}
+
+.info-pqrs {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+}
+
+p.title-info {
+    color: #1e2933;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+p.txt-info {
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-weight: 500;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-pqrs {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    right: -1px;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-pqrs li {
+    color: #ff5973;
+    margin: 8px 0px;
+    position: relative;
+    text-align: left;
+    padding-left: 14px;
+}
+
+.acciones-pqrs li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+.texto-editar{
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+.estado{
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+/* Chat */
+.header-chat {
+    padding: 2em 1em;
+    border-bottom: 1px solid #d7d7d7;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-chat p{
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.message-user-received, .message-user-send{
+    width: 100%;
+}
+
+.message-user-send{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message-user-received{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.row-cont-chat{
+    height: 75vh;
+}
+
+.iniciales-chat {
+    width: 2em;
+    height: 2em;
+    background: #ff596a;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 auto;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.content-message{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 1.5em;
+    justify-content: flex-end;
+}
+
+p.message {
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 1em;
+}
+
+p.message-send {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 1em;
+    background: #0084ff;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.user {
+    padding: .5em;
+    margin-right: 1.7em;
+}
+
+.user-send {
+    padding: .5em;
+    margin-left: 1.7em;
+}
+
+.user, .user-send p{
+    font-size: 12px;
+    color: #343c4b;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.content-chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.footer-chat {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #fafafa;
+}
+
+.mat-mini-fab.mat-primary{
+    background-color: #0058ff;
+}
+
+.div-editable {
+    background: transparent;
+    margin-right: 15px;
+    border: none;
+    color: #757575;
+    width: 90%;
+    min-height: 1.4em;
+    max-height: 5em;
+    padding: 0.3em 0.5em 0 0.5em;
+    text-align: left;
+    overflow-y: auto;
+    cursor: text;
+}
+
+.btn-send{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buscador-pedido {
+    border: 1px solid #FF596A;
+    width: 100%;
+    border-radius: 15px;
+    padding: .5em 1em;
+    margin-top: 10px;
+}
+
+.box-pedidos {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 7px;
+    padding: .3em .6em;
+    margin: 1em 0em;
+    cursor: pointer;
+}
+
+.box-pedidos:hover{
+    background: #fafafa;
+}
+
+.cont-info-pedido{
+    font-size: 13px;
+    padding: 0.2em 0;
+    display: flex;
+}
+
+.info-pedido{
+    font-size: 13px;
+    padding: 0.2em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fecha-pedido{
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #8997b5;
+    font-weight: 500;
+}
+
+
+.iniciales-pedidos {
+    width: 2em;
+    height: 2em;
+    background: #ff596a;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 auto;
+    margin-bottom: 3px;
+    font-weight: 500;
+    margin-right: .5em;
+}
+
+/* Placeholder chat. */
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #555; 
+}
+
+[placeholder]:empty:focus::before {
+    content: "";
+}
+
+/* Scroll chat */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

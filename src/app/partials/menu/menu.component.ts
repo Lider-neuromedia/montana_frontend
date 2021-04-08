@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { SendHttpData } from '../../services/SendHttpData';
 import Swal from 'sweetalert2'
+import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 declare var $:any;
 
@@ -36,13 +38,15 @@ export class MenuComponent implements OnInit {
   code : string = '';
   pedido_descuento = {
     id_pedido: '',
-    code : this.code,
+    code : '',
     descuento : 0,
     cliente : '',
     vendedor: ''
   }
+  subscripcion: Subscription;
+  codeBool: boolean;
 
-  constructor( private users: UsersService, private http : SendHttpData ) {
+  constructor( private users: UsersService, private http : SendHttpData) {
 
     this.rol = localStorage.getItem('rol');
 
@@ -70,6 +74,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getPedido();
   }
 
   previewChildMenu(){
@@ -86,6 +91,7 @@ export class MenuComponent implements OnInit {
 
 
   getPedido(){
+    if(this.code.length > 0){
     this.http.httpGet('getPedidoWithCode/' + this.code, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
@@ -93,12 +99,14 @@ export class MenuComponent implements OnInit {
           this.pedido_descuento.cliente = response.pedido.name_cliente + ' ' + response.pedido.apellido_cliente;
           this.pedido_descuento.vendedor = response.pedido.name_vendedor + ' ' + response.pedido.apellido_vendedor;
           this.pedido_descuento.descuento = response.pedido.descuento;
+          this.codeBool = true;
         }else{
-          Swal.fire(
-            '¡Ups!',
-            response.message,
-            'error'
-          );
+          this.codeBool = false;
+          // Swal.fire(
+          //   '¡Ups!',
+          //   response.message,
+          //   'error'
+          // );
         }
       },
       error => {
@@ -106,8 +114,19 @@ export class MenuComponent implements OnInit {
       }
     )
   }
-
-  setPedido(){
+  }
+  setPedido(form: NgForm){
+    if(form.invalid){
+      console.log("invalido");
+      if(this.code === ""){
+        Swal.fire('Coloque un número de pedido existente', '', 'warning');
+        return;
+      }
+    }
+    if(!this.codeBool){
+      Swal.fire('El pedido ingresado no existe', '', 'error');
+      return;
+    }
     var route = 'changeDescuentoPedido/' + this.pedido_descuento.id_pedido + '/' + this.pedido_descuento.descuento;
     this.http.httpGet(route, true).subscribe(
       response => {
@@ -117,13 +136,18 @@ export class MenuComponent implements OnInit {
             'Descuento asignado de manera correcta.',
             'success'
           );
-          this.pedido_descuento = {
-            id_pedido: '',
-            code : this.code,
-            descuento : 0,
-            cliente : '',
-            vendedor: ''
-          };
+          // this.pedido_descuento = {
+          //   id_pedido: '',
+          //   code : this.code,
+          //   descuento : 0,
+          //   cliente : '',
+          //   vendedor: ''
+          // };
+          this.code = '';
+          this.pedido_descuento.id_pedido = '';
+          this.pedido_descuento.cliente = '';
+          this.pedido_descuento.vendedor = '';
+          this.pedido_descuento.descuento = 0;
           $('#descuento').modal('hide');
         }else{
           Swal.fire(

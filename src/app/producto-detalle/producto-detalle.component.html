@@ -13,16 +13,16 @@
                     <!-- <div class="icono-editar">
                         <img src="{{ templateImage.lapiz }}" alt="">
                     </div> -->
-                    <p class="texto-editar">Acción de</p>
+                    <span class="puntero">Acción de</span>
                     <div class="icono-puntos">
-                        <img src="assets/img/edit_points.svg" alt="">
+                        <img src="./assets/img/edit_points.svg" alt="">
                     </div>
     
                     <ul class="acciones-administrador">
-                        <li (click)="openDrawerRigth(true, 'edit')">
-                            <img src="assets/img/editar.svg" alt=""> Editar
+                        <li class="puntero" (click)="openDrawerRigth(true, 'edit')">
+                            <img src="./assets/img/editar.svg" alt=""> Editar
                         </li>
-                        <li (click)="deleteProduct()"><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                        <li class="puntero" (click)="deleteProduct()"><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
 
                 <div class="detalle">
                     <h2 class="title-detalle">Detalles</h2>
-                    <ul>
+                    <ul class="bullet-rojo">
                         <li>Sistema de amarre de cordones</li>
                         <li>Exterior tejido con refuerzos de TPU</li>
                         <li>Diseño ajustado y elástico</li>
@@ -52,7 +52,7 @@
                         <div class="col-md-7">
                             <div class="valoracion-column pad-30">
                                 <h3 class="valorar-title">Valorar producto</h3>
-                                <ul class="qya-list">
+                                <ul class="qya-list" *ngIf="preguntas.length > 0; else preguntaNoExiste">
                                     <li *ngFor="let pregunta of preguntas">
                                         {{pregunta.pregunta}}
                                         <div class="strellas-valoracion">
@@ -71,7 +71,6 @@
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 5, 
                                                 'star-inactive' : pregunta.respuesta < 5}"  
                                             (click)="pregunta.respuesta = 5">star</mat-icon>
-                                            
                                         </div>
                                     </li>
                                     <div style="display: flex; justify-content: center;">
@@ -80,14 +79,41 @@
                                         </a>
                                     </div>
                                 </ul>
+                                <ng-template #preguntaNoExiste>
+                                    <div class="col-md-12 text-center no-products">
+                                        <p>
+                                            <mat-icon style="font-size: 70px;margin-left: -100%;">sentiment_dissatisfied</mat-icon>
+                                        </p>
+                                        <h3>No has registrado productos aun...</h3>
+                                    </div>
+                                </ng-template>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="valoraciones-column">
                                 <h3 class="valoraciones-title">Otras valoraciones</h3>
-                                <small class="total-comentarios">12 comentarios</small>
+                                <div class="example-table-container">
+                                    <table mat-table [dataSource]="dataSource">
+                                        <ng-container matColumnDef="valoraciones">
+                                            <th *matHeaderCellDef></th>
+                                            <td mat-cell *matCellDef="let valoracion">
+                                                <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
+                                                <star-rating value="5"
+                                                 totalstars="5"
+                                                 checkedcolor="red"
+                                                 uncheckedcolor="black"
+                                                 size="24px"
+                                                 readonly="false"></star-rating>
+                                                <p>{{ valoracion.respuesta }}</p>
+                                            </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                                    </table>
+                                </div>
+                                <!-- <small class="total-comentarios">12 comentarios</small> -->
 
-                                <div class="user-feedback">
+                                <!-- <div class="user-feedback">
                                     <p>Excelentes zapatillas</p>
                                     <div class="strellas-valoracio">
                                         <img src="assets/img/start-on.svg" alt="">
@@ -132,7 +158,7 @@
                                 </div>
                                 <a href="#" class="ver-valoraciones">
                                     Ver más
-                                </a>
+                                </a> -->
                             </div>
 
                         </div>
@@ -155,20 +181,16 @@
                     <p class="numero-referencia">{{producto.referencia}}</p>
 
                     <p class="stock">Stock</p>
-                    <p class="numero-stock mrg-btn-30">{{producto.stock}} cajas</p>
+                    <p class="numero-stock mrg-btn-30">{{producto.stock}} pares</p>
 
                     <!-- Footer actions. -->
                     <div class="acciones">
-                        <a class="agregar" (click)="openDialogPedido()">
-                            <span class="mas">
-                                <img src="" alt="">
-                            </span> Agregar Pedido
-                        </a>
-                
-                        <a class="cancelar">
-                            <span class="mas">
-                                <img src="" alt="">
-                            </span> Cancelar
+                        <!-- <button mat-raised-button (click)="openDialogPedido()" class="btn-agregar"><mat-icon>add_circle_outline</mat-icon>Agregar Pedido</button> -->
+                        <a class="agregar" style="width: 180px;" (click)="openDialogPedido()">
+                            <div class="box-mas">
+                                <img class="mas" src="./assets//img/mas.svg" alt="">
+                            </div>
+                            Agregar Pedido
                         </a>
                     </div>
                 </div>

@@ -72,7 +72,9 @@ export class LoginComponent implements OnInit {
         let dataJson = JSON.parse(dataString);
         localStorage.setItem('rol', res.rol);
         localStorage.setItem('user_id', res.id);
+        localStorage.setItem('user', res.name);
         localStorage.setItem('email', res.email);
+        // console.log(res);
         localStorage.setItem('userdata', JSON.stringify(dataJson));
 
         let rol = localStorage.getItem('rol');
@@ -97,7 +99,6 @@ export class LoginComponent implements OnInit {
         })
       });
   }
-
   }
 
 

@@ -1,3 +1,5 @@
+<div *ngIf="access_token; else login">
+
 <app-header></app-header>
 
 <div id="wrapper">
@@ -5,6 +7,7 @@
         <app-menu></app-menu>
     </div>
     <div class="contenido">
+
         <div class="overview"></div>
         <app-drawer-advanced class="form-advanced" name="crear-vendedor" title="Crear Vendedor" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarVendedor()">
                 <div class="tabs">
@@ -16,99 +19,90 @@
                 </div>
 
                 <div class="fields">
-                    <!-- Datos generales -->
                     <div *ngIf="generales" class="field-datos-generales">
                         <div class="label-field">
                             <label for="">Nombres</label>
                             <input [(ngModel)]="vendedor.name" name="nombres" type="text" class="">
-                            <small *ngIf="" style="color: red;">{{ errors.name }}</small>
+                            <small *ngIf="nameBool"><span class="text-danger">{{error.name}}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Apellidos</label>
                             <input [(ngModel)]="vendedor.apellidos" name="apellidos" type="text" class="">
-                            <small style="color: red;">{{ errors.apellidos }}</small>
+                            <small *ngIf="apellidosBool"><span class="text-danger">{{error.apellidos}}</span></small>
                         </div>
 
 
                         <div class="label-field">
                             <label for="">Cédula de ciudadanía</label>
                             <input [(ngModel)]="vendedor.dni" name="dni" type="number" class="">
-                            <small style="color: red;">{{ errors.dni }}</small>
+                            <small *ngIf="dniBool"><span class="text-danger">{{error.dni}}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Celular</label>
                             <input [(ngModel)]="vendedor.userdata.telefono" name="celular" type="tel" class="">
-                            <!-- <small style="color: red;">{{ errorsDos.celular }}</small> -->
+                            <small *ngIf="telefonoBool"><span class="text-danger">{{error.telefono}}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Código de vendedor</label>
                             <input [(ngModel)]="vendedor.userdata.codigo" type="number" name="codigo" class="">
-                            <!-- <small style="color: red;">{{ errorsDos.codigo }}</small> -->
+                            <small *ngIf="codigoBool"><span class="text-danger">{{error.codigo}}</span></small>
                         </div>
 
                     </div>
-                    <!-- ...# -->
 
-                    <!-- Credenciales -->
                     <div *ngIf="credenciales" class="credenciales">
                         <div class="label-field">
                             <label for="">Correo electrónico</label>
                             <input [(ngModel)]="vendedor.email" name="email" type="email" class="">
-                            <small style="color: red;">{{ errors.email }}</small>
+                            <small *ngIf="emaiBool"><span class="text-danger">{{error.email}}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Contraseña</label>
                             <input [(ngModel)]="vendedor.password" name="password" type="password" class="">
-                            <small style="color: red;">{{ errors.password }}</small>
+                            <small *ngIf="passwordBool"><span class="text-danger">{{error.password}}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Confirmar Contraseña</label>
                             <input [(ngModel)]="vendedor.confirm_password" name="confirm_password" type="password"
                                 class="">
-                            <small style="color: red;">{{ errors.confirm_password }}</small>
+                                <small *ngIf="confirm_passwordBool"><span class="text-danger">{{error.confirm_password}}</span></small>
                         </div>
                     </div>
-                    <!-- ...# -->
 
                     <div *ngIf="asignar" class="asignar-cliente">
                         <div class="search-cliente">
-                            <p>Eligue un cliente</p>
-                            <mat-form-field appearance="legacy" class="w-100">
-                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
-                                <input matInput 
-                                    placeholder="Buscar por nombre, cedula."
-                                    style="color: #82867D;"
-                                    [(ngModel)]="search"
-                                    (keyup.enter)="searchClientes()"
-                                    [ngModelOptions]="{standalone: true}"
-                                    >
-                                    <mat-icon matSuffix
-                                        (click)="searchClientes()"
-                                        style="color: #82867D; cursor: pointer;">
-                                        search
-                                    </mat-icon>
+                            <p>Elige un cliente</p>
+                            <mat-form-field class="w-100">
+                                <mat-label>Asignar Cliente</mat-label>
+                                <input placeholder="Asignar Cliente" matInput [formControl]="asigCliente" [matAutocomplete]="auto">
+                                <mat-icon matSuffix>search</mat-icon>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let cliente of filteredOptions | async" [value]="cliente" (blur)="asignCliente(cliente)">
+                                      {{cliente}}
+                                    </mat-option>
+                                  </mat-autocomplete>                 
                             </mat-form-field>
                         </div>
-                        <div class="item-cliente-select" *ngFor="let clienteAsign of vendedor.clientes" [@inOutAnimation]>
+                        <!-- <div class="item-cliente-select" *ngFor="let clienteAsign of vendedor.clientes" [@inOutAnimation]>
                             <p style="display: flex;"> 
                                 {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
                             </p>
                             <button mat-icon-button aria-label="Delete" type="button" (click)="deleteClientSelect(clienteAsign)">
                                 <mat-icon style="color: #ff596a;">delete</mat-icon>
                             </button> 
-                        </div>
+                        </div> -->
                         <div class="list-vendedores">
-                            <div class="item-cliente" *ngFor="let cliente of clientes" (click)="asignCliente(cliente)" [@fadeIn]>
+                            <div class="item-cliente" *ngFor="let cliente of vendedor.clientes" [@fadeIn]>
                                 <p> 
-                                    <span class="icon-cliente">{{cliente.name.substr(0,1) + cliente.apellidos.substr(0,1)}}</span> 
+                                    <span class="icon-cliente">{{(cliente.name.charAt(0)) + (cliente.apellidos.charAt(0))}}</span> 
                                     {{cliente.name + ' ' + cliente.apellidos}}
                                 </p>
-                                <p>{{vendedor.id}}</p>
+                                <p (click)="deleteClientSelect(cliente)" style="cursor: pointer;" class="text-danger"><mat-icon>delete_outline</mat-icon></p>
                             </div>
                         </div>
                     </div>
@@ -125,63 +119,58 @@
                 </div>
 
                 <div class="fields">
-                    <!-- Datos generales -->
                     <div *ngIf="generales" class="field-datos-generales">
                         <div class="label-field">
                             <label for="">Nombres</label>
                             <input [(ngModel)]="selectVendedor.name" name="nombres" type="text" class="">
-                            <small *ngIf="" style="color: red;">{{ errors.name }}</small>
+                            <small *ngIf="nameBool"><span class="text-danger">{{ error.name }}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Apellidos</label>
                             <input [(ngModel)]="selectVendedor.apellidos" name="apellidos" type="text" class="">
-                            <small style="color: red;">{{ errors.apellidos }}</small>
+                            <small *ngIf="apellidosBool"><span class="text-danger">{{ error.apellidos }}</span></small>
                         </div>
 
 
                         <div class="label-field">
                             <label for="">Cédula de ciudadanía</label>
                             <input [(ngModel)]="selectVendedor.dni" name="dni" type="number" class="">
-                            <small style="color: red;">{{ errors.dni }}</small>
+                            <small *ngIf="dniBool"><span class="text-danger">{{ error.dni }}</span></small>
                         </div>
-
-                        <div class="label-field" *ngFor="let userdata of selectVendedor.data_user">
+                        <div class="label-field" *ngFor="let userdata of selectVendedor['data_user']">
                             <label for="">{{userdata.field_key}}</label>
                             <input [(ngModel)]="userdata.value_key" name="celular" type="tel" class="">
+                            <small *ngIf="telefonoBool"><span class="text-danger">{{ error.telefono }}</span></small>
                         </div>
 
                     </div>
-                    <!-- ...# -->
 
-                    <!-- Credenciales -->
                     <div *ngIf="credenciales" class="credenciales">
                         <div class="label-field">
                             <label for="">Correo electrónico</label>
                             <input [(ngModel)]="selectVendedor.email" name="email" type="email" class="">
-                            <small style="color: red;">{{ errors.email }}</small>
+                            <small *ngIf="emaiBool"><span class="text-danger">{{ error.email }}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Contraseña</label>
                             <input [(ngModel)]="selectVendedor.password" name="password" type="password" class="">
-                            <small style="color: red;">{{ errors.password }}</small>
+                            <small *ngIf="passwordBool"><span class="text-danger">{{ error.password }}</span></small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Confirmar Contraseña</label>
                             <input [(ngModel)]="selectVendedor.confirm_password" name="confirm_password" type="password"
                                 class="">
-                            <small style="color: red;">{{ errors.confirm_password }}</small>
+                                <small *ngIf="confirm_passwordBool"><span class="text-danger">{{ error.confirm_password }}</span></small>
                         </div>
                     </div>
-                    <!-- ...# -->
 
                     <div *ngIf="asignar" class="asignar-cliente">
                         <div class="search-cliente">
-                            <p>Eligue un cliente</p>
-                            <mat-form-field appearance="legacy" class="w-100">
-                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
+                            <p>Elige un cliente</p>
+                            <!-- <mat-form-field appearance="legacy" class="w-100">
                                 <input matInput 
                                     placeholder="Buscar por nombre, cedula."
                                     style="color: #82867D;"
@@ -194,23 +183,33 @@
                                         style="color: #82867D; cursor: pointer;">
                                         search
                                     </mat-icon>
+                            </mat-form-field> -->
+                            <mat-form-field class="w-100">
+                                <mat-label>Asignar Cliente</mat-label>
+                                <input placeholder="Asignar Cliente" matInput [formControl]="asigCliente" [matAutocomplete]="auto">
+                                <mat-icon matSuffix>search</mat-icon>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let cliente of filteredOptions | async" [value]="cliente" (blur)="updateAsignCliente(cliente)">
+                                      {{cliente}}
+                                    </mat-option>
+                                  </mat-autocomplete>                               
                             </mat-form-field>
                         </div>
-                        <div class="item-cliente-select" *ngFor="let clienteAsign of selectVendedor.clientes" [@inOutAnimation]>
+                        <!-- <div class="item-cliente-select" *ngFor="let clienteAsign of selectVendedor.clientes" [@inOutAnimation]>
                             <p style="display: flex;"> 
                                 {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
                             </p>
                             <button mat-icon-button aria-label="Delete" type="button" (click)="deleteAsignClient(clienteAsign)">
                                 <mat-icon style="color: #ff596a;">delete</mat-icon>
                             </button> 
-                        </div>
+                        </div> -->
                         <div class="list-vendedores">
-                            <div class="item-cliente" *ngFor="let cliente of clientes" (click)="updateAsignCliente(cliente)" [@fadeIn]>
+                            <div class="item-cliente" *ngFor="let cliente of selectVendedor.clientes" [@fadeIn]>
                                 <p> 
-                                    <span class="icon-cliente">{{cliente.name.substr(0,1) + cliente.apellidos.substr(0,1)}}</span> 
+                                    <span class="icon-cliente">{{(cliente.name?.charAt(0)) + (cliente.apellidos?.charAt(0))}}</span> 
                                     {{cliente.name + ' ' + cliente.apellidos}}
                                 </p>
-                                <p>{{vendedor.id}}</p>
+                                <p (click)="deleteAsignClient(cliente)" style="cursor: pointer;" class="text-danger"><mat-icon>delete_outline</mat-icon></p>
                             </div>
                         </div>
                     </div>
@@ -219,33 +218,77 @@
 
         <div class="filtros">
             <div class="box-buscador">
-                <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-                <input class="buscador" placeholder="Buscar.." (keyup.enter)="searchTable($event)"  type="text">
+                <img class="lupa" [src]="templateImage.lupa" alt="">
+                <input class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
             </div>
             <div (click)="accionesVendedor()" class="box-editar">
-                <p class="texto-editar">Acción de</p>
+                <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
-                    <img src="{{ templateImage.points }}" alt="">
+                    <img [src]="templateImage.points" alt="">
                 </div>
-                <!-- Pop up editar -->
                 <ul class="acciones-vendedor">
                     <li (click)="editTienda()">
-                        <img src="{{ templateImage.lapiz }}" alt=""> Editar
+                        <img [src]="templateImage.lapiz" alt=""> Editar
                     </li>
-                    <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
-                    <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+                    <li (click)="exporter.exportTable('xlsx', {fileName:'vendedores'})"><img [src]="templateImage.exportar" alt=""> Exportar</li>
+                    <li (click)="getUsersAndDelete()"><img [src]="templateImage.eliminar" alt=""> Eliminar</li>
                 </ul>
             </div>
             <div class="box-create-new">
                 <div class="box-mas">
-                    <img class="mas" src="/assets/img/mas.svg" alt="">
+                    <img class="mas" src="./assets/img/mas.svg" alt="">
                 </div>
                 <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo vendedor</a>
             </div>
         </div>
 
         <section class="table-data">
-            <table style="width:100%">
+            <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let user; let i = index">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (click)="selectVendCheckbox(user, i)"
+                            (change)="$event ? selection.toggle(user) : null"
+                            [checked]="selection.isSelected(user)"
+                            [aria-label]="checkboxLabel(user)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                    <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">
+                        <div class="iniciales"> {{vendedor.iniciales}} </div>
+                        <p class="nombre">{{ vendedor.name }} {{ vendedor.apellidos }}</p></td>
+                </ng-container>
+                <ng-container matColumnDef="Teléfono">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+                    <!-- <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor.name }}</td> -->
+                    <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor['user_data'][0]?.value_key }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Código">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+                    <!-- <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor.apellidos }}</td> -->
+                    <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor['user_data'][1]?.value_key }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Correo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                    <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor.email }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!--<table style="width:100%">
 
                 <tr class="tabla-fila-cabecera">
                     <td></td>
@@ -268,14 +311,14 @@
                     <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
                 </tr>
 
-            </table>
+            </table>-->
         </section>
     </div>
 </div>
 
 
 
-<div class="footer">
+<!-- <div class="footer">
     <div class="footer-paginate">
         <div class="pagination">
             <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
@@ -290,6 +333,10 @@
                 <option [value]="20"> 20 Por página </option>
                 <option [value]="30"> 30 Por página </option>
             </select>
-        </div>   
-    </div>
+        </div>
+    </div> 
+</div> -->
 </div>
+<ng-template #login>
+    <app-login></app-login>
+</ng-template>

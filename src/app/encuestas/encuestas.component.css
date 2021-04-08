@@ -18,6 +18,13 @@
     top: 0.2em;
     right: 2px;
 }
+.ancho{
+    width: 100%;
+}
+
+.ancho td{
+    height: 70px;
+}
 
 
 a.btn-delete-pregunta:hover{

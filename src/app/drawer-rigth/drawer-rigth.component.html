@@ -3,7 +3,7 @@
 <div class="drawer-right" [ngClass]="name">
     <div class="header-form">
         <h2>{{title}}</h2>
-        <img class="close-drawer" src="assets/img/cerrar.svg" (click)="closeDrawer()" alt="">
+        <img class="close-drawer" src="./assets/img/cerrar.svg" (click)="closeDrawer()" alt="">
     </div>
     <h3 class="subtitle">{{subtitle}}</h3>
     <div class="content">
@@ -11,14 +11,14 @@
     </div>
     <div class="acciones-form-adminitrador">
         <a class="agregar" (click)="submitForm()">
-            <span class="mas">
-                <img src="" alt="">
-            </span> {{button}}
+                <span class="box-mas">
+                    <img class="mas" src="./assets/img/mas.svg" alt="">
+                </span> {{button}}
         </a>
 
         <a class="cancelar" (click)="closeDrawer()">
-            <span class="mas">
-                <img src="" alt="">
+            <span class="box-cancelar">
+                <mat-icon class="text-danger cancel">close</mat-icon>
             </span> Cancelar
         </a>
     </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { map, tap } from 'rxjs/operators';
 @Injectable()
 export class SendHttpData {
 
@@ -24,7 +24,7 @@ export class SendHttpData {
   httpGet(route:string, headers = false):Observable<any>{
     var url = this.baseUrl + route;
     if (headers) {
-      return this._http.get(url, this.options);
+      return this._http.get(`${url}`, this.options);
     }else{
       return this._http.get(url);
     }
@@ -43,6 +43,7 @@ export class SendHttpData {
   // Peticion Http PUT
   httpPut(route:string, id:any, data:any, headers = false):Observable<any>{
     var url = this.baseUrl + route + '/' + id;
+    console.log(url);
     if (headers) {
       return this._http.put(url, data, this.options);
     }else{

@@ -6,9 +6,9 @@
     </div>
     <div class="area">
         <div class="row">
-            <div class="filtros"  style="margin-bottom: 15px;">
-                <div class="box-editar">
-                    <p class="texto-editar" (click)="accionesCatalogos()">Filtros</p>
+            <div class="filtros" style="margin-bottom: 15px;">
+                <div class="box-editar" (click)="accionesCatalogos()">
+                    <span class="texto-editar">Filtros</span>
 
                     <!-- Pop up editar -->
                     <ul class="filtros-catalogo">
@@ -61,8 +61,8 @@
                 </div>
 
                 <div class="box-create-new">
-                    <div class="box-mas">
-                        <img class="mas" src="assets/img/mas.svg" alt="">
+                    <div class="box-mas nuevo-catalogo">
+                        <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>
                     <a class="btn-nuevo-cliente" (click)="openDrawerRight(true, 'create')">Nuevo catálogo</a>
                 </div> 
@@ -77,7 +77,7 @@
                     <div class="box-imagen-estado-descuento"
                         style="background: url({{catalogo.imagen}});background-size: cover;background-repeat: no-repeat;"
                         (click)="verDetalle(catalogo.id_catalogo)">
-                        <!-- <img (click)="verDetalle()" src="" alt=""> -->
+                        <!-- <img (click)="verDetalle()" src="{{catalogo.imagen}}" alt=""> -->
                         <div class="estado">{{catalogo.estado}}</div>
                         <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
                         <div *ngIf="catalogo.descuento != null" [class]="(catalogo.tipo == 'general') ? 'descuento' : 'descuento-show-room'">
@@ -99,7 +99,7 @@
                     <ul>
                         <li class="btn-options">
                             <a (click)="editCatalogo(catalogo)">
-                                <img class="icon-edit" src="assets/img/editar.svg" alt="">Editar
+                                <img class="icon-edit" src="./assets/img/editar.svg" alt="">Editar
                             </a>
                         </li>
                         <li class="btn-options">
@@ -138,11 +138,12 @@
 
 <!-- Crear Catalogo -->
 <app-drawer-rigth name="create-catalogo" title="Nuevo catálogo" [open]="openDrawer"
-(close)="openDrawerRight(false, 'create')" (submit)="submitCreateCat()">
-<form action="">
+(close)="openDrawerRight(false, 'create')" (submit)="submitCreateCat(form)">
+<form #form="ngForm">
     <div class="label-field">
         <label for="">Nombres</label>
-        <input [(ngModel)]="catalogo.nombre" name="name" type="text" class="">
+        <input [(ngModel)]="catalogo.nombre" name="name" type="text" class="" required>
+        <small *ngIf="flagNombreCatalogo"><span class="text-danger">{{nombreCatalogo}}</span></small>
     </div>
 
     <div class="label-field" style="display: flex;">
@@ -150,7 +151,7 @@
             <label for="">Descuento</label>
             <mat-form-field appearance="outline" style="width: 100%;">
                 <!-- <mat-label>Descuento</mat-label> -->
-                <mat-select name="food" [(ngModel)]="catalogo.descuento"  [(value)]="catalogo.descuento">
+                <mat-select name="food" [(ngModel)]="catalogo.descuento">
                     <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
                         {{i}}%
                     </mat-option>
@@ -183,7 +184,7 @@
                 </div>
             </ngx-dropzone-label>
             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                [file]="f" [removable]="true" (removed)="onRemove(f)" required>
                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-image-preview>
         </div>
@@ -249,7 +250,7 @@
             <ul>
                 <li class="btn-options">
                     <a (click)="changeImageEdit()">
-                        <img class="icon-edit" src="assets/img/editar.svg" alt="">Remplazar
+                        <img class="icon-edit" src="./assets/img/editar.svg" alt="">Remplazar
                     </a>
                 </li>
             </ul>

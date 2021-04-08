@@ -1,0 +1,123 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+
+        <div class="filtros">
+            <div class="info-pqrs">
+                <div>
+                    <p class="title-info">#Ticket</p>
+                    <p class="txt-info">{{pqrs.codigo}}</p>
+                </div>
+                <div>
+                    <p class="title-info">Fecha de registro</p>
+                    <p class="txt-info">{{pqrs.fecha_registro}}</p>
+                </div>
+                <div>
+                    <p class="title-info">Cliente</p>
+                    <p class="txt-info">{{pqrs.name_cliente + ' ' + pqrs.apellidos_cliente}}</p>
+                </div>
+                <div>
+                    <p class="title-info">Vendedor</p>
+                    <p class="txt-info">{{pqrs.name_vendedor + ' ' + pqrs.apellidos_vendedor}}</p>
+                </div>
+            </div>
+
+            <div class="box-editar" (click)="accionesPqrs()">
+                <p class="texto-editar">Estado: <span class="estado">{{pqrs.estado}}</span> </p>
+                
+                <div class="icono-puntos">
+                    <img src="assets/img/edit_points.svg" alt="">
+                </div>
+
+                <ul class="acciones-pqrs">
+                    <li (click)="changeState('abierto')" style="border-bottom: 1px solid #d7d7d7">abierto</li>
+                    <li (click)="changeState('cerrado')">cerrado</li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="cliente-detalle" style="padding-top: 0;">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="header-chat">
+                                <p>{{pqrs.name_cliente + ' ' + pqrs.apellidos_cliente}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cont-chat">
+                        <div class="col-sm-12">
+                            <div class="content-chat">
+                                <div *ngFor="let message of pqrs.messages_pqrs" [ngClass]="{'message-user-received' : !message.addressee, 'message-user-send' : message.addressee}">
+                                    <!-- Mensaje recibido. -->
+                                    <div class="content-message" *ngIf="!message.addressee">
+                                        <div class="user">
+                                            <div class="iniciales-chat"> {{message.iniciales}} </div>
+                                            <p>{{message.hora}}</p>
+                                        </div>
+                                        <p class="message">{{message.mensaje}}</p>
+                                    </div>
+                                    <!-- Mensaje enviado. -->
+                                    <div class="content-message" *ngIf="message.addressee">
+                                        <p class="message-send">{{message.mensaje}}</p>
+                                        <div class="user-send">
+                                            <div class="iniciales-chat"> {{message.iniciales}} </div>
+                                            <p>{{message.hora}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="footer-chat">
+                                    <!-- <textarea rows="1" placeholder="Escriba un mensaje" class="textarea-chat"></textarea> -->
+                                    <div placeholder="Escriba un mensaje" (keyup.enter)="sendMessage()"  [textContent]="mensaje" (input)="mensaje=$event.target.textContent" contenteditable="true" spellcheck="false" class="div-editable">
+                                        {{mensaje}}
+                                    </div>
+                                    <div class="btn-send">
+                                        <button (click)="sendMessage()" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                                          <mat-icon>near_me</mat-icon>
+                                        </button>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <!-- <div class="actions">
+                        <a class="pedidos" href="#">Novedades</a>
+                        <a class="solicitar" href="#">Registrar novedad</a>
+                    </div> -->
+                    <mat-tab-group mat-align-tabs="start">
+                        <mat-tab label="Pedidos">
+                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+
+                            <div class="box-pedidos" *ngFor="let pedido of pqrs.pedidos">
+                                <div class="cont-info-pedido">
+                                    <div class="iniciales-pedidos">
+                                        {{pedido.iniciales}}
+                                    </div>
+                                    <div class="info-pedido">
+                                        <p style="color: #a5a5a5;">{{pedido.name +  ' ' + pedido.apellidos}}</p>
+                                        <p style="color: #d9d9d9;">#{{pedido.codigo}}</p>
+                                    </div>
+                                </div>
+                                <div class="fecha-pedido">
+                                    <p>{{pedido.fecha}}</p>
+                                </div>
+                            </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

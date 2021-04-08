@@ -1,0 +1,275 @@
+.nuevo-cliente {
+    width: 50%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: white;
+    top: 0;
+    height: 100vh;
+    transition: all .6s ease;
+    transform: translateX(100%);
+    z-index: 510;
+}
+
+
+.cerrar-form-admin {
+    cursor: pointer;
+}
+
+.header-form {
+    display: flex;
+    justify-content: space-between;
+    background: #F6FBFF;
+    padding: 8px 10px;
+}
+
+.header-form h2 {
+    font-size: 19px;
+    padding: 0px 20px;
+}
+
+.open {
+    transform: translateX(0%);
+}
+
+.nuevo-cliente .header-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.label-field {
+    padding: 0px 20px;
+    margin-bottom: 16px;
+}
+
+.label-field label,
+.label-field input {
+    display: block;
+    width: 100%;
+}
+
+.label-field label {
+    color: #FF596A;
+    margin-bottom: 5px;
+}
+
+.label-field input {
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.agregar,
+.cancelar {
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+
+.agregar {
+    background: #FF596A;
+    padding: 6px 0px;
+    color: white;
+}
+
+.cancelar {
+    background: white;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    padding: 6px 0px;
+}
+
+.acciones-form-adminitrador {
+    display: flex;
+    position: fixed;
+    bottom: 50px;
+    padding: 0px 20px;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-cliente {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    right: -1px;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-cliente li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-cliente li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+select {
+    padding: 6px;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.two-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-field .label-field-two label,
+.label-field .label-field-two input {
+    width: 90%;
+}
+
+.agregar-tienda {
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.search-vendedor {
+    padding: 0 15px;
+}
+
+/* Lista de tiendas */
+.list-tiendas {
+    padding: 0 20px;
+    margin-bottom: 2em;
+    height: 20vh;
+    overflow: auto;
+}
+
+.item-tienda {
+    display: flex;
+    background: #EBEBEB;
+    padding: 10px 15px;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.cont-item-tienda{
+    display: block;
+    width: 90%;
+}
+
+p.codigo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff596a;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.ubicacion {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ubicacion p{
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.ubicacion span{
+    font-weight: 500;
+}
+
+.btn-edit-tienda {
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    transition: all .3s ease;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.icon-edit-tienda{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #ff596a;
+}
+
+.item-vendedor {
+    width: 100%;
+    padding: 25px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-vendedor:hover {
+    background: #ff596a2c;
+    transition: all 1s ease;
+}
+
+.item-vendedor p{
+    font-size: 15px;
+    color: #82867D;
+}
+
+span.icon-vendedor {
+    background: #ff596a;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.item-vendedor-select{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #2eb07b1f;
+    align-items: center;
+    transition: all 1s ease;
+}

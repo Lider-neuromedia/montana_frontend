@@ -1,0 +1,278 @@
+.detalle{
+    padding: 1.5em .6em;
+    margin-bottom: 2em;
+    background: white;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+    border-radius: 13px;
+}
+
+.detalle h2{
+    margin: 1em 0em;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.detalle ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.detalle ul li{
+    margin: .4em 0em;
+    width: 30%;
+}
+
+.qya-list{
+    list-style: decimal;
+}
+
+.qya-list li{
+    font-weight: bold;
+    margin: 1em 0em;
+    margin-left: 15px;
+}
+
+.qya-list .strellas-valoracion{
+    margin-top: 10px;
+}
+
+.valorar-title,
+.valoraciones-title{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.total-comentarios{
+    color: #969696;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 2em;
+}
+
+.valoraciones-column{
+    position: relative;
+}
+
+.user-feedback{
+    margin: 1em 0em;
+}
+
+.user-feedback p{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.ver-valoraciones{
+    background: #FF596A;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    width: 135px;
+    border-radius: 25px;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.aside-detalle-producto .nombre{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.aside-detalle-producto .marca{
+    color: #969696;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.aside-detalle-producto .precio-descuento{
+    font-size: 26px;
+    color: #FF596A;
+    margin-top: 28px;
+    font-weight: bold;
+}
+
+.aside-detalle-producto .precio-normal{
+    color: #919191;
+    margin-left: 40px;
+}
+
+.aside-detalle-producto .codigo,
+.aside-detalle-producto .referencia,
+.aside-detalle-producto .stock{
+    color: #969696;
+    font-size: 16px;
+    margin-top: 1.5em;
+}
+
+.aside-detalle-producto .numero-codigo,
+.aside-detalle-producto .numero-referencia,
+.aside-detalle-producto .numero-stock{
+    color: #1E2933;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.opiniones .valoracion-column,
+.opiniones .valoraciones-column{
+    border-radius: 13px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+}
+
+.opiniones .valoraciones-column{
+    height: 487px;
+}
+
+.tienda-cantidad{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tienda,
+.cantidad{
+    width: 50%;
+}
+
+.cantidad{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+.cantidad input{
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    margin: 0 3px;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+}
+
+.menos-productos,
+.mas-productos{
+    background: #FF596A;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    text-align: center;
+    color: white;
+    line-height: 15px;
+}
+
+
+/* Galeria */
+
+.ngx-gallery { display: inline-block; margin-bottom: 20px; }
+
+.content-gallery{
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Detalles. */
+.precio-real{
+    font-size: 26px;
+    color: #FF596A;
+    font-weight: bold;
+}
+
+p.precio-anterior {
+    color: #969696;
+}
+
+.marca{
+    color: #969696;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+h2.title-info {
+    color: #969696;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+p.info {
+    color: #1E2933;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/* Tiendas */
+
+.input-cantidad{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.add{
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background: #ff596ad6;
+}
+
+.remove{
+    position: absolute;
+    top: 35%;
+    right: 80px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.remove:hover{
+    background: #ff596ad6;
+}
+
+.icon-tienda { font-size: 20px !important; }
+
+.cantidad {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    right: 35px;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.title {
+    font-size: 14px;
+}
+
+.content-rigth{
+    position: relative;
+    height: auto;
+    width: 100%;
+    padding-bottom: 5em;
+}

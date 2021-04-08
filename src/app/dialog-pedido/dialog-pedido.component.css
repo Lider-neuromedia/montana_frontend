@@ -11,6 +11,22 @@
     align-items: center;
     background: rgba(0,0,0,.4);
 }
+.btn-continuar{
+    border-radius: 30px;
+    width: 80%;
+    background-color: #FF596A;
+    color: #fff;
+}
+.agregar{
+    background-color: #FF596A !important;
+    margin-left: 30%;
+}
+
+.box-mas{
+    position: absolute !important;
+    top: 77% !important;
+    left: 39% !important;
+}
 
 .pop-up-pedido{
     width: 50%;

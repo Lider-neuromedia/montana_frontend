@@ -15,10 +15,12 @@
     padding: 0 2em;
 }
 
-.filtro-clientes .box-editar {
+/* .filtro-clientes .box-editar {
     margin-right: 0;
-}
-
+} */
+/* .box-editar {
+    margin-right: 0;
+} */
 hr {
     border-top: 1px solid #EEEEEE;
     margin: auto;
@@ -35,18 +37,14 @@ hr {
     align-items: center;
 }
 
-.filtros {
-    justify-content: flex-end;
-}
-
 .div-edit-boton {
     display: flex;
 }
 
-.box-editar,
+/* .box-editar,
 .box-create-new {
-    height: max-content;
-}
+    height: 31px;
+} */
 
 .texto-editar {
     padding: 5px;
@@ -225,6 +223,11 @@ hr {
     opacity: 1;
 }
 
+.open {
+    transform: translateX(0%);
+}
+
+
 .btn-whatsapp {
     background: #1CD34D;
     cursor: pointer;
@@ -275,7 +278,7 @@ hr {
     color: #E3E3E3;
 }
 
-.acciones-administrador {
+.acciones-cliente {
     display: none;
     position: absolute;
     top: 30px;
@@ -288,13 +291,13 @@ hr {
     text-align: center;
 }
 
-.acciones-administrador li {
+.acciones-cliente li {
     color: #959BA0;
     margin: 8px 0px;
     position: relative;
 }
 
-.acciones-administrador li img {
+.acciones-cliente li img {
     position: absolute;
     left: 8px;
     top: 3px;
@@ -383,4 +386,15 @@ p.description-novedad {
     font-size: 16px;
     color: #7a7a7a;
     margin-top: 10px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
 }

@@ -1,0 +1,301 @@
+button:focus{ outline: none !important;}
+
+.head-state{
+    text-align: center;
+}
+.estado{
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.estado-aprobado{
+    background: #11bc4a;
+}
+.estado-rechazado{
+    background: #ff293f;
+}
+.estado-pendiente{
+    background: #979797;
+}
+
+.fechas{
+    display: flex;
+    margin: 0px 15px;
+    align-items: center;
+    border: 1px solid #FF596A;
+    border-radius: 16px;
+    height: 31px;
+}
+
+.hoy{
+    display: block;
+    color: #FF596A;
+    border-right: 1px solid #FF596A;
+    padding: 3px 15px;
+    border-radius: 15px 0px 0px 15px;
+    cursor: pointer;
+}
+
+.fecha-active{
+    color: white !important;
+    background: #FF596A !important;
+}
+
+.ayer{
+    display: block;
+    color: #FF596A;
+    border-right: 1px solid #FF596A;
+    cursor: pointer;
+    padding: 3px 15px;
+}
+
+.todos{
+    display: block;
+    color: #FF596A;
+    padding: 3px 15px;
+    border-radius: 0px 15px 15px 0px;
+    cursor: pointer;
+}
+
+
+/* BOTON ACCIONES PARA EDITAR, ELIMINAR, ETC. */
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.open-acciones{
+    display: block;
+    opacity: 1;
+}
+
+.overpedido{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 8000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.4);
+}
+
+.pop-up-pedido{
+    width: 50%;
+    background: white;
+    padding: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.bar-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.close-dialog{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pop-up-pedido h2{
+    font-size: 36px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.w-70{ width: 70% !important;}
+
+.label-field label,
+.label-field select{
+    width: 100%;
+}
+
+.label-field label{
+    color: #FF596A;
+    text-transform: uppercase;
+    margin-bottom: .6em;
+}
+
+.label-field select{
+    padding: 1em;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+}
+
+.overpedido{
+    display: none;
+}
+
+.continuar-pedido{
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+    text-align: center;
+    background: #FF596A;
+    width: 50%;
+    color: white;
+    padding: 7px;
+    border-radius: 15px;
+    margin-top: 1em;
+}
+
+
+/* Editar */
+
+.detalle-pedido{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #D7D7D7;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.detalle-pedido:hover {
+    background: #d7d7d74d;
+}
+
+.title-detalle {
+    display: flex;
+    justify-content: center;
+    padding: 10px 5px 15px 5px;
+    border-bottom: 1px solid #D7D7D7;
+    position: relative;
+}
+
+.title-detalle img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+}
+
+.title-detalle p {
+    color: #1E2933;
+    font-size: 21px;
+    letter-spacing: 0.6px;
+    line-height: 28.64px;
+}
+
+.tiendas-detalle {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.tiendas-detalle p{
+    font-size: 14px;
+}
+
+.tiendas-detalle > span {
+    color: #FF596A;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+
+.input-cantidad{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.add{
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background: #ff596ad6;
+}
+
+.remove{
+    position: absolute;
+    top: 30%;
+    right: 80px;
+    background: #ff596a;
+    color: #fff;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.remove:hover{
+    background: #ff596ad6;
+}
+
+.icon-tienda { font-size: 20px !important; }
+
+.cantidad {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    right: 35px;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+
+.total-pedido {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-top: 1px solid #D7D7D7;
+}
+
+.total-pedido span{
+    color: #FF596A;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+/* STYLES MATERIAL */
+.mat-button-toggle-checked{
+    background-color: #ff596a !important;
+}
+
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard{
+    color: #fff;
+}
+
+.mat-button-toggle{
+    box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.mat-button-toggle-group{
+    width: 100%;
+}

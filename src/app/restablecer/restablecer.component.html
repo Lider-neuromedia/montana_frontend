@@ -1,0 +1,32 @@
+<div class="bg-login">
+    <div class="content-login">
+        <div class="col-title">
+            <h1 class="plataforma">Plataforma</h1>
+            <h2 class="gestion">Gestión interna de ventas</h2>
+        </div>
+        <div class="col-login">
+            <div class="box-login">
+                <p class="text-center p-b5rem">
+                    <img src="./assets/img/logo_txt.png" alt="" class="img-fluid">
+                </p>
+                <form (ngSubmit)="restablecer()" [formGroup]="formCorreo" class="animated fadeInLeft">
+                    <div class="box-input-label">
+                        <!-- <label for="">Usuario</label> -->
+                        <input name="email" type="text" placeholder="Correo electrónico" formControlName="email" [class.is-invalid]="emailNoValid">
+                        <input name="mensaje" type="text" hidden formControlName="mensaje">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="emailNoValid">
+                            El correo es obligatorio
+                        </small>
+                    </div>
+                    <div class="box-btn-iniciar-sesion">
+                        <button type="submit">Enviar Correo Electronico</button>
+                        <!-- <button type="submit" class="btn btn-outline-primary btn-block">
+                            Iniciar Session
+                        </button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

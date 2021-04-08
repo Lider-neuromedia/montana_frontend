@@ -11,9 +11,20 @@
     transform: translateX(100%);
     z-index: 510;
 }
+table{
+    width: 100%;
+}
+
+table td{
+    height: 70px;
+}
 
 .cerrar-form-admin{
     cursor: pointer;
+}
+
+.buscador::placeholder{
+    color: rgb(122, 122, 122);
 }
 
 .overview{
@@ -154,6 +165,11 @@ select{
     cursor: pointer;
     transition: all .3s ease;
 }
+.registrar{
+    position: absolute;
+    top: 80%;
+    left: 5%;
+}
 
 .box-editar-open{
     border-bottom: 0;
@@ -244,7 +260,7 @@ select{
 .item-cliente {
     width: 100%;
     padding: 25px 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
     display: flex;
     justify-content: space-between;
 }

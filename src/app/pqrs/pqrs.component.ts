@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SendHttpData } from '../services/SendHttpData';
 import { Router } from '@angular/router';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 declare var $:any;
 
 @Component({
@@ -24,18 +28,56 @@ export class PqrsComponent implements OnInit {
     mensaje : ''
   }
 
-  constructor( private route: Router, private http : SendHttpData) { }
-
-  ngOnInit(): void {
-    this.getPqrs();
-    this.getUsers();
+  error = {
+    vendedor: 'Seleccione un vendedor',
+    cliente: 'Seleccione un cliente',
+    tipoPqrs: 'Seleccione un tipo de PQRS',
+    mensaje: 'Escriba una descripcion'
   }
 
+  vendedorBool: boolean = false;
+  clienteBool: boolean = false;
+  tipoPqrsBool: boolean = false;
+  mensajeBool: boolean = false;
+
+  formulario: FormGroup;
+
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  selection: SelectionModel<any>;
+  columns = ['ticket', 'fechaRegistro', 'cliente', 'vendedor', 'estado'];
+  numRows: number;
+
+  constructor( private route: Router, private http : SendHttpData, private formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
+    this.getPqrs();
+    this.getUsers();
+    this.crearFormulario();
+  }
+
+  crearFormulario(){
+    this.formulario = this.formBuilder.group({
+      cliente: ['', Validators.required],
+      vendedor: ['', Validators.required],
+      tipo: ['', Validators.required],
+      mensaje: ['', [Validators.required, Validators.minLength(5)]]
+    });
+  }
+
+  filtro(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValue.trim().toLowerCase();
+  }
   getPqrs(){
     this.http.httpGet('pqrs', true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.pqrs = response.pqrs;
+          this.dataSource = new MatTableDataSource<any>(response.pqrs);
+          this.dataSource.paginator = this.paginator;
+          this.numRows = this.dataSource.data.length;
           this.createPqrs = {
             cliente : '',
             vendedor : '',
@@ -79,7 +121,33 @@ export class PqrsComponent implements OnInit {
   }
 
   submitCretePqrs(){
-    this.http.httpPost('pqrs', this.createPqrs, true).subscribe(
+    if(this.formulario.invalid){
+      console.log(this.formulario.value);
+      if(this.formulario.value.vendedor === ""){
+        this.vendedorBool = true;
+      }else{
+        this.vendedorBool = false;
+      }
+      if(this.formulario.value.cliente === ""){
+        this.clienteBool = true;
+      }else{
+        this.clienteBool = false;
+      }
+      if(this.formulario.value.tipo === ""){
+        this.tipoPqrsBool = true;
+      }else{
+        this.tipoPqrsBool = false;
+      }
+      if(this.formulario.value.mensaje === ""){
+        this.mensajeBool = true;
+      }else{
+        this.mensajeBool = false;
+      }
+      return;
+    }
+    console.log(this.formulario.value);
+    this.vendedorBool, this.clienteBool, this.tipoPqrsBool, this.mensajeBool = false;
+    this.http.httpPost('pqrs', this.formulario.value, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
           Swal.fire(

@@ -7,7 +7,9 @@
     display: flex;
     align-items: center;
 }
-
+.centrado{
+    margin-top: 3%;
+}
 .header .header-items{
     color: white;
     margin-left: 230px;

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { AmplicacionCupoService } from '../services/amplicacion-cupo.service';
 declare var $:any;
 
 @Component({
@@ -55,8 +57,29 @@ export class ClienteDetalleComponent implements OnInit {
   tiendas = [];
   selectTiendas : any;
   checkTiendas = [];
+  dataSource: MatTableDataSource<any>;
+  dataCupo: MatTableDataSource<any>;
+  columns = ['Pedidos'];
+  columnsCupo = ['cupos']
+  iniciales: string;
 
-  constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService, private http: SendHttpData) {
+  error = {
+    direccion: 'Ingrese una dirección',
+    local: 'Ingrese un local',
+    lugar: 'Ingrese un lugar',
+    nombre: 'Ingrese un nombre',
+    telefono: 'Ingrese un teléfono'
+  }
+
+  direccionBool: boolean = false;
+  localBool: boolean = false;
+  lugarBool: boolean = false;
+  nombreBool: boolean = false;
+  telefonoBool: boolean = false;
+
+  dataAmpliacion: any;
+
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService, private http: SendHttpData, private ampliacionCupo: AmplicacionCupoService) {
 
     this.id = this.activatedRoute.snapshot.params['id'];
 
@@ -68,10 +91,49 @@ export class ClienteDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if(this.id != null){
       this.getCliente();
+        this.getCupo();
     }
     this.asignTiendasClient();
+  }
+
+  getCupo(){
+    this.ampliacionCupo.getAumentarCupo().subscribe(resp => {
+      const clientes = [];
+        for (const cliente of resp) {
+          // console.log(resp);              
+          if(this.id == cliente.cliente){
+            
+            clientes.push(cliente)
+              this.dataAmpliacion = clientes; 
+              
+              this.dataCupo = new MatTableDataSource<any>(clientes);
+              // console.log(clientes);
+              // console.log(this.dataCupo.data);
+          }
+        }
+        if(this.dataCupo === undefined){
+          
+          const noHay = [];
+          noHay.push({noHay: 'No tiene solicitud de pedidos'})
+          console.log(noHay);
+          this.dataCupo = new MatTableDataSource<any>(noHay);
+        }
+        
+        
+    });
+  }
+
+  filtro(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  filtroCupo(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataCupo.filter = filtroValue.trim().toLowerCase();
+    
   }
 
   getCliente(){
@@ -79,6 +141,9 @@ export class ClienteDetalleComponent implements OnInit {
       (data:any) =>{
         this.usuario = data;
         this.vendedor_asoci = data.vendedor;
+        this.iniciales = data.name.charAt(0)+data.apellidos.charAt(0);
+        // console.log(this.usuario);
+        this.dataSource = new MatTableDataSource<any>(this.usuario['pedidos']);
 
       },
       (error) =>{
@@ -99,6 +164,8 @@ export class ClienteDetalleComponent implements OnInit {
   openDrawerRigth(action : boolean, type : string){
     if (type == 'create') {
       this.openDrawer = action;
+      // this.selectTiendas = '';
+      this.asignTiendasClient();
       (!action) ? this.updateDrawer = false : '';
     }else{
       this.updateDrawer = action;
@@ -109,8 +176,46 @@ export class ClienteDetalleComponent implements OnInit {
   // Agregar tienda.
   addTienda(){
     // Validates.
+    if(this.selectTiendas.nombre === "" && this.selectTiendas.lugar === "" && this.selectTiendas.local === "" &&
+      this.selectTiendas.direccion === "" && this.selectTiendas.telefono === ""){
+        this.nombreBool = this.lugarBool = this.localBool = this.direccionBool = this.telefonoBool = true;
+        return;
+      }else if(this.selectTiendas.nombre === "" || this.selectTiendas.lugar === "" || this.selectTiendas.local === "" ||
+           this.selectTiendas.direccion === "" || this.selectTiendas.telefono === ""){
+
+            if(this.selectTiendas.nombre === ""){
+              this.nombreBool = true;
+            }else{
+              this.nombreBool = false;
+            }
+            if(this.selectTiendas.lugar === ""){
+              this.lugarBool = true;
+            }else{
+              this.lugarBool = false;
+            }
+            if(this.selectTiendas.local === ""){
+              this.localBool = true;
+            }else{
+              this.localBool = false;
+            }
+            if(this.selectTiendas.direccion === ""){
+              this.direccionBool = true;
+            }else{
+              this.direccionBool = false;
+            }
+            if(this.selectTiendas.telefono === ""){
+              this.telefonoBool = true;
+            }else{
+              this.telefonoBool = false;
+            }
+             return;
+           }
+           this.nombreBool = this.lugarBool = this.localBool = this.direccionBool = this.telefonoBool = true;
+
+      console.log(this.selectTiendas);
     this.tiendas.push(this.selectTiendas);
     this.asignTiendasClient();
+    
   }
 
   submitCreateStore(){
@@ -126,6 +231,7 @@ export class ClienteDetalleComponent implements OnInit {
             'Tienda creada de manera correcta.',
             'success'
           );
+          this.tiendas = [];
           this.getCliente();
           this.openDrawerRigth(false, 'create');
           this.asignTiendasClient();

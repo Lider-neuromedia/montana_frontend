@@ -1,0 +1,267 @@
+.comisiones-ganadas,
+.comisiones-perdidas,
+.comisiones-a-perder{
+    background: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+    padding: .6em .8em;
+    position: relative;
+}
+
+.placeholder-img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.comisiones-ganadas{
+    border-top: 3px solid #95D5C1;
+}
+
+.comisiones-perdidas{
+    border-top: 3px solid #E31D31;
+}
+
+.comisiones-a-perder{
+    border-top: 3px solid #FBAD12;
+}
+
+.comisiones{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.division-comisiones{
+    color: #D8D8D8;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    background: #D8D8D8;
+    height: 1px;
+}
+
+.total-fecha{
+    color: #323E4A;
+}
+
+.valor-comision{
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.row-datos .datos{
+    flex-grow: 1;
+}
+
+.row-credenciales .datos p:nth-child(2),
+.row-datos .datos p:nth-child(2){
+    font-weight: bold;
+}
+
+.tabla-clientes-en-vendedores{
+    width: 100%;
+}
+
+.tabla-clientes-en-vendedores thead{
+    text-align: left;
+}
+
+.tabla-clientes-en-vendedores td{
+    padding: 2em 0em;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.row-finanzas,
+.row-datos,
+.row-credenciales{
+    margin-bottom: 1.4em;
+}
+
+.row-finanzas .col-md-4{
+    padding: 0px 4px;
+}
+
+.administrador-detalle{
+    color: #323E4A !important;
+}
+
+.administrador-detalle .title-tus-finanzas,
+.administrador-detalle .title-datos-personales,
+.administrador-detalle .title-credenciales,
+.administrador-detalle .title-tiendas{
+    margin-bottom: .8em;
+    color: #323E4A;
+    font-size: 26px;
+    letter-spacing: 0.74px;
+}
+
+.row-credenciales{
+    margin-bottom: 2.5em;
+}
+
+.buscador-pedido {
+    border: 1px solid #FF596A;
+    width: 100%;
+    border-radius: 15px;
+    padding: .5em 1em;
+    margin-top: 10px;
+}
+
+.box-pedidos {
+    background: #f7f8f9;
+    border-radius: 7px;
+    padding: .3em .6em;
+    margin: 1em 0em;
+    cursor: pointer;
+}
+
+.box-pedidos:hover{
+    background: #e7e7e7;
+}
+
+.info-pedido{
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+    padding: 0.2em 0;
+}
+
+.foto-referencia {
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #D7D7D7;
+    align-items: center;
+}
+
+.foto-referencia p {
+    font-size: 21px;
+}
+
+.list-tienda{
+    display: flex;
+    justify-content: space-between;
+    margin: .6em 0em;
+}
+
+.list-tienda .cantidad{
+    color: #FF596A;
+    font-weight: bold;
+}
+
+.foto-referencia img{
+    height: 55px;
+    width: 50px;
+}
+
+.administrador-detalle .actions{
+    padding: 8px 10px;
+    border-bottom: 1px solid #c7c7c7;
+    margin-bottom: 15px;
+    text-decoration: none;
+    position: relative;
+}
+
+.administrador-detalle .actions a{
+    color: #1E2933;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.line-pedidos{
+    background: #FF596A;
+    height: 3px;
+    width: 200px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+.filtro-vendedores{
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 0 2em;
+}
+
+.filtro-vendedores .ident-admin{
+    display: flex;
+}
+
+.filtro-vendedores .div-imagen{
+    margin-right: 15px;
+}
+
+.filtro-vendedores .box-editar{
+    cursor: pointer;
+    padding: 4px 40px;
+    margin-right: 0;
+}
+
+.box-editar-open{
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.editar-vendedor{
+    display: none;
+    position: absolute;
+    top: 28px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    width: 100%;
+    left: 0;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.editar-vendedor li{
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.editar-vendedor li img{
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones{
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+
+.administrador-detalle{
+    background: white;
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+.aside-pedidos {
+    padding-right: 2em;
+    border-left: 1px solid #D8D8D8;
+}
+
+ /* Cambiar color del placeholder */
+ ::placeholder {
+    color: #E3E3E3;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #E3E3E3;
+}
+
+::-ms-input-placeholder {
+    color: #E3E3E3;
+}

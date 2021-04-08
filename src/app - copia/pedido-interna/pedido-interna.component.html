@@ -1,0 +1,244 @@
+<app-header></app-header>
+
+<div class="workplace">
+    <div class="slide-menu">
+        <app-menu></app-menu>
+    </div>
+    <div class="area">
+        <!-- <router-outlet></router-outlet> -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="content-gallery">
+                    <!-- <img src="{{producto.destacada}}" alt=""> -->
+                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                </div>
+
+                <div class="info-pedido-interna">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2>{{producto.nombre}}</h2>
+                            <p class="marca">{{producto.nombre_marca}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="precio-real">{{producto.total  |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                            <!-- <p class="precio-anterior">$970.000</p> -->
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 3rem; margin-bottom: 3rem;">
+                        <div class="col-md-4">
+                            <h2 class="title-info">Código</h2>
+                            <p class="info">{{producto.codigo}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="title-info">Referencia</h2>
+                            <p class="info">{{producto.referencia}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="title-info">Stock</h2>
+                            <p class="info">{{producto.stock}} cajas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detalle">
+                    <h2 class="title-detalle">Detalles</h2>
+                    <ul>
+                        <li>Sistema de amarre de cordones</li>
+                        <li>Exterior tejido con refuerzos de TPU</li>
+                        <li>Diseño ajustado y elástico</li>
+                        <li>Mediasuela receptiva Boost</li>
+                        <li>Suela de caucho</li>
+                        <li>Tenis urbanos icónicos</li>
+                        <li>Color del artículo: Core Black</li>
+                    </ul>
+                </div>
+
+                <div class="opiniones">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="valoracion-column">
+                                <h3 class="valorar-title">Valorar producto</h3>
+                                <ul class="qya-list">
+    
+                                    <li>
+                                        ¿Calidad en el servicio por parte del ejecutivo comercial?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Calidad del producto?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Calidad en el servicio por parte del área de cartera/ conciliación de la misma?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Diseño de tendencias?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Recomendaría nuestro producto?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Tiempos de entrega?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+    
+                                    <li>
+                                        ¿Empaque del producto?
+                                        <div class="strellas-valoracion">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                            <img src="assets/img/start-off.svg" alt="">
+                                        </div>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="valoraciones-column">
+                                <h3 class="valoraciones-title">Otras valoraciones</h3>
+                                <small class="total-comentarios">12 comentarios</small>
+
+                                <div class="user-feedback">
+                                    <p>Excelentes zapatillas</p>
+                                    <div class="strellas-valoracio">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-off.svg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="user-feedback">
+                                    <p>Excelentes zapatillas</p>
+                                    <div class="strellas-valoracio">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="user-feedback">
+                                    <p>Excelentes zapatillas</p>
+                                    <div class="strellas-valoracio">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="user-feedback">
+                                    <p>Excelentes zapatillas</p>
+                                    <div class="strellas-valoracio">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                        <img src="assets/img/start-on.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="#" class="ver-valoraciones">
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-4">
+                <div class="content-rigth">
+                    <div class="aside-interna-pedido mrg-btn-30">
+                        <h3 class="nombre" style="margin-bottom: 15px;">Tu pedido</h3>
+                        <form>
+                            <div class="label-field">
+                                <label for="">REFERENCIA</label>
+                                <input name="referencia" type="text" [(ngModel)]="producto.referencia" class="">
+                            </div>
+                            <div class="label-field">
+                                <label for="">TIENDAS</label>
+                                <div class="input-cantidad" *ngFor="let tienda of tiendas; let i = index">
+                                    <p class="title"> <span class="bold">{{tienda.lugar}}</span> L {{tienda.local}}</p>
+                                    <a class="remove" type="button" (click)="resCantidad(i)">
+                                        <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
+                                    </a>
+                                    <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                                    <a class="add" type="button" (click)="sumCantidad(i)">
+                                        <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Footer actions. -->
+                    <div class="acciones">
+                        <a class="agregar" (click)="addProducto()">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Agregar producto
+                        </a>
+                
+                        <a class="cancelar" [routerLink]="['/pedido']">
+                            <span class="mas">
+                                <img src="" alt="">
+                            </span> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

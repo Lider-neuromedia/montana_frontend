@@ -38,9 +38,13 @@
         </div>
 
         <div class="label-field w-70">
-            <a (click)="continuarPedido()" class="continuar-pedido">
-                Continuar
-            </a>
+            <div class="label-field">
+                <button class="agregar" (click)="continuarPedido()">
+                    <span class="box-mas registrar-producto">
+                        <img class="mas" src="./assets/img/mas.svg" alt="">
+                    </span> Continuar
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -87,32 +91,32 @@
                     <p class="todos fecha-active" (click)="changeFilterDate('todos')">Todos</p>
                 </div>
                 <div class="box-buscador">
-                    <img class="lupa" src="/assets/img/search.svg" alt="">
-                    <input class="buscador" placeholder="Buscar..." (keyup.enter)="searchTable($event)" type="text">
+                    <img class="lupa" src="./assets/img/search.svg" alt="">
+                    <input class="buscador" placeholder="Buscar..." (keyup)="filtro($event)" type="text">
                 </div>
             
                 <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar">
                     <!-- <div class="icono-editar">
                         <img src="{{ templateImage.lapiz }}" alt="">
                     </div> -->
-                    <p class="texto-editar">Acción de</p>
+                    <span class="texto-editar">Acción de</span>
                     <div class="icono-puntos">
-                        <img src="assets/img/edit_points.svg" alt="">
+                        <img src="./assets/img/edit_points.svg" alt="">
                     </div>
     
                     <ul class="acciones-administrador">
                         <li (click)="openDrawerRigth(true)">
-                            <img src="assets/img/editar.svg" alt=""> Editar
+                            <img src="./assets/img/editar.svg" alt=""> Editar
                         </li>
-                        <li (click)="exportPedido()">
-                            <img src="assets/img/icons-filter/export.svg" alt=""> Exportar
+                        <li (click)="exporter.exportTable('xlsx', {fileName:'pedidos'})">
+                            <img src="./assets/img/icons-filter/export.svg" alt=""> Exportar
                         </li>
                     </ul>
                 </div>
             
                 <div class="box-create-new">
                     <div class="box-mas">
-                        <img class="mas" src="/assets/img/mas.svg" alt="">
+                        <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>
                     <a class="btn-nuevo-cliente" (click)="nuevoPedido()">Nuevo pedido</a>
                 </div>
@@ -120,7 +124,77 @@
         </div>
 
         <section class="table-data">
-            <table class="table">
+
+            <table mat-table [dataSource]="dataSource" matTableExporter  #exporter="matTableExporter">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let pedido; let i = index">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                        (click)="selectPedidoCheckbox(pedido, i)"
+                            (change)="$event ? selection.toggle(pedido) : null"
+                            [checked]="selection.isSelected(pedido)"
+                            [aria-label]="checkboxLabel(pedido)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell (click)="redirectDetalle(pedido.id_pedido)" style="cursor: pointer;" *matCellDef="let pedido">{{ pedido.fecha }}</td>
+                </ng-container>
+                <ng-container matColumnDef="codigo">
+                    <th mat-header-cell *matHeaderCellDef>Código</th>
+                    <td mat-cell (click)="redirectDetalle(pedido.id_pedido)" style="cursor: pointer;" *matCellDef="let pedido">{{ pedido.codigo }}</td>
+                </ng-container>
+                <ng-container matColumnDef="vendedor">
+                    <th mat-header-cell *matHeaderCellDef>Vendedor</th>
+                    <td mat-cell (click)="redirectDetalle(pedido.id_pedido)" style="cursor: pointer;" *matCellDef="let pedido">{{ pedido.name_vendedor +' '+pedido.apellido_vendedor }}</td>
+                </ng-container>
+                <ng-container matColumnDef="cliente">
+                    <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                    <td mat-cell (click)="redirectDetalle(pedido.id_pedido)" style="cursor: pointer;" *matCellDef="let pedido">{{pedido.name_cliente + " " + pedido.apellido_cliente}}</td>
+                </ng-container>
+                <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef>Valor</th>
+                    <td mat-cell (click)="redirectDetalle(pedido.id_pedido)" style="cursor: pointer;" *matCellDef="let pedido"> {{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="estado_pedido">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let pedido">
+                        <div *ngIf="pedido.id_estado == 1"
+                            #tooltip="matTooltip"
+                            matTooltip="Aprobado"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="1000"
+                            class="estado estado-aprobado"></div>
+                            
+                            <div *ngIf="pedido.id_estado == 2" 
+                            #tooltip="matTooltip"
+                            matTooltip="Pendiente"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="100000"
+                            class="estado estado-pendiente"
+                            (click)="openDialogState(pedido.id_pedido)"></div>
+
+                            <div *ngIf="pedido.id_estado == 3"
+                            #tooltip="matTooltip"
+                            matTooltip="Rechazado"
+                            matTooltipPosition="left"
+                            matTooltipHideDelay="1000"
+                            class="estado estado-rechazado"></div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+            <!-- <table class="table">
                 <thead>
                     <tr class="tabla-fila-cabecera">
                         <th></th>
@@ -134,7 +208,6 @@
                 </thead>
 
                 <tbody>
-                    <!-- (click)="redirectDetalle(pedido.id_pedido)" -->
                     <tr class="tabla-fila-datos" *ngFor="let pedido of pedidos | customPaginate:page_size:page_number">
                         <td>
                             <input class="check-nombre" (change)="selectPedidoCheckbox($event, pedido)" type="checkbox" name="check-pedido" id="check-pedido">
@@ -155,7 +228,7 @@
                             {{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}
                         </td>
                         <td>
-                            <!-- Aprobado -->
+                            <!-- Aprobado
                             <div *ngIf="pedido.id_estado == 1"
                             #tooltip="matTooltip"
                             matTooltip="Aprobado"
@@ -180,7 +253,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
 
         </section>
     </div>
@@ -226,7 +299,7 @@
     </app-drawer-rigth>
 </div>
 
-<div class="footer">
+<!-- <div class="footer">
     <div class="footer-paginate">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -262,4 +335,4 @@
             </select>
         </div>   
     </div>
-</div>
+</div> -->

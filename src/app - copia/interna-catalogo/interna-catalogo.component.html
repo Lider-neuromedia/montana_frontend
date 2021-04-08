@@ -1,0 +1,201 @@
+<app-header></app-header>
+
+<app-dialog-pedido [id_catalogo]="id_catalogo" [id_producto]="id_producto"></app-dialog-pedido>
+
+<div class="workplace">
+    <div class="slide-menu">
+        <app-menu></app-menu>
+    </div>
+    <div class="area">
+        <!-- <router-outlet></router-outlet> -->
+        <div class="row">
+            <div class="filtros" style="margin-bottom: 15px;">
+                <div class="box-create-new">
+                    <div class="box-mas">
+                        <img class="mas" src="assets/img/mas.svg" alt="">
+                    </div>
+                    <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo Producto</a>
+                </div>
+            </div>
+        </div>
+
+        <app-drawer-rigth name="create-producto" title="Nuevo producto" [open]="openDrawer"
+        (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateProduct()">
+            <form>
+                <div class="label-field">
+                    <label for="">Nombres</label>
+                    <input [(ngModel)]="crearProducto.nombre" name="nombre" type="text" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Código</label>
+                    <input [(ngModel)]="crearProducto.codigo" name="codigo" type="text" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Referencia</label>
+                    <input [(ngModel)]="crearProducto.referencia" name="referencia" type="text" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Stock</label>
+                    <input [(ngModel)]="crearProducto.stock" name="stock" type="number" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Marca</label>
+                    <select [(ngModel)]="crearProducto.marca" name="marca" type="text" class="">
+                        <option>Seleccione...</option>
+                        <option *ngFor="let marca of marcas" [value]="marca.id_marca"> {{marca.nombre_marca}}</option>
+                    </select>
+                </div>
+                <div class="label-field">
+                    <label for="">Precio</label>
+                    <input [(ngModel)]="crearProducto.precio" name="precio" type="number" class="">
+                </div>
+                <div class="label-field">
+                    <label for="">Descripción</label>
+                    <textarea [(ngModel)]="crearProducto.descripcion" name="descripcion" class="text-area">
+                    </textarea>
+                </div>
+
+                <div class="label-field" style="display: flex;">
+                    <div class="col-md-6">   
+                        <label for="">Imagen destacada</label>
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_1')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_1"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">Imagen destacada</label>
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_2')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_2"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="label-field" style="display: flex;">
+                    <div class="col-md-6">
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_3')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_3"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_4')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_4"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="label-field" style="display: flex;">
+                    <div class="col-md-6">
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_5')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_5"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+                            (change)="onSelect($event, false, 'files_6')">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                    <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_6"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-image-preview>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </app-drawer-rigth>
+
+        <div class="row">
+            <div class="col-md-12" *ngFor="let producto of productos">
+                <div class="row row-producto">
+                    <div class="col-md-4">
+                        <img src="{{producto.image}}" alt="{{producto.nombre}}">
+                    </div>
+                    <div class="col-md-4 border-rh-lft">
+                        <div class="info-interna">
+                            <p class="codigo">Cod: {{producto.codigo}}</p>
+                            <p class="referencia">Ref: {{producto.referencia}}</p>
+                            <p class="marca">{{producto.nombre_marca}}</p>
+                            <p class="nombre">{{producto.nombre}}</p>
+                            <p class="stock">Stock: {{producto.stock}} cajas</p>
+                            <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 end-content">
+                        <a (click)="verProducto(producto.id_producto)" class="ver-producto">
+                            <span>
+                                <img src="" alt="">
+                            </span>
+                            Ver producto
+                        </a>
+                        <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
+                            <span>
+                                <img src="" alt="">
+                            </span>
+                            Añadir a pedido
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 no-products" *ngIf="productos.length == 0">
+                <p>
+                    <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
+                </p>
+                <h2>No has registrado productos aun...</h2>
+            </div>
+        </div>
+    </div>
+</div>

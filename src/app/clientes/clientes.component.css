@@ -12,6 +12,13 @@
     z-index: 510;
 }
 
+table{
+    width: 100%;
+}
+table td{
+    height: 70px;
+}
+
 
 .cerrar-form-admin {
     cursor: pointer;
@@ -150,7 +157,7 @@ select {
 }
 
 .two-fields {
-    display: flex;
+    display: inline-block;
     justify-content: space-between;
 }
 

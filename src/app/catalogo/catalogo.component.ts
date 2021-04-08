@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
+import { NgForm } from '@angular/forms';
 declare var $:any;
 
 @Component({
@@ -24,11 +25,11 @@ export class CatalogoComponent implements OnInit {
   };
   catalogoEdit = {
     "id_catalogo": null,
-    "titulo": null,
-    "descuento": 0,
+    "titulo": 0,
+    "descuento": null,
     "estado": null,
     "tipo": null,
-    "imagen": null
+    "image": null
   };
   showEditDropzone = false;
   // Paginacion
@@ -41,6 +42,8 @@ export class CatalogoComponent implements OnInit {
     public : false,
     private : false,
   }
+  nombreCatalogo: string;
+  flagNombreCatalogo: boolean;
 
 
   constructor(private route: Router, private http : SendHttpData) { }
@@ -60,6 +63,7 @@ export class CatalogoComponent implements OnInit {
     this.http.httpGet(route, true).subscribe(
       response => {
         this.catalogos = response.catalogos;
+        console.log(this.catalogos);
       },
       error => {
         console.error(error);
@@ -94,11 +98,16 @@ export class CatalogoComponent implements OnInit {
 
   onSelect(event, edit = false) {
     this.files = event.addedFiles;
+    console.log(this.files);
     this.readFile(this.files[0]).then(fileContents => {
       if (edit) {
-        this.catalogoEdit.imagen = fileContents;
+        // console.log(edit);
+        this.catalogoEdit.image = fileContents;
+        // console.log(this.catalogoEdit.imagen);
       }else{
+        // console.log(edit);
         this.catalogo.image = fileContents;
+        // console.log(this.catalogo.image);
       }
     });
   }
@@ -133,7 +142,7 @@ export class CatalogoComponent implements OnInit {
   resetForm(){
     this.catalogo = {
       "nombre": null,
-      "descuento": null,
+      "descuento": 0,
       "estado": 'activo',
       "tipo": 'general',
       "image": null
@@ -141,11 +150,24 @@ export class CatalogoComponent implements OnInit {
     this.files = [];
   }
 
-  submitCreateCat(){
+  submitCreateCat(form: NgForm){
+    if(form.invalid){
+      console.log(form.form.value);
+      if(form.form.value.name === null){
+        this.nombreCatalogo = "Ingrese nombre del producto";
+        this.flagNombreCatalogo = true;
+      }else{
+        this.flagNombreCatalogo = false;
+      }
+      return;
+    }
+    this.flagNombreCatalogo = false;
     var data = this.catalogo;
+    console.log(data);
     this.http.httpPost('catalogos', data, true).subscribe(
       response => {
         if (response.status == 200 && response.response == 'success') {
+          console.log(response);
           this.openDrawer = false;
           this.getCatalogos();
           this.resetForm();
@@ -163,6 +185,7 @@ export class CatalogoComponent implements OnInit {
         }
       },
       error => {
+        Swal.fire('¡Ups!','Olvidaste subir la imagen', 'error');
         console.error(error);
       }
     )
@@ -170,7 +193,7 @@ export class CatalogoComponent implements OnInit {
 
   deleteCatalogo(id){
     Swal.fire({
-      title: 'Está seguro que desea eleiminar este catalogo?',
+      title: 'Está seguro que desea eliminar este catalogo?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -271,7 +294,9 @@ export class CatalogoComponent implements OnInit {
       }
     }
     var search = "search=" + JSON.stringify(this.filterCatalogo);
-    this.getCatalogos(search); 
+    console.log(search);
+    console.log(this.filterCatalogo);
+    this.getCatalogos(search);
   }
 }
 

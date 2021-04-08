@@ -28,6 +28,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -59,7 +62,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
      MatProgressBarModule,
      MatDialogModule,
      MatProgressSpinnerModule,
-     MatButtonToggleModule
+     MatButtonToggleModule,
+     MatTableExporterModule,
+     MatAutocompleteModule,
+     MatSortModule
   ],
   exports: [
      MatButtonModule,
@@ -88,11 +94,14 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
      MatProgressBarModule,
      MatDialogModule,
      MatProgressSpinnerModule,
-     MatButtonToggleModule
+     MatButtonToggleModule,
+     MatTableExporterModule,
+     MatAutocompleteModule,
+     MatSortModule
   ],
   providers: [
      MatDatepickerModule,
-     MatSnackBar,
+     MatSnackBar
      
   ]
 })

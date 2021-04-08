@@ -1,3 +1,4 @@
+<div *ngIf="access_token; else login">
 <app-header></app-header>
 
 <div id="wrapper">
@@ -6,7 +7,7 @@
     </div>
     <div class="contenido">
         <div class="overview"></div>
-        <app-drawer-advanced class="form-advanced" name="crear-cliente" title="Crear Cliente" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarCliente()">
+        <app-drawer-advanced class="form-advanced" name="crear-cliente" title="Crear Cliente" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarCliente(f)">
             <div class="tabs">
                 <ul>
                     <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
@@ -16,11 +17,14 @@
                 </ul>
             </div>
             <div class="fields">
-                <form (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
+                <form (keydown.enter)="$event.target.tagName == 'TEXTAREA'" #f="ngForm">
                     <div *ngIf="generales" class="field-datos-generales">
                         <div class="label-field">
                             <label for="">Nombres</label>
                             <input type="text" class="" [(ngModel)]="createClient.name" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.name">
+                                {{errors.name}}
+                            </small>
                         </div>
 
                         <div class="label-field">
@@ -69,16 +73,25 @@
                         <div class="label-field">
                             <label for="">Correo electrónico</label>
                             <input name="email" type="email" [(ngModel)]="createClient.email" [ngModelOptions]="{standalone: true}" class="">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.email">
+                                {{errors.email}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Contraseña</label>
                             <input name="password" type="password" [(ngModel)]="createClient.password" [ngModelOptions]="{standalone: true}" class="">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.password">
+                                {{errors.password}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Confirmar contraseña</label>
-                            <input type="password" class="">
+                            <input type="password" class="" [(ngModel)]="confirm_password">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.password">
+                                {{errors.password}}
+                            </small>
                         </div>
 
                     </div>
@@ -102,30 +115,35 @@
                         <div class="label-field">
                             <label for="">Nombre de la tienda</label>
                             <input type="text" class="" [(ngModel)]="createTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                            <small *ngIf="nombreBool"><span class="text-danger">{{ error.nombre }}</span></small>
                         </div>
 
-                        <div class="label-field two-fields">
-                            <div class="label-field-two">
+                        <div class="row p-2">
+                            <div class="label-field col">
                                 <label for="">Lugar</label>
-                                <input type="text" class="" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                                <input type="text" class="form-control" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                                <small *ngIf="lugarBool"><span class="text-danger">{{ error.lugar }}</span></small>
                             </div>
-                            <div class="label-field-two">
+                            <div class="label-field col">
                                 <label for="">Número de local</label>
-                                <input type="number" class="" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
+                                <input type="number" class="form-control" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
+                                <small *ngIf="localBool"><span class="text-danger">{{ error.local }}</span></small>
                             </div>
                         </div>
                         <div class="label-field">
                             <label for="">Dirección</label>
                             <input type="text" class="" [(ngModel)]="createTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                            <small *ngIf="direccionBool"><span class="text-danger">{{ error.direccion }}</span></small>
                         </div>
                         <div class="label-field">
                             <label for="">Teléfono</label>
                             <input type="tel" class="" [(ngModel)]="createTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                            <small *ngIf="telefonoBool"><span class="text-danger">{{ error.telefono }}</span></small>
                         </div>
                         <div class="agregar-tienda">
                             <div class="box-button-light">
                                 <div class="box-mas">
-                                    <img class="mas" src="assets/img/mas.svg" alt="">
+                                    <img class="mas" src="./assets/img/mas.svg" alt="">
                                 </div>
                                 <a class="btn-ligth" (click)="addTienda()"> Agregar tienda</a>
                             </div>
@@ -134,8 +152,8 @@
 
                     <div *ngIf="asignar" class="asignar-vendedor">
                         <div class="search-vendedor">
-                            <p>Eligue un vendedor</p>
-                            <mat-form-field appearance="legacy" class="w-100">
+                            <p>Elige un vendedor</p>
+                            <mat-form-field class="w-100">
                                 <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
                                 <input matInput 
                                     placeholder="Buscar por nombre, código."
@@ -258,14 +276,14 @@
                             <input type="text" class="" [(ngModel)]="createTiendas.nombre"  [ngModelOptions]="{standalone: true}">
                         </div>
 
-                        <div class="label-field two-fields">
-                            <div class="label-field-two">
+                        <div class="row p-2">
+                            <div class="label-field col">
                                 <label for="">Lugar</label>
-                                <input type="text" class="" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                                <input type="text" class="form-control" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
                             </div>
-                            <div class="label-field-two">
+                            <div class="label-field col">
                                 <label for="">Número de local</label>
-                                <input type="number" class="" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
+                                <input type="number" class="form-control" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="label-field">
@@ -279,7 +297,7 @@
                         <div class="agregar-tienda">
                             <div class="box-button-light">
                                 <div class="box-mas">
-                                    <img class="mas" src="assets/img/mas.svg" alt="">
+                                    <img class="mas" src="./assets/img/mas.svg" alt="">
                                 </div>
                                 <a class="btn-ligth" (click)="createTiendaUpdateClient()"> Agregar tienda</a>
                             </div>
@@ -288,14 +306,14 @@
 
                     <div *ngIf="asignar" class="asignar-vendedor">
                         <div class="search-vendedor">
-                            <p>Eligue un vendedor</p>
+                            <p>Elige un vendedor</p>
                             <mat-form-field appearance="legacy" class="w-100">
                                 <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
                                 <input matInput 
                                     placeholder="Buscar por nombre, código."
                                     style="color: #82867D;"
                                     [(ngModel)]="search"
-                                    (keyup.enter)="searchVendedor()"
+                                    (keyup)="searchVendedor()"
                                     [ngModelOptions]="{standalone: true}"
                                     >
                                     <mat-icon matSuffix
@@ -331,10 +349,10 @@
         <div class="filtros">
             <div class="box-buscador">
                 <img class="lupa" src="{{ templateImage.lupa }}" alt="">
-                <input class="buscador" placeholder="Buscar..." (keyup.enter)="searchTable($event)" type="text">
+                <input class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
             </div>
             <div (click)="accionesCliente()" class="box-editar">
-                <p class="texto-editar">Acción de</p>
+                <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img src="{{ templateImage.points }}" alt="">
                 </div>
@@ -343,7 +361,7 @@
                     <li (click)="editTienda()">
                         <img src="{{ templateImage.lapiz }}" alt=""> Editar
                     </li>
-                    <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                    <li (click)="exporter.exportTable('xlsx', {fileName:'clientes'})"><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
                     <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                 </ul>
             </div>
@@ -357,8 +375,48 @@
         </div>
 
         <section class="table-data">
-
-            <table class="table">
+            <table mat-table [dataSource]="dataSource" matSort matTableExporter  #exporter="matTableExporter">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let cliente; let i = index">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (click)="selectClientCheckbox(cliente, i)"
+                            (change)="$event ? selection.toggle(cliente) : null"
+                            [checked]="selection.isSelected(cliente)"
+                            [aria-label]="checkboxLabel(cliente)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente"><div class="iniciales"> {{cliente.iniciales}} </div><p class="nombre">{{ cliente.name }} {{ cliente.apellidos }}</p></td>
+                </ng-container>
+                <ng-container matColumnDef="Nit">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nit</th>
+                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente">1115072011-8</td>
+                </ng-container>
+                <ng-container matColumnDef="Vendedor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendedor</th>
+                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente">{{(cliente.vendedor != null) ? cliente.vendedor.name + ' ' + cliente.vendedor.apellidos : 'Sin asignar'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Correo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <table class="table" matTableExporter  #exporter="matTableExporter">
                 <thead>
                     <tr class="tabla-fila-cabecera">
                         <th></th>
@@ -382,21 +440,20 @@
                         <td (click)="clienteDetalle(cliente.id)" class="correo">{{ cliente.email }}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
 
         </section>
     </div>
 </div>
 
 
-<div class="footer">
+<!-- <div class="footer">
     <div class="footer-paginate">
         <div class="pagination">
             <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
         </div>
         <div class="label-field label-field-paginate">
-            <select name="changeNumberPage" id="changeNumberPage" 
-            class="select-paginate"
+            <select name="changeNumberPage" id="changeNumberPage" class="select-paginate"
             (change)="changeListPagination($event)">
                 <option [value]="5"> 5 Por página </option>
                 <option [value]="10"> 10 Por página </option>
@@ -406,4 +463,8 @@
             </select>
         </div>   
     </div>
+</div> -->
 </div>
+<ng-template #login>
+    <app-login></app-login>
+</ng-template>

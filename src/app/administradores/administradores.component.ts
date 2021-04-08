@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { TablaAdministradoresComponent } from '../tabla-administradores/tabla-administradores.component';
 
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 
@@ -10,7 +11,6 @@ declare var $:any;
 
 import Swal from 'sweetalert2'
 import { NgxSpinnerService } from 'ngx-spinner';
-
 
 @Component({
   selector: 'app-administradores',
@@ -38,6 +38,7 @@ export class AdministradoresComponent implements OnInit {
   data = [];
 
   rol = localStorage.getItem('rol');
+  access_token = localStorage.getItem('access_token');
 
   admin = {
     "rol_id": 1,
@@ -83,6 +84,8 @@ export class AdministradoresComponent implements OnInit {
   removeItemsUsers = [];
   active:string = "activeOff";
   user_data : FormArray;
+
+  superAdmin: boolean = false;
 
   constructor( private userService: UsersService, private route: Router, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService, private formb: FormBuilder) {
 
@@ -167,7 +170,7 @@ export class AdministradoresComponent implements OnInit {
       apellidos: [this.check_Update.apellidos, [Validators.required]],
       dni: [this.check_Update.dni, [Validators.required]],
       email: [this.check_Update.email, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: [''],
+      password: ['', Validators.required],
       user_data: this.formb.array([this.createUser_data()],[Validators.required])
     });
   }
@@ -205,6 +208,7 @@ export class AdministradoresComponent implements OnInit {
       res =>{
         this.usersAdmins = res['users'];
         this.user_data = this.userColumns = res['fields'];
+        console.log(res);
       }
     );
   }
@@ -226,20 +230,25 @@ export class AdministradoresComponent implements OnInit {
     this.userService.createUser(this.formCreateAdmin.value).subscribe(
       (data:any) =>{
         // console.log(data);
-        this.showAdmins();
-        this.FormCreateAdmin();
-        this.cerrarFormAdmin();
+        // this.showAdmins();
+        // this.FormCreateAdmin();
+        // this.cerrarFormAdmin();
 
         Swal.fire({
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
         });
+        
         // this.buscarAdmin();
       },
       (error:any) =>{
         console.log(error);
       }
     );
+  }
+
+  procesarData(data: any){
+    this.check_Update = data;
   }
 
   updatedAdmin(){
@@ -316,6 +325,7 @@ export class AdministradoresComponent implements OnInit {
         
         // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
         var data = {usuarios : this.removeItemsUsers};
+        console.log(this.removeItemsUsers);
         this.userService.deleteUsers(data).subscribe(
           (data:any) =>{
             if (data.response == 'success' && data.status == 200) {

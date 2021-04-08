@@ -1,0 +1,667 @@
+.title-datos-personales,
+.title-tiendas,
+.title-credenciales,
+.title-vendedor-asignado,
+.title-tus-finanzas {
+    font-size: 26px;
+    letter-spacing: 0.74px;
+    font-weight: 700;
+    margin: .6em 0em;
+}
+
+.filtro-clientes {
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 0 2em;
+}
+
+/* .filtro-clientes .box-editar {
+    margin-right: 0;
+} */
+
+hr {
+    border-top: 1px solid #EEEEEE;
+    margin: auto;
+    margin-right: 0;
+}
+
+.width-75 {
+    width: 75%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ident-admin {
+    display: flex;
+}
+
+.div-imagen img {
+    margin-right: 10px;
+}
+
+.filtros {
+    justify-content: space-between;
+}
+
+.div-edit-boton {
+    display: flex;
+}
+
+.box-editar,
+.box-create-new {
+    height: max-content;
+}
+
+.texto-editar {
+    padding: 5px;
+}
+
+.datos {
+    margin-bottom: 1em;
+}
+
+.datos p:nth-child(2) {
+    font-weight: 800;
+}
+
+.color-email {
+    color: #FF596A;
+}
+
+.pt-2 {
+    padding-top: 2rem;
+}
+
+.pt-3 {
+    padding-top: 3rem;
+}
+
+.pt-4 {
+    padding-top: 4rem;
+}
+
+.pt-5 {
+    padding-top: 5rem;
+}
+
+.pb-2 {
+    padding-bottom: 2rem;
+}
+
+.pb-3 {
+    padding-bottom: 3rem;
+}
+
+.pb-4 {
+    padding-bottom: 4rem;
+}
+
+.pb-5 {
+    padding-bottom: 5rem;
+}
+
+.card {
+    box-shadow: 1px 1px 5px 1px rgba(125, 125, 125, .2);
+    margin: 0;
+    border-radius: 8px;
+}
+
+
+.overview {
+    background: rgba(0, 0, 0, .4);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 500;
+}
+
+.cupo-preaprobado,
+.cupo-disponible,
+.total-deuda,
+.saldo-en-mora {
+    background: white;
+    margin: 1em 0em;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cupo-preaprobado {
+    border-top: 4px solid #FFCF27;
+    border-radius: 0 0 8px 8px;
+}
+
+.cupo-preaprobado p:nth-child(1) {
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    /* padding-bottom: 10px; */
+}
+
+.cupo-preaprobado p:nth-child(2) {
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.cupo-disponible {
+    border-top: 4px solid #95D5C1;
+    border-radius: 0 0 8px 8px;
+}
+
+.cupo-disponible p:nth-child(1) {
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.cupo-disponible p:nth-child(2) {
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.total-deuda {
+    border-top: 4px solid #EB1EC3;
+    border-radius: 0 0 8px 8px;
+}
+
+.total-deuda p:nth-child(1) {
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.total-deuda p:nth-child(2) {
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.saldo-en-mora {
+    border-top: 4px solid #E31D31;
+    border-radius: 0 0 8px 8px;
+}
+
+.saldo-en-mora p:nth-child(1) {
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #D8D8D8;
+    margin: 0px 10px 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.saldo-en-mora p:nth-child(2) {
+    color: #FF596A;
+    font-size: 26px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions a {
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+}
+
+.buscador-pedido {
+    border: 1px solid #FF596A;
+    width: 100%;
+    border-radius: 15px;
+    padding: .5em 1em;
+    margin-top: 10px;
+}
+
+.box-pedidos {
+    background: #f7f8f9;
+    border-radius: 7px;
+    padding: .3em .6em;
+    margin: 1em 0em;
+    cursor: pointer;
+}
+
+.box-pedidos:hover{
+    background: #e7e7e7;
+}
+
+.info-pedido{
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+    padding: 0.2em 0;
+}
+
+.foto-referencia {
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #D7D7D7;
+    align-items: center;
+}
+
+.foto-referencia p {
+    font-size: 21px;
+}
+
+.list-tienda {
+    display: flex;
+    justify-content: space-between;
+    margin: .6em 0em;
+}
+
+.list-tienda .cantidad {
+    color: #FF596A;
+    font-weight: bold;
+}
+
+.foto-referencia img {
+    height: 55px;
+    width: 50px;
+}
+
+.vendedor-detalle .actions {
+    padding: 8px 10px;
+    border-bottom: 1px solid #c7c7c7;
+    margin-bottom: 15px;
+    text-decoration: none;
+    position: relative;
+}
+
+.vendedor-detalle .actions a {
+    color: #1E2933;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.line-pedidos {
+    background: #FF596A;
+    height: 3px;
+    width: 200px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+
+.tabla-clientes-en-vendedores {
+    width: 100%;
+}
+
+.tabla-clientes-en-vendedores thead {
+    text-align: left;
+}
+
+.tabla-clientes-en-vendedores td {
+    padding: 1.5em 0em;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.tabla-clientes-en-vendedores th {
+    padding: 1.1em 0em;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.tabla-clientes-en-vendedores tr:last-child td {
+    border-bottom: 0px !important;
+}
+
+.actions {
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #D7D7D7;
+}
+
+.actions a {
+    color: #1E2933;
+    display: block;
+    font-weight: 600;
+    padding: .8em 0em;
+}
+
+.actions .pedidos {
+    border-bottom: 3px solid #FF596A;
+}
+
+.row-vendedor-asignado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btn-whatsapp {
+    background: #1CD34D;
+    cursor: pointer;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    height: 32px;
+    line-height: 30px;
+    padding-right: 15px;
+}
+
+.btn-whatsapp a {
+    color: #fff;
+    text-decoration: none;
+    ;
+}
+
+.btn-whatsapp img {
+    padding-right: 10px;
+}
+
+.aside-pedidos {
+    padding-right: 2em;
+    border-left: 1px solid #D8D8D8;
+}
+
+.title-datos-personales,
+.title-credenciales,
+.title-vendedor-asignado{
+    margin: .8em 0em;
+    margin-bottom: 1.2em;
+}
+
+.title-tiendas {
+    margin: .5em 0em;
+}
+
+/* Cambiar color del placeholder */
+
+::placeholder {
+    color: #E3E3E3;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #E3E3E3;
+}
+
+::-ms-input-placeholder {
+    color: #E3E3E3;
+}
+
+/* Boton tienda. */
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+.acciones-administrador {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    left: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administrador li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administrador li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+
+.cont-title-tienda {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Drawer tienda. */
+
+.form-advanced .info-row {
+    display: flex;
+    width: 100%;
+}
+
+.form-advanced .tabs {
+    width: 40%;
+    height: 100vh;
+    border-right: 1px solid #d7d7d7;
+}
+
+.form-advanced .fields {
+    width: 60%;
+}
+
+.form-advanced .tabs ul {
+    list-style: none;
+}
+
+.form-advanced .tabs li {
+    width: 100%;
+}
+
+.form-advanced .tabs a {
+    color: #adadad;
+    padding: .7em 0em;
+    display: block;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+.form-advanced .tabs a:hover {
+    background: #ff7281;
+    color: #fff !important;
+    transition: all .5s ease;
+}
+
+.activeclasstab {
+    background: #FF596A;
+    color: white !important;
+}
+
+.activeclasstab a { 
+    color: white !important;
+}
+
+.activeclasstab-default {
+    background: #FF596A;
+    color: white !important;
+}
+
+.label-field {
+    padding: 0px 20px;
+    margin-bottom: 16px;
+}
+
+.label-field label,
+.label-field input {
+    display: block;
+    width: 100%;
+}
+
+.label-field label {
+    color: #FF596A;
+    margin-bottom: 5px;
+}
+
+.label-field input {
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.two-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-field .label-field-two label,
+.label-field .label-field-two input {
+    width: 90%;
+}
+
+
+.btn-edit-tienda {
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    transition: all .3s ease;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.agregar-tienda {
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.icon-edit-tienda{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #ff596a;
+}
+
+/* Lista de tiendas */
+.list-tiendas {
+    padding: 0 20px;
+    margin-bottom: 2em;
+    height: 20vh;
+    overflow: auto;
+}
+
+.item-tienda {
+    display: flex;
+    background: #EBEBEB;
+    padding: 10px 15px;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.cont-item-tienda{
+    display: block;
+    width: 90%;
+}
+
+p.codigo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff596a;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+
+.ubicacion {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ubicacion p{
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.ubicacion span{
+    font-weight: 500;
+}
+
+.box-ampliacion{
+    background: #f7f8f9;
+    border-radius: 7px;
+    margin: 1em 0em;
+    cursor: pointer;
+}
+
+.titulo-ampliacion {
+    display: flex;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #D7D7D7;
+    align-items: center;
+    padding: .3em .6em;
+}
+
+.titulo-ampliacion p {
+    font-size: 21px;
+}
+
+.info-ampliacion {
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+    padding: 0.2em 0.5em;
+}
+.estado{
+    background: #e7e7e7;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding: .7em .5em;
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+}
+
+.aprobado{color: #1CD34D; font-weight: 600;}
+.rechazado{color: #E31D31; font-weight: 600;}
+.pendiente{color: #444A4F; font-weight: 600;}

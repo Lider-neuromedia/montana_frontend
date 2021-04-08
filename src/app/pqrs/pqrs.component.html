@@ -8,14 +8,14 @@
 
         <div class="filtros">
             <div class="box-buscador">
-                <img class="lupa" src="assets/img/search.svg" alt="">
-                <input name="buscador" class="buscador" type="text">
+                <img class="lupa" src="./assets/img/search.svg" alt="">
+                <input name="buscador" class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
                 <button type="button" class="hidden"></button>
             </div>
 
             <div class="box-create-new">
                 <div class="box-mas">
-                    <img class="mas" src="assets/img/mas.svg" alt="">
+                    <img class="mas" src="./assets/img/mas.svg" alt="">
                 </div>
                 <a class="btn-nuevo-cliente" data-toggle="modal" data-target="#crearPqrs">Nuevo PQRS</a>
             </div>
@@ -23,7 +23,35 @@
 
 
         <section class="table-data">
-            <table class="table">
+            <table class="ancho" mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="ticket">
+                    <th mat-header-cell *matHeaderCellDef>#Ticket</th>
+                    <td (click)="redirectDetalle(pqrs.id_pqrs)" style="cursor: pointer;" mat-cell *matCellDef="let pqrs">{{ pqrs.codigo }}</td>
+                </ng-container>
+                <ng-container matColumnDef="fechaRegistro">
+                    <th mat-header-cell *matHeaderCellDef>Fecha de Registro</th>
+                    <td (click)="redirectDetalle(pqrs.id_pqrs)" style="cursor: pointer;" mat-cell *matCellDef="let pqrs">{{ pqrs.fecha_registro }}</td>
+                </ng-container>
+                <ng-container matColumnDef="cliente">
+                    <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                    <td (click)="redirectDetalle(pqrs.id_pqrs)" style="cursor: pointer;" mat-cell *matCellDef="let pqrs">{{ pqrs.name_cliente+ ' ' + pqrs.apellidos_cliente }}</td>
+                </ng-container>
+                <ng-container matColumnDef="vendedor">
+                    <th mat-header-cell *matHeaderCellDef>Vendedor</th>
+                    <td (click)="redirectDetalle(pqrs.id_pqrs)" style="cursor: pointer;" mat-cell *matCellDef="let pqrs">{{ pqrs.name_vendedor+ ' ' + pqrs.apellidos_vendedor }}</td>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td (click)="redirectDetalle(pqrs.id_pqrs)" style="cursor: pointer;" mat-cell *matCellDef="let pqrs">{{ pqrs.estado }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <table class="table">
                 <thead>
                     <tr class="tabla-fila-cabecera">
                         <th>
@@ -52,7 +80,7 @@
                         <td (click)="redirectDetalle(pqr.id_pqrs)">{{pqr.estado}}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </section>
     </div>
 </div>
@@ -62,44 +90,48 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-            <form (submit)="submitCretePqrs()">
+            <form (submit)="submitCretePqrs()" [formGroup]="formulario">
                 <p class="title-solicitud">Nuevo PQRS</p>
                 <div class="label-field">
                     <label >Vendedor</label>
-                    <select name="vendedor" [(ngModel)]="createPqrs.vendedor" [ngModelOptions]="{standalone: true}">
+                    <select name="vendedor" formControlName="vendedor" required>
                         <option value="">Seleccione...</option>
                         <option *ngFor="let vendedor of vendedores" [value]="vendedor.id">
                             {{vendedor.name + ' ' + vendedor.apellidos}}
                         </option>
                     </select>
+                    <small *ngIf="vendedorBool"><span class="text-danger">{{error.vendedor}}</span></small>
                 </div>
                 <div class="label-field">
                     <label >cliente</label>
-                    <select name="cliente" [(ngModel)]="createPqrs.cliente" [ngModelOptions]="{standalone: true}">
+                    <select name="cliente" formControlName="cliente" required>
                         <option value="">Seleccione...</option>
                         <option *ngFor="let cliente of clientes" [value]="cliente.id">
                             {{cliente.name + ' ' + cliente.apellidos}}
                         </option>
                     </select>
+                    <small *ngIf="clienteBool"><span class="text-danger">{{error.cliente}}</span></small>
                 </div>
                 <div class="label-field">
                     <label >Tipo de PQRS</label>
-                    <select name="tipo" [(ngModel)]="createPqrs.tipo" [ngModelOptions]="{standalone: true}">
+                    <select name="tipo" formControlName="tipo" required>
                         <option value="">Seleccione...</option>
                         <option value="queja_retraso">Queja por retrasos</option>
                     </select>
+                    <small *ngIf="tipoPqrsBool"><span class="text-danger">{{error.tipoPqrs}}</span></small>
                 </div>
 
                 <div class="label-field">
                     <label >Mensaje</label>
-                    <textarea name="mensaje" class="text-area"  [(ngModel)]="createPqrs.mensaje" [ngModelOptions]="{standalone: true}">
+                    <textarea name="mensaje" formControlName="mensaje" class="text-area" required>
                     </textarea>
+                    <small *ngIf="mensajeBool"><span class="text-danger">{{error.mensaje}}</span></small>
                 </div>
                 
                 <div class="enviar-solicitud">
                     <div class="box-create-new">
                         <div class="box-mas">
-                            <img class="mas" src="assets/img/enviar.png" alt="">
+                            <img class="mas" src="./assets/img/enviar.png" alt="">
                         </div>
                         <button type="submit" class="btn-enviar-solicitud">Enviar</button>
                     </div>
@@ -110,7 +142,7 @@
     </div>
 </div>
 
-<div class="footer">
+<!-- <div class="footer">
     <div class="footer-paginate">
         <div class="pagination">
             <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
@@ -125,4 +157,4 @@
             </select>
         </div>   
     </div>
-</div>
+</div> -->

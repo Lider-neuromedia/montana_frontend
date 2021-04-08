@@ -44,7 +44,6 @@
     padding: 15px 20px;
     letter-spacing: 0.54px;
 }
-
 .nuevo-administrador h2,
 .editar-administrador h2 {
     font-size: 19px;
@@ -138,7 +137,20 @@
     cursor: pointer;
     transition: all .3s ease;
 }
-
+.box-mas{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.box-cancelar{
+    margin-top: 1px;
+    margin-left: 10px;
+}
+.img-close-admin{
+    font-size: 15px;
+    margin-left: 22%;
+    margin-top: 20%;
+}
 .box-editar-open {
     border-bottom: 0;
     border-radius: 15px 15px 0px 0px;

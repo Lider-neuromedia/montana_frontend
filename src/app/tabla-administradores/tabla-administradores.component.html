@@ -1,0 +1,74 @@
+ <div class="filtros">
+    <div class="box-buscador">
+        <img class="lupa" src="./assets/img/search.svg" alt="">
+        <input class="buscador" type="text" (keyup)="filtro($event)" placeholder="Buscar" #input>
+        <button type="button" class="hidden"></button>
+    </div>
+
+    <div (click)="accionesAdministrador()" class="box-editar">
+        <span class="texto-editar">Acción de</span>
+        <div class="icono-puntos">
+            <img src="./assets/img/edit_points.svg" alt="">
+        </div>
+
+        <ul class="acciones-administrador">
+            <li (click)="abrirFormulario()"><img src="./assets/img/editar.svg" alt=""> Editar</li>
+            <li><a (click)="exporter.exportTable('xlsx', {fileName:'admins'})"><img src="./assets/img/icons-filter/export.svg" alt=""> Exportar</a></li>
+            <li (click)="eliminarAdmin()"><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+        </ul>
+    </div>
+
+    <div class="box-create-new">
+        <div class="box-mas">
+            <img class="mas" src="./assets/img/mas.svg" alt="">
+        </div>
+        <a class="btn-nuevo-cliente" (click)="nuevoAdmin()">Nuevo administrador</a>
+    </div>
+</div>
+        <!-- <mat-form-field>
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="filtro($event)" placeholder="Buscar" #input>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field> -->
+    <table mat-table [dataSource]="dataSource" matSort matTableExporter  #exporter="matTableExporter">
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let admin; let i = index">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                    (click)="editarAdmin(admin, i)"
+                    (change)="$event ? selection.toggle(admin) : null"
+                    [checked]="selection.isSelected(admin)"
+                    [aria-label]="checkboxLabel(admin)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let admin">
+                <div class="iniciales"> {{admin.iniciales}} </div>
+                <p class="nombre">{{ admin.name }} {{ admin.apellidos }}</p>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Celular">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dni </th>
+            <td mat-cell *matCellDef="let admin"> {{ admin.dni }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let admin"> {{ admin.email }} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
+        </tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

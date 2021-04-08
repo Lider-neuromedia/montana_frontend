@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,20 @@ export class UsersService {
   constructor( private http: HttpClient ) {}
 
   admins:any = {};
+  private _refresh$ = new Subject<void>();
   
   /* Traer todos los usuarios */
-  getAllUsers(){
-    return this.http.get(`${this.api}/users`);
+  /*getAllUsers(){
+    return this.http.get('http://127.0.0.1:8000/api/usersAll');
+  }*/
+
+  get refresh$(){
+    return this._refresh$;
+  }
+
+  getAllUsers(i: number){
+    console.log(i)
+    return this.http.get(`${this.api}/users?page=${i}`);
   }
 
   /* Traer todos los roles */
@@ -76,7 +87,11 @@ export class UsersService {
   /* Crear usuario admin */
   createUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.post(`${this.api}/users`, user, {headers: headers});
+    return this.http.post(`${this.api}/users`, user, {headers: headers}).pipe(
+      tap(() => {
+        this.refresh$.next();
+      })
+    );
   }
 
   updateUser(user){
@@ -91,8 +106,11 @@ export class UsersService {
 
   /* Eliminar varios usuario */
   deleteUsers(users){
+    console.log(users);
     const headers = new HttpHeaders( {'Content-Type': 'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.post(`${this.api}/delete-users`, users,{ headers:headers });
+    return this.http.post(`${this.api}/delete-users`, users,{ headers:headers }).pipe(tap(() => {
+      this.refresh$.next();
+    }));
   }
 
   /* Clientes asianados */
@@ -110,7 +128,27 @@ export class UsersService {
   getAllSellers(search){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     var route = 'vendedores?search=' + search;
+    let users = [];
     return this.http.get(`${this.api}/` + route, {headers: headers});
+  }
+  getAllSellersForTable(search){
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    var route = 'vendedores?search=' + search;
+    let users = [];
+    return this.http.get(`${this.api}/` + route, {headers: headers}).pipe( map((resp: any[]) => {
+      resp['users'].forEach(element =>{
+        users.push({
+          nombre: element['name'],
+          apellido: element['apellidos'],
+          email: element['email'],
+          iniciales: element['iniciales'],
+          telefono: element['user_data'][0].value_key,
+          codigo: element['user_data'][1].value_key
+        });
+      });        
+      // console.log(resp);
+      return users;
+    }));
   }
 
   getSeller(id){
@@ -122,6 +160,17 @@ export class UsersService {
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     var route = 'clientes?search=' + search;
     return this.http.get(`${this.api}/` + route, {headers: headers});
+  }
+  getNameAllClients(search){
+    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    var route = 'clientes?search=' + search;
+    let users = [];
+    return this.http.get(`${this.api}/` + route, {headers: headers}).pipe( map( (resp: any[]) => {
+      resp['users'].forEach(element => {
+        users.push(`${element['name']} ${element['apellidos']}`);
+      });
+      return users;
+    }))
   }
 
   getClient(id){

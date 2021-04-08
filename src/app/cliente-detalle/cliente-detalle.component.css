@@ -11,6 +11,7 @@
 
 .filtro-clientes {
     justify-content: space-between;
+    margin-left: 3%;
     margin-bottom: 1em;
     padding: 0 2em;
 }
@@ -255,16 +256,19 @@ hr {
 }
 
 .info-pedido{
-    display: flex;
+    display: block;
     justify-content: space-between;
     font-size: 21px;
     padding: 0.2em 0;
+}
+.div-datos{
+    margin-top: 2%;
 }
 
 .foto-referencia {
     display: flex;
     padding-bottom: 7px;
-    border-bottom: 1px solid #D7D7D7;
+    /* border-bottom: 1px solid #D7D7D7; */
     align-items: center;
 }
 
@@ -310,6 +314,12 @@ hr {
     position: absolute;
     bottom: -2px;
     left: 0;
+}
+.tabla-pedidos{
+    width: 100%;
+}
+.tabla-cupo{
+    width: 100%;
 }
 
 .tabla-clientes-en-vendedores {

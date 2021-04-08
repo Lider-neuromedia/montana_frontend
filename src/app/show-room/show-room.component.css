@@ -13,6 +13,10 @@
 .cont-img-banner{
     padding: 0;
 }
+.icon-center{
+    margin-left: 5px    ;
+    margin-top: 5px;
+}
 
 .cont-img-banner img{
     width: 100%;

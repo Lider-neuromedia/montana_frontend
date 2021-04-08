@@ -19,6 +19,15 @@
     margin-bottom: 1em;
 }
 
+.ancho{
+    width: 100%;
+}
+
+.ancho td{
+    height: 70px;
+}
+
+
 .enviar-solicitud{
     width: 100%;
     display: flex;

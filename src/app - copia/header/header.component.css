@@ -1,0 +1,52 @@
+.header{
+    background: #FF596A;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header .header-items{
+    color: white;
+    margin-left: 230px;
+    width: calc(100% - 250px);
+    justify-content: space-between;
+    display: flex;
+}
+
+.header .breadcrumb-custom ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+}
+
+.header .notify-accout{
+    align-items: center;
+    display: flex;
+}
+
+.header .notify,
+.header .account,
+.header .close-custom{
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+}
+
+.header .notify,
+.header .notify img,
+.header .account img,
+.header .close-custom img{
+    margin: 0 .5em;
+}
+
+.breadcrumb-custom li{
+    margin: 0 4px;
+}
+
+.breadcrumb-custom a{
+    text-decoration: none;
+    color: white;
+}

@@ -13,6 +13,20 @@
     font-size: 19px;
     padding: 0px;
 }
+.box-mas{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+}
+.box-cancelar{
+    position: absolute;
+    top: 25%;
+    left: 51%;
+}
+.cancel{
+    margin-top: 20%;
+    font-size: 15px;
+}
 
 .drawer-right {
     box-shadow: 0px 3px 7px rgba(0, 0, 0, .2);

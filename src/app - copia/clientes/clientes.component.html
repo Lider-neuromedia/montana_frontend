@@ -1,0 +1,409 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="overview"></div>
+        <app-drawer-advanced class="form-advanced" name="crear-cliente" title="Crear Cliente" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarCliente()">
+            <div class="tabs">
+                <ul>
+                    <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                    <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                    <li><a [class.activeclasstab]="activeTienda" (click)="crearTienda()">Crear Tienda</a></li>
+                    <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un vendedor</a></li>
+                </ul>
+            </div>
+            <div class="fields">
+                <form (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
+                    <div *ngIf="generales" class="field-datos-generales">
+                        <div class="label-field">
+                            <label for="">Nombres</label>
+                            <input type="text" class="" [(ngModel)]="createClient.name" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Apellidos</label>
+                            <input type="text" class="" [(ngModel)]="createClient.apellidos" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Tipo de documento</label>
+                            <select name="" id="" [(ngModel)]="createClient.tipo_documento" [ngModelOptions]="{standalone: true}">
+                                    <option value="">Selecciones tipo de documento</option>
+                                    <option value="">Cédula de ciudadanía</option>
+                                    <option value="">Cédula de extranjería</option>
+                                    <option value="">Pasaporte</option>
+                                </select>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Número de documento</label>
+                            <input type="number" class="" [(ngModel)]="createClient.dni" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Nit</label>
+                            <input type="text" class="" [(ngModel)]="createClient.nit" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Razón social</label>
+                            <input type="text" class="" [(ngModel)]="createClient.razon_social" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Dirección</label>
+                            <input type="text" class="" [(ngModel)]="createClient.direccion" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Teléfono</label>
+                            <input type="text" class="" [(ngModel)]="createClient.telefono" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div *ngIf="credenciales" class="credenciales">
+
+                        <div class="label-field">
+                            <label for="">Correo electrónico</label>
+                            <input name="email" type="email" [(ngModel)]="createClient.email" [ngModelOptions]="{standalone: true}" class="">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Contraseña</label>
+                            <input name="password" type="password" [(ngModel)]="createClient.password" [ngModelOptions]="{standalone: true}" class="">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Confirmar contraseña</label>
+                            <input type="password" class="">
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="tienda" class="tienda">
+                        <div class="list-tiendas" *ngIf="this.createClient.tiendas.length > 0">
+                            <div class="item-tienda" *ngFor="let tienda of createClient.tiendas">
+                                <div class="cont-item-tienda">
+                                    <p class="codigo">Tienda: {{tienda.nombre}}</p>
+                                    <div class="ubicacion">
+                                        <p><span>Lugar:</span> {{tienda.lugar}}</p>
+                                        <p><span>Local:</span> {{tienda.local}}</p>
+                                    </div>
+                                </div>
+                                <div class="btn-edit-tienda">
+                                    <mat-icon matSuffix class="icon-edit-tienda">edit</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Nombre de la tienda</label>
+                            <input type="text" class="" [(ngModel)]="createTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field two-fields">
+                            <div class="label-field-two">
+                                <label for="">Lugar</label>
+                                <input type="text" class="" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="label-field-two">
+                                <label for="">Número de local</label>
+                                <input type="number" class="" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="label-field">
+                            <label for="">Dirección</label>
+                            <input type="text" class="" [(ngModel)]="createTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="label-field">
+                            <label for="">Teléfono</label>
+                            <input type="tel" class="" [(ngModel)]="createTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="agregar-tienda">
+                            <div class="box-button-light">
+                                <div class="box-mas">
+                                    <img class="mas" src="assets/img/mas.svg" alt="">
+                                </div>
+                                <a class="btn-ligth" (click)="addTienda()"> Agregar tienda</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="asignar" class="asignar-vendedor">
+                        <div class="search-vendedor">
+                            <p>Eligue un vendedor</p>
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
+                                <input matInput 
+                                    placeholder="Buscar por nombre, código."
+                                    style="color: #82867D;"
+                                    [(ngModel)]="search"
+                                    (keyup.enter)="searchVendedor()"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                    <mat-icon matSuffix
+                                        (click)="searchVendedor()"
+                                        style="color: #82867D; cursor: pointer;">
+                                        search
+                                    </mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="item-vendedor-select" *ngIf="createClient.vendedor.id != 0" [@inOutAnimation]>
+                            <p style="display: flex;"> 
+                                {{createClient.vendedor.name + ' ' + createClient.vendedor.apellidos}}
+                            </p>
+                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteVendedorSelect()">
+                                <mat-icon style="color: #ff596a;">delete</mat-icon>
+                            </button> 
+                        </div>
+                        <div class="list-vendedores">
+                            <div class="item-vendedor" *ngFor="let vendedor of vendedores" (click)="selectVendedor(vendedor)" [@fadeIn]>
+                                <p> 
+                                    <span class="icon-vendedor">{{vendedor.name.substr(0,1) + vendedor.apellidos.substr(0,1)}}</span> 
+                                    {{vendedor.name + ' ' + vendedor.apellidos}}
+                                </p>
+                                <p>{{vendedor.id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </app-drawer-advanced>
+        <!-- Editar clientes -->
+        <app-drawer-advanced class="form-advanced" name="editar-cliente" title="Editar Cliente" button="Actualizar"
+        [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="submitUpdateClient()">
+            <div class="tabs">
+                <ul>
+                    <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                    <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                    <li><a [class.activeclasstab]="activeTienda" (click)="crearTienda()">Crear Tienda</a></li>
+                    <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un vendedor</a></li>
+                </ul>
+            </div>
+            <div class="fields">
+                <form (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
+                    <div *ngIf="generales" class="field-datos-generales">
+                        <div class="label-field">
+                            <label for="">Nombres</label>
+                            <input type="text" class="" [(ngModel)]="updateClient.name" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Apellidos</label>
+                            <input type="text" class="" [(ngModel)]="updateClient.apellidos" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Tipo de documento</label>
+                            <select name="" id="" [(ngModel)]="updateClient.tipo_identificacion" [ngModelOptions]="{standalone: true}">
+                                    <option value="">Selecciones tipo de documento</option>
+                                    <option value="Cedula">Cédula de ciudadanía</option>
+                                    <option value="Cedula extrangeria">Cédula de extranjería</option>
+                                    <option value="Pasaporte">Pasaporte</option>
+                                </select>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Número de documento</label>
+                            <input type="number" class="" [(ngModel)]="updateClient.dni" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field" *ngFor="let cliente of updateClient.data_user">
+                            <label for="">{{cliente.field_key}}</label>
+                            <input type="text" class="" [(ngModel)]="cliente.value_key" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div *ngIf="credenciales" class="credenciales">
+
+                        <div class="label-field">
+                            <label for="">Correo electrónico</label>
+                            <input name="email" type="email" [(ngModel)]="updateClient.email" [ngModelOptions]="{standalone: true}" class="">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Contraseña</label>
+                            <input name="password" type="password" [(ngModel)]="updateClient.password" [ngModelOptions]="{standalone: true}" class="">
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Confirmar contraseña</label>
+                            <input type="password" class="">
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="tienda" class="tienda">
+                        <div class="list-tiendas" *ngIf="this.updateClient.tiendas.length > 0">
+                            <div class="item-tienda" *ngFor="let tienda of updateClient.tiendas">
+                                <div class="cont-item-tienda">
+                                    <p class="codigo">Tienda: {{tienda.nombre}}</p>
+                                    <div class="ubicacion">
+                                        <p><span>Lugar:</span> {{tienda.lugar}}</p>
+                                        <p><span>Local:</span> {{tienda.local}}</p>
+                                    </div>
+                                </div>
+                                <div class="btn-edit-tienda">
+                                    <mat-icon matSuffix class="icon-edit-tienda">edit</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="label-field">
+                            <label for="">Nombre de la tienda</label>
+                            <input type="text" class="" [(ngModel)]="createTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="label-field two-fields">
+                            <div class="label-field-two">
+                                <label for="">Lugar</label>
+                                <input type="text" class="" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="label-field-two">
+                                <label for="">Número de local</label>
+                                <input type="number" class="" [(ngModel)]="createTiendas.local"  [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="label-field">
+                            <label for="">Dirección</label>
+                            <input type="text" class="" [(ngModel)]="createTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="label-field">
+                            <label for="">Teléfono</label>
+                            <input type="tel" class="" [(ngModel)]="createTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="agregar-tienda">
+                            <div class="box-button-light">
+                                <div class="box-mas">
+                                    <img class="mas" src="assets/img/mas.svg" alt="">
+                                </div>
+                                <a class="btn-ligth" (click)="createTiendaUpdateClient()"> Agregar tienda</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="asignar" class="asignar-vendedor">
+                        <div class="search-vendedor">
+                            <p>Eligue un vendedor</p>
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <!-- <mat-label>Buscar por nombre, código.</mat-label> -->
+                                <input matInput 
+                                    placeholder="Buscar por nombre, código."
+                                    style="color: #82867D;"
+                                    [(ngModel)]="search"
+                                    (keyup.enter)="searchVendedor()"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                    <mat-icon matSuffix
+                                        (click)="searchVendedor()"
+                                        style="color: #82867D; cursor: pointer;">
+                                        search
+                                    </mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="item-vendedor-select" *ngIf="updateClient.vendedor != null" [@inOutAnimation]>
+                            <p style="display: flex;"> 
+                                {{updateClient.vendedor.name + ' ' + updateClient.vendedor.apellidos}}
+                            </p>
+                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteAsignVendedor(updateClient.vendedor)">
+                                <mat-icon style="color: #ff596a;">delete</mat-icon>
+                            </button> 
+                        </div>
+                        <div class="list-vendedores">
+                            <div class="item-vendedor" *ngFor="let vendedor of vendedores" (click)="updateAsignCliente(vendedor)" [@fadeIn]>
+                                <p> 
+                                    <span class="icon-vendedor">{{vendedor.name.substr(0,1) + vendedor.apellidos.substr(0,1)}}</span> 
+                                    {{vendedor.name + ' ' + vendedor.apellidos}}
+                                </p>
+                                <p>{{vendedor.id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </app-drawer-advanced>
+
+        <div class="filtros">
+            <div class="box-buscador">
+                <img class="lupa" src="{{ templateImage.lupa }}" alt="">
+                <input class="buscador" placeholder="Buscar..." (keyup.enter)="searchTable($event)" type="text">
+            </div>
+            <div (click)="accionesCliente()" class="box-editar">
+                <p class="texto-editar">Acción de</p>
+                <div class="icono-puntos">
+                    <img src="{{ templateImage.points }}" alt="">
+                </div>
+                <!-- Pop up editar -->
+                <ul class="acciones-cliente">
+                    <li (click)="editTienda()">
+                        <img src="{{ templateImage.lapiz }}" alt=""> Editar
+                    </li>
+                    <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                    <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+                </ul>
+            </div>
+            <div class="box-create-new">
+                <div class="box-mas">
+                    <img class="mas" src="{{ templateImage.mas }}" alt="">
+                </div>
+                <!-- <a class="btn-nuevo-cliente" (click)="nuevoCliente()">Nuevo cliente</a> -->
+                <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')"> Nuevo cliente</a>
+            </div>
+        </div>
+
+        <section class="table-data">
+
+            <table class="table">
+                <thead>
+                    <tr class="tabla-fila-cabecera">
+                        <th></th>
+                        <th style="padding-left: 38px;">Nombre <img src="{{ templateImage.ordenar }}" alt=""></th>
+                        <th>Nit<img src="{{ templateImage.ordenar }}" alt=""></th>
+                        <th>Vendedor<img src="{{ templateImage.ordenar }}" alt=""></th>
+                        <th>Correo<img src="{{ templateImage.ordenar }}" alt=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
+                        <td><input (change)="selectClientCheckbox($event, cliente)" class="check-nombre" type="checkbox" name="" id=""></td>
+                        <td (click)="clienteDetalle(cliente.id)" class="imagen-nombre">
+                            <div class="iniciales"> {{cliente.iniciales}} </div>
+                            <p class="nombre">{{ cliente.name + ' ' + cliente.apellidos }}</p>
+                        </td>
+                        <td (click)="clienteDetalle(cliente.id)" class="telefono">1115072011-8</td>
+                        <td (click)="clienteDetalle(cliente.id)" class="nombre">{{ 
+                            (cliente.vendedor != null) ? cliente.vendedor.name + ' ' + cliente.vendedor.apellidos : 'Sin asignar'}}
+                        </td>
+                        <td (click)="clienteDetalle(cliente.id)" class="correo">{{ cliente.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="footer-paginate">
+        <div class="pagination">
+            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
+        </div>
+        <div class="label-field label-field-paginate">
+            <select name="changeNumberPage" id="changeNumberPage" 
+            class="select-paginate"
+            (change)="changeListPagination($event)">
+                <option [value]="5"> 5 Por página </option>
+                <option [value]="10"> 10 Por página </option>
+                <option [value]="15"> 15 Por página </option>
+                <option [value]="20"> 20 Por página </option>
+                <option [value]="30"> 30 Por página </option>
+            </select>
+        </div>   
+    </div>
+</div>

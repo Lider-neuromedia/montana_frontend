@@ -9,8 +9,6 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   // Local
-  // authUrl = 'http://localhost/montana_backend/public/api/auth/login';
-  // apiUrl = 'http://localhost/montana_backend/public/api';
 
   // authUrl = 'http://127.0.0.1:8000/api/auth/login';
   // apiUrl = 'http://127.0.0.1:8000/api';
@@ -18,6 +16,8 @@ export class AuthService {
   // Producción
   authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
   apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+
+  urlCorreo: string = "http://localhost:3000/formulario";
 
   options: any;
 
@@ -45,6 +45,10 @@ export class AuthService {
   //     // scope: ''
   //   }, this.options);
   // }
+
+  enviarCorreo(body) {
+    return this.http.post(this.urlCorreo, body);
+    }
 
   login(credenciales) {
     const headers = new HttpHeaders( {'Content-Type': 'application/json'} );

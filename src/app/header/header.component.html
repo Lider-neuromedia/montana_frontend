@@ -9,14 +9,18 @@
         </div>
         <div class="notify-accout">
             <div class="notify">
-                <img src="{{ templateImage.notificacion }}" alt=""> <p>Notificaciones</p>
+                <img src="{{ templateImage.notificacion }}" alt=""> <span>Notificaciones</span>
             </div>
             <div (click)="logout()" class="close-custom">
                 <img src="{{ templateImage.logout }}" alt=""> 
-                <p>Cerrar sesión</p>
+                <span>Cerrar sesión</span>
             </div>
             <div class="account">
-                <img src="{{ templateImage.user }}" alt=""> <p>Mi cuenta</p>
+                <div class="div-imagen">
+                    <div class="iniciales-azul-notificacion"> {{iniciales}} </div>
+                    <!-- <img src="/assets/img/iniciales_dm_azul.svg" alt=""> -->
+                </div>
+                <span class="centrado">{{email}}</span>
             </div>
         </div>
     </div>

@@ -10,9 +10,26 @@
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
             <div class="filtros" style="margin-bottom: 15px;">
+                <div class="filtro-ordernar">
+                    <mat-form-field>
+                    <mat-label>Ordernar por:</mat-label>
+                    <mat-select>
+                        <mat-option value="food.value">
+                            Marca
+                        </mat-option>
+                        <mat-option value="food.value">
+                            Precio
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="box-buscador">
+                    <img class="lupa" src="./assets/img/search.svg" alt="">
+                    <input class="buscador mr-1" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
+                </div>
                 <div class="box-create-new">
                     <div class="box-mas">
-                        <img class="mas" src="assets/img/mas.svg" alt="">
+                        <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>
                     <a class="btn-nuevo-cliente" (click)="openDrawerRigth(true, 'create')">Nuevo Producto</a>
                 </div>
@@ -20,39 +37,46 @@
         </div>
 
         <app-drawer-rigth name="create-producto" title="Nuevo producto" [open]="openDrawer"
-        (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateProduct()">
-            <form>
+        (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateProduct(form)">
+            <form #form="ngForm">
                 <div class="label-field">
                     <label for="">Nombres</label>
-                    <input [(ngModel)]="crearProducto.nombre" name="nombre" type="text" class="">
+                    <input [(ngModel)]="crearProducto.nombre" name="nombre" type="text" class="" required>
+                    <small *ngIf="nombreBool"><span class="text-danger">{{error.nombre}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Código</label>
-                    <input [(ngModel)]="crearProducto.codigo" name="codigo" type="text" class="">
+                    <input [(ngModel)]="crearProducto.codigo" name="codigo" type="text" class="" required>
+                    <small *ngIf="codigoBool"><span class="text-danger">{{error.codigo}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Referencia</label>
-                    <input [(ngModel)]="crearProducto.referencia" name="referencia" type="text" class="">
+                    <input [(ngModel)]="crearProducto.referencia" name="referencia" type="text" class="" required>
+                    <small *ngIf="referenciaBool"><span class="text-danger">{{error.referencia}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Stock</label>
-                    <input [(ngModel)]="crearProducto.stock" name="stock" type="number" class="">
+                    <input [(ngModel)]="crearProducto.stock" name="stock" type="number" class="" required>
+                    <small *ngIf="stockBool"><span class="text-danger">{{error.stock}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Marca</label>
-                    <select [(ngModel)]="crearProducto.marca" name="marca" type="text" class="">
+                    <select [(ngModel)]="crearProducto.marca" name="marca" type="text" class="" required>
                         <option>Seleccione...</option>
                         <option *ngFor="let marca of marcas" [value]="marca.id_marca"> {{marca.nombre_marca}}</option>
                     </select>
+                    <small *ngIf="marcarBool"><span class="text-danger">{{error.marca}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Precio</label>
-                    <input [(ngModel)]="crearProducto.precio" name="precio" type="number" class="">
+                    <input [(ngModel)]="crearProducto.precio" name="precio" type="number" class="" required>
+                    <small *ngIf="precioBool"><span class="text-danger">{{error.precio}}</span></small>
                 </div>
                 <div class="label-field">
                     <label for="">Descripción</label>
-                    <textarea [(ngModel)]="crearProducto.descripcion" name="descripcion" class="text-area">
+                    <textarea [(ngModel)]="crearProducto.descripcion" name="descripcion" class="text-area" required>
                     </textarea>
+                    <small *ngIf="descripcionBool"><span class="text-danger">{{error.descripcion}}</span></small>
                 </div>
 
                 <div class="label-field" style="display: flex;">
@@ -157,8 +181,57 @@
                 </div>
             </form>
         </app-drawer-rigth>
-
-        <div class="row">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="productos">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let producto">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row row-producto">
+                                <div class="col-md-4">
+                                    <img src="{{producto.image}}" alt="{{producto.nombre}}">
+                                </div>
+                                <div class="col-md-4 border-rh-lft">
+                                    <div class="info-interna">
+                                        <p class="codigo">Cod: {{producto.codigo}}</p>
+                                        <p class="referencia">Ref: {{producto.referencia}}</p>
+                                        <p class="marca">{{producto.nombre_marca}}</p>
+                                        <p class="nombre">{{producto.nombre}}</p>
+                                        <p class="stock">Stock: {{producto.stock}} pares</p>
+                                        <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 end-content">
+                                    <a (click)="verProducto(producto.id_producto)" class="ver-producto">
+                                        Ver producto
+                                    <div class="box-ver">
+                                        <mat-icon class="text-size-sm icon-add">shopping_bag</mat-icon>
+                                    </div>
+                                    </a>
+                                    <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
+                                        Añadir a pedido
+                                        <div class="box-add">
+                                            <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
+                                        </div>
+                                        
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-products" *ngIf="productos.length == 0">
+                            <p>
+                                <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
+                            </p>
+                            <h2>No has registrado productos aun...</h2>
+                        </div>
+                    </div>
+                </td>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+            </ng-container>
+        </table>
+        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <!-- <div class="row">
             <div class="col-md-12" *ngFor="let producto of productos">
                 <div class="row row-producto">
                     <div class="col-md-4">
@@ -175,16 +248,16 @@
                         </div>
                     </div>
                     <div class="col-md-4 end-content">
+                        <div class="box-ver">
+                            <mat-icon class="text-size-sm">shopping_bag</mat-icon>
+                        </div>
                         <a (click)="verProducto(producto.id_producto)" class="ver-producto">
-                            <span>
-                                <img src="" alt="">
-                            </span>
                             Ver producto
                         </a>
                         <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
-                            <span>
-                                <img src="" alt="">
-                            </span>
+                            <div class="box-add">
+                                <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
+                            </div>
                             Añadir a pedido
                         </a>
                     </div>
@@ -196,6 +269,6 @@
                 </p>
                 <h2>No has registrado productos aun...</h2>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

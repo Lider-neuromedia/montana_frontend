@@ -1,0 +1,168 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="filtros filtro-clientes">
+            <div class="box-editar">
+                <!-- <div class="icono-editar">
+                        <img src="{{ templateImage.lapiz }}" alt="">
+                    </div> -->
+                <p class="texto-editar">Acción de</p>
+                <div class="icono-puntos">
+                    <img src="assets/img/edit_points.svg" alt="">
+                </div>
+                <ul class="acciones-administrador">
+                    <!-- <li [ngClass]="active"><img src="{{ templateImage.lapiz }}" alt=""> Editar</li> -->
+                    <li>
+                        <a class="btn-nuevo-cliente" ><img src="assets/img/editar.svg" alt=""> Editar</a>
+                    </li>
+                    <li><img src="assets/img/icons-filter/export.svg" alt=""> Exportar</li>
+                    <li><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="cliente-detalle" style="padding-top: 0;">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="title-tus-finanzas">Tu pedido <span>#{{pedido.codigo}}</span></h2>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <p class="letter-spacing"><strong>Fecha de emisión del pedido:</strong></p>
+                            <p>{{pedido.fecha}}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <p class="letter-spacing"> <strong>Nombre comercial:</strong></p>
+                            <p>{{pedido.info_cliente.name}}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <p class="letter-spacing"> <strong>Nit:</strong></p>
+                            <p>{{pedido.info_cliente.nit}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row space-row">
+                        <div class="col-md-3">
+                            <div class="mini-card-info">
+                                <p>Valor del pedido</p>
+                                <div class="sub-title">{{pedido.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mini-card-info">
+                                <p>Método de pago</p>
+                                <div class="sub-title">{{pedido.metodo_pago}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mini-card-info">
+                                <p>Estado del pedido</p>
+                                <div class="sub-title">{{pedido.estado}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mini-card-info">
+                                <p>Descuento</p>
+                                <div class="sub-title">
+                                    {{(pedido.descuento == null) ? 0 : pedido.descuento}}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-clientes pt-4">
+                        <div class="col-sm-12">
+                            <h2 class="title-tiendas">Resumen del pedido</h2>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>Referencia</th>
+                                    <th>Cantidad</th>
+                                    <th>Tienda</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let producto of pedido.productos">
+                                        <td> {{producto.referencia}}</td>
+                                        <td> {{producto.cantidad_producto}} Cajas</td>
+                                        <td> {{producto.lugar}}</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row row-clientes pt-4">
+                        <div class="col-sm-12">
+                            <h2 class="title-tiendas">Notas adicionales</h2>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <p class="notas">{{pedido.notas}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <!-- <div class="actions">
+                        <a class="pedidos" href="#">Novedades</a>
+                        <a class="solicitar" href="#">Registrar novedad</a>
+                    </div> -->
+                    <mat-tab-group mat-align-tabs="start" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                        <mat-tab label="Novedades">
+                            <ng-container  *ngIf="pedido.novedades.length > 0">
+                                <div class="novedad" *ngFor="let novedad of pedido.novedades" >
+                                    <p class="title-novedad">
+                                        {{novedad.tipo}}
+                                    </p>
+                                    <p class="description-novedad">
+                                        {{novedad.descripcion}}
+                                    </p>
+                                </div>
+                            </ng-container>
+                            <div class="sin-novedades" *ngIf="pedido.novedades.length == 0">
+                                <img src="assets/img/sin_novedad.png" alt="">
+                                <p>Aún no se registran novedades</p>
+                            </div>
+
+                        </mat-tab>
+                        <mat-tab label="Registrar Novedad">
+                            <form>
+                                <div class="label-field" style="margin-top: 30px; width: 100%; padding: 0;">
+                                    <label for="tipo">Tipo de novedad</label>
+                                    <select name="tipo" [(ngModel)]="novedad.tipo">
+                                        <option value="">Seleccione...</option>
+                                        <option value="retraso en envio"> Retraso en envío</option>
+                                    </select>
+                                </div>
+                                <div class="label-field" style="width: 100%; padding: 0;">
+                                    <label for="">Descripción</label>
+                                    <textarea name="descripcion" [(ngModel)]="novedad.descripcion" class="text-area">
+                                    </textarea>
+                                </div>
+                                                       
+                                <div style="display: flex; justify-content: flex-end; width: 100%;">
+                                    <div class="box-create-new">
+                                        <div class="box-mas">
+                                            <img class="mas" src="/assets/img/mas.svg" alt="">
+                                        </div>
+                                        <a class="btn-nuevo-cliente" (click)="addNovedad()">Agregar novedad</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </mat-tab>
+                      </mat-tab-group>
+                </div>
+            </div>
+
+        </div>
+    </div>

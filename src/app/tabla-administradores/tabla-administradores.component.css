@@ -1,0 +1,23 @@
+table {
+    width : 100% ;
+ }
+ table td{
+     height: 70px;
+ }
+.mat-form-field {
+    padding-left: 1%;
+    font-size: 14px;
+}
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+

@@ -21,6 +21,14 @@
     border: 1px solid #ff596a;
 }
 
+table{
+    width: 100%;
+}
+
+table td{
+    height: 75px;
+}
+
 .custom-file-label{
     height: 3em;
     display: flex;

@@ -8,6 +8,7 @@
 .end-content{
     align-self: flex-end;
     direction: rtl;
+    position: relative;
 }
 
 .info-interna{
@@ -67,6 +68,15 @@
     text-decoration: none;
 }
 
+.ver-producto:hover{
+    background-color: #919191;
+    color: #fff;
+}
+.ver-producto:active{
+    background-color: #fff;
+    color: #919191;
+}
+
 .anadir-a-pedido{
     color: #FF596A;
     cursor: pointer;
@@ -79,10 +89,52 @@
     align-items: center;
     text-decoration: none;
 }
-
+.anadir-a-pedido:hover{
+    background-color: #FF596A;
+    color: #fff;
+}
+.anadir-a-pedido:active{
+    background-color: #fff;
+    color: #FF596A;
+}
 .border-rh-lft{
     border-right: 1px solid #e8e8e8;
     border-left: 1px solid #e8e8e8;
+}
+
+.box-add{
+    background-color:  #FF596A;
+    padding: 2.5%;
+    width: 20%;
+    height: 99%;
+    border-radius: 30px;
+    margin-right: 10%;
+    margin-left: -20%;
+}
+table{
+    width: 100%;
+}
+.filtro-ordernar{
+    margin-top: -1%;
+    margin-right: 50%;
+}
+.box-ver{
+    background-color: #919191;
+    padding: 2.5%;
+    width: 20%;
+    height: 99%;
+    border-radius: 30px;
+    margin-right: 10%;
+    margin-left: -30%;
+}
+.text-size-sm{
+    margin-top: 1px;
+    margin-left: 5px;
+    font-size: 20px;
+    color: #fff;
+}
+.icon-add{
+    margin-top: 6px;
 }
 
 .no-products{

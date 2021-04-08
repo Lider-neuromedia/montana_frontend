@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
 declare var $:any;
 
 @Component({
@@ -34,10 +37,17 @@ export class AmpliacionCupoComponent implements OnInit {
   };
   checkSolicitud = [];
   editSolicitud : any = [];
+  columns = ['select', 'solicitud', 'fecha_creacion', 'monto', 'vendedor', 'estado', 'documentos'];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  selection: SelectionModel<any>;
+  numRows: number;
+  contador: number;
 
   constructor( private http : SendHttpData) {  }
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
     this.getSolicitudes();
     this.getUsers();
   }
@@ -52,6 +62,10 @@ export class AmpliacionCupoComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.solicitudes = response.solicitudes;
+          this.dataSource = new MatTableDataSource<any>(response.solicitudes);
+          this.dataSource.paginator = this.paginator;
+          this.numRows = this.dataSource.data.length;
+          console.log(this.dataSource.data);
         }
       },
       error => {
@@ -59,7 +73,21 @@ export class AmpliacionCupoComponent implements OnInit {
       }
     )
   }
-
+  isAllSelected() {
+    let numSelected = this.selection.selected.length;
+    return numSelected === this.numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
   //Buscar encuesta 
   searchTable(event){
     this.getSolicitudes(event.target.value);
@@ -189,19 +217,13 @@ export class AmpliacionCupoComponent implements OnInit {
     });
   }
 
-  checkBoxSolicitud(event, solicitud){
-    if (event.target.checked) {
-      this.checkSolicitud.push(solicitud);
-    }else{
-      let removeIndex = this.checkSolicitud.findIndex(x => x.id_cupo === solicitud.id_cupo);
-      if (removeIndex !== -1){
-        this.checkSolicitud.splice(removeIndex, 1);
-      }
-    }
+  checkBoxSolicitud(data?: any, index?: number){
+    this.contador = index+1;
+    this.checkSolicitud = data;
   }
 
   editarSolicitud(){
-    if (this.checkSolicitud.length > 1 || this.checkSolicitud.length === 0) {
+    if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       Swal.fire(
         'Tienes problemas?',
         'Asegurate de seleccionar alguna solicitud o tener solo 1 seleccionado.',
@@ -209,7 +231,7 @@ export class AmpliacionCupoComponent implements OnInit {
         );
     }else{
       $('#editarSolicitud').modal('show');
-      this.editSolicitud = this.checkSolicitud[0];
+      this.editSolicitud = this.checkSolicitud;
     }
   }
 

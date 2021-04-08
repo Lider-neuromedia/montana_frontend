@@ -11,6 +11,14 @@ button:focus{ outline: none !important;}
     cursor: pointer;
 }
 
+table{
+    width: 100%;
+}
+
+table td{
+    height: 70px;
+}
+
 .estado-aprobado{
     background: #11bc4a;
 }
@@ -19,6 +27,16 @@ button:focus{ outline: none !important;}
 }
 .estado-pendiente{
     background: #979797;
+}
+.registrar-producto{
+    position: absolute;
+    top: 78.5%;
+    left: 40%;
+}
+
+.agregar{
+    background-color: #FF596A !important;
+    margin-left: 30%;
 }
 
 .fechas{
@@ -34,13 +52,15 @@ button:focus{ outline: none !important;}
     display: block;
     color: #FF596A;
     border-right: 1px solid #FF596A;
-    padding: 3px 15px;
+    padding: 5px 15px;
+    margin-top: 6%;
     border-radius: 15px 0px 0px 15px;
     cursor: pointer;
 }
 
 .fecha-active{
     color: white !important;
+    margin-top: 6%;
     background: #FF596A !important;
 }
 
@@ -49,13 +69,15 @@ button:focus{ outline: none !important;}
     color: #FF596A;
     border-right: 1px solid #FF596A;
     cursor: pointer;
-    padding: 3px 15px;
+    margin-top: 6%;
+    padding: 5px 15px;
 }
 
 .todos{
     display: block;
     color: #FF596A;
-    padding: 3px 15px;
+    padding: 5px 15px;
+    margin-top: 6%;
     border-radius: 0px 15px 15px 0px;
     cursor: pointer;
 }

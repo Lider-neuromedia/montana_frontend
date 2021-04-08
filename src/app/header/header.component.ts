@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
     "user": "assets/img/icons-header/iniciales_user.svg",
   }
 
-  name:any;
+  email:any;
+  iniciales: string;
 
   constructor( private http: HttpClient, private route: Router ) {
     this.options = {
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
-    this.name = localStorage.getItem('user');
+    this.email = localStorage.getItem('user');
+    this.iniciales = localStorage.getItem('user').charAt(0).toUpperCase();
   }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('access_token');
     localStorage.removeItem('userdata');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('user');
     localStorage.removeItem('rol');
     this.route.navigate(['/login']);
     return this.http.get(this.logoutUrl, {headers: headers});

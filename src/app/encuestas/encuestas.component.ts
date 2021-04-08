@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from "@angular/material/paginator";
 declare var $:any;
 
 @Component({
@@ -38,9 +41,17 @@ export class EncuestasComponent implements OnInit {
   checkEncuesta = [];
   selectEncuesta : any = [];
 
+  dataSource: MatTableDataSource<any>;
+  selection: SelectionModel<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  columns = ['select', 'encuesta', 'fechaCreacion', 'catalogo', 'objetivo', 'estado'];
+  numRows: number;
+  contador: number;
+  
   constructor( private http : SendHttpData, private router : Router ) { }
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
     this.getEncuestas();
     this.getCatalogos();
   }
@@ -56,6 +67,10 @@ export class EncuestasComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.encuestas = response.encuestas;
+          this.dataSource = new MatTableDataSource<any>(response.encuestas);
+          this.dataSource.paginator = this.paginator;
+          this.selection = new SelectionModel<any>(true, []);
+          this.numRows = this.dataSource.data.length;
           this.checkEncuesta = [];
         }
       },
@@ -64,7 +79,21 @@ export class EncuestasComponent implements OnInit {
       }
     )
   }
-  
+  isAllSelected() {
+    let numSelected = this.selection.selected.length;
+    return numSelected === this.numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
   //Buscar encuesta 
   searchTable(event){
     this.getEncuestas(event.target.value);
@@ -173,19 +202,17 @@ export class EncuestasComponent implements OnInit {
     $('.box-editar').toggleClass('box-editar-open');
   }
   
-  selectClientCheckbox(event, encuesta){
-    if (event.target.checked) {
-      this.checkEncuesta.push(encuesta);
-    }else{
-      let removeIndex = this.checkEncuesta.findIndex(x => x.id === encuesta.id);
-      if (removeIndex !== -1){
-        this.checkEncuesta.splice(removeIndex, 1);
-      }
-    }
+  selectEncuestaCheckbox(data?: any, index?: number){
+    this.contador = index+1;
+      this.checkEncuesta = data;
+  }
+  filtro(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValue.trim().toLowerCase();
   }
 
   editEncuesta(){
-    if (this.checkEncuesta.length > 1 || this.checkEncuesta.length === 0) {
+    if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       Swal.fire(
         'Tienes problemas?',
         'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
@@ -193,7 +220,7 @@ export class EncuestasComponent implements OnInit {
         );
     }else{
       this.openDrawerRigth(true, 'edit');
-      this.selectEncuesta = this.checkEncuesta[0];
+      this.selectEncuesta = this.checkEncuesta;
       this.http.httpGet('editEncuesta/' + this.selectEncuesta.id_form, true).subscribe(
         response => {
           if (response.response == 'success' && response.status == 200) {

@@ -2,9 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
 import { SendHttpData } from '../app/services/SendHttpData';
-
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './partials/menu/menu.component';
@@ -44,6 +43,10 @@ import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.compo
 import { PqrsComponent } from './pqrs/pqrs.component';
 import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
 import { ShowRoomComponent } from './show-room/show-room.component';
+import { RestablecerComponent } from './restablecer/restablecer.component';
+import { TablaAdministradoresComponent } from './tabla-administradores/tabla-administradores.component';
+import { TablaVendedorComponent } from './tabla-vendedor/tabla-vendedor.component';
+import { RatingModule } from 'ng-starrating';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -79,7 +82,10 @@ import { ShowRoomComponent } from './show-room/show-room.component';
     AmpliacionCupoComponent,
     PqrsComponent,
     DetallePqrsComponent,
-    ShowRoomComponent
+    ShowRoomComponent,
+    RestablecerComponent,
+    TablaAdministradoresComponent,
+    TablaVendedorComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,7 @@ import { ShowRoomComponent } from './show-room/show-room.component';
     MaterialModule,
     NgxDropzoneModule,
     NgxGalleryModule,
+    RatingModule,
     ChartsModule
   ],
   providers: [SendHttpData],

@@ -1,4 +1,6 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
@@ -24,14 +26,17 @@ export class VendedorDetalleComponent implements OnInit {
     "dmRojo": "assets/img/iniciales_dm_rojo.svg",
     "btnCerrar": "assets/img/cerrar.svg",
     "exportar": "assets/img/icons-filter/export.svg",
-    "eliminar": "assets/img/icons-filter/trash.svg"
+    "eliminar": "assets/img/icons-filter/trash.svg",
+    "editar": "assets/img/editar.svg"
   };
 
   id:any;
 
   usuarios:any = {};
   info:any = {};
-
+  iniciales: string;
+  dataSource: MatTableDataSource<any>;
+  columns = ['Pedidos'];
   show = true;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService) {
@@ -41,7 +46,10 @@ export class VendedorDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.getVendedor();
   }
-
+  filtro(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   getVendedor(){
 
     if(this.id != null){
@@ -49,6 +57,9 @@ export class VendedorDetalleComponent implements OnInit {
         (data:any) =>{
           console.log(data);
           this.usuarios = data;
+          this.iniciales = stringify(data.name).charAt(0)+stringify(data.apellidos).charAt(0);
+          this.dataSource = new MatTableDataSource<any>(data.pedidos);
+          console.log(this.iniciales);
         },
         (error) =>{
           this.show = false;

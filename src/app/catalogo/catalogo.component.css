@@ -341,7 +341,14 @@
     color: #D7D7D7;
     border: 2px dashed #D7D7D7;
     display: flex;
-    justify-content: center;
+    text-align: center;
+    /* justify-content: center; */
+}
+
+.btn-nuevo-cliente{
+    background-color: #fff;
+    color: #ff596a;
+    border: 1px solid #FF596A;
 }
 
 /* STYLES MATERIAL */

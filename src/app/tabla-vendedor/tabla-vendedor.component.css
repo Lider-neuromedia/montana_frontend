@@ -1,0 +1,93 @@
+mat-sidenav {
+  width: 50%;
+}
+table{
+  width: 100%;
+}
+.input-busqueda {
+  padding-left: 1%;
+  font-size: 14px;
+}
+.fondo-rojo.active{
+  background-color: #FF596A !important;
+  border: #FF596A;
+}
+.texto-rojo{
+  color: #FF596A;
+}
+.titulo-form{
+  padding-left: 1%;
+  margin-bottom: 10%;
+}
+.buscarCliente{
+  width: 90%;
+}
+/* .form-control:focus{
+border-color: #FF596A !important;
+box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px rgba(255,144,0,0.6);
+outline: 0 none;
+} */
+/* mat-vertical-stepper{
+  padding-left: 5%;
+}
+.step-form{
+  margin-left: 50%;
+  float: left;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected, ::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #FF596A; 
+} */
+.btn-close{
+  margin-left: 94%;
+}
+.box-editar{
+  position: relative;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.box-editar-open{
+  border-bottom: 0;
+  border-radius: 15px 15px 0px 0px;
+  background: white;
+  opacity: 1;
+}
+
+.acciones-vendedor{
+  display: none;
+  position: absolute;
+  top: 30px;
+  list-style: none;
+  opacity: 0;
+  background: white;
+  left: -1px;
+  right: -1px;
+  transition: all .3s ease;
+  text-align: center;
+}
+
+.acciones-vendedor li{
+  color: #959BA0;
+  margin: 8px 0px;
+  position: relative;
+}
+
+.acciones-vendedor li img{
+  position: absolute;
+  left: 8px;
+  top: 3px;
+}
+
+.open-acciones{
+  display: block;
+  opacity: 1;
+  border-left: 1px solid #FF596A;
+  border-right: 1px solid #FF596A;
+  border-bottom: 1px solid #FF596A;
+  padding: 0px -6px;
+  border-radius: 0px 0px 15px 15px;
+  opacity: 1;
+}
+.open{
+  transform: translateX(0%);
+}

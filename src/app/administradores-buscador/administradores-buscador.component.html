@@ -130,7 +130,7 @@
                 <tr *ngFor="let usuario of admins | paginate: { itemsPerPage: 5, currentPage: current }" class="tabla-fila-datos">
                     <td><input class="check-nombre" type="checkbox" name="check[]" id=""></td>
                     <td (click)="administradorDetalle(usuario.id)" class="imagen-nombre">
-                        <img class="imagen" src="/assets/img/iniciales_dm_rojo.svg" alt="">
+                        <img class="imagen" src="./assets/img/iniciales_dm_rojo.svg" alt="">
                         <p class="nombre">{{ usuario.name }}</p>
                     </td>
                     <td class="telefono">{{ usuario.value_key }}</td>

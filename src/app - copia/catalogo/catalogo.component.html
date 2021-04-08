@@ -1,0 +1,259 @@
+<app-header></app-header>
+
+<div class="workplace">
+    <div class="slide-menu">
+        <app-menu></app-menu>
+    </div>
+    <div class="area">
+        <div class="row">
+            <div class="filtros"  style="margin-bottom: 15px;">
+                <div class="box-editar">
+                    <p class="texto-editar" (click)="accionesCatalogos()">Filtros</p>
+
+                    <!-- Pop up editar -->
+                    <ul class="filtros-catalogo">
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre"  
+                                type="checkbox" 
+                                name="todos" 
+                                id="todos"
+                                [(ngModel)]="filterCatalogo.all"
+                                (change)="checkFilterCatalogo($event, 'all')"> 
+                            <label for="todos">Todos</label>
+                        </li>
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="general" 
+                                id="general"
+                                [(ngModel)]="filterCatalogo.general"
+                                (change)="checkFilterCatalogo($event, 'general')">  
+                            <label for="general">General</label>
+                        </li>
+                        <li>
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="show-room" 
+                                id="show-room"
+                                [(ngModel)]="filterCatalogo.show_room"
+                                (change)="checkFilterCatalogo($event, 'show_room')">
+                            <label for="show-room">Show Room</label>
+                        </li>
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="publicos" 
+                                id="publicos"
+                                [(ngModel)]="filterCatalogo.public"
+                                (change)="checkFilterCatalogo($event, 'public')"> 
+                            <label for="publicos">Publicos</label>
+                        </li>
+                        <li>
+                            <input class="check-nombre" 
+                                type="checkbox" 
+                                name="privados" 
+                                id="privados"
+                                [(ngModel)]="filterCatalogo.private"
+                                (change)="checkFilterCatalogo($event, 'private')">
+                            <label for="privados">Privados</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="box-create-new">
+                    <div class="box-mas">
+                        <img class="mas" src="assets/img/mas.svg" alt="">
+                    </div>
+                    <a class="btn-nuevo-cliente" (click)="openDrawerRight(true, 'create')">Nuevo catálogo</a>
+                </div> 
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos  | paginate: { itemsPerPage: itemPerPage, currentPage: current }">
+                <div id="{{catalogo.id_catalogo}}-box-catalogo" class="box-catalogo">
+                    <div (click)="closeCatOptions(catalogo.id_catalogo)" id="{{catalogo.id_catalogo}}-overblock"
+                        class="overblock"></div>
+                    <div class="box-imagen-estado-descuento"
+                        style="background: url({{catalogo.imagen}});background-size: cover;background-repeat: no-repeat;"
+                        (click)="verDetalle(catalogo.id_catalogo)">
+                        <!-- <img (click)="verDetalle()" src="" alt=""> -->
+                        <div class="estado">{{catalogo.estado}}</div>
+                        <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
+                        <div *ngIf="catalogo.descuento != null" [class]="(catalogo.tipo == 'general') ? 'descuento' : 'descuento-show-room'">
+                            -{{catalogo.descuento}}%
+                        </div>
+                    </div>
+                    <div class="box-titulo-cantidad-opciones">
+                        <div class="info">
+                            <p class="title-catalogo">{{catalogo.titulo}}</p>
+                            <p class="subtitle-catalogo">{{catalogo.cantidad}} Productos</p>
+                        </div>
+                        <div (click)="showCatOptions(catalogo.id_catalogo)" class="opciones">
+                            <button mat-icon-button aria-label="Menu opciones">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- pop up opciones -->
+                    <ul>
+                        <li class="btn-options">
+                            <a (click)="editCatalogo(catalogo)">
+                                <img class="icon-edit" src="assets/img/editar.svg" alt="">Editar
+                            </a>
+                        </li>
+                        <li class="btn-options">
+                            <a><img src=""> Exportar</a>
+                        </li>
+                        <li class="btn-options">
+                            <a (click)="deleteCatalogo(catalogo.id_catalogo)"><img src=""> Eliminar
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Paginacion. -->
+<div class="footer">
+    <div class="footer-paginate">
+        <div class="pagination">
+            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
+        </div>
+        <div class="label-field label-field-paginate">
+            <select name="changeNumberPage" id="changeNumberPage" 
+            class="select-paginate"
+            (change)="changeListPagination($event)"
+            >
+                <option [value]="8"> 8 Por página </option>
+                <option [value]="16"> 16 Por página </option>
+                <option [value]="24"> 24 Por página </option>
+                <option [value]="32"> 32 Por página </option>
+            </select>
+        </div>   
+    </div>
+</div>
+
+<!-- Crear Catalogo -->
+<app-drawer-rigth name="create-catalogo" title="Nuevo catálogo" [open]="openDrawer"
+(close)="openDrawerRight(false, 'create')" (submit)="submitCreateCat()">
+<form action="">
+    <div class="label-field">
+        <label for="">Nombres</label>
+        <input [(ngModel)]="catalogo.nombre" name="name" type="text" class="">
+    </div>
+
+    <div class="label-field" style="display: flex;">
+        <div class="col-md-4" style="padding-left: 0;">
+            <label for="">Descuento</label>
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <!-- <mat-label>Descuento</mat-label> -->
+                <mat-select name="food" [(ngModel)]="catalogo.descuento"  [(value)]="catalogo.descuento">
+                    <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
+                        {{i}}%
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-8" style="padding-right: 0;">
+            <label for="">Estado del cátalogo</label>
+            <mat-button-toggle-group [(ngModel)]="catalogo.estado" name="estado" aria-label="Estado">
+                <mat-button-toggle value="activo" checked="true">Activo</mat-button-toggle>
+                <mat-button-toggle value="privado">Privado</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <div class="label-field">
+        <label for="">Tipo de catálogo</label>
+        <mat-button-toggle-group [(ngModel)]="catalogo.tipo" name="tipo" aria-label="tipo">
+            <mat-button-toggle checked="true" value="general">General</mat-button-toggle>
+            <mat-button-toggle value="show room">Show Room</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="label-field">
+        <label for="">Imagen destacada</label>
+        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+            (change)="onSelect($event)">
+            <ngx-dropzone-label>
+                <div>
+                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                    <h4>Suelta los archivos aquí o haz clic para subirlos...</h4>
+                </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+        </div>
+    </div>
+</form>
+</app-drawer-rigth>
+
+<!-- Editar Catalogo -->
+<app-drawer-rigth name="update-catalogo" title="Editar catálogo" [open]="updateDrawer"
+(close)="openDrawerRight(false, 'edit')" (submit)="submitUpdateCatalogo()" button="Actualizar">
+<form action="">
+    <div class="label-field">
+        <label for="">Nombres</label>
+        <input [(ngModel)]="catalogoEdit.titulo" name="name" type="text" class="">
+        <!-- <small style="color: red;">{{ errors.name }}</small> -->
+    </div>
+    <div class="label-field" style="display: flex;">
+        <div class="col-md-4" style="padding-left: 0;"> 
+            <label for="">Descuento</label>
+            <mat-form-field appearance="outline"  style="width: 100%;">
+                <mat-select name="food" [(ngModel)]="catalogoEdit.descuento">
+                    <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
+                        {{i}}%
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-8" style="padding-right: 0;">
+            <label for="">Estado del cátalogo</label>
+            <mat-button-toggle-group [(ngModel)]="catalogoEdit.estado" name="estado"
+                aria-label="Estado">
+                <mat-button-toggle checked="true" value="activo">Activo</mat-button-toggle>
+                <mat-button-toggle value="privado">Privado</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <div class="label-field">
+        <label for="">Tipo de catálogo</label>
+        <mat-button-toggle-group [(ngModel)]="catalogoEdit.tipo" name="tipo" aria-label="tipo">
+            <mat-button-toggle checked="true" value="general">General</mat-button-toggle>
+            <mat-button-toggle value="show room">Show Room</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="label-field">
+        <label for="">Imagen destacada</label>
+        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
+            (change)="onSelect($event, true)"  *ngIf="showEditDropzone">
+            <ngx-dropzone-label>
+                <div>
+                    <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                    <h4>Suelta los archivos aquí o haz clic para subirlos...</h4>
+                </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+        </div>
+        <div class="box-image-edit" *ngIf="!showEditDropzone">
+            <img class="image-edit" src="{{catalogoEdit.imagen}}" alt="Image edit" (click)="showEditImageOptions()">
+            <div class="overblock-edit" (click)="hideEditImageOptions()"></div>
+            <!-- pop up opciones -->
+            <ul>
+                <li class="btn-options">
+                    <a (click)="changeImageEdit()">
+                        <img class="icon-edit" src="assets/img/editar.svg" alt="">Remplazar
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+</app-drawer-rigth>

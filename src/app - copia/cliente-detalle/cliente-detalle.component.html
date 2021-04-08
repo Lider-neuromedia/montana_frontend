@@ -1,0 +1,366 @@
+<app-header></app-header>
+
+<div id="wrapper">
+    <div class="opciones">
+        <app-menu></app-menu>
+    </div>
+    <div class="contenido">
+        <div class="filtros filtro-clientes">
+            <div class="ident-admin">
+                <div class="div-imagen">
+                    <img src="/assets/img/iniciales_dm_azul.svg" alt="">
+                </div>
+                <div class="div-datos">
+                    <p *ngIf="show"> <strong>{{ usuario.name }} {{ usuario.apellidos }}</strong> </p>
+                    <td class="datos" *ngFor="let data of usuario.data_user">
+                        <p *ngIf="data.field_key == 'codigo'">Cliente No. {{ data.value_key }}</p>
+                    </td>
+                </div>
+            </div>
+        </div>
+        <div class="overview"></div>
+
+        <app-drawer-advanced class="form-advanced" name="crear-tienda" title="Crear tienda" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="submitCreateStore()">
+            <div class="tabs">
+                <ul>
+                    <li class="activeclasstab"><a>Crear Tienda</a></li>
+                </ul>
+            </div>
+            <div class="fields">
+                <div class="tienda">
+                    <div class="list-tiendas" *ngIf="this.tiendas.length > 0">
+                        <div class="item-tienda" *ngFor="let tienda of tiendas">
+                            <div class="cont-item-tienda">
+                                <p class="codigo">Tienda: {{tienda.nombre}}</p>
+                                <div class="ubicacion">
+                                    <p><span>Lugar:</span> {{tienda.lugar}}</p>
+                                    <p><span>Local:</span> {{tienda.local}}</p>
+                                </div>
+                            </div>
+                            <div class="btn-edit-tienda">
+                                <mat-icon matSuffix class="icon-edit-tienda">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="label-field">
+                        <label for="">Nombre de la tienda</label>
+                        <input type="text" class="" [(ngModel)]="selectTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="label-field two-fields">
+                        <div class="label-field-two">
+                            <label for="">Lugar</label>
+                            <input type="text" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="label-field-two">
+                            <label for="">Número de local</label>
+                            <input type="number" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="label-field">
+                        <label for="">Dirección</label>
+                        <input type="text" class="" [(ngModel)]="selectTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="label-field">
+                        <label for="">Teléfono</label>
+                        <input type="tel" class="" [(ngModel)]="selectTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="agregar-tienda">
+                        <div class="box-button-light">
+                            <div class="box-mas">
+                                <img class="mas" src="assets/img/mas.svg" alt="">
+                            </div>
+                            <a class="btn-ligth" (click)="addTienda()"> Agregar tienda</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-drawer-advanced>
+
+        <app-drawer-advanced class="form-advanced" name="edit-tienda" title="Editar tienda" button="Actualizar"
+            [open]="updateDrawer" (close)="openDrawerRigth(false, 'edit')" (submit)="submitUpdateTienda()">
+            <div class="tabs">
+                <ul>
+                    <li class="activeclasstab"><a>Editar Tienda</a></li>
+                </ul>
+            </div>
+            <div class="fields">
+                <div class="tienda">
+                    <div class="list-tiendas" *ngIf="this.tiendas.length > 0">
+                        <div class="item-tienda" *ngFor="let tienda of tiendas">
+                            <div class="cont-item-tienda">
+                                <p class="codigo">Tienda: {{tienda.nombre}}</p>
+                                <div class="ubicacion">
+                                    <p><span>Lugar:</span> {{tienda.lugar}}</p>
+                                    <p><span>Local:</span> {{tienda.local}}</p>
+                                </div>
+                            </div>
+                            <div class="btn-edit-tienda">
+                                <mat-icon matSuffix class="icon-edit-tienda">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="label-field">
+                        <label for="">Nombre de la tienda</label>
+                        <input type="text" class="" [(ngModel)]="selectTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="label-field two-fields">
+                        <div class="label-field-two">
+                            <label for="">Lugar</label>
+                            <input type="text" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="label-field-two">
+                            <label for="">Número de local</label>
+                            <input type="number" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="label-field">
+                        <label for="">Dirección</label>
+                        <input type="text" class="" [(ngModel)]="selectTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="label-field">
+                        <label for="">Teléfono</label>
+                        <input type="tel" class="" [(ngModel)]="selectTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+        </app-drawer-advanced>
+
+        <div class="cliente-detalle">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 datos-personales">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="title-tus-finanzas">Tus finanzas</h2>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <p> <strong>Último crédito:</strong> 25 de junio de 2020</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <p> <strong>Próximo pago:</strong> 30 de julio de 2020</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cupo-preaprobado">
+                                <p>Cupo preaprobado</p>
+                                <p>$15.000.000</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="cupo-disponible">
+                                <p>Cupo disponible</p>
+                                <p>$6.000.000</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="total-deuda">
+                                <p>Saldo total de la deuda</p>
+                                <p>$9.000.000</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="saldo-en-mora">
+                                <p>Saldo en mora</p>
+                                <p>$4.500.000</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-12 flex-center">
+                            <h2 class="title-datos-personales">Datos personales</h2>
+                            <hr class="width-75">
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Nombres</p>
+                            <p *ngIf="show">{{ usuario.name }}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Apellidos</p>
+                            <p *ngIf="show">{{ usuario.apellidos }}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Tipo de documento</p>
+                            <p *ngIf="show">Cedula de ciudadania</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Numero de documento</p>
+                            <p *ngIf="show">{{usuario.dni}}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Correo electrónico</p>
+                            <p *ngIf="show">{{ usuario.email }}</p>
+                        </div>
+
+                        <td class="col-sm-12 col-md-3 datos" *ngFor="let data of usuario.data_user">
+                            <p *ngIf="data.field_key == 'nit'">Nit</p>
+                            <p *ngIf="data.field_key == 'telefono'">Teléfono</p>
+                            <p *ngIf="data.field_key == 'razon_social'">Razón social</p>
+                            <p *ngIf="data.field_key == 'direccion'">Dirección</p>
+                            <p style="font-weight: bold;">{{ data.value_key }}</p>
+
+                        </td>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 flex-center">
+                            <h2 class="title-credenciales">Credenciales</h2>
+                            <hr class="width-75">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 datos">
+                            <p>Usuario</p>
+                            <p *ngIf="show">{{ usuario.email }}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 datos">
+                            <p>Contraseña</p>
+                            <p>**************</p>
+                        </div>
+                    </div>
+                    <hr class="pb-4 pt-3">
+                    <div class="row card">
+                        <div class="col-md-12 row-vendedor-asignado">
+                            <h2 class="title-vendedor-asignado">Vendedor asignado</h2>
+                            <div class="btn-whatsapp">
+                                <a class="flex-center" href="https://wa.me/57{{vendedor_asoci_tel}}" target="_blank" rel="noopener noreferrer">
+                                    <img src="/assets/img/wa.svg" alt="" class="icon"> Contactar vía WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 row-vendedor-asignado">
+                            <div class="col-md-3 datos">
+                                <p>Nombre del vendedor</p>
+                                <p>{{ vendedor_asoci.name }}</p>
+                            </div>
+                            <div class="col-md-3 datos">
+                                <p>Correo electrónico</p>
+                                <p class="color-email">{{ vendedor_asoci.email }}</p>
+                            </div>
+    
+                            <div class="col-md-2 datos" *ngFor="let data of vendedor_asoci.user_data">
+                                <p *ngIf="data.field_key == 'codigo'" style="display:grid"><span>Código</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
+                                <p *ngIf="data.field_key == 'telefono'" style="display:grid"><span>Teléfono</span><span style="font-weight: bold;"> {{ data.value_key }}</span></p>
+                            </div>
+    
+                            <!-- <div class="col-md-2 datos">
+                                <p>Código</p>
+                                <p>40</p>
+                            </div>
+                            <div class="col-md-3 datos">
+                                <p>Teléfono</p>
+                                <p>3217552803</p>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="row row-clientes pt-4">
+                        <div class="col-sm-12">
+                            <div class="cont-title-tienda">
+                                <h2 class="title-tiendas">Tiendas</h2>
+                                <div (click)="accionesAdministrador()"  class="box-editar">
+                                    <div class="icono-editar">
+                                            <img src="assets/img/icons-filter/shop.svg" alt="">
+                                        </div>
+                                    <p class="texto-editar">Tiendas</p>
+                                    <div class="icono-puntos">
+                                        <img src="{{ templateImage.points }}" alt="">
+                                    </div>
+                                    <ul class="acciones-administrador">
+                                        <!-- <li [ngClass]="active"><img src="{{ templateImage.lapiz }}" alt=""> Editar</li> -->
+                                        <li (click)="openDrawerRigth(true, 'create')">
+                                            <img src="assets/img/icons-filter/shop.svg" alt=""> Nueva
+                                        </li>
+                                        <li (click)="editTienda()">
+                                            <img src="{{ templateImage.lapiz }}" alt=""> Editar 
+                                        </li>
+                                        <li (click)="deleteTienda()">
+                                            <img src="{{ templateImage.eliminar }}" alt=""> Eliminar
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <table class="tabla-clientes-en-vendedores">
+                                <thead>
+                                    <th></th>
+                                    <th>Nombre de la tienda</th>
+                                    <th>Código</th>
+                                    <th>Lugar</th>
+                                    <th>Dirección</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tienda of usuario.tiendas">
+                                        <td><input type="checkbox" (change)="selectTiendaCheckbox($event, tienda)"></td>
+                                        <td> {{ tienda.nombre }}</td>
+                                        <td> {{ tienda.id_tiendas }}</td>
+                                        <td> {{ tienda.lugar }}</td>
+                                        <td> {{ tienda.direccion }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-4 aside-pedidos">
+                    <mat-tab-group mat-align-tabs="start">
+                        <mat-tab label="Pedidos">
+                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+
+                            <div class="box-pedidos" *ngFor="let pedido of usuario.pedidos" (click)="navigatePedido(pedido.id_pedido)">
+                                <div class="foto-referencia">
+                                    <p>Pedido #{{pedido.codigo}}</p>
+                                </div>
+                                <div class="info-pedido">
+                                    <p>{{pedido.fecha}}</p>
+                                    <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Solicitar cupo">
+                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+
+                            <div class="box-ampliacion">
+                                <div class="titulo-ampliacion">
+                                    <p>Solicitud de ampliación #faf322s1</p>
+                                </div>
+                                <div class="info-ampliacion">
+                                    <p>2020-10-25</p>
+                                    <p>Valor: {{1000000 | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                </div>
+                                <div class="estado">
+                                    <p>Estado:</p>
+                                    <p class="aprobado">Aprobado</p>
+                                    <!-- <p class="rechazado">Rechazado</p> -->
+                                    <!-- <p class="pendiente">Pendiente</p> -->
+                                </div>
+                            </div>
+                        </mat-tab>
+                      </mat-tab-group>
+
+                </div>
+            </div>
+
+        </div>
+    </div>

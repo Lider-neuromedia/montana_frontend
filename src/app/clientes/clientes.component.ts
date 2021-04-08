@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { SendHttpData } from '../services/SendHttpData';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import Swal from 'sweetalert2'
+import { FormGroup, NgForm } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Subscription } from 'rxjs';
 declare var $:any;
 
 
@@ -41,7 +46,7 @@ declare var $:any;
     ]),
   ]
 })
-export class ClientesComponent implements OnInit {
+export class ClientesComponent implements OnInit, OnDestroy {
 
   generales = true;
   credenciales = false;
@@ -92,24 +97,77 @@ export class ClientesComponent implements OnInit {
   createTiendas : any;
   vendedores : [];
   search = '';
-  checkCliente = [];
+  checkCliente: any = [];
+  confirm_password: string;
   selectClient : any;
+  dataSource: MatTableDataSource<any>;
+  selection: SelectionModel<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  columns = ['select', 'Nombre', 'Nit', 'Vendedor', 'Correo'];
+  numRows: number;
+  contador: number;
+  subscripcion: Subscription;
+  access_token: string;
+
+  error = {
+    direccion: 'Ingrese una dirección',
+    local: 'Ingrese un local',
+    lugar: 'Ingrese un lugar',
+    nombre: 'Ingrese un nombre',
+    telefono: 'Ingrese un teléfono'
+  }
+
+  direccionBool: boolean = false;
+  localBool: boolean = false;
+  lugarBool: boolean = false;
+  nombreBool: boolean = false;
+  telefonoBool: boolean = false;
   constructor( private clients: UsersService, private route: Router, private http: SendHttpData) {
    
   }
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
+    this.access_token = localStorage.getItem('access_token');
     this.asignCreateClient();
     this.asignUpdateClient();
     this.asignTiendasClient();
     this.getClients();
+    this.subscripcion = this.clients.refresh$.subscribe(() => {
+      this.selection = new SelectionModel<any>(true, []);
+    })
+  }
+  ngOnDestroy(): void{
+    this.subscripcion.unsubscribe();
+    console.log("Observable cerrado");
   }
 
   getClients(search = ''){
     this.clients.getAllClients(search).subscribe( (data:any) => {
-      this.clientes = data['users'];
-      this.checkCliente = [];
+      this.dataSource = new MatTableDataSource<any>(data['users']);
+      this.dataSource.paginator = this.paginator
+      this.numRows = this.dataSource.data.length;
+      // this.checkCliente = [];
     });
+  }
+  filtro(event: Event){
+      const filtroValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filtroValue.trim().toLowerCase();
+  }
+  isAllSelected() {
+    let numSelected = this.selection.selected.length;
+    return numSelected === this.numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   searchTable(event){
@@ -235,8 +293,21 @@ export class ClientesComponent implements OnInit {
     this.route.navigate(['/users/clientes', id]);
   }
 
-  agregarCliente(){
-
+  agregarCliente(form: NgForm){
+    if(form.invalid){
+      return Object.values(form.control).forEach(control => {
+        if (control instanceof FormGroup){
+          Object.values(control.controls).forEach(control => control.markAsTouched());
+        }else{
+          control.markAsTouched();
+        }
+        return;
+    });
+  }
+  if(this.createClient.password !== this.confirm_password){
+    Swal.fire('Contraseñas incorrectas', '', 'error');
+    return;
+  }
     var data = {
       rol_id : 3,
       name : this.createClient.name,
@@ -286,7 +357,7 @@ export class ClientesComponent implements OnInit {
   getUsersAndDelete(){
 
     Swal.fire({
-      title: 'Está seguro que desea eleiminar?',
+      title: 'Está seguro que desea eliminar?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -295,33 +366,39 @@ export class ClientesComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         var usuarios = [];
-        this.checkCliente.forEach(element => {
-          console.log(element);
-          usuarios.push(element.id);
-        });
+        console.log(this.checkCliente);
+          usuarios.push(this.checkCliente.id);
         var data = {usuarios : usuarios};
-  
-        this.clients.deleteUsers(data).subscribe(
-          (data:any) =>{
-            if (data.response == 'success' && data.status == 200) {
-              this.getClients();
-              Swal.fire(
-                'Completado',
-                'Los usuarios han sido eliminados correctamente.',
-                'success'
-              );
-              this.checkCliente = [];
-            }else{
-              this.getClients();
-              Swal.fire(
-                '¡Ups!',
-                data.message,
-                'error'
-              );
-              this.checkCliente = [];
+        if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
+          Swal.fire(
+            'Tienes problemas?',
+            'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+            'warning'
+            );
+        }else{
+          this.clients.deleteUsers(data).subscribe(
+            (data:any) =>{
+              if (data.response == 'success' && data.status == 200) {
+                this.getClients();
+                Swal.fire(
+                  'Completado',
+                  'Los usuarios han sido eliminados correctamente.',
+                  'success'
+                );
+                this.checkCliente = [];
+              }else{
+                this.getClients();
+                Swal.fire(
+                  '¡Ups!',
+                  data.message,
+                  'error'
+                );
+                this.checkCliente = [];
+              }
             }
-          }
-        );
+          )
+        }
+        ;
       }
     })
     
@@ -345,7 +422,42 @@ export class ClientesComponent implements OnInit {
 
   // Agregar tienda.
   addTienda(){
+    if(this.createTiendas.direccion === "" && this.createTiendas.local === "" && this.createTiendas.lugar === "" &&
+       this.createTiendas.nombre === "" && this.createTiendas.telefono === ""){
+         this.direccionBool = this.localBool = this.lugarBool = this.nombreBool = this.telefonoBool = true;
+         return;
+       }else if(this.createTiendas.direccion === "" || this.createTiendas.local === "" || this.createTiendas.lugar === "" ||
+       this.createTiendas.nombre === "" || this.createTiendas.telefono === ""){
+          if(this.createTiendas.direccion === ""){
+            this.direccionBool = true;
+          }else{
+            this.direccionBool = false;
+          }
+          if(this.createTiendas.local === ""){
+            this.localBool = true;
+          }else{
+            this.localBool = false;
+          }
+          if(this.createTiendas.lugar === ""){
+            this.lugarBool = true;
+          }else{
+            this.lugarBool = false;
+          }
+          if(this.createTiendas.nombre === ""){
+            this.nombreBool = true;
+          }else{
+            this.nombreBool = false;
+          }
+          if(this.createTiendas.telefono === ""){
+            this.telefonoBool = true;
+          }else{
+            this.telefonoBool = false;
+          }
+          return;
+       }
+       this.direccionBool = this.localBool = this.lugarBool = this.nombreBool = this.telefonoBool = false;
     this.createClient.tiendas.push(this.createTiendas);
+    // console.log(this.createTiendas);
     this.asignTiendasClient();
   }
 
@@ -379,19 +491,13 @@ export class ClientesComponent implements OnInit {
     };
   }
 
-  selectClientCheckbox(event, cliente){
-    if (event.target.checked) {
-      this.checkCliente.push(cliente);
-    }else{
-      let removeIndex = this.checkCliente.findIndex(x => x.id === cliente.id);
-      if (removeIndex !== -1){
-        this.checkCliente.splice(removeIndex, 1);
-      }
-    }
+  selectClientCheckbox(data?: any, index?: number){
+    this.contador = index+1;
+      this.checkCliente = data;
   }
 
   editTienda(){
-    if (this.checkCliente.length > 1 || this.checkCliente.length === 0) {
+    if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       Swal.fire(
         'Tienes problemas?',
         'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
@@ -399,7 +505,7 @@ export class ClientesComponent implements OnInit {
         );
     }else{
       this.openDrawerRigth(true, 'edit');
-      this.selectClient = this.checkCliente[0];
+      this.selectClient = this.checkCliente;
       this.clients.getClient(this.selectClient.id).subscribe(
         (data:any) =>{
           this.updateClient = data;
@@ -420,6 +526,7 @@ export class ClientesComponent implements OnInit {
             'Cliente actualizado de manera correcta.',
             'success'
           );
+          this.selection = new SelectionModel<any>(true, []);
           this.getClients();
           this.openDrawerRigth(false, 'edit');
         }
@@ -466,6 +573,7 @@ export class ClientesComponent implements OnInit {
   }
 
   createTiendaUpdateClient(){
+    
     var route = 'newTienda/' + this.updateClient.id;
     this.http.httpPost(route, this.createTiendas, true).subscribe(
       response => {

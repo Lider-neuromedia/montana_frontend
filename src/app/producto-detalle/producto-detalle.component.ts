@@ -7,6 +7,7 @@ import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
 import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component';
 
 import Swal from 'sweetalert2'
+import { MatTableDataSource } from '@angular/material/table';
 declare var $:any;
 
 @Component({
@@ -48,7 +49,10 @@ export class ProductoDetalleComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
   preguntas : any = [];
+  valoraciones: any = [];
   respuesta_usuario = false; //Si el usuario respondio ya la encuesta.
+  dataSource: MatTableDataSource<any>;
+  columns = ['valoraciones'];
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
@@ -84,7 +88,6 @@ export class ProductoDetalleComponent implements OnInit {
     ];
 
   }
-
   getProduct(){
     var route = 'producto/' + this.id_producto;
     this.http.httpGet(route, true).subscribe(
@@ -92,6 +95,7 @@ export class ProductoDetalleComponent implements OnInit {
         if (response.status == 200) {
           this.producto = response.producto;
           this.getPreguntasCatalogo();
+          this.getValoraciones();
           (this.galleryImages.length >= 1) ? this.galleryImages = [] : '';
           this.producto.imagenes.forEach( (element) => {
               this.galleryImages.push({
@@ -106,16 +110,34 @@ export class ProductoDetalleComponent implements OnInit {
     )
   }
 
+  getValoraciones(){
+    this.http.httpGet(`getValoraciones/${this.producto.catalogo}`, true).subscribe(
+      resp => {
+        if(resp.response === 'success' && resp.status === 200){
+          this.valoraciones = resp.preguntas;
+          // console.log("Funciona");
+          this.dataSource = new MatTableDataSource<any>(this.valoraciones);
+          console.log(this.valoraciones);
+        }
+      },error => {
+        console.log(error)
+        ;
+      }
+    )
+  }
+
   getPreguntasCatalogo(){
-    this.http.httpGet('getPreguntas/'+ this.producto.catalogo, true).subscribe(
+    this.http.httpGet(`getPreguntas/${this.producto.catalogo}`, true).subscribe(
       response =>{
         if (response.response == 'success' && response.status == 200) {
           this.preguntas = response.preguntas;
           this.respuesta_usuario = response.respuesta_usuario;
+          // console.log("Bueno");
+          // console.log(this.preguntas);
         }
       },
       error => {
-
+        // console.log("Malo");
       }
     );
   }
@@ -187,7 +209,7 @@ export class ProductoDetalleComponent implements OnInit {
 
   deleteProduct(){
     Swal.fire({
-      title: 'Está seguro que desea eleiminar?',
+      title: 'Está seguro que desea eliminar?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

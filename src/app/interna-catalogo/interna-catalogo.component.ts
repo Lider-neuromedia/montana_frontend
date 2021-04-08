@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component';
+import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-interna-catalogo',
@@ -34,6 +38,27 @@ export class InternaCatalogoComponent implements OnInit {
     descripcion : '',
     imagenes : [],
   };
+
+  error = {
+    nombre: 'Ingrese Nombre por favor',
+    codigo: 'Ingrese código por favor',
+    referencia: 'Ingrese referencia por favor',
+    stock: 'Ingrese stock por favor',
+    marca: 'Seleccione una marca',
+    precio: 'Ingrese un precio por favor',
+    descripcion: 'Ingrese una descripción',
+  }
+  nombreBool: boolean = false;
+  codigoBool: boolean = false;
+  referenciaBool: boolean = false;
+  stockBool: boolean = false;
+  marcarBool: boolean = false;
+  precioBool: boolean = false;
+  descripcionBool: boolean = false;
+
+  columns = ['productos'];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_catalogo = this.activatedRoute.snapshot.params['id'];
@@ -74,6 +99,9 @@ export class InternaCatalogoComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.productos = response.productos;
+          this.dataSource = new MatTableDataSource<any>(response.productos);
+          this.dataSource.paginator = this.paginator;
+          console.log(this.dataSource);
         }else{
           console.error(response.message);
         }
@@ -83,18 +111,66 @@ export class InternaCatalogoComponent implements OnInit {
       }
     );
   }
-
-  submitCreateProduct(){
+  filtro(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValue.trim().toLowerCase();
+  }
+  submitCreateProduct(form: NgForm){
+    if(form.invalid){
+      console.log(form.invalid);
+      console.log(form.form.value);
+      if(form.form.value.nombre === ""){
+        this.nombreBool = true;
+      }else{
+        this.nombreBool = false;
+      }
+      if(form.form.value.codigo === ""){
+        this.codigoBool = true;
+      }else{
+        this.codigoBool = false;
+      }
+      if(form.form.value.referencia === ""){
+        this.referenciaBool = true;
+      }else{
+        this.referenciaBool = false;
+      }
+      if(form.form.value.stock === ""){
+        this.stockBool = true;
+      }else{
+        this.stockBool = false;
+      }
+      if(form.form.value.marca === ""){
+        this.marcarBool = true;
+      }else{
+        this.marcarBool = false;
+      }
+      if(form.form.value.precio === ""){
+        this.precioBool = true;
+      }else{
+        this.precioBool = false;
+      }
+      if(form.form.value.descripcion === ""){
+        this.descripcionBool = true;
+      }else{
+        this.descripcionBool = false;
+      }
+      return;
+    }
+    this.nombreBool, this.codigoBool, this.referenciaBool, this.stockBool, this.marcarBool,
+    this.precioBool, this.descripcionBool = false;
     var data = this.crearProducto;
+    Swal.fire('Cargando', '', 'info');
+    Swal.showLoading();
     this.http.httpPost('productos', data, true).subscribe(
       response => {
         if (response.response == "success" && response.status == 200) {
+          Swal.fire('Producto creado correctamente', '', 'success');
           this.getProducts();
           this.openDrawerRigth(false, 'create');
         }
       },
       error => {
-
+        Swal.fire('Sube una imagen', 'Debe subir por lo minimo 1 imagen', 'error' );
       }
     );
   }

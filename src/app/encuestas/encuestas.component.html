@@ -60,7 +60,7 @@
                 <div class="agregar-pregunta">
                     <div class="box-button-light">
                         <div class="box-mas">
-                            <img class="mas" src="assets/img/mas.svg" alt="">
+                            <img class="mas" src="./assets/img/mas.svg" alt="">
                         </div>
                         <a class="btn-ligth" (click)="addPregunta()"> Agregar pregunta</a>
                     </div>
@@ -138,7 +138,7 @@
                 <div class="agregar-pregunta">
                     <div class="box-button-light">
                         <div class="box-mas">
-                            <img class="mas" src="assets/img/mas.svg" alt="">
+                            <img class="mas" src="./assets/img/mas.svg" alt="">
                         </div>
                         <a class="btn-ligth" (click)="addPreguntaUpdate()"> Agregar pregunta</a>
                     </div>
@@ -157,8 +157,8 @@
 
         <div class="filtros">
             <div class="box-buscador">
-                <img class="lupa" src="assets/img/search.svg" alt="">
-                <input name="buscador" class="buscador"  (keyup.enter)="searchTable($event)" placeholder="Buscar..." type="text">
+                <img class="lupa" src="./assets/img/search.svg" alt="">
+                <input name="buscador" class="buscador"  (keyup)="filtro($event)" placeholder="Buscar..." type="text" #input>
                 <button type="button" class="hidden"></button>
             </div>
 
@@ -166,20 +166,20 @@
                 <!-- <div class="icono-editar">
                     <img src="{{ templateImage.lapiz }}" alt="">
                 </div> -->
-                <p class="texto-editar">Acción de</p>
+                <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
-                    <img src="assets/img/edit_points.svg" alt="">
+                    <img src="./assets/img/edit_points.svg" alt="">
                 </div>
 
                 <ul class="acciones-encuestas">
-                    <li (click)="editEncuesta()"><img src="assets/img/editar.svg" alt=""> Editar</li>
-                    <li><img src="assets/img/icons-filter/export.svg" alt=""> Exportar</li>
+                    <li (click)="editEncuesta()"><img src="./assets/img/editar.svg" alt=""> Editar</li>
+                    <li (click)="exporter.exportTable('xlsx', {fileName:'encuestas'})"><img src="./assets/img/icons-filter/export.svg" alt=""> Exportar</li>
                 </ul>
             </div>
 
             <div class="box-create-new">
                 <div class="box-mas">
-                    <img class="mas" src="assets/img/mas.svg" alt="">
+                    <img class="mas" src="./assets/img/mas.svg" alt="">
                 </div>
                 <a (click)="openDrawerRigth(true, 'create')" class="btn-nuevo-cliente">Nueva Encuesta</a>
             </div>
@@ -187,7 +187,52 @@
 
 
         <section class="table-data">
-            <table class="table">
+            <table class="ancho" mat-table [dataSource]="dataSource" matTableExporter  #exporter="matTableExporter">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let encuesta; let i = index">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                        (click)="selectEncuestaCheckbox(encuesta, i)"
+                            (change)="$event ? selection.toggle(encuesta) : null"
+                            [checked]="selection.isSelected(encuesta)"
+                            [aria-label]="checkboxLabel(encuesta)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="encuesta">
+                    <th mat-header-cell *matHeaderCellDef>#Encuesta</th>
+                    <td (click)="detalleEncuesta(encuesta.id_form)" style="cursor: pointer;" mat-cell *matCellDef="let encuesta">{{ encuesta.codigo }}</td>
+                </ng-container>
+                <a-ng-container matColumnDef="fechaCreacion">
+                    <th mat-header-cell *matHeaderCellDef>Fecha Creación</th>
+                    <td (click)="detalleEncuesta(encuesta.id_form)" style="cursor: pointer;" mat-cell *matCellDef="let encuesta">{{ encuesta.fecha_creacion }}</td>
+                </a-ng-container>
+                <a-ng-container matColumnDef="catalogo">
+                    <th mat-header-cell *matHeaderCellDef>Catálogo</th>
+                    <td (click)="detalleEncuesta(encuesta.id_form)" style="cursor: pointer;" mat-cell *matCellDef="let encuesta">{{ encuesta.titulo }}</td>
+                </a-ng-container>
+                <a-ng-container matColumnDef="objetivo">
+                    <th mat-header-cell *matHeaderCellDef>Objetivo</th>
+                    <td (click)="detalleEncuesta(encuesta.id_form)" style="cursor: pointer;" mat-cell *matCellDef="let encuesta">{{ encuesta.tipo }}</td>
+                </a-ng-container>
+                <a-ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td (click)="detalleEncuesta(encuesta.id_form)" style="cursor: pointer;" mat-cell *matCellDef="let encuesta">{{ encuesta.estado | uppercase}}</td>
+                </a-ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{input.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <table class="table">
                 <thead>
                     <tr class="tabla-fila-cabecera">
                         <th></th>
@@ -218,12 +263,12 @@
                         <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.estado}}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </section>
     </div>
 </div>
 
-<div class="footer">
+<!-- <div class="footer">
     <div class="footer-paginate">
         <div class="pagination">
             <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
@@ -238,4 +283,4 @@
             </select>
         </div>   
     </div>
-</div>
+</div> -->

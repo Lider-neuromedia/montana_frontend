@@ -27,6 +27,7 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoInternaComponent } from './pedido-interna/pedido-interna.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { DetalleEncuestaComponent } from './detalle-encuesta/detalle-encuesta.component';
@@ -34,6 +35,7 @@ import { AmpliacionCupoComponent } from './ampliacion-cupo/ampliacion-cupo.compo
 import { PqrsComponent } from './pqrs/pqrs.component';
 import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
 import { ShowRoomComponent } from './show-room/show-room.component';
+import { RestablecerComponent } from './restablecer/restablecer.component';
 
 
 // import { AuthGuardService } from './services/auth-guard.service';
@@ -42,7 +44,7 @@ import { ShowRoomComponent } from './show-room/show-room.component';
 const routes : Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
   { path: 'productos/:id', component: InternaCatalogoComponent },
   { path: 'producto-detalle/:id', component: ProductoDetalleComponent },
   {
@@ -76,6 +78,7 @@ const routes : Routes = [
   { path: 'pqrs', component: PqrsComponent },
   { path: 'detalle-pqrs/:id', component: DetallePqrsComponent },
   { path: 'show-room', component: ShowRoomComponent },
+  {path: 'restablecer', component: RestablecerComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

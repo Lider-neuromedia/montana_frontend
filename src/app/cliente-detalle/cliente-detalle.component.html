@@ -8,13 +8,28 @@
         <div class="filtros filtro-clientes">
             <div class="ident-admin">
                 <div class="div-imagen">
-                    <img src="/assets/img/iniciales_dm_azul.svg" alt="">
+                    <div class="iniciales-azul"> {{ iniciales }} </div>
+                    <!-- <img src="/assets/img/iniciales_dm_azul.svg" alt=""> -->
                 </div>
                 <div class="div-datos">
-                    <p *ngIf="show"> <strong>{{ usuario.name }} {{ usuario.apellidos }}</strong> </p>
+                    <span *ngIf="show"> <strong>{{ usuario.name }} {{ usuario.apellidos }}</strong> </span>
                     <td class="datos" *ngFor="let data of usuario.data_user">
-                        <p *ngIf="data.field_key == 'codigo'">Cliente No. {{ data.value_key }}</p>
+                        <p *ngIf="data.field_key == 'nit'">Cliente No. {{ data.value_key }}</p>
                     </td>
+                </div>
+            </div>
+            <div class="div-edit-boton">
+                <div (click)="accionesAdministrador()" class="box-editar"> 
+                    <span class="texto-editar">Acción de</span>
+                    <div class="icono-puntos">
+                        <img src="./assets/img/edit_points.svg" alt="">
+                    </div>
+
+                    <ul class="acciones-administrador">
+                        <li><img src="./assets/img/editar.svg" alt="">Editar</li>
+                        <li><img src="./assets/img/icons-filter/export.svg" alt=""> Exportar</li>
+                        <li><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -46,30 +61,35 @@
                     <div class="label-field">
                         <label for="">Nombre de la tienda</label>
                         <input type="text" class="" [(ngModel)]="selectTiendas.nombre"  [ngModelOptions]="{standalone: true}">
+                        <small *ngIf="nombreBool"><span class="text-danger">{{ error.nombre }}</span></small>
                     </div>
 
                     <div class="label-field two-fields">
                         <div class="label-field-two">
                             <label for="">Lugar</label>
                             <input type="text" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                            <small *ngIf="lugarBool"><span class="text-danger">{{ error.lugar }}</span></small>
                         </div>
                         <div class="label-field-two">
                             <label for="">Número de local</label>
                             <input type="number" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
+                            <small *ngIf="localBool"><span class="text-danger">{{ error.local }}</span></small>
                         </div>
                     </div>
                     <div class="label-field">
                         <label for="">Dirección</label>
                         <input type="text" class="" [(ngModel)]="selectTiendas.direccion"  [ngModelOptions]="{standalone: true}">
+                        <small *ngIf="direccionBool"><span class="text-danger">{{ error.direccion }}</span></small>
                     </div>
                     <div class="label-field">
                         <label for="">Teléfono</label>
                         <input type="tel" class="" [(ngModel)]="selectTiendas.telefono"  [ngModelOptions]="{standalone: true}">
+                        <small *ngIf="telefonoBool"><span class="text-danger">{{ error.telefono }}</span></small>
                     </div>
                     <div class="agregar-tienda">
                         <div class="box-button-light">
                             <div class="box-mas">
-                                <img class="mas" src="assets/img/mas.svg" alt="">
+                                <img class="mas" src="./assets/img/mas.svg" alt="">
                             </div>
                             <a class="btn-ligth" (click)="addTienda()"> Agregar tienda</a>
                         </div>
@@ -240,7 +260,7 @@
                             <h2 class="title-vendedor-asignado">Vendedor asignado</h2>
                             <div class="btn-whatsapp">
                                 <a class="flex-center" href="https://wa.me/57{{vendedor_asoci_tel}}" target="_blank" rel="noopener noreferrer">
-                                    <img src="/assets/img/wa.svg" alt="" class="icon"> Contactar vía WhatsApp
+                                    <img src="./assets/img/wa.svg" alt="" class="icon"> Contactar vía WhatsApp
                                 </a>
                             </div>
                         </div>
@@ -276,22 +296,22 @@
                                 <h2 class="title-tiendas">Tiendas</h2>
                                 <div (click)="accionesAdministrador()"  class="box-editar">
                                     <div class="icono-editar">
-                                            <img src="assets/img/icons-filter/shop.svg" alt="">
+                                            <img src="./assets/img/icons-filter/shop.svg" alt="">
                                         </div>
-                                    <p class="texto-editar">Tiendas</p>
+                                    <span class="texto-editar">Tiendas</span>
                                     <div class="icono-puntos">
-                                        <img src="{{ templateImage.points }}" alt="">
+                                        <img [src]="templateImage.points" alt="">
                                     </div>
                                     <ul class="acciones-administrador">
                                         <!-- <li [ngClass]="active"><img src="{{ templateImage.lapiz }}" alt=""> Editar</li> -->
                                         <li (click)="openDrawerRigth(true, 'create')">
-                                            <img src="assets/img/icons-filter/shop.svg" alt=""> Nueva
+                                            <img src="./assets/img/icons-filter/shop.svg" alt=""> Nueva
                                         </li>
                                         <li (click)="editTienda()">
-                                            <img src="{{ templateImage.lapiz }}" alt=""> Editar 
+                                            <img [src]=" templateImage.lapiz " alt=""> Editar 
                                         </li>
                                         <li (click)="deleteTienda()">
-                                            <img src="{{ templateImage.eliminar }}" alt=""> Eliminar
+                                            <img [src]=" templateImage.eliminar " alt=""> Eliminar
                                         </li>
                                     </ul>
                                 </div>
@@ -326,9 +346,27 @@
                 <div class="col-sm-12 col-md-4 aside-pedidos">
                     <mat-tab-group mat-align-tabs="start">
                         <mat-tab label="Pedidos">
-                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
-
-                            <div class="box-pedidos" *ngFor="let pedido of usuario.pedidos" (click)="navigatePedido(pedido.id_pedido)">
+                            <input (keyup)="filtro($event)" class="buscador-pedido" type="search" placeholder="Realiza una búsqueda" #input>
+                            <table class="tabla-pedidos" mat-table [dataSource]="dataSource">
+                                <ng-container matColumnDef="Pedidos">
+                                    <th *matHeaderCellDef></th>
+                                    <td mat-cell class="box-pedidos" *matCellDef="let pedido" style="cursor: pointer;" (click)="navigatePedido(pedido.id_pedido)">
+                                        <div class="foto-referencia">
+                                            <p>Pedido #{{pedido.codigo}}</p>
+                                        </div>
+                                        <div class="info-pedido">
+                                            <p>{{pedido.fecha}}</p>
+                                            <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
+                                </tr>
+                            </table>
+                            <!-- <div class="box-pedidos" *ngFor="let pedido of usuario.pedidos" (click)="navigatePedido(pedido.id_pedido)">
                                 <div class="foto-referencia">
                                     <p>Pedido #{{pedido.codigo}}</p>
                                 </div>
@@ -336,26 +374,42 @@
                                     <p>{{pedido.fecha}}</p>
                                     <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </mat-tab>
                         <mat-tab label="Solicitar cupo">
-                            <input class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
-
-                            <div class="box-ampliacion">
-                                <div class="titulo-ampliacion">
-                                    <p>Solicitud de ampliación #faf322s1</p>
-                                </div>
-                                <div class="info-ampliacion">
-                                    <p>2020-10-25</p>
-                                    <p>Valor: {{1000000 | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
-                                </div>
-                                <div class="estado">
-                                    <p>Estado:</p>
-                                    <p class="aprobado">Aprobado</p>
-                                    <!-- <p class="rechazado">Rechazado</p> -->
-                                    <!-- <p class="pendiente">Pendiente</p> -->
-                                </div>
-                            </div>
+                            <input class="buscador-pedido" (keyup)="filtroCupo($event)" type="search" placeholder="Realiza una búsqueda" #inputCupo>
+                            <table class="tabla-cupo" mat-table [dataSource]="dataCupo">
+                                <ng-container matColumnDef="cupos">
+                                    <th *matHeaderCellDef></th>
+                                    <td mat-cell *matCellDef="let cupo">
+                                        <div class="box-ampliacion" *ngIf="cupo.codigo_solicitud">
+                                            <div class="titulo-ampliacion">
+                                                <p>Solicitud de ampliación #{{cupo.codigo_solicitud}}</p>
+                                            </div>
+                                            <div class="info-ampliacion">
+                                                <p>{{cupo.fecha_solicitud}}</p>
+                                                <p>Valor: {{cupo.monto | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                            </div>
+                                            <div class="estado">
+                                                <p>Estado:</p>
+                                                <p class="aprobado" *ngIf="cupo.estado === 'aceptado'">{{cupo.estado}}</p>
+                                                 <p class="rechazado" *ngIf="cupo.estado === 'rechazado'">Rechazado</p> 
+                                                 <p class="pendiente" *ngIf="cupo.estado === 'pendiente'">Pendiente</p> 
+                                            </div>
+                                        </div>
+                                        <div *ngIf="cupo.noHay" class="text-center text-muted">
+                                            <mat-icon style="font-size: 50px;">sentiment_dissatisfied</mat-icon>
+                                            <p *ngIf="cupo.noHay">{{cupo.noHay}}</p>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="columnsCupo"></tr>
+                                <tr mat-row *matRowDef="let row; columns: columnsCupo"></tr>
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ inputCupo.value }}"</td>
+                                </tr>
+                            </table>
+                            
                         </mat-tab>
                       </mat-tab-group>
 

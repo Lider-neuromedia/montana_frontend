@@ -1,0 +1,11 @@
+#wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#wrapper .contenido{
+    background: #F4F8FB;
+    width: 100%;
+    padding-left: 209px;
+    padding-top: 60px;
+}

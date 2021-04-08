@@ -6,7 +6,7 @@
     <p class="title-menu">Menú</p>
 
     <ul class="firts-menu">
-        <li> <a class="das" href="#"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
+        <li> <a class="das" style="cursor: pointer;"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
         <li *ngIf="admin || vendedor" (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
             <a routerLinkActive="active-menu" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
         </li>
@@ -16,8 +16,8 @@
         <li> <a [routerLink]="['/pedidos']"> <img src="{{ templateImage.pedidos }}" alt=""> Pedidos</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/ampliacion-cupo']"> <img src="{{ templateImage.ampliacion }}" alt=""> Ampliación de cupo</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/pqrs']"> <img src="{{ templateImage.pqrs }}" alt="">PQRS</a></li>
-        <li> <a data-toggle="modal" data-target="#descuento"> <img src="{{ templateImage.descuento }}" alt=""> Descuento</a></li>
-        <li *ngIf="admin"> <a [routerLink]="['/catalogos']"> <img src="" alt="">Auditoria</a></li>
+        <li> <a data-toggle="modal" style="cursor: pointer;" data-target="#descuento"> <img src="{{ templateImage.descuento }}" alt=""> Descuento</a></li>
+        <li *ngIf="admin"><a [routerLink]="['/catalogos']"> <img src="./assets/img/icons-menu/auditoria.svg" alt=""> Auditoria</a></li>
         <li *ngIf="admin"> <a [routerLink]="['/show-room']"> <img src="{{ templateImage.show }}" alt=""> Show Room</a></li>
     </ul>
 
@@ -34,18 +34,19 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-            <form>
+            <form #form="ngForm" (ngSubmit)="setPedido(form)" autocomplete="off">
                 <p class="title-solicitud">Asigna un descuento</p>
                 <div class="label-field" style="display: flex; margin: 0;">
                     <div class="col-md-6" style="padding-left: 0;">
                         <label style="text-transform: capitalize;">Número del pedido</label>
-                        <input type="text" [(ngModel)]="code" name="code" (keyup.enter)="getPedido()">
+                        <input type="text" [(ngModel)]="code" name="code" (keyup)="getPedido()" required>
+                        <small><span class="text-muted">Presione enter despues de colocar el pedido</span></small>
                     </div>
                     <div class="col-md-6" style="padding-right: 0;">
                         <label style="text-transform: capitalize;">Descuento</label>
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <!-- <mat-label>Descuento</mat-label> -->
-                            <mat-select  [(ngModel)]="pedido_descuento.descuento" name="descuento"  [(value)]="pedido_descuento.descuento">
+                            <mat-select  [(ngModel)]="pedido_descuento.descuento" name="descuento"  [(value)]="pedido_descuento.descuento" required>
                                 <mat-option *ngFor="let num of [].constructor(100); let i = index;" [value]="i">
                                     {{i}}%
                                 </mat-option>
@@ -55,24 +56,24 @@
                 </div>
                 <div class="label-field">
                     <label style="text-transform: capitalize;">Cliente</label>
-                    <select [(ngModel)]="pedido_descuento.cliente" name="cliente">
-                        <option value="" *ngIf="pedido_descuento.cliente == ''">Ningun cliente seleccionado...</option>
-                        <option value="" *ngIf="pedido_descuento.cliente != ''">{{pedido_descuento.cliente}}</option>
+                    <select [(ngModel)]="pedido_descuento.cliente" name="cliente" required>
+                        <option value="" *ngIf="!pedido_descuento.cliente">Ningun cliente seleccionado...</option>
+                        <option [value]="pedido_descuento.cliente" *ngIf="pedido_descuento.cliente">{{pedido_descuento.cliente}}</option>
                     </select>
                 </div>
                 <div class="label-field">
                     <label style="text-transform: capitalize;">Vendedor</label>
-                    <select [(ngModel)]="pedido_descuento.vendedor" name="vendedor">
-                        <option value="" *ngIf="pedido_descuento.vendedor == ''">Ningun vendedor seleccionado...</option>
-                        <option value="" *ngIf="pedido_descuento.vendedor != ''">{{pedido_descuento.vendedor}}</option>
+                    <select [(ngModel)]="pedido_descuento.vendedor" name="vendedor" required>
+                        <option value="" *ngIf="!pedido_descuento.vendedor">Ningun vendedor seleccionado...</option>
+                        <option [value]="pedido_descuento.vendedor" *ngIf="pedido_descuento.vendedor">{{pedido_descuento.vendedor}}</option>
                     </select>
                 </div>
                 <div class="enviar-solicitud">
                     <div class="box-create-new">
                         <div class="box-mas">
-                            <img class="mas" src="assets/img/enviar.png" alt="">
+                            <img class="mas" src="./assets/img/enviar.png" alt="">
                         </div>
-                        <button type="button" (click)="setPedido()" class="btn-enviar-solicitud">Enviar</button>
+                        <button type="submit" class="btn-enviar-solicitud">Enviar</button>
                     </div>
                 </div>
             </form>

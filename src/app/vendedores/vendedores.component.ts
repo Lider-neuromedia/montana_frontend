@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { FormControl } from "@angular/forms";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SendHttpData } from '../services/SendHttpData';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort, Sort } from '@angular/material/sort';
 
 import Swal from 'sweetalert2'
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 declare var $:any;
 
 @Component({
@@ -44,7 +49,7 @@ declare var $:any;
     ]),
   ]
 })
-export class VendedoresComponent implements OnInit {
+export class VendedoresComponent implements OnInit, OnDestroy {
 
   generales = true;
   credenciales = false;
@@ -72,19 +77,19 @@ export class VendedoresComponent implements OnInit {
 
   vendedor = {
     /* datos modelo usuario */
-    id: null,
+    id: '',
     rol_id: 2,
-    name: null,
-    apellidos: null,
-    dni: null,
-    email: null,
-    password: null,
-    confirm_password: null,
+    name: '',
+    apellidos: '',
+    dni: '',
+    email: '',
+    password: '',
+    confirm_password: '',
     clientes: [],
     /* datos modelo usuario */
     userdata: {
-      telefono: null,
-      codigo: null,
+      telefono: '',
+      codigo: '',
     }
   };
 
@@ -98,6 +103,7 @@ export class VendedoresComponent implements OnInit {
 
   rol = localStorage.getItem('rol');
   tmp = localStorage.getItem('tmp_user');
+  access_token = localStorage.getItem('access_token');
 
   buscador = '';
 
@@ -128,7 +134,40 @@ export class VendedoresComponent implements OnInit {
   habilitado = true;
 
   angForm: FormGroup;
+  asigCliente = new FormControl('');
+  clients = [];
+  filteredOptions: Observable<string[]>;
+  columns = ['select', 'Nombre', 'Teléfono', 'Código', 'Correo'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  selection: SelectionModel<any>;
+  dataSource: MatTableDataSource<any>;
+  numRows: number;
+  contador: number;
+  desserts: any;
+  sortedData: any;
+  subscription : Subscription;
 
+  error = {
+    apellidos: 'Ingresa un apellido por favor',
+    name: 'Ingresa un nombre por favor',
+    confirm_password: 'Ingresa la confirmación de tu contraseña',
+    dni: 'Ingresa un DNI',
+    email: 'Ingresa un correo eléctronico',
+    password: 'Ingresa una contraseña por favor',
+    telefono: 'Ingrese un número de teléfono',
+    codigo: 'Ingrese cóigo del vendedor'
+  }
+
+  apellidosBool: boolean = false;
+  nameBool: boolean = false;
+  confirm_passwordBool: boolean = false;
+  dniBool: boolean = false;
+  emaiBool: boolean = false;
+  passwordBool: boolean = false;
+  telefonoBool: boolean = false;
+  codigoBool: boolean = false;
+  dataCliente: any;
   
 
   constructor( private sellers: UsersService, private route: Router, private userService: UsersService, private fb: FormBuilder, private http : SendHttpData) {
@@ -136,14 +175,74 @@ export class VendedoresComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
     this.getVendedores();
+    this.getClientes();
+    setTimeout(() => {
+      this.filteredOptions = this.asigCliente.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );      
+      }, 2000);
+      this.subscription = this.userService.refresh$.subscribe(() => {
+        this.selection = new SelectionModel<any>(true, []);
+      })
+  }
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
+    // console.log("Observable cerrado");
+  }
+  private _filter(value: string): string[] {
+    // console.log(value);
+    const filterValue = value.toLowerCase();
+
+    return this.clients.filter(option => option.toLowerCase().includes(filterValue));
   }
   
-  getVendedores(search = ''){
-    this.sellers.getAllSellers(search).subscribe(
-      data =>{
-      this.vendedores = data['users'];
+  getClientes(){
+    return this.userService.getAllClients('').subscribe(clientes => {
+      let users = [];
+      let i = 0;
+      for (const iterator of clientes['users']) {
+        users.push(`${clientes['users'][i].name} ${clientes['users'][i].apellidos}`);
+        this.clients = users
+        // console.log(this.clients); 
+        i++;
+      }
+      
     });
+  }
+  getVendedores(search = ''){
+    this.sellers.getAllSellers(search).subscribe(data => {
+      this.dataSource = new MatTableDataSource<any>(data['users']);
+      this.dataSource.paginator = this.paginator;
+      this.numRows = this.dataSource.data.length;
+      this.dataSource.sort = this.sort;
+      // this.vendedor = data['users'];
+    });
+  }
+
+  filtro(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValue.trim().toLowerCase();
+    // console.log(this.dataSource);
+  }
+  
+  isAllSelected() {
+    let numSelected = this.selection.selected.length;
+    return numSelected === this.numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   searchTable(event){
@@ -153,13 +252,13 @@ export class VendedoresComponent implements OnInit {
   onSubmit(){
     if(this.angForm.valid) {
       // console.log(this.angForm.value);
-      console.log(this.angForm);
+      // console.log(this.angForm);
       // this.angForm = this.fb.group({
       //   nombres: ["", Validators.required]
       // });
     } else {
       // alert("FILL ALL FIELDS");
-      console.log(this.angForm);
+      // console.log(this.angForm);
     }
   }
 
@@ -211,6 +310,72 @@ export class VendedoresComponent implements OnInit {
   }
 
   agregarVendedor(){
+    // console.log(this.vendedor);
+    if(this.vendedor.name === '' && this.vendedor.apellidos === '' && this.vendedor.confirm_password === '' && 
+       this.vendedor.password === '' && this.vendedor.dni === '' && this.vendedor.email === '' && this.vendedor.userdata.telefono === '' &&
+       this.vendedor.userdata.codigo === ''){
+         this.nameBool = this.apellidosBool = this.confirm_passwordBool = this.passwordBool = this.dniBool = this.emaiBool = this.telefonoBool =
+         this.codigoBool = true;
+         return;
+       }else if(this.vendedor.name === '' || this.vendedor.apellidos === '' || this.vendedor.confirm_password === '' || 
+       this.vendedor.password === '' || this.vendedor.dni === '' || this.vendedor.email === '' || this.vendedor.userdata.telefono === '' ||
+       this.vendedor.userdata.codigo === ''){
+    if(this.vendedor.name === ''){
+      this.nameBool = true;
+      
+    }else{
+      this.nameBool = false;
+    }
+    if(this.vendedor.apellidos === ''){
+      this.apellidosBool = true;
+      
+    }else{
+      this.apellidosBool = false
+    }
+    if(this.vendedor.confirm_password === ''){
+      this.confirm_passwordBool = true;
+      
+    }else{
+      this.confirm_passwordBool = false;
+    }
+    if(this.vendedor.password === ''){
+      this.passwordBool = true;
+      
+    }else{
+      this.passwordBool = false;
+    }
+    if(this.vendedor.dni === ''){
+      this.dniBool = true;
+      
+    }else{
+      this.dniBool = false;
+    }
+    if(this.vendedor.email === ''){
+      this.emaiBool = true;
+      
+    }else{
+      this.emaiBool = false;
+    }
+    if(this.vendedor.userdata.telefono === ''){
+      this.telefonoBool = true;
+      
+    }else{
+      this.telefonoBool = false;
+    }
+    if(this.vendedor.userdata.codigo === ''){
+      this.codigoBool = true;
+      
+    }else{
+      this.codigoBool = false;
+    }
+    return;
+    }
+    if(this.vendedor.password !== this.vendedor.confirm_password){
+      Swal.fire('Contraseñas incorrectas', '', 'error');
+      return;
+    }
+    this.nameBool = this.apellidosBool = this.confirm_passwordBool = this.passwordBool = this.dniBool = this.emaiBool =
+    this.telefonoBool = this.codigoBool = false;
     this.userService.createUser(this.vendedor).subscribe(
       (response : any) => {
         if (response.response == 'success' && response.status == 200) {
@@ -221,12 +386,27 @@ export class VendedoresComponent implements OnInit {
             'Usuario creado de manera correcta.',
             'success'
           );
+          this.vendedor = {
+            /* datos modelo usuario */
+            id: '',
+            rol_id: 2,
+            name: '',
+            apellidos: '',
+            dni: '',
+            email: '',
+            password: '',
+            confirm_password: '',
+            clientes: [],
+            /* datos modelo usuario */
+            userdata: {
+              telefono: '',
+              codigo: '',
+            }
+          };
         }
       },
       (error) =>{
-        this.errors.name = error.error.errors.name;
-        this.errors.email = error.error.errors.email;
-        this.errors.password = error.error.errors.password;
+        Swal.fire('Correo eléctronico existente, digite otro', '', 'warning');
       });
   }
 
@@ -243,7 +423,7 @@ export class VendedoresComponent implements OnInit {
 
   getUsersAndDelete(){
     Swal.fire({
-      title: 'Está seguro que desea eleiminar?',
+      title: 'Está seguro que desea eliminar?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -252,33 +432,40 @@ export class VendedoresComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         var usuarios = [];
-        this.checkVendedor.forEach(element => {
-          usuarios.push(element.id);
-        });
+          usuarios.push(this.checkVendedor.id);
         var data = {usuarios : usuarios};
-        
-        this.userService.deleteUsers(data).subscribe(
-          (data:any) =>{
-            if (data.response == 'success' && data.status == 200) {
-              this.getVendedores();
-              Swal.fire(
-                'Completado',
-                'Los usuarios han sido eliminados correctamente.',
-                'success'
-              );
-              this.checkVendedor = [];
-            }else{
-              this.getVendedores();
-              Swal.fire(
-                '¡Ups!',
-                data.message,
-                'error'
-              );
-              this.checkVendedor = [];
-
+        if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
+          Swal.fire(
+            'Tienes problemas?',
+            'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+            'warning'
+            );
+            // console.log(this.checkVendedor.length);
+        }else{
+          this.userService.deleteUsers(data).subscribe(
+            (data:any) =>{
+              if (data.response == 'success' && data.status == 200) {
+                this.getVendedores();
+                Swal.fire(
+                  'Completado',
+                  'Los usuarios han sido eliminados correctamente.',
+                  'success'
+                );
+                this.checkVendedor = [];
+              }else{
+                this.getVendedores();
+                Swal.fire(
+                  '¡Ups!',
+                  data.message,
+                  'error'
+                );
+                this.checkVendedor = [];
+  
+              }
             }
-          }
-        );
+          );
+        }
+        
       }
     }) 
   }
@@ -329,7 +516,27 @@ export class VendedoresComponent implements OnInit {
   }
 
   asignCliente(cliente){
-    if (this.vendedor.clientes.includes(cliente) === false) this.vendedor.clientes.push(cliente);
+
+    this.userService.getAllClients('').subscribe(resp => {
+      resp['users'].find(element => {
+        if(element.name+' '+element.apellidos === cliente){     
+          this.dataCliente = {
+            id: element.id,
+            name: element.name,
+            apellidos: element.apellidos
+          }   
+        // console.log(element);
+        }
+      })
+    })
+    setTimeout(() => {
+      // console.log(this.dataCliente);
+      // this.searchClientes();
+      if (this.vendedor.clientes.includes(cliente) === false) 
+      this.vendedor.clientes.push(this.dataCliente)
+      // this.getVendedores();
+      // console.log(this.vendedor.clientes);
+    }, 1500);
   }
 
   // Eliminar clientes asignados.
@@ -340,19 +547,13 @@ export class VendedoresComponent implements OnInit {
     }
   }
   
-  selectVendCheckbox(event, vendedor){
-    if (event.target.checked) {
-      this.checkVendedor.push(vendedor);
-    }else{
-      let removeIndex = this.checkVendedor.findIndex(x => x.id === vendedor.id);
-      if (removeIndex !== -1){
-        this.checkVendedor.splice(removeIndex, 1);
-      }
-    }
+  selectVendCheckbox(data?: any, index?: number){
+    this.contador = index+1;
+      this.checkVendedor = data;
   }
 
   editTienda(){
-    if (this.checkVendedor.length > 1 || this.checkVendedor.length === 0) {
+    if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       Swal.fire(
         'Tienes problemas?',
         'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
@@ -360,9 +561,10 @@ export class VendedoresComponent implements OnInit {
         );
     }else{
       this.openDrawerRigth(true, 'edit');
-      this.http.httpGet('vendedor/' + this.checkVendedor[0]['id'], true).subscribe(
+      this.http.httpGet('vendedor/' + this.checkVendedor['id'], true).subscribe(
         response => {
           this.selectVendedor = response;
+          // console.log(this.selectVendedor);
         }, 
         error => {
 
@@ -372,6 +574,73 @@ export class VendedoresComponent implements OnInit {
   }
 
   actualizarVendedor(){
+    // console.log(this.selectVendedor.id);
+    // console.log(this.selectVendedor);
+    if(this.selectVendedor.name === '' && this.selectVendedor.apellidos === '' && this.selectVendedor.confirm_password === '' && 
+       this.selectVendedor.password === '' && this.selectVendedor.dni === '' && this.selectVendedor.email === '' && this.selectVendedor.userdata.telefono === '' &&
+       this.selectVendedor.userdata.codigo === ''){
+         this.nameBool = this.apellidosBool = this.confirm_passwordBool = this.passwordBool = this.dniBool = this.emaiBool = this.telefonoBool =
+         this.codigoBool = true;
+         return;
+       }else if(this.selectVendedor.name === '' || this.selectVendedor.apellidos === '' || this.selectVendedor.confirm_password === '' || 
+       this.selectVendedor.password === '' || this.selectVendedor.dni === '' || this.selectVendedor.email === '' || this.selectVendedor.telefono === '' ||
+       this.selectVendedor.codigo === ''){
+    if(this.selectVendedor.name === ''){
+      this.nameBool = true;
+      
+    }else{
+      this.nameBool = false;
+    }
+    if(this.selectVendedor.apellidos === ''){
+      this.apellidosBool = true;
+      
+    }else{
+      this.apellidosBool = false
+    }
+    if(this.selectVendedor.confirm_password === ''){
+      this.confirm_passwordBool = true;
+      
+    }else{
+      this.confirm_passwordBool = false;
+    }
+    if(this.selectVendedor.password === ''){
+      this.passwordBool = true;
+      
+    }else{
+      this.passwordBool = false;
+    }
+    if(this.selectVendedor.dni === ''){
+      this.dniBool = true;
+      
+    }else{
+      this.dniBool = false;
+    }
+    if(this.selectVendedor.email === ''){
+      this.emaiBool = true;
+      
+    }else{
+      this.emaiBool = false;
+    }
+    if(this.selectVendedor.telefono === ''){
+      this.telefonoBool = true;
+      
+    }else{
+      this.telefonoBool = false;
+    }
+    if(this.selectVendedor.codigo === ''){
+      this.codigoBool = true;
+      
+    }else{
+      this.codigoBool = false;
+    }
+    return;
+    }
+    if(this.selectVendedor.password !== this.selectVendedor.confirm_password){
+      Swal.fire('Contraseñas incorrectas', '', 'error');
+      return;
+    }
+    this.nameBool = this.apellidosBool = this.confirm_passwordBool = this.passwordBool = this.dniBool = this.emaiBool =
+    this.telefonoBool = this.codigoBool = false;
     this.http.httpPost('update-vendedor/' + this.selectVendedor.id, this.selectVendedor, true).subscribe(
       response =>{  
         if (response.response == 'success' && response.status == 200) {
@@ -380,6 +649,7 @@ export class VendedoresComponent implements OnInit {
             'Vendedor actualizado de manera correcta.',
             'success'
           );
+          this.selection = new SelectionModel<any>(true, []);
           this.getVendedores();
           this.openDrawerRigth(false, 'edit');
           this.checkVendedor = [];
@@ -393,19 +663,45 @@ export class VendedoresComponent implements OnInit {
 
   updateAsignCliente(cliente){
 
-    var route = 'updateAsignClient/' + cliente.id + '/' + this.selectVendedor.id+ '/create';
-
-    this.http.httpGet(route, true).subscribe(
-      response => {
-        if (response.response == 'success' && response.status == 200) {
-          if (this.selectVendedor.clientes.includes(cliente) === false) this.selectVendedor.clientes.push(cliente);
-          this.clientes = [];
+    
+    this.userService.getAllClients('').subscribe(resp => {
+      resp['users'].find(element => {
+        if(element.name+' '+element.apellidos === cliente){     
+          this.dataCliente = {
+            id: element.id
+          }   
+        // console.log(element);
         }
-      },
-      error => {
+      })
+    })
+    setTimeout(() => {
+      // console.log(this.selectVendedor);
+      var route = 'updateAsignClient/' + this.dataCliente.id + '/' + this.selectVendedor.id+ '/create';
+      this.http.httpGet(route, true).subscribe(
+        response => {
+          if (response.response == 'success' && response.status == 200) {
+            this.editTienda();
+            if (this.selectVendedor.clientes.includes(cliente) === false)
+            this.selectVendedor.clientes.push(this.dataCliente);
+            this.clientes = [];
+          }
+        },error => {
 
-      }
-    );
+        }
+      )
+     
+    }, 1500);
+    // this.http.httpGet(route, true).subscribe(
+    //   response => {
+    //     if (response.response == 'success' && response.status == 200) {
+    //       if (this.selectVendedor.clientes.includes(cliente) === false) this.selectVendedor.clientes.push(cliente);
+    //       this.clientes = [];
+    //     }
+    //   },
+    //   error => {
+
+    //   }
+    // );
   }
 
   deleteAsignClient(cliente){

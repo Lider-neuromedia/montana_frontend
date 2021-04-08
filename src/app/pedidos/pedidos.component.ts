@@ -4,6 +4,9 @@ import {MatDialog} from '@angular/material/dialog';
 import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
 import {  SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 declare var $:any;
 
 @Component({
@@ -43,12 +46,22 @@ export class PedidosComponent implements OnInit {
     total: 0
   };
 
+  dataSource: MatTableDataSource<any>;
+  columns = ['select', 'fecha', 'codigo', 'vendedor', 'cliente', 'valor', 'estado_pedido'];
+
   @ViewChild('changeState') changeState: TemplateRef<any>;
+  selection: SelectionModel<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  numRows: number;
+  contador: number;
 
 
-  constructor(private route: Router, private http : SendHttpData, private dialog: MatDialog) { }
+  constructor(private route: Router, private http : SendHttpData, private dialog: MatDialog) { 
+    
+  }
 
   ngOnInit(): void {
+    this.selection = new SelectionModel<any>(true, []);
     this.getPedidos(); //Consumo de los pedidos.
     this.getRecursosCrearPedido(); //Consumo de los recursos para crear(Clientes, vendedores, catalogos).
   }
@@ -92,6 +105,11 @@ export class PedidosComponent implements OnInit {
       }
     );
   }
+  filtro(event: Event){
+    const filtroValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtroValue.trim().toLowerCase();
+
+  }
 
   getPedidos(search : string = null, date : string = null){
     var route = 'pedidos';
@@ -106,6 +124,9 @@ export class PedidosComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.pedidos = response.pedidos;
+          this.dataSource = new MatTableDataSource<any>(response.pedidos);
+          this.dataSource.paginator = this.paginator;
+          this.numRows = this.dataSource.data.length;
           this.calcularPaginas();
         }
       }, 
@@ -113,6 +134,21 @@ export class PedidosComponent implements OnInit {
 
       }
     )
+  }
+  isAllSelected() {
+    let numSelected = this.selection.selected.length;
+    return numSelected === this.numRows;
+  }
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   searchTable(event){
@@ -304,20 +340,14 @@ export class PedidosComponent implements OnInit {
     }    
   }
 
-  selectPedidoCheckbox(event, pedido){
-    if (event.target.checked) {
-      this.checkPedido.push(pedido);
-    }else{
-      let removeIndex = this.checkPedido.findIndex(x => x.id_pedido === pedido.id_pedido);
-      if (removeIndex !== -1){
-        this.checkPedido.splice(removeIndex, 1);
-      }
-    }
+  selectPedidoCheckbox(data?: any, index?: number){
+    this.contador = index+1;
+      this.checkPedido = data;
   }
 
   openDrawerRigth(action : boolean){
     if (action) {
-      if (this.checkPedido.length > 1 || this.checkPedido.length === 0) {
+      if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
         Swal.fire(
           'Tienes problemas?',
           'Asegurate de seleccionar algun pedido o tener solo 1 seleccionado.',
@@ -333,11 +363,13 @@ export class PedidosComponent implements OnInit {
   }
 
   getEditPedido(){
-    var edit_pedido = this.checkPedido[0];
-    this.http.httpGet('edit-pedido/' + edit_pedido.id_pedido, true).subscribe(
+    var edit_pedido = this.checkPedido;
+    this.http.httpGet('edit-pedido/' + edit_pedido['id_pedido'], true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.edit_pedido = response.pedido;
+          this.selection = new SelectionModel<any>(true, []);
+          console.log(response.pedido);
         }
       },
       error => {
