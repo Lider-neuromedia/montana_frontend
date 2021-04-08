@@ -74,9 +74,14 @@
                                         </div>
                                     </li>
                                     <div style="display: flex; justify-content: center;">
-                                        <a class="calificar" (click)="createCalificacion()" *ngIf="!respuesta_usuario">
+                                        <button class="calificar" (click)="createCalificacion()" *ngIf="!respuesta_usuario; else califica">
                                             Calificar
-                                        </a>
+                                        </button>
+                                        <ng-template #califica>
+                                            <button class="calificar disabled" disabled>
+                                                Calificar
+                                            </button>
+                                        </ng-template>
                                     </div>
                                 </ul>
                                 <ng-template #preguntaNoExiste>
@@ -104,7 +109,18 @@
                                                  uncheckedcolor="black"
                                                  size="24px"
                                                  readonly="false"></star-rating>
-                                                <p>{{ valoracion.respuesta }}</p>
+                                                 <div class="strellas-valoracion">
+                                                    <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
+                                                        'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>
+                                                    <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 2, 
+                                                        'star-inactive' : valoracion.respuesta < 2}">star</mat-icon>
+                                                    <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 3, 
+                                                        'star-inactive' : valoracion.respuesta < 3}">star</mat-icon>
+                                                    <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 4, 
+                                                        'star-inactive' : valoracion.respuesta < 4}" >star</mat-icon>
+                                                    <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 5, 
+                                                        'star-inactive' : valoracion.respuesta < 5}">star</mat-icon>
+                                                </div>
                                             </td>
                                         </ng-container>
                                         <tr mat-header-row *matHeaderRowDef="columns"></tr>
@@ -187,10 +203,12 @@
                     <div class="acciones">
                         <!-- <button mat-raised-button (click)="openDialogPedido()" class="btn-agregar"><mat-icon>add_circle_outline</mat-icon>Agregar Pedido</button> -->
                         <a class="agregar" style="width: 180px;" (click)="openDialogPedido()">
-                            <div class="box-mas">
-                                <img class="mas" src="./assets//img/mas.svg" alt="">
-                            </div>
                             Agregar Pedido
+                            <div class="box-mas">
+                                <!-- <img class="mas" src="./assets//img/mas.svg" alt=""> -->
+                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
+                            </div>
+                            
                         </a>
                     </div>
                 </div>

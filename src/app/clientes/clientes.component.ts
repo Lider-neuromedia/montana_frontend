@@ -304,6 +304,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
         return;
     });
   }
+  console.log(this.createClient.password);
+  console.log(this.confirm_password);
   if(this.createClient.password !== this.confirm_password){
     Swal.fire('Contraseñas incorrectas', '', 'error');
     return;
