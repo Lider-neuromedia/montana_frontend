@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row row-cont-chat">
+                    <div class="row row-cont-chat"  style="overflow: auto; height: 28%;">
                         <div class="col-sm-12">
                             <div class="content-chat">
                                 <div *ngFor="let message of pqrs.messages_pqrs" [ngClass]="{'message-user-received' : !message.addressee, 'message-user-send' : message.addressee}">
@@ -72,20 +72,19 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="footer-chat">
-                                    <!-- <textarea rows="1" placeholder="Escriba un mensaje" class="textarea-chat"></textarea> -->
-                                    <div placeholder="Escriba un mensaje" (keyup.enter)="sendMessage()"  [textContent]="mensaje" (input)="mensaje=$event.target.textContent" contenteditable="true" spellcheck="false" class="div-editable">
-                                        {{mensaje}}
-                                    </div>
-                                    <div class="btn-send">
-                                        <button (click)="sendMessage()" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
-                                          <mat-icon>near_me</mat-icon>
-                                        </button>
-                                      </div>
-                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="footer-chat">
+                        <!-- <textarea rows="1" placeholder="Escriba un mensaje" class="textarea-chat"></textarea> -->
+                        <div placeholder="Escriba un mensaje" (keyup.enter)="sendMessage()"  [textContent]="mensaje" (input)="mensaje=$event.target.textContent" contenteditable="true" spellcheck="false" class="div-editable">
+                            {{mensaje}}
+                        </div>
+                        <div class="btn-send">
+                            <button (click)="sendMessage()" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+                              <mat-icon>near_me</mat-icon>
+                            </button>
+                          </div>
                     </div>
                 </div>
 
