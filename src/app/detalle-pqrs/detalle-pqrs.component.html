@@ -27,7 +27,7 @@
             </div>
 
             <div class="box-editar" (click)="accionesPqrs()">
-                <p class="texto-editar">Estado: <span class="estado">{{pqrs.estado}}</span> </p>
+                <span class="texto-editar">Estado: <span class="estado">{{pqrs.estado}}</span> </span>
                 
                 <div class="icono-puntos">
                     <img src="./assets/img/edit_points.svg" alt="">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row row-cont-chat"  style="overflow: auto; height: 28%;">
+                    <div class="row row-cont-chat"  style="overflow: auto; height: 350px;">
                         <div class="col-sm-12">
                             <div class="content-chat">
                                 <div *ngFor="let message of pqrs.messages_pqrs" [ngClass]="{'message-user-received' : !message.addressee, 'message-user-send' : message.addressee}">

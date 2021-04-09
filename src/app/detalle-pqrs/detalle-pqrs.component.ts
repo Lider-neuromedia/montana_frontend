@@ -23,6 +23,8 @@ export class DetallePqrsComponent implements OnInit {
     messages_pqrs : []
   };
   mensaje = '';
+  fecha: string;
+  hora: string;
 
   constructor( private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_pqrs = this.activatedRoute.snapshot.params['id'];
@@ -37,6 +39,13 @@ export class DetallePqrsComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.pqrs = response.pqrs;
+          // console.log(response);
+          this.fecha = new Date().getFullYear()+'-'+new Date().getMonth()+'-'+new Date().getDay()+' '+new Date().getHours()+':'+
+          new Date().getMinutes()+':'+new Date().getSeconds();
+          
+          this.hora = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
+
+          console.log(this.hora);
         }
       },  
       error => {
@@ -49,7 +58,10 @@ export class DetallePqrsComponent implements OnInit {
     var data = {
       mensaje : this.mensaje,
       usuario : localStorage.getItem('user_id'),
-      pqrs : this.id_pqrs
+      pqrs : this.id_pqrs,
+      hora: this.hora,
+      created_at: this.fecha,
+      update_at: this.fecha
     };
     this.mensaje = '';
 
@@ -57,6 +69,7 @@ export class DetallePqrsComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.pqrs.messages_pqrs.push(response.mensaje);
+          console.log(response);
         }
       },
       error =>{
