@@ -26,6 +26,24 @@ export class AmpliacionCupoComponent implements OnInit {
     doc_camara_com : null,
     monto : 0,
   }
+
+  error = {
+    vendedor: 'Seleccione un vendedor',
+    cliente: 'Seleccione un cliente',
+    doc_identidad: 'Suba el documento de identidad',
+    doc_rut: 'Suba el rut',
+    doc_camara_com: 'Suba la cámara del comercio',
+    monto: 'Ingrese un monto'
+  }
+
+  vendedorBool: boolean = false;
+  clienteBool: boolean = false;
+  doc_identidadBool: boolean = false;
+  doc_rutBool: boolean = false;
+  doc_camara_comBool: boolean = false;
+  montoBool: boolean = false;
+
+
   name_files = { 
     doc_identidad : '',
     doc_rut : '',
@@ -43,6 +61,7 @@ export class AmpliacionCupoComponent implements OnInit {
   selection: SelectionModel<any>;
   numRows: number;
   contador: number;
+  
 
   constructor( private http : SendHttpData) {  }
 
@@ -135,6 +154,47 @@ export class AmpliacionCupoComponent implements OnInit {
   }
 
   submitSolicitud(){
+    if(this.createSolicitud.vendedor === '' && this.createSolicitud.cliente === '' && this.createSolicitud.doc_identidad === null &&
+    this.createSolicitud.doc_rut === null && this.createSolicitud.doc_camara_com === null && this.createSolicitud.monto === 0){
+      
+      this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = true;
+return;
+    }else if(this.createSolicitud.vendedor === '' || this.createSolicitud.cliente === '' || this.createSolicitud.doc_identidad === null ||
+    this.createSolicitud.doc_rut === null || this.createSolicitud.doc_camara_com === null || this.createSolicitud.monto === 0){
+    if(this.createSolicitud.vendedor === ''){
+      this.vendedorBool = true;
+    }else{
+      this.vendedorBool = false
+    }
+    if(this.createSolicitud.cliente === ''){
+      this.clienteBool = true;
+    }else{
+      this.clienteBool = false;
+    }
+    if(this.createSolicitud.doc_identidad === null){
+      this.doc_identidadBool = true;
+    }else{
+      this.doc_identidadBool = false;
+    }
+    if(this.createSolicitud.doc_rut === null){
+      this.doc_rutBool = true;
+    }else{
+      this.doc_rutBool = false;
+    }
+    if(this.createSolicitud.doc_camara_com === null){
+      this.doc_camara_comBool = true;
+    }else{
+      this.doc_camara_comBool = false;
+    }
+    if(this.createSolicitud.monto === 0){
+      this.montoBool = true;
+    }else{
+      this.montoBool = false;
+    }
+    return;
+  }
+  this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = false;
+    
     this.http.httpPost('ampliacion-cupo', this.createSolicitud, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
@@ -159,7 +219,7 @@ export class AmpliacionCupoComponent implements OnInit {
         }
       },
       error => {
-
+        console.log(error);
       }
     )
   }

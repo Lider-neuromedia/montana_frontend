@@ -45,9 +45,11 @@ import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
 import { ShowRoomComponent } from './show-room/show-room.component';
 import { RestablecerComponent } from './restablecer/restablecer.component';
 import { TablaAdministradoresComponent } from './tabla-administradores/tabla-administradores.component';
-import { TablaVendedorComponent } from './tabla-vendedor/tabla-vendedor.component';
 import { RatingModule } from 'ng-starrating';
 import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { DialogExportPedidoComponent } from './dialog-export-pedido/dialog-export-pedido.component';
+import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog-preguntas-pedido.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -86,8 +88,10 @@ import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.compo
     ShowRoomComponent,
     RestablecerComponent,
     TablaAdministradoresComponent,
-    TablaVendedorComponent,
-    DialogCatalogoComponent
+    DialogCatalogoComponent,
+    BreadcrumbComponent,
+    DialogExportPedidoComponent,
+    DialogPreguntasPedidoComponent
   ],
   imports: [
     BrowserModule,

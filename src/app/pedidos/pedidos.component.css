@@ -81,7 +81,20 @@ table td{
     border-radius: 0px 15px 15px 0px;
     cursor: pointer;
 }
-
+.btn-continuar{
+    position: relative;
+    border-radius: 30px;
+    width: 50%;
+}
+.box-icon-mas{
+    position: absolute;
+    background-image: linear-gradient(180deg, #FF596A 0%, #F51A3C 100%);
+    border-radius: 50%;
+    top: 3%;
+    left: 0%;
+    height: 31px;
+    width: 31px;
+}
 
 /* BOTON ACCIONES PARA EDITAR, ELIMINAR, ETC. */
 .box-editar {

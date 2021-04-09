@@ -12,6 +12,7 @@ import { SendHttpData } from '../services/SendHttpData';
 export class DialogCatalogoComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
+  catalogoName: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columns = ['codigo', 'nombre', 'nombre_marca', 'precio'];
   constructor(public dialogRef: MatDialogRef<DialogCatalogoComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private http: SendHttpData){
@@ -25,8 +26,18 @@ export class DialogCatalogoComponent implements OnInit {
       this.http.httpGet(`productos/${this.data.id}`, true).subscribe(resp => {
         this.dataSource = new MatTableDataSource<any>(resp.productos);
         this.dataSource.paginator = this.paginator;
-        console.log(this.dataSource.data);
+        // console.log(this.dataSource.data);
+        this.getNameCatalogo();
       });  
     }
 
+    getNameCatalogo(){
+      this.http.httpGet('catalogos',true).subscribe(resp => {
+        for (const iterator of resp.catalogos) {
+            if(this.data.id === iterator.id_catalogo){
+              this.catalogoName = iterator.titulo;
+            }
+        }
+      })
+    }
 }

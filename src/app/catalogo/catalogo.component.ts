@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
 import { NgForm } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogCatalogoComponent } from '../dialog-catalogo/dialog-catalogo.component';
 declare var $:any;
 
@@ -264,11 +262,6 @@ export class CatalogoComponent implements OnInit {
       height: '60%',
       data: {id}
     });
-    dialogRef.afterClosed().subscribe(resp => {
-      if(resp.length > 0){
-        Swal.fire('Exportado correctamente', '', 'success');
-      }
-    })
   }
 
   editCatalogo(catalogo){

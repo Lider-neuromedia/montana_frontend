@@ -15,6 +15,7 @@
                     {{cliente.name + ' ' + cliente.apellidos}}
                 </option>
             </select>
+            <small *ngIf="clienteBool"><span class="text-danger">{{error.cliente}}</span></small>
         </div>
 
         <div class="label-field w-70">
@@ -25,6 +26,7 @@
                     {{vendedor.name + ' ' + vendedor.apellidos}}
                 </option>
             </select>
+            <small *ngIf="vendedorBool"><span class="text-danger">{{error.vendedor}}</span></small>
         </div>
 
         <div class="label-field w-70">
@@ -35,9 +37,18 @@
                     {{catalogo.titulo}}
                 </option>
             </select>
+            <small *ngIf="catalogoBool"><span class="text-danger">{{error.catalogo}}</span></small>
         </div>
 
-        <div class="label-field w-70">
+        <div class="form-group label-field w-70 text-center">
+            <button (click)="continuarPedido()" class="btn btn-danger mt-5 btn-continuar">
+                <span class="box-icon-mas">
+                    <img class="mas" src="./assets/img/mas.svg" alt="">
+                </span>
+                Continuar
+            </button>
+        </div>
+        <!-- <div class="label-field w-70">
             <div class="label-field">
                 <button class="agregar" (click)="continuarPedido()">
                     <span class="box-mas registrar-producto">
@@ -45,7 +56,7 @@
                     </span> Continuar
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -75,9 +86,10 @@
 </ng-template>
 
 
-<app-header></app-header>
-
 <div class="workplace">
+    <div class="header">
+        <app-header></app-header>
+    </div>
     <div class="slide-menu">
         <app-menu></app-menu>
     </div>

@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <header class="header">
     <div class="header-items">
         <div class="breadcrumb-custom">
@@ -8,20 +9,29 @@
             </ul>
         </div>
         <div class="notify-accout">
-            <div class="notify">
+            <!-- <div class="notify">
                 <img src="{{ templateImage.notificacion }}" alt=""> <span>Notificaciones</span>
-            </div>
-            <div (click)="logout()" class="close-custom">
+            </div> -->
+            <!-- <div (click)="logout()" class="close-custom">
                 <img src="{{ templateImage.logout }}" alt=""> 
                 <span>Cerrar sesión</span>
-            </div>
-            <div class="account">
+            </div> -->
+            <!-- <div class="account">
                 <div class="div-imagen">
                     <div class="iniciales-azul-notificacion"> {{iniciales}} </div>
-                    <!-- <img src="/assets/img/iniciales_dm_azul.svg" alt=""> -->
                 </div>
                 <span class="centrado">{{email}}</span>
-            </div>
+            </div> -->
+
+            
         </div>
+        <ul class="lista-horizontal">
+            <li style="cursor: pointer;" (click)="logout()"(click)="logout()">
+                <img [src]="templateImage.logout" alt="">
+                Cerrar Sesión
+            </li>
+            <li class=""><span class="mr-3 iniciales-header">{{iniciales}}</span>{{email}}</li>
+        </ul>
     </div>
 </header>
+</div>

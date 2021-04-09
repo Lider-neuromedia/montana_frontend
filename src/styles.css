@@ -44,12 +44,17 @@ img {
     display: flex;
     position: relative;
 }
+.workplace .header{
+
+}
 
 .workplace .slide-menu {
     position: relative;
 }
 
 .workplace .area {
+    margin-top: 3%;
+    /* margin-bottom: 50%; */
     padding: 4em 2em 3em 0px;
     width: 100%;
     position: relative;

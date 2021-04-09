@@ -4,7 +4,9 @@ import { SendHttpData } from '../services/SendHttpData';
 import {FormControl, NgForm} from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { DialogExportPedidoComponent } from '../dialog-export-pedido/dialog-export-pedido.component';
 
 declare var $: any;
 
@@ -45,8 +47,11 @@ export class DetallePedidoComponent implements OnInit {
   columns = ['Referencia', 'Cantidad', 'Tienda'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  dataDetalle: MatTableDataSource<any>;
+  columnsDetalle = ['detalle'];
 
-  constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData){ 
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData, 
+              private dialog: MatDialog){ 
     this.id_pedido = this.activatedRoute.snapshot.params['id'];
   }
 
@@ -60,15 +65,27 @@ export class DetallePedidoComponent implements OnInit {
       response =>{
         if (response.status == 200 && response.response == 'success') {
           this.pedido = response.pedido;
-          this.dataSource = new MatTableDataSource<any>(response.pedido.productos);
-          this.dataSource.paginator = this.paginator;
-          // console.log(this.dataSource.data);
+          const pedidoArray = [];
+          pedidoArray.push(response.pedido);
+          this.dataDetalle = new MatTableDataSource<any>(pedidoArray);
+          setTimeout(() => {
+            this.dataSource = new MatTableDataSource<any>(response.pedido.productos);
+            this.dataSource.paginator = this.paginator;
+          }, 500);
         }
       }, 
       error => {
 
       }
     )
+  }
+
+  getExportData(){
+    const dialogRef= this.dialog.open(DialogExportPedidoComponent, {
+      width: '70%',
+      height: '30%',
+      data: {id: this.id_pedido}
+    })
   }
 
   addNovedad(form: NgForm){

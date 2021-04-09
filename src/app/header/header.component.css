@@ -23,12 +23,26 @@
     list-style: none;
     margin: 0;
 }
-
+.iniciales-header{
+    background-color: #13e6e6;
+    border-radius: 30px;
+    padding-top: 10px;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-bottom: 10px;
+}
 .header .notify-accout{
     align-items: center;
     display: flex;
 }
-
+.lista-horizontal{
+    margin-right: 2%;
+}
+.lista-horizontal li{
+    display: inline;
+    margin-left: 50px;
+    list-style: none;
+}
 .header .notify,
 .header .account,
 .header .close-custom{

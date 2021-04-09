@@ -1,5 +1,5 @@
 <div class="container">
-<button class="btn-rojo" mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Catalogo'})">Exportar</button>
+<button class="btn-rojo" mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:catalogoName})">Exportar</button>
 <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter">
     <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef>Código</th>

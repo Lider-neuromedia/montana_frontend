@@ -27,6 +27,18 @@ export class PedidosComponent implements OnInit {
     catalogo : '',
     codigo_pedido : ''
   };
+
+  error = {
+    cliente: 'Seleccione un cliente',
+    vendedor: 'Seleccione un vendedor',
+    catalogo: 'Seleccione un catalogo'
+  };
+
+  clienteBool: boolean = false;
+  vendedorBool: boolean = false;
+  catalogoBool: boolean = false;
+
+
   change_state = 0;
   pedido_select = 0;
   page_size: number = 5;
@@ -88,6 +100,28 @@ export class PedidosComponent implements OnInit {
   }
 
   continuarPedido(){
+    if(this.crear_pedido.cliente === '' && this.crear_pedido.vendedor === '' && this.crear_pedido.catalogo === ''){
+      this.clienteBool = this.vendedorBool = this.catalogoBool = true;
+      return;
+    }else if(this.crear_pedido.cliente === '' || this.crear_pedido.vendedor === '' || this.crear_pedido.catalogo === ''){
+      if(this.crear_pedido.cliente === ''){
+        this.clienteBool = true;
+      }else{
+        this.clienteBool = false;
+      }
+      if(this.crear_pedido.vendedor === ''){
+        this.vendedorBool = true;
+      }else{
+        this.vendedorBool = false;
+      }
+      if(this.crear_pedido.catalogo === ''){
+        this.catalogoBool = true;
+      }else{
+        this.catalogoBool = false;
+      }
+      return;
+    }
+    this.clienteBool = this.vendedorBool = this.catalogoBool = false;
     this.http.httpGet('generate-code', true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {

@@ -47,6 +47,7 @@ export class PedidoInternaComponent implements OnInit {
   control_cantidad = 0;
   total_pedido = 0;
   list_buy_products = [];
+  id_catalogo: string;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
@@ -89,6 +90,10 @@ export class PedidoInternaComponent implements OnInit {
     }
   }
 
+  getPreguntas(){
+    this.http.httpGet(`getPreguntas/${this.id_catalogo}`, true).subscribe(console.log);
+  }
+
   getProduct(){
     var route = 'producto/' + this.id_producto;
     this.http.httpGet(route, true).subscribe(
@@ -102,6 +107,10 @@ export class PedidoInternaComponent implements OnInit {
                 big: element.image
               })
           });
+          this.getPreguntas();
+          
+          this.id_catalogo = this.producto.catalogo;
+          console.log(this.producto);
         }
       }, 
       error => {    }
