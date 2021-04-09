@@ -103,7 +103,10 @@ export class InternaCatalogoComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           console.log(this.dataSource);
         }else{
-          console.error(response.message);
+          console.error(response);
+          const error = [];
+          error.push(response);
+          this.dataSource = new MatTableDataSource<any>(error);
         }
       }, 
       error => {

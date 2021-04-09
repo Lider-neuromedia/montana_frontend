@@ -185,7 +185,7 @@
             <ng-container matColumnDef="productos">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let producto">
-                    <div class="row">
+                    <div class="row" *ngIf="producto.codigo; else noProducto">
                         <div class="col-md-12">
                             <div class="row row-producto">
                                 <div class="col-md-4">
@@ -225,6 +225,16 @@
                             <h2>No has registrado productos aun...</h2>
                         </div>
                     </div>
+                    <ng-template #noProducto>
+                        <div class="row">
+                            <div class="col-md-12 text-center text-muted">
+                                <h1>
+                                    <mat-icon style="font-size: 80px;">sentiment_dissatisfied</mat-icon>
+                                    <p style="margin-left: 5%;">{{producto.message}}</p>
+                                </h1>
+                            </div>
+                        </div>
+                    </ng-template>
                 </td>
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
                 <tr mat-row *matRowDef="let row; columns: columns"></tr>

@@ -5,11 +5,52 @@
     box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
     border-radius: 13px;
 }
-
+.valoraciones-column{
+    padding: 30px;
+    position: relative;
+}
+.example-table-container{
+    position: relative;
+    margin-left: -5%;
+    width: 110%;
+    height: 90%;
+    overflow: auto;
+  }
+  table{
+      width: 100%;
+  }
 .detalle h2{
     margin: 1em 0em;
     font-size: 24px;
     text-transform: uppercase;
+}
+.star-active{
+    color: #ff9017;
+    font-size: 22px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.star-inactive{
+    color: #e4e4e4;
+    font-size: 22px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.qya-list .strellas-valoracion{
+    margin-top: 10px;
+}
+
+.bullet-rojo{
+    list-style: none; /* Quitamos los marcadores */
+    padding: 0; /* Quitamos el padding por defecto de la lista */
+    margin-left: 10px; /* Separamos la lista de la izquierda */
+}
+.bullet-rojo > li::before {
+    content: "\2022";
+    padding-right: 3px;
+    color: red;
+    font-size: 25px;
 }
 
 .detalle ul{
@@ -34,11 +75,27 @@
     margin: 1em 0em;
     margin-left: 15px;
 }
-
-.qya-list .strellas-valoracion{
-    margin-top: 10px;
+.calificar{
+    text-align: center;
+    border-radius: 15px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+.disabled{
+    background-color: #ce9898 !important;
 }
 
+.calificar {
+    background: #FF596A;
+    padding: 6px 0px;
+    color: white;
+    transition: all .5s ease;
+}
+
+.calificar:hover {
+    background: #da4e5c;
+}
 .valorar-title,
 .valoraciones-title{
     font-size: 24px;

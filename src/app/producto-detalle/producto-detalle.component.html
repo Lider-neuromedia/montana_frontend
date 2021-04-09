@@ -103,12 +103,6 @@
                                             <th *matHeaderCellDef></th>
                                             <td mat-cell *matCellDef="let valoracion">
                                                 <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
-                                                <star-rating value="5"
-                                                 totalstars="5"
-                                                 checkedcolor="red"
-                                                 uncheckedcolor="black"
-                                                 size="24px"
-                                                 readonly="false"></star-rating>
                                                  <div class="strellas-valoracion">
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
                                                         'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>

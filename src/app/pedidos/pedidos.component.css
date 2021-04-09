@@ -103,6 +103,10 @@ table td{
     transition: all .3s ease;
 }
 
+.admin-menu{
+    left: 0 !important;
+}
+
 .box-editar-open {
     border-bottom: 0;
     border-radius: 15px 15px 0px 0px;

@@ -13,6 +13,11 @@
     line-height: 17px;
 }
 
+.icon-center{
+    margin-left: 5px    ;
+    margin-top: 5px;
+}
+
 .info-interna .marca{
     color: #969696;
     font-size: 13px;

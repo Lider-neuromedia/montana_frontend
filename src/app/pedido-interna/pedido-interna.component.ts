@@ -4,6 +4,8 @@ import { SendHttpData } from '../services/SendHttpData';
 import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
 import {NgxGalleryImage} from '@kolkov/ngx-gallery';
 import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
+import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 declare var $:any;
 
@@ -47,7 +49,14 @@ export class PedidoInternaComponent implements OnInit {
   control_cantidad = 0;
   total_pedido = 0;
   list_buy_products = [];
-  id_catalogo: string;
+  preguntas: any[];
+  respuesta_usuario: any;
+  dataSource: MatTableDataSource<any>;
+  valoraciones: any;
+  columns = ['valoraciones'];
+  cantidad: number;
+  tempStock: number;
+  catalogo: string;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
@@ -90,8 +99,28 @@ export class PedidoInternaComponent implements OnInit {
     }
   }
 
-  getPreguntas(){
-    this.http.httpGet(`getPreguntas/${this.id_catalogo}`, true).subscribe(console.log);
+  getValoraciones(id: number){
+    this.http.httpGet(`getValoraciones/${id}`, true).subscribe(
+      resp => {
+        if(resp.response === 'success' && resp.status === 200){
+          this.valoraciones = resp.preguntas;
+          // console.log("Funciona");
+          this.dataSource = new MatTableDataSource<any>(this.valoraciones);
+          console.log(this.valoraciones);
+        }
+      },error => {
+        console.log(error)
+        ;
+      }
+    )
+  }
+
+  getPreguntas(id: number){
+    this.http.httpGet(`getPreguntas/${id}`, true).subscribe(resp => {
+      this.preguntas = resp.preguntas;
+      this.respuesta_usuario = resp.respuesta_usuario;
+      console.log(resp.preguntas);
+    });
   }
 
   getProduct(){
@@ -100,6 +129,7 @@ export class PedidoInternaComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.producto = response.producto;
+          this.tempStock = this.producto.stock;
           this.producto.imagenes.forEach( (element) => {
               this.galleryImages.push({
                 small: element.image,
@@ -107,10 +137,13 @@ export class PedidoInternaComponent implements OnInit {
                 big: element.image
               })
           });
-          this.getPreguntas();
+          this.catalogo = this.producto.catalogo;
+          console.log(this.catalogo);
+          this.getPreguntas(response.producto.catalogo);
+          this.getValoraciones(response.producto.catalogo);
           
-          this.id_catalogo = this.producto.catalogo;
-          console.log(this.producto);
+          // this.id_catalogo = this.producto.catalogo;
+          // console.log(this.producto);
         }
       }, 
       error => {    }
@@ -179,24 +212,38 @@ export class PedidoInternaComponent implements OnInit {
 
   
   sumCantidad(position){
-    if(this.tiendas[position].cantidad == undefined){
-      this.tiendas[position].cantidad = 1;
-    }else{
-      if (this.control_cantidad < this.producto.stock) {
-        this.control_cantidad ++;
-        this.tiendas[position].cantidad++;
-      }
+    
+    if(this.tiendas[position].cantidad <= this.producto.stock || this.tiendas[position].cantidad > this.producto.stock &&
+       this.producto.stock > 0){
+         if(this.tiendas[position].cantidad === this.producto.stock && this.producto.stock === 0){
+           return;
+         }
+      this.cantidad++;
+      this.producto.stock--;
+      this.tiendas[position].cantidad++;
     }
   }
 
   resCantidad(position){
-    if (this.tiendas[position].cantidad != undefined && this.tiendas[position].cantidad != 0) {
+    
+    if (this.tiendas[position].cantidad <= this.producto.stock || this.tiendas[position].cantidad > this.producto.stock &&
+        this.producto.stock != 0) {
+          if(this.tiendas[position].cantidad === 0){
+            return;
+          }
       this.tiendas[position].cantidad--;
-      this.control_cantidad--;
+      this.producto.stock++;
+    }else if(this.tiendas[position].cantidad > this.producto.stock && this.producto.stock === 0){
+      this.tiendas[position].cantidad--;
+      this.producto.stock++;
     }
   }
 
   addProducto(){
+    if(this.producto.stock === this.tempStock){
+      Swal.fire('No se puede crear un pedido en 0', '', 'error');
+      return;
+    }
     var product_add = {
       id_producto : this.producto.id_producto,
       referencia : this.producto.referencia,
