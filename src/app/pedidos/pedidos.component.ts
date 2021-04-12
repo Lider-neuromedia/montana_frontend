@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
-import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import {  SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
 import { MatTableDataSource } from '@angular/material/table';

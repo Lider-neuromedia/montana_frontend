@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { AmplicacionCupoService } from '../services/amplicacion-cupo.service';
 declare var $:any;
 

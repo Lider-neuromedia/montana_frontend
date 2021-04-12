@@ -1,6 +1,6 @@
-import { stringify } from '@angular/compiler/src/util';
+// import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UsersService } from '../services/users.service';
@@ -57,7 +57,7 @@ export class VendedorDetalleComponent implements OnInit {
         (data:any) =>{
           console.log(data);
           this.usuarios = data;
-          this.iniciales = stringify(data.name).charAt(0)+stringify(data.apellidos).charAt(0);
+          this.iniciales = data.name.charAt(0)+data.apellidos.charAt(0);
           this.dataSource = new MatTableDataSource<any>(data.pedidos);
           console.log(this.iniciales);
         },

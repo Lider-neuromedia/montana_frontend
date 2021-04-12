@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
 import { SendHttpData } from '../services/SendHttpData';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import Swal from 'sweetalert2'
 import { FormGroup, NgForm } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';

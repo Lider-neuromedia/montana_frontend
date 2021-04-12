@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { TablaAdministradoresComponent } from '../tabla-administradores/tabla-administradores.component';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
-import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 declare var jQuery:any;

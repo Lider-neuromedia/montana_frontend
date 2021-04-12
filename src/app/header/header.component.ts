@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params , ParamMap } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() breadcrumbs: string;
   logoutUrl = 'http://localhost/athletic-api/public/api/auth/logout';
   apiUrl = 'http://localhost/athletic-api/public/api';
   options: any;

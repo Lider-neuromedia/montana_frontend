@@ -6,7 +6,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
 declare var $:any;
 
 @Component({

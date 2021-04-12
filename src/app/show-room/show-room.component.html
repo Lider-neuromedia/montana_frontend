@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header breadcrumbs="Show Room"></app-header>
 <app-dialog-pedido [id_catalogo]="selectCatalogo" [id_producto]="selectProduct"></app-dialog-pedido>
 
 <div id="wrapper">
@@ -34,7 +34,7 @@
                                     <p>Puma</p>
                                     <p class="nombre-show-room">{{producto.nombre}}</p>
 
-                                    <p class="stock-show-room">Stock: {{producto.stock}} cajas</p>
+                                    <p class="stock-show-room">Stock: {{producto.stock}} pares</p>
 
                                     <p class="price-show-room">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0' }}</p>
                                 </div>
