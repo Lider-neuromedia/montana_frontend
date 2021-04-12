@@ -46,7 +46,6 @@ import { ShowRoomComponent } from './show-room/show-room.component';
 import { RestablecerComponent } from './restablecer/restablecer.component';
 import { TablaAdministradoresComponent } from './tabla-administradores/tabla-administradores.component';
 import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DialogExportPedidoComponent } from './dialog-export-pedido/dialog-export-pedido.component';
 import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog-preguntas-pedido.component';
 
@@ -88,7 +87,6 @@ import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog
     RestablecerComponent,
     TablaAdministradoresComponent,
     DialogCatalogoComponent,
-    BreadcrumbComponent,
     DialogExportPedidoComponent,
     DialogPreguntasPedidoComponent
   ],
