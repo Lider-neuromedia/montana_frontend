@@ -18,9 +18,8 @@ export class UsersService {
   web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
-
+  private refresh: Subject<void>;
   admins:any = {};
-  private _refresh$ = new Subject<void>();
   
   /* Traer todos los usuarios */
   /*getAllUsers(){
@@ -28,7 +27,7 @@ export class UsersService {
   }*/
 
   get refresh$(){
-    return this._refresh$;
+    return this.refresh;
   }
 
   getAllUsers(i: number){
@@ -162,7 +161,10 @@ export class UsersService {
     return this.http.get(`${this.api}/` + route, {headers: headers});
   }
   getNameAllClients(search){
-    const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    const headers = new HttpHeaders( 
+    {'Content-Type':'application/json',
+     'Authorization':'Bearer ' + localStorage.getItem('access_token')
+    });
     var route = 'clientes?search=' + search;
     let users = [];
     return this.http.get(`${this.api}/` + route, {headers: headers}).pipe( map( (resp: any[]) => {
