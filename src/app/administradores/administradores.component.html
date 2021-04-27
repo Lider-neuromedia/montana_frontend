@@ -33,7 +33,7 @@
                 </div>
                 <div class="label-field">
                     <label for="">Numero identificación</label>
-                    <input name="dni" type="text" formControlName="dni" [class.is-invalid]="dniNoValid">
+                    <input name="dni" type="number" formControlName="dni" [class.is-invalid]="dniNoValid">
                     <small class="form-text text-danger animated fadeIn" *ngIf="dniNoValid">
                         El Numero de identificación es obligatorio
                     </small>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="label-field">
                     <label for="">Numero identificación</label>
-                    <input name="dni" type="text" formControlName="dni" [class.is-invalid]="dniUpdatedNoValid" value="{{ check_Update.dni }}" placeholder="{{ check_user.dni }}">
+                    <input name="dni" type="number" formControlName="dni" [class.is-invalid]="dniUpdatedNoValid" value="{{ check_Update.dni }}" placeholder="{{ check_user.dni }}">
                     <small class="form-text text-danger animated fadeIn" *ngIf="dniUpdatedNoValid">
                         El Numero de identificación es obligatorio
                     </small>
@@ -137,7 +137,7 @@
                 <div formArrayName="user_data" *ngFor="let user of formUpdatedAdmin.controls['user_data']['controls']; let i = index;">
                     <div [formGroupName]="i" class="label-field">
                         <label for="">{{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}}</label>
-                        <input name="telefono" type="text" formControlName="value_key">
+                        <input name="telefono" type="number" formControlName="value_key">
                         <small class="form-text text-danger animated fadeIn" *ngIf="userData.controls[i].get('value_key').errors?.required">
                             El {{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}} es obligatorio
                         </small>

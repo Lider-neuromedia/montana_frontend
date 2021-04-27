@@ -260,10 +260,12 @@ export class AdministradoresComponent implements OnInit {
   }
 
   updatedAdmin(){
-    console.log(this.formUpdatedAdmin.value);
     if(this.formUpdatedAdmin.get('password').value !== this.formUpdatedAdmin.get('password_confirmation').value){
       return this.formUpdatedAdmin.get('password').invalid && this.formUpdatedAdmin.get('password_confirmation');
     }
+    let telefono: number = this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].value;
+    this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].setValue(telefono.toString());
+
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
         console.log(data);
