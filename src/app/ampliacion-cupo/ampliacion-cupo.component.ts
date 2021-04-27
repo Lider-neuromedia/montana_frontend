@@ -146,11 +146,14 @@ export class AmpliacionCupoComponent implements OnInit {
       this.name_files[file] = this[variable][file][0]['name'];
       this[variable][file] = this[variable][file][0];
       this.readFile(this[variable][file]).then(fileContents => { 
-        this[variable][file] = fileContents;
+        // this[variable][file] = fileContents;
       });
     }else{
       this.name_files[file] = '';
     }
+    console.log(this.createSolicitud.doc_camara_com);
+    console.log(this.createSolicitud.doc_identidad);
+    console.log(this.createSolicitud.doc_rut);
   }
 
   submitSolicitud(){
@@ -193,6 +196,15 @@ return;
     }
     return;
   }
+  console.log(this.createSolicitud);
+  // const formData = new FormData();
+  // formData.append('cliente', this.createSolicitud.cliente);
+  // formData.append('doc_camara_com', this.createSolicitud.doc_camara_com);
+  // formData.append('doc_identidad', this.createSolicitud.doc_identidad);
+  // formData.append('doc_rut', this.createSolicitud.doc_rut);
+  // formData.append('monto', this.createSolicitud.monto.toString());
+  // formData.append('vendedor', this.createSolicitud.vendedor);
+
   this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = false;
     
     this.http.httpPost('ampliacion-cupo', this.createSolicitud, true).subscribe(
@@ -258,8 +270,9 @@ return;
   private async readFile(file: File): Promise<string | ArrayBuffer> {
     return new Promise<string | ArrayBuffer>((resolve, reject) => {
       const reader = new FileReader();
-  
+      
       reader.onload = e => {
+        console.log((e.target as FileReader).result);
         return resolve((e.target as FileReader).result);
       };
   

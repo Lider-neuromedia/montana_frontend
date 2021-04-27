@@ -350,13 +350,15 @@
                             <table class="tabla-pedidos" mat-table [dataSource]="dataSource">
                                 <ng-container matColumnDef="Pedidos">
                                     <th *matHeaderCellDef></th>
-                                    <td mat-cell class="box-pedidos" *matCellDef="let pedido" style="cursor: pointer;" (click)="navigatePedido(pedido.id_pedido)">
-                                        <div class="foto-referencia">
-                                            <p>Pedido #{{pedido.codigo}}</p>
-                                        </div>
-                                        <div class="info-pedido">
-                                            <p>{{pedido.fecha}}</p>
-                                            <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                    <td *matCellDef="let pedido" style="cursor: pointer;" (click)="navigatePedido(pedido.id_pedido)">
+                                        <div class="box-pedidos" (click)="navigatePedido(pedido.id_pedido)">
+                                            <div class="foto-referencia">
+                                                <p>Pedido #{{pedido.codigo}}</p>
+                                            </div>
+                                            <div class="info-pedido">
+                                                <p>{{pedido.fecha}}</p>
+                                                <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                            </div>
                                         </div>
                                     </td>
                                 </ng-container>
@@ -366,22 +368,13 @@
                                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                                 </tr>
                             </table>
-                            <!-- <div class="box-pedidos" *ngFor="let pedido of usuario.pedidos" (click)="navigatePedido(pedido.id_pedido)">
-                                <div class="foto-referencia">
-                                    <p>Pedido #{{pedido.codigo}}</p>
-                                </div>
-                                <div class="info-pedido">
-                                    <p>{{pedido.fecha}}</p>
-                                    <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
-                                </div>
-                            </div> -->
                         </mat-tab>
                         <mat-tab label="Solicitar cupo">
                             <input class="buscador-pedido" (keyup)="filtroCupo($event)" type="search" placeholder="Realiza una búsqueda" #inputCupo>
                             <table class="tabla-cupo" mat-table [dataSource]="dataCupo">
                                 <ng-container matColumnDef="cupos">
                                     <th *matHeaderCellDef></th>
-                                    <td mat-cell *matCellDef="let cupo">
+                                    <td *matCellDef="let cupo">
                                         <div class="box-ampliacion" *ngIf="cupo.codigo_solicitud">
                                             <div class="titulo-ampliacion">
                                                 <p>Solicitud de ampliación #{{cupo.codigo_solicitud}}</p>

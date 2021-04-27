@@ -162,6 +162,7 @@ export class InternaCatalogoComponent implements OnInit {
     this.nombreBool, this.codigoBool, this.referenciaBool, this.stockBool, this.marcarBool,
     this.precioBool, this.descripcionBool = false;
     var data = this.crearProducto;
+    console.log(this.crearProducto);
     Swal.fire('Cargando', '', 'info');
     Swal.showLoading();
     this.http.httpPost('productos', data, true).subscribe(
@@ -173,6 +174,7 @@ export class InternaCatalogoComponent implements OnInit {
         }
       },
       error => {
+        console.log(error);
         Swal.fire('Sube una imagen', 'Debe subir por lo minimo 1 imagen', 'error' );
       }
     );
@@ -184,6 +186,7 @@ export class InternaCatalogoComponent implements OnInit {
   
   onSelect(event, edit = false, fileSelect) {
     this[fileSelect] = event.addedFiles;
+    console.log(event.addedFiles);
     this.readFile(this[fileSelect][0]).then(fileContents => {
       if (edit) {
         // this.catalogoEdit.imagen = fileContents;

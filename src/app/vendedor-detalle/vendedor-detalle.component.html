@@ -156,16 +156,18 @@
                     <mat-tab-group mat-align-tabs="start">
                         <mat-tab label="Pedidos">
                             <input #input (keyup)="filtro($event)" class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
-                            <table mat-table [dataSource]="dataSource">
+                            <table class="tabla-pedidos" mat-table [dataSource]="dataSource">
                                 <ng-container matColumnDef="Pedidos">
-                                    <th mat-header-cell *matHeaderCellDef></th>
-                                    <td mat-cell class="box-pedidos" *matCellDef="let pedido" style="cursor: pointer;" (click)="navigatePedido(pedido.id_pedido)">
-                                        <div class="foto-referencia">
-                                            <p>Pedido #{{pedido.codigo}}</p>
-                                        </div>
-                                        <div class="info-pedido">
-                                            <p>{{pedido.fecha}}</p>
-                                            <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                    <th *matHeaderCellDef></th>
+                                    <td *matCellDef="let pedido" style="cursor: pointer;" (click)="navigatePedido(pedido.id_pedido)">
+                                        <div class="box-pedidos" (click)="navigatePedido(pedido.id_pedido)">
+                                            <div class="foto-referencia">
+                                                <p>Pedido #{{pedido.codigo}}</p>
+                                            </div>
+                                            <div class="info-pedido">
+                                                <p>{{pedido.fecha}}</p>
+                                                <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                            </div>
                                         </div>
                                     </td>
                                 </ng-container>
@@ -175,15 +177,6 @@
                                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                                 </tr>
                             </table>
-                            <!-- <div class="box-pedidos" *ngFor="let pedido of usuarios.pedidos" (click)="navigatePedido(pedido.id_pedido)">
-                                <div class="foto-referencia">
-                                    <p>Pedido #{{pedido.codigo}}</p>
-                                </div>
-                                <div class="info-pedido">
-                                    <p>{{pedido.fecha}}</p>
-                                    <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
-                                </div>
-                            </div> -->
                         </mat-tab>
                     </mat-tab-group>
 

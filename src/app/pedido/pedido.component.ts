@@ -8,6 +8,7 @@ import { SendHttpData } from '../services/SendHttpData';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent implements OnInit {
+  imagen_catalogo: string;
 
   constructor(private route: Router, private http : SendHttpData) { }
 
@@ -43,6 +44,7 @@ export class PedidoComponent implements OnInit {
     }else{
       this.pedido = JSON.parse(localStorage.getItem('pedido'));
       this.list_buy_products = (this.pedido.productos == undefined) ? [] : this.pedido.productos;
+      this.imagen_catalogo = localStorage.getItem('img-catalogo');
       this.getProductos();
       this.getTiendas();
       

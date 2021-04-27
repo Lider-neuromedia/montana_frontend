@@ -241,44 +241,5 @@
             </ng-container>
         </table>
         <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
-        <!-- <div class="row">
-            <div class="col-md-12" *ngFor="let producto of productos">
-                <div class="row row-producto">
-                    <div class="col-md-4">
-                        <img src="{{producto.image}}" alt="{{producto.nombre}}">
-                    </div>
-                    <div class="col-md-4 border-rh-lft">
-                        <div class="info-interna">
-                            <p class="codigo">Cod: {{producto.codigo}}</p>
-                            <p class="referencia">Ref: {{producto.referencia}}</p>
-                            <p class="marca">{{producto.nombre_marca}}</p>
-                            <p class="nombre">{{producto.nombre}}</p>
-                            <p class="stock">Stock: {{producto.stock}} cajas</p>
-                            <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 end-content">
-                        <div class="box-ver">
-                            <mat-icon class="text-size-sm">shopping_bag</mat-icon>
-                        </div>
-                        <a (click)="verProducto(producto.id_producto)" class="ver-producto">
-                            Ver producto
-                        </a>
-                        <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
-                            <div class="box-add">
-                                <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
-                            </div>
-                            Añadir a pedido
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 no-products" *ngIf="productos.length == 0">
-                <p>
-                    <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
-                </p>
-                <h2>No has registrado productos aun...</h2>
-            </div>
-        </div> -->
     </div>
 </div>

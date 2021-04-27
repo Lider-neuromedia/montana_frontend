@@ -231,7 +231,12 @@ export class AdministradoresComponent implements OnInit {
       });
     }
     if(this.formCreateAdmin.get('password_confirmation').value !== this.formCreateAdmin.get('password').value){
-      return this.formCreateAdmin.get('password').invalid && this.formCreateAdmin.get('password_confirmation').invalid;
+        Swal.fire('Las contraseñas no coinciden', '', 'error');
+      return;
+    }
+    if(this.formCreateAdmin.get('password').value.length < 6){
+      Swal.fire('La contraseña debe ser minimo 6 caracteres', '', 'info');
+      return;
     }
     this.userService.createUser(this.formCreateAdmin.value).subscribe(
       (data:any) =>{
@@ -244,7 +249,8 @@ export class AdministradoresComponent implements OnInit {
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
         });
-        
+        this.formCreateAdmin.reset();
+        this.cerrarFormAdmin();
         // this.buscarAdmin();
       },
       (error:any) =>{
@@ -261,7 +267,12 @@ export class AdministradoresComponent implements OnInit {
 
   updatedAdmin(){
     if(this.formUpdatedAdmin.get('password').value !== this.formUpdatedAdmin.get('password_confirmation').value){
-      return this.formUpdatedAdmin.get('password').invalid && this.formUpdatedAdmin.get('password_confirmation');
+      Swal.fire('Las contraseñas no coinciden', '', 'error');
+      return;
+    }
+    if(this.formUpdatedAdmin.get('password').value.length < 6){
+      Swal.fire('La contraseña debe ser minimo 6 caracteres', '', 'info');
+      return;
     }
     let telefono: number = this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].value;
     this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].setValue(telefono.toString());

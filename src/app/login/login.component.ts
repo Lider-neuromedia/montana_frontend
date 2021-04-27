@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
   roles = [];
 
   constructor(private route: Router, private auth: AuthService, private userService: UsersService, private formb: FormBuilder) {
-    this.userService.getRoles().subscribe( (data:any) =>{
-      this.roles = data;
-    })
+    
     this.FormLogin();
   }
 
@@ -79,7 +77,8 @@ export class LoginComponent implements OnInit {
 
         let rol = localStorage.getItem('rol');
         let name = localStorage.getItem('user');
-
+        this.userService.getRoles().subscribe( (data:any) =>{
+          this.roles = data;
         if( rol == this.roles[2].id){
           this.route.navigateByUrl('/users/clientes');
         } else if( rol == this.roles[1].id){
@@ -89,6 +88,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.route.navigateByUrl('/login');
         }
+        })
 
       },
       (err: any) => {

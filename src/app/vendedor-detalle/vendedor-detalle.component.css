@@ -13,7 +13,9 @@
     bottom: 0;
     right: 0;
 }
-
+.tabla-pedidos{
+    width: 100%;
+}
 .comisiones-ganadas{
     border-top: 3px solid #95D5C1;
 }

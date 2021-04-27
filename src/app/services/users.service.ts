@@ -37,7 +37,8 @@ export class UsersService {
 
   /* Traer todos los roles */
   getRoles(){
-    return this.http.get(`${this.api}/roles`);
+    const headers = new HttpHeaders( {'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
+    return this.http.get(`${this.api}/roles`, {headers: headers});
   }
 
   /* Traer usuarios por rol */
