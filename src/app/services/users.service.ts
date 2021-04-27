@@ -18,7 +18,7 @@ export class UsersService {
   web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
 
   constructor( private http: HttpClient ) {}
-  private refresh: Subject<void>;
+  private refresh = new Subject<void>();
   admins:any = {};
   
   /* Traer todos los usuarios */
@@ -95,7 +95,11 @@ export class UsersService {
 
   updateUser(user){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
-    return this.http.post(`${this.api}/update-user`, user, {headers: headers});
+    return this.http.post(`${this.api}/update-user`, user, {headers: headers}).pipe(
+      tap(() => {
+        this.refresh$.next();
+      })
+    );
   }
 
   /* Eliminar un usuario */

@@ -49,7 +49,7 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
     this.userService.getUsersAdmin().subscribe(
       res =>{
         this.dataSource = new MatTableDataSource<any>(res['users']);
-        // console.log(res['users']);
+        console.log(res);
         this.numRows = this.dataSource.data.length;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

@@ -126,7 +126,9 @@ export class AdministradoresComponent implements OnInit {
   get passNoValid(){
     return this.formCreateAdmin.get('password').invalid && this.formCreateAdmin.get('password').touched;
   }
-
+  get confirmpassNoValid(){
+    return this.formCreateAdmin.get('password_confirmation').invalid && this.formCreateAdmin.get('password_confirmation').touched;
+  }
   /* UPDATE ADMIN */
   get nameUpdatedNoValid(){
     return this.formUpdatedAdmin.get('name').invalid;
@@ -155,6 +157,7 @@ export class AdministradoresComponent implements OnInit {
       dni: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', Validators.required],
+      password_confirmation: ['', Validators.required],
       userdata: this.formb.group({
         telefono: ['', Validators.required],
       })
@@ -170,6 +173,7 @@ export class AdministradoresComponent implements OnInit {
       dni: [this.check_Update.dni, [Validators.required]],
       email: [this.check_Update.email, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', Validators.required],
+      password_confirmation: ['', Validators.required],
       user_data: this.formb.array([this.createUser_data()],[Validators.required])
     });
   }
@@ -226,6 +230,9 @@ export class AdministradoresComponent implements OnInit {
         }
       });
     }
+    if(this.formCreateAdmin.get('password_confirmation').value !== this.formCreateAdmin.get('password').value){
+      return this.formCreateAdmin.get('password').invalid && this.formCreateAdmin.get('password_confirmation').invalid;
+    }
     this.userService.createUser(this.formCreateAdmin.value).subscribe(
       (data:any) =>{
         // console.log(data);
@@ -248,11 +255,18 @@ export class AdministradoresComponent implements OnInit {
 
   procesarData(data: any){
     this.check_Update = data;
+    console.log(data);
+    this.FormUpdateAdmin();
   }
 
   updatedAdmin(){
+    console.log(this.formUpdatedAdmin.value);
+    if(this.formUpdatedAdmin.get('password').value !== this.formUpdatedAdmin.get('password_confirmation').value){
+      return this.formUpdatedAdmin.get('password').invalid && this.formUpdatedAdmin.get('password_confirmation');
+    }
     this.userService.updateUser(this.formUpdatedAdmin.value).subscribe(
       (data:any) =>{
+        console.log(data);
         this.showAdmins();
         this.formUpdatedAdmin.reset();
         Swal.fire({

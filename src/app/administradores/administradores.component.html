@@ -46,10 +46,17 @@
                     </small>
                 </div>
                 <div class="label-field">
-                    <label for="">Password</label>
+                    <label for="">Contraseña</label>
                     <input name="password" type="password" formControlName="password" [class.is-invalid]="passNoValid">
                     <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
-                        El password es obligatorio
+                        El contraseña es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Confirmar Contraseña</label>
+                    <input name="password" type="password" formControlName="password_confirmation" [class.is-invalid]="confirmpassNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="confirmpassNoValid">
+                        El Confirmar contraseña es obligatorio
                     </small>
                 </div>
                 <div formGroupName="userdata">
@@ -114,16 +121,23 @@
                     </small>
                 </div>
                 <div class="label-field">
-                    <label for="">Password</label>
-                    <input name="password" type="text" formControlName="password" [class.is-invalid]="passNoValid">
+                    <label for="">Contraseña</label>
+                    <input name="password" type="password" formControlName="password" [class.is-invalid]="passNoValid">
                     <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
-                        El password es obligatorio
+                        El contraseña es obligatorio
+                    </small>
+                </div>
+                <div class="label-field">
+                    <label for="">Confirmar Contraseña</label>
+                    <input name="password" type="password" formControlName="password_confirmation" [class.is-invalid]="confirmpassNoValid">
+                    <small class="form-text text-danger animated fadeIn" *ngIf="confirmpassNoValid">
+                        El Confirmar contraseña es obligatorio
                     </small>
                 </div>
                 <div formArrayName="user_data" *ngFor="let user of formUpdatedAdmin.controls['user_data']['controls']; let i = index;">
                     <div [formGroupName]="i" class="label-field">
                         <label for="">{{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}}</label>
-                        <input name="telefono" type="number" formControlName="value_key">
+                        <input name="telefono" type="text" formControlName="value_key">
                         <small class="form-text text-danger animated fadeIn" *ngIf="userData.controls[i].get('value_key').errors?.required">
                             El {{formUpdatedAdmin.controls['user_data']['controls'][i].controls.field_key.value}} es obligatorio
                         </small>
