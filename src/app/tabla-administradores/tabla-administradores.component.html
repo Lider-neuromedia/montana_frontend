@@ -41,7 +41,7 @@
             </th>
             <td mat-cell *matCellDef="let admin; let i = index">
                 <mat-checkbox (click)="$event.stopPropagation()"
-                    (click)="editarAdmin(admin, i)" *ngIf="admin.id !== 146"
+                    (click)="editarAdmin(admin, i)" *ngIf="admin.id !== 1"
                     (change)="$event ? selection.toggle(admin) : null"
                     [checked]="selection.isSelected(admin)"
                     [aria-label]="checkboxLabel(admin)">

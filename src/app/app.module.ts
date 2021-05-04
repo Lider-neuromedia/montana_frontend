@@ -48,6 +48,7 @@ import { TablaAdministradoresComponent } from './tabla-administradores/tabla-adm
 import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.component';
 import { DialogExportPedidoComponent } from './dialog-export-pedido/dialog-export-pedido.component';
 import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog-preguntas-pedido.component';
+import { RestablecerContrasenaComponent } from './restablecer-contrasena/restablecer-contrasena.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -88,7 +89,8 @@ import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog
     TablaAdministradoresComponent,
     DialogCatalogoComponent,
     DialogExportPedidoComponent,
-    DialogPreguntasPedidoComponent
+    DialogPreguntasPedidoComponent,
+    RestablecerContrasenaComponent
   ],
   imports: [
     BrowserModule,

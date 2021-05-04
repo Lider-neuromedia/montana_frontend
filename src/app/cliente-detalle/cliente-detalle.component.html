@@ -18,7 +18,7 @@
                     </td>
                 </div>
             </div>
-            <div class="div-edit-boton">
+            <!-- <div class="div-edit-boton">
                 <div (click)="accionesAdministrador()" class="box-editar"> 
                     <span class="texto-editar">Acción de</span>
                     <div class="icono-puntos">
@@ -31,7 +31,7 @@
                         <li><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="overview"></div>
 
@@ -67,12 +67,12 @@
                     <div class="label-field two-fields">
                         <div class="label-field-two">
                             <label for="">Lugar</label>
-                            <input type="text" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                            <input type="text" class="" style="width: 129%;" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
                             <small *ngIf="lugarBool"><span class="text-danger">{{ error.lugar }}</span></small>
                         </div>
                         <div class="label-field-two">
                             <label for="">Número de local</label>
-                            <input type="number" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
+                            <input type="number" style="width: 100%; margin-right: 64px;" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
                             <small *ngIf="localBool"><span class="text-danger">{{ error.local }}</span></small>
                         </div>
                     </div>
@@ -130,11 +130,11 @@
                     <div class="label-field two-fields">
                         <div class="label-field-two">
                             <label for="">Lugar</label>
-                            <input type="text" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
+                            <input type="text" style="width: 129%;" class="" [(ngModel)]="selectTiendas.lugar"  [ngModelOptions]="{standalone: true}">
                         </div>
                         <div class="label-field-two">
                             <label for="">Número de local</label>
-                            <input type="number" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
+                            <input type="number" style="width: 100%; margin-right: 64px;" class="" [(ngModel)]="selectTiendas.local"  [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
                     <div class="label-field">

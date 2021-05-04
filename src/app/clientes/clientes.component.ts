@@ -374,7 +374,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
         if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
           Swal.fire(
             'Tienes problemas?',
-            'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+            'Asegurate de seleccionar 1 usuario.',
             'warning'
             );
         }else{
@@ -502,7 +502,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
     if (this.selection.selected.length > 1 || this.selection.selected.length === 0) {
       Swal.fire(
         'Tienes problemas?',
-        'Asegurate de seleccionar alguna cliente o tener solo 1 seleccionado.',
+        'Asegurate de seleccionar 1 usuario.',
         'warning'
         );
     }else{

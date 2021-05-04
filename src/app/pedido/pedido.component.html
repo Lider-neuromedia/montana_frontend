@@ -94,7 +94,7 @@
     
                     <div class="detalle-pedido"  *ngFor="let buy_product of list_buy_products" (click)="editarPedido(buy_product)">
                         <div class="title-detalle">
-                            <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo">
+                            <!-- <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo"> -->
                             <p>Ref: {{buy_product.referencia}}</p>
                         </div>
                         <div class="tiendas-detalle" *ngFor="let tienda of buy_product.tiendas">

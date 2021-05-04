@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+declare var enviarProducto: any;
+
 @Component({
   selector: 'app-interna-catalogo',
   templateUrl: './interna-catalogo.component.html',
@@ -165,19 +167,41 @@ export class InternaCatalogoComponent implements OnInit {
     console.log(this.crearProducto);
     Swal.fire('Cargando', '', 'info');
     Swal.showLoading();
-    this.http.httpPost('productos', data, true).subscribe(
-      response => {
+    enviarProducto(data, 'nuevo').then(response => {
         if (response.response == "success" && response.status == 200) {
           Swal.fire('Producto creado correctamente', '', 'success');
           this.getProducts();
+          this.crearProducto = {
+            nombre : '',
+            catalogo : '',
+            codigo : '',
+            referencia : '',
+            stock : 0,
+            marca : '',
+            precio : 0,
+            descripcion : '',
+            imagenes : [],
+          };
           this.openDrawerRigth(false, 'create');
         }
-      },
-      error => {
-        console.log(error);
-        Swal.fire('Sube una imagen', 'Debe subir por lo minimo 1 imagen', 'error' );
-      }
-    );
+        },
+        error => {
+          console.log(error);
+          Swal.fire('Sube una imagen', 'Debe subir por lo minimo 1 imagen', 'error' );
+    })
+    // this.http.httpPost('productos', data, true).subscribe(
+    //   response => {
+    //     if (response.response == "success" && response.status == 200) {
+    //       Swal.fire('Producto creado correctamente', '', 'success');
+    //       this.getProducts();
+    //       this.openDrawerRigth(false, 'create');
+    //     }
+    //   },
+    //   error => {
+    //     console.log(error);
+    //     Swal.fire('Sube una imagen', 'Debe subir por lo minimo 1 imagen', 'error' );
+    //   }
+    // );
   }
 
   verProducto(id){
@@ -192,9 +216,9 @@ export class InternaCatalogoComponent implements OnInit {
         // this.catalogoEdit.imagen = fileContents;
       }else{
         if (fileSelect == 'files_1') {
-          this.crearProducto.imagenes.push({image : fileContents, destacada : 1});
+          this.crearProducto.imagenes.push({image : this[fileSelect][0], destacada : 1});
         }else{
-          this.crearProducto.imagenes.push({image : fileContents, destacada : 0});
+          this.crearProducto.imagenes.push({image : this[fileSelect][0], destacada : 0});
         }
       }
     });

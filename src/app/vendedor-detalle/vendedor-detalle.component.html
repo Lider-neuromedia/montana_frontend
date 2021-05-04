@@ -5,14 +5,14 @@
         <app-menu></app-menu>
     </div>
     <div class="contenido">
-        <div class="filtros filtro-vendedores">
-            <div class="ident-admin">
+        <div class="filtros filtro-vendedores" style="align-items: center;">
+            <div class="ident-admin" style="align-items: center;">
                 <div class="div-imagen">
-                    <div class="iniciales-azul"> {{iniciales}} </div>
+                    <div class="iniciales-azul" style="position: inherit; margin-left: 0;"> {{iniciales}} </div>
                 </div>
                 <div class="div-datos">
                     <!-- <p> <strong>{{ usuario.nombres }}</strong> </p> -->
-                    <p *ngIf="show"> <strong>{{ usuarios.name }} {{ usuarios.apellidos }}</strong> </p>
+                    <p *ngIf="show" style="margin: 0;"> <strong>{{ usuarios.name }} {{ usuarios.apellidos }}</strong> </p>
                     <td class="datos" *ngFor="let data of usuarios.data_user">
                         <p *ngIf="data.field_key == 'codigo'">Código: {{ data.value_key }}</p>
                     </td>

@@ -254,6 +254,9 @@ export class AdministradoresComponent implements OnInit {
         // this.buscarAdmin();
       },
       (error:any) =>{
+        if(error.error.errors.email){
+          Swal.fire('Email se encuentra registrado', '', 'warning');
+        }
         console.log(error);
       }
     );
@@ -266,13 +269,15 @@ export class AdministradoresComponent implements OnInit {
   }
 
   updatedAdmin(){
-    if(this.formUpdatedAdmin.get('password').value !== this.formUpdatedAdmin.get('password_confirmation').value){
-      Swal.fire('Las contraseñas no coinciden', '', 'error');
-      return;
-    }
-    if(this.formUpdatedAdmin.get('password').value.length < 6){
-      Swal.fire('La contraseña debe ser minimo 6 caracteres', '', 'info');
-      return;
+    if(this.formUpdatedAdmin.get('password').value.length >= 1 || this.formUpdatedAdmin.get('password_confirmation').value.length >= 1){
+      if(this.formUpdatedAdmin.get('password').value !== this.formUpdatedAdmin.get('password_confirmation').value){
+        Swal.fire('Las contraseñas no coinciden', '', 'error');
+        return;
+      }
+      if(this.formUpdatedAdmin.get('password').value.length < 6){
+        Swal.fire('La contraseña debe ser minimo 6 caracteres', '', 'info');
+        return;
+      }
     }
     let telefono: number = this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].value;
     this.formUpdatedAdmin.controls['user_data']['controls'][0]['controls']['value_key'].setValue(telefono.toString());
@@ -348,10 +353,8 @@ export class AdministradoresComponent implements OnInit {
       confirmButtonText: 'Si, Eliminar'
     }).then((result) => {
       if (result.value) {
-        
         // Método deleteUser para un sólo usuario ---- método deleteUsers para varios usuarios
         var data = {usuarios : this.removeItemsUsers};
-        console.log(this.removeItemsUsers);
         this.userService.deleteUsers(data).subscribe(
           (data:any) =>{
             if (data.response == 'success' && data.status == 200) {
@@ -391,7 +394,7 @@ export class AdministradoresComponent implements OnInit {
       $('.overview2').css('display', 'none');
       Swal.fire(
         'Tienes problemas?',
-        'Asegurate de seleccionar algun usuario o tener solo 1 seleccionado',
+        'Asegurate de seleccionar 1 usuario',
         'warning'
       );
     }

@@ -158,6 +158,7 @@ export class PedidosComponent implements OnInit {
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.pedidos = response.pedidos;
+          console.log(response.pedidos);
           this.dataSource = new MatTableDataSource<any>(response.pedidos);
           this.dataSource.paginator = this.paginator;
           this.numRows = this.dataSource.data.length;

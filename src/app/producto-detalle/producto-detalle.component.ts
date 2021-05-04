@@ -9,6 +9,7 @@ import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component'
 import Swal from 'sweetalert2'
 import { MatTableDataSource } from '@angular/material/table';
 declare var $:any;
+declare var enviarProducto: any;
 
 @Component({
   selector: 'app-producto-detalle',
@@ -53,6 +54,7 @@ export class ProductoDetalleComponent implements OnInit {
   respuesta_usuario = false; //Si el usuario respondio ya la encuesta.
   dataSource: MatTableDataSource<any>;
   columns = ['valoraciones'];
+  imagenesBool: any;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
@@ -94,6 +96,7 @@ export class ProductoDetalleComponent implements OnInit {
       response => {
         if (response.status == 200) {
           this.producto = response.producto;
+          console.log(this.producto);
           this.getPreguntasCatalogo();
           this.getValoraciones();
           (this.galleryImages.length >= 1) ? this.galleryImages = [] : '';
@@ -144,12 +147,23 @@ export class ProductoDetalleComponent implements OnInit {
 
   openDrawerRigth(action : boolean, type : string){
     if (type == 'edit') {
-      this.openDrawer = action;
+      this.openDrawer = action; 
     }else{  }
   }
 
   submitEditProduct(){
     var data = this.producto;
+    if(!this.imagenesBool){
+      this.producto.imagenes = [];
+    }
+    this.imagenesBool = false;
+    enviarProducto(this.producto, 'editar').then(response => {
+      if (response.status == 200 && response.response == 'success') {
+        this.openDrawerRigth(false, 'edit');
+        this.getProduct();
+      }
+    })
+    return;
     this.http.httpPut('producto', this.id_producto, data, true).subscribe(
       response => {
         if (response.status == 200 && response.response == 'success') {
@@ -164,20 +178,24 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   onSelect(event, fileSelect) {
+    console.log(event.addedFiles);
+    console.log(fileSelect);
     this[fileSelect] = event.addedFiles;
+    this.imagenesBool = true;
     this.readFile(this[fileSelect][0]).then(fileContents => {
       if (fileSelect == 'files_1') {
-        this.producto.imagenes.push({image : fileContents, destacada : 1});
+        this.producto.imagenes[0].image = this[fileSelect][0];
       }else{
+        console.log(fileSelect[fileSelect.length - 1]);
         var position_file = fileSelect[fileSelect.length - 1];
         
         if (this.producto.imagenes[position_file - 1]) {
-          this.producto.imagenes[position_file - 1].image = fileContents;
+          this.producto.imagenes[position_file - 1].image = this[fileSelect][0];
         }else{
-          this.producto.imagenes.push({image : fileContents, destacada : 0});
+          this.producto.imagenes.push({image : this[fileSelect][0], destacada : 0});
         }
       }
-
+      console.log(this.producto);
     });
   }
   

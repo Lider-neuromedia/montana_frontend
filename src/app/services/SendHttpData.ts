@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
+declare var axios: any;
+
 @Injectable()
 export class SendHttpData {
 
@@ -9,6 +12,8 @@ export class SendHttpData {
   // private baseUrl = 'http://127.0.0.1:8000/api/';
 
   options : any;
+  private _refresh$ = new Subject<void>();
+  cargando: boolean = false;
 
   constructor(private _http: HttpClient) { 
     this.options = {
@@ -19,6 +24,11 @@ export class SendHttpData {
       })
     };
   }
+
+  get refresh(){
+    return this._refresh$;
+  }
+
 
   // Peticion Http GET
   httpGet(route:string, headers = false):Observable<any>{
@@ -41,9 +51,14 @@ export class SendHttpData {
   }
 
   // Peticion Http PUT
+
   httpPut(route:string, id:any, data:any, headers = false):Observable<any>{
     var url = this.baseUrl + route + '/' + id;
     console.log(url);
+    if(this.cargando){
+      return of([]);
+    }
+    this.cargando = true;
     if (headers) {
       return this._http.put(url, data, this.options);
     }else{

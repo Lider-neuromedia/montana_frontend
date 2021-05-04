@@ -46,30 +46,36 @@ export class RestablecerComponent implements OnInit {
       'info'
     );
     Swal.showLoading();
-    for (let i = 1; i < 5; i++) {
-    this.user.getAllUsers(i).subscribe((resp:any[]) => {
-        resp['data'].find(element => {
-          console.log(element);
-          if(element.email === this.formCorreo.get('email').value){
-            this.services.enviarCorreo(this.formCorreo.value).subscribe(() => {
-              existe = true;
-              //Swal.fire("Formulario de contacto", "Mensaje enviado correctamente", 'success');
-              return;
-              })    
-          }else{
-            existe = false;
-            // Swal.fire("Correo no existe", "No se encontro correo registrado", 'warning');
-            return;
-          }
-        })
+    this.services.enviarCorreo(this.formCorreo.value, '/password/email').subscribe((resp: any) => {
+      existe = true;
+      console.log(resp);
+      Swal.fire("Formulario de contacto", resp.message, 'success');
+      return;
+      },error => {
+        Swal.fire('El correo no se encuentra registrado','','error');
+        console.log(error);
       })
-    }
-    setTimeout(() => {
-      if(existe){
-        Swal.fire("Formulario de contacto", "Mensaje enviado correctamente", 'success');
-      }else{
-        Swal.fire("Correo no existe", "No se encontro correo registrado", 'warning');
-      }
-    }, 2000);
+    // for (let i = 1; i < 5; i++) {
+    // this.user.getAllUsers(i).subscribe((resp:any[]) => {
+    //     resp['data'].find(element => {
+    //       console.log(element);
+    //       if(element.email === this.formCorreo.get('email').value){
+                
+    //       }else{
+    //         existe = false;
+    //         console.log(resp);
+    //         Swal.fire("Correo no existe", "No se encontro correo registrado", 'warning');
+    //         return;
+    //       }
+    //     })
+    //   })
+    // }
+    // setTimeout(() => {
+    //   if(existe){
+    //     Swal.fire("Formulario de contacto", "Mensaje enviado correctamente", 'success');
+    //   }else{
+    //     Swal.fire("Correo no existe", "No se encontro correo registrado", 'warning');
+    //   }
+    // }, 2000);
   }
 }

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 declare var $:any;
+declare var enviarData: any;
 
 @Component({
   selector: 'app-ampliacion-cupo',
@@ -82,6 +83,7 @@ export class AmpliacionCupoComponent implements OnInit {
         if (response.response == 'success' && response.status == 200) {
           this.solicitudes = response.solicitudes;
           this.dataSource = new MatTableDataSource<any>(response.solicitudes);
+          this.selection = new SelectionModel<any>(true, []);
           this.dataSource.paginator = this.paginator;
           this.numRows = this.dataSource.data.length;
           console.log(this.dataSource.data);
@@ -140,8 +142,8 @@ export class AmpliacionCupoComponent implements OnInit {
   }
 
   // Change files
-  onFileChange(event, file, variable){
-    this[variable][file] = event.target.files;
+  onFileChange(files: File, file, variable){
+    this[variable][file] = files;
     if (this[variable][file]['length'] > 0) {
       this.name_files[file] = this[variable][file][0]['name'];
       this[variable][file] = this[variable][file][0];
@@ -197,6 +199,7 @@ return;
     return;
   }
   console.log(this.createSolicitud);
+
   // const formData = new FormData();
   // formData.append('cliente', this.createSolicitud.cliente);
   // formData.append('doc_camara_com', this.createSolicitud.doc_camara_com);
@@ -204,67 +207,95 @@ return;
   // formData.append('doc_rut', this.createSolicitud.doc_rut);
   // formData.append('monto', this.createSolicitud.monto.toString());
   // formData.append('vendedor', this.createSolicitud.vendedor);
-
   this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = false;
-    
-    this.http.httpPost('ampliacion-cupo', this.createSolicitud, true).subscribe(
-      response => {
-        if (response.response == 'success' && response.status == 200) {
-          Swal.fire(
-            '¡Listo!',
-            'Solicitud creada de manera correcta!.',
-            'success'
-          );
-          $('#crearSolicitud').modal('hide');
-          this.getSolicitudes();
-          this.name_files = { 
-            doc_identidad : '',
-            doc_rut : '',
-            doc_camara_com : '',
+  enviarData(this.createSolicitud, 'nuevo').then( resp => {
+    console.log(resp);
+    if (resp.response == 'success' && resp.status == 200) {
+            Swal.fire(
+              '¡Listo!',
+              'Solicitud creada de manera correcta!.',
+              'success'
+            );
+            $('#crearSolicitud').modal('hide');
+            this.getSolicitudes();
+            this.name_files = { 
+              doc_identidad : '',
+              doc_rut : '',
+              doc_camara_com : '',
+            }
+            this.createSolicitud = {
+              vendedor : '',
+              cliente : '',
+              doc_identidad : null,
+              doc_rut : null,
+              doc_camara_com : null,
+              monto : 0,
+            }
+            
+          }else{
+            Swal.fire(
+              '¡Ups!',
+              resp.message,
+              'error'
+            );
           }
-        }else{
-          Swal.fire(
-            '¡Ups!',
-            response.message,
-            'error'
-          );
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    )
+  }, error => {
+    console.log(error);
+  })
+    // this.http.httpPost('ampliacion-cupo', this.createSolicitud, true).subscribe(
+    //   response => {
+    //     if (response.response == 'success' && response.status == 200) {
+    //       Swal.fire(
+    //         '¡Listo!',
+    //         'Solicitud creada de manera correcta!.',
+    //         'success'
+    //       );
+    //       $('#crearSolicitud').modal('hide');
+    //       this.getSolicitudes();
+    //       this.name_files = { 
+    //         doc_identidad : '',
+    //         doc_rut : '',
+    //         doc_camara_com : '',
+    //       }
+    //     }else{
+    //       Swal.fire(
+    //         '¡Ups!',
+    //         response.message,
+    //         'error'
+    //       );
+    //     }
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // )
   }
 
   submitUpdateSolicitud(){
-    this.http.httpPut('ampliacion-cupo', this.editSolicitud.id_cupo, this.editSolicitud, true).subscribe(
-      response => {
-        if (response.response == 'success' && response.status == 200) {
-          Swal.fire(
-            '¡Listo!',
-            'Solicitud actualizada de manera correcta!.',
-            'success'
-          );
-          $('#editarSolicitud').modal('hide');
-          this.getSolicitudes();
-          this.checkSolicitud = [];
-          this.name_files = { 
-            doc_identidad : '',
-            doc_rut : '',
-            doc_camara_com : '',
-          }
-        }else{
-          Swal.fire(
-            '¡Ups!',
-            response.message,
-            'error'
-          );
+    enviarData(this.editSolicitud, 'editar').then(response => {
+      if (response.response == 'success' && response.status == 200) {
+        Swal.fire(
+          '¡Listo!',
+          'Solicitud actualizada de manera correcta!.',
+          'success'
+        );
+        $('#editarSolicitud').modal('hide');
+        this.getSolicitudes();
+        this.checkSolicitud = [];
+        this.name_files = { 
+          doc_identidad : '',
+          doc_rut : '',
+          doc_camara_com : '',
         }
-      },
-      error => {
-
+      }else{
+        Swal.fire(
+          '¡Ups!',
+          response.message,
+          'error'
+        );
       }
-    )
+    })
+    console.log(this.editSolicitud);
   }
 
   private async readFile(file: File): Promise<string | ArrayBuffer> {

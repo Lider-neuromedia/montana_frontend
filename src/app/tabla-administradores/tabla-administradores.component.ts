@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { UsersService } from '../services/users.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -29,7 +30,7 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UsersService){
+  constructor(private userService: UsersService, private router: Router){
   }
 
   ngOnInit(): void {
@@ -92,7 +93,7 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
     if(this.selection.selected.length > 1 || this.selection.selected.length === 0){
       Swal.fire(
         'Tienes problemas?',
-        'Asegurate de seleccionar algun usuario o tener solo 1 seleccionado',
+        'Asegurate de seleccionar 1 usuario',
         'warning'
       );
       return;
@@ -106,7 +107,7 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
     if(this.selection.selected.length > 1 || this.selection.selected.length === 0){
       Swal.fire(
         'Tienes problemas?',
-        'Asegurate de seleccionar algun usuario o tener solo 1 seleccionado',
+        'Asegurate de seleccionar 1 usuario',
         'warning'
       );
       return;
@@ -122,6 +123,8 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
       if (result.value) {
         var data = {usuarios : [this.dataEmitida.id]};
         console.log(data);
+        console.log(localStorage.getItem('user_id'));
+
         this.userService.deleteUsers(data).subscribe((data: any) =>{
           console.log(data.response);
           Swal.fire(
@@ -129,6 +132,16 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
             'Los usuarios han sido eliminados correctamente.',
             'success'
           );
+          if(localStorage.getItem('user_id') == this.dataEmitida.id){
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('email');
+            localStorage.removeItem('rol');
+            localStorage.removeItem('userdata');
+            this.router.navigateByUrl('/login');
+            
+          }
         })
         console.log("Eliminar");
       }

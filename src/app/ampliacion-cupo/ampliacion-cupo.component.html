@@ -199,7 +199,7 @@
                 <div class="label-field">
                     <label >Adjuntar documento de identidad</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_identidad', 'createSolicitud')" 
+                        <input type="file" (change)="onFileChange($event.target.files,'doc_identidad', 'createSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <small *ngIf="doc_identidadBool"><span class="text-danger">{{error.doc_identidad}}</span></small>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_identidad}}</label>
@@ -208,7 +208,7 @@
                 <div class="label-field">
                     <label >Adjuntar RUT</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_rut', 'createSolicitud')" 
+                        <input type="file" (change)="onFileChange($event.target.files,'doc_rut', 'createSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <small *ngIf="doc_rutBool"><span class="text-danger">{{error.doc_rut}}</span></small>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_rut}}</label>
@@ -217,7 +217,7 @@
                 <div class="label-field">
                     <label >Adjuntar cámara de comercio</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_camara_com', 'createSolicitud')" 
+                        <input type="file" (change)="onFileChange($event.target.files,'doc_camara_com', 'createSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <small *ngIf="doc_camara_comBool"><span class="text-danger">{{error.doc_camara_com}}</span></small>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_camara_com}}</label>
@@ -254,7 +254,7 @@
                 <p class="title-solicitud">Editar tu solicitud</p>
                 <div class="label-field">
                     <label >Vendedor</label>
-                    <select name="vendedor" [(ngModel)]="editSolicitud.vendedor" [ngModelOptions]="{standalone: true}" required>
+                    <select name="vendedor" id="vendedor" [(ngModel)]="editSolicitud.vendedor" [ngModelOptions]="{standalone: true}" required>
                         <option value="">Seleccione...</option>
                         <option *ngFor="let vendedor of vendedores" [value]="vendedor.id">
                             {{vendedor.name + ' ' + vendedor.apellidos}}
@@ -263,7 +263,7 @@
                 </div>
                 <div class="label-field">
                     <label >cliente</label>
-                    <select name="cliente" [(ngModel)]="editSolicitud.cliente" [ngModelOptions]="{standalone: true}" required>
+                    <select name="cliente" id="cliente" [(ngModel)]="editSolicitud.cliente" [ngModelOptions]="{standalone: true}" required>
                         <option value="">Seleccione...</option>
                         <option *ngFor="let cliente of clientes" [value]="cliente.id">
                             {{cliente.name + ' ' + cliente.apellidos}}
@@ -273,7 +273,7 @@
                 <div class="label-field">
                     <label >Adjuntar documento de identidad</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_identidad', 'editSolicitud')" 
+                        <input type="file" id="doc_identidad" (change)="onFileChange($event.target.files,'doc_identidad', 'editSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_identidad}}</label>
                     </div>
@@ -281,7 +281,7 @@
                 <div class="label-field">
                     <label >Adjuntar RUT</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_rut', 'editSolicitud')" 
+                        <input type="file" id="doc_rut" (change)="onFileChange($event.target.files,'doc_rut', 'editSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_rut}}</label>
                     </div>
@@ -289,7 +289,7 @@
                 <div class="label-field">
                     <label >Adjuntar cámara de comercio</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event,'doc_camara_com', 'editSolicitud')" 
+                        <input type="file" id="doc_camara_com" (change)="onFileChange($event.target.files,'doc_camara_com', 'editSolicitud')" 
                         class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
                         <label class="custom-file-label" for="customFileLang">{{name_files.doc_camara_com}}</label>
                     </div>
@@ -299,7 +299,7 @@
                 </div>
                 <div class="label-field">
                     <label >monto</label>
-                    <input type="text" [(ngModel)]="editSolicitud.monto" [ngModelOptions]="{standalone: true}" required>
+                    <input type="text" name="monto" id="monto" [(ngModel)]="editSolicitud.monto" [ngModelOptions]="{standalone: true}" required>
                 </div>
                 <div class="enviar-solicitud">
                     <div class="box-create-new">

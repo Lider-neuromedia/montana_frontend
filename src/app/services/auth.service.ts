@@ -17,7 +17,7 @@ export class AuthService {
   authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
   apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
 
-  urlCorreo: string = "http://localhost:3000/formulario";
+  // urlCorreo: string = "http://localhost:3000/formulario";
 
   options: any;
 
@@ -46,8 +46,8 @@ export class AuthService {
   //   }, this.options);
   // }
 
-  enviarCorreo(body) {
-    return this.http.post(this.urlCorreo, body);
+  enviarCorreo(body, route) {
+    return this.http.post(this.apiUrl+route, body);
     }
 
   login(credenciales) {

@@ -1,0 +1,47 @@
+<div class="bg-login">
+    <div class="content-login">
+        <div class="col-title">
+            <h1 class="plataforma">Plataforma</h1>
+            <h2 class="gestion">Gestión interna de ventas</h2>
+        </div>
+        <div class="col-login">
+            <div class="box-login">
+                <p class="text-center p-b5rem">
+                    <img src="./assets/img/logo_txt.png" alt="" class="img-fluid">
+                </p>
+                <form (ngSubmit)="resetPassword()" [formGroup]="formReset" class="animated fadeInLeft">
+                    <div class="box-input-label">
+                        <!-- <label for="">Usuario</label> -->
+                        <input name="email" type="text" placeholder="Correo electrónico" formControlName="email" [class.is-invalid]="emailNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="emailNoValid">
+                            El correo es obligatorio
+                        </small>
+                    </div>
+
+                    <div class="box-input-label last-label">
+                        <!-- <label for="">Contraseña</label> -->
+                        <input name="password" type="password" placeholder="Contraseña" formControlName="password" [class.is-invalid]="passNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="passNoValid">
+                            La contraseña es obligatorio
+                        </small>
+                    </div>
+                    <div class="box-input-label last-label">
+                        <!-- <label for="">Contraseña</label> -->
+                        <input name="password" type="password" placeholder="Contraseña" formControlName="password_confirmation" [class.is-invalid]="passNoValid">
+                        <small class="form-text text-danger animated fadeIn" *ngIf="confirmPassNoValid">
+                            Confirmar contraseña es obligatorio
+                        </small>
+                    </div>
+
+                    <div class="box-btn-iniciar-sesion">
+                        <button type="submit">Restablecer contraseña</button>
+                        <!-- <button type="submit" class="btn btn-outline-primary btn-block">
+                            Iniciar Session
+                        </button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SendHttpData } from '../services/SendHttpData';
 import Swal from 'sweetalert2'
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCatalogoComponent } from '../dialog-catalogo/dialog-catalogo.component';
+import { Subscription } from 'rxjs';
 declare var $:any;
+declare var enviarCatalogo: any;
 
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
-export class CatalogoComponent implements OnInit {
+export class CatalogoComponent implements OnInit, OnDestroy {
 
   catalogos : any;
   openDrawer = false;
@@ -46,12 +48,18 @@ export class CatalogoComponent implements OnInit {
   }
   nombreCatalogo: string;
   flagNombreCatalogo: boolean;
-
+  subscripcion: Subscription;
 
   constructor(private route: Router, private http : SendHttpData, public dialog: MatDialog) { }
+  ngOnDestroy(){
+    this.subscripcion.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.getCatalogos();
+    this.subscripcion = this.http.refresh.subscribe(() => {
+      this.getCatalogos();
+    })
   }
 
   // Obtener catalogos.
@@ -104,11 +112,11 @@ export class CatalogoComponent implements OnInit {
     this.readFile(this.files[0]).then(fileContents => {
       if (edit) {
         // console.log(edit);
-        this.catalogoEdit.image = fileContents;
+        this.catalogoEdit.image = this.files[0];
         // console.log(this.catalogoEdit.imagen);
       }else{
         // console.log(edit);
-        this.catalogo.image = fileContents;
+        this.catalogo.image = this.files[0];
         // console.log(this.catalogo.image);
       }
     });
@@ -153,6 +161,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   submitCreateCat(form: NgForm){
+    console.log(form.value);
     if(form.invalid){
       console.log(form.form.value);
       if(form.form.value.name === null){
@@ -166,29 +175,34 @@ export class CatalogoComponent implements OnInit {
     this.flagNombreCatalogo = false;
     var data = this.catalogo;
     console.log(data);
+    enviarCatalogo(this.catalogo, 'nuevo').then(resp => {
+      if (resp.status == 200 && resp.response == 'success') {
+        console.log(resp);
+        this.openDrawer = false;
+          this.getCatalogos();
+        this.resetForm();
+        Swal.fire(
+          '¡Listo!',
+          'Catalogo creado de manera existosa',
+          'success'
+        );
+      }else{
+        Swal.fire(
+          '¡Ups!',
+          resp.message,
+          resp.response
+        );
+      }
+    }, error => {
+      Swal.fire('¡Ups!','Olvidaste subir la imagen', 'error');
+      console.error(error);
+    })
     this.http.httpPost('catalogos', data, true).subscribe(
       response => {
-        if (response.status == 200 && response.response == 'success') {
-          console.log(response);
-          this.openDrawer = false;
-          this.getCatalogos();
-          this.resetForm();
-          Swal.fire(
-            '¡Listo!',
-            'Catalogo creado de manera existosa',
-            'success'
-          );
-        }else{
-          Swal.fire(
-            '¡Ups!',
-            response.message,
-            response.response
-          );
-        }
+        
       },
       error => {
-        Swal.fire('¡Ups!','Olvidaste subir la imagen', 'error');
-        console.error(error);
+        
       }
     )
   }
@@ -229,13 +243,20 @@ export class CatalogoComponent implements OnInit {
                   for (const iterator of resp['productos']) {
                     console.log(iterator);
                     this.http.httpDelete('producto', iterator.id_producto).subscribe(resp => {
+                      this.http.httpDelete('catalogos', id).subscribe(resp => {
+                        if (resp.status == 200 && resp.response == 'success') {
+                          this.getCatalogos();
+                          console.log("catalogo con productos");
+                          Swal.fire(
+                            '¡Exito!',
+                            'Catalogo eliminado de manera correcta!',
+                            'success'
+                          );
+                        }
+                      });
                     });    
                   }
-                  this.http.httpDelete('catalogos', id).subscribe(resp => {
-                    Swal.fire('¡Exito!',
-                    'Catalogo eliminado de manera correcta!',
-                    'success');
-                  });
+                  
                   
                 });
               }
@@ -266,35 +287,42 @@ export class CatalogoComponent implements OnInit {
 
   editCatalogo(catalogo){
     this.openDrawerRight(true, 'edit');
-    this.catalogoEdit = catalogo;  
+    this.catalogoEdit = catalogo;
+    console.log(this.catalogoEdit);
   }
 
   submitUpdateCatalogo(){
-    var data = this.catalogoEdit;
-    this.http.httpPut('catalogos', data.id_catalogo ,data, true).subscribe(
-      response => {
-        console.log(response);
-        if (response.status == 200 && response.response == 'success') {
-          this.updateDrawer = false;
-          this.getCatalogos();
-          this.resetForm();
-          Swal.fire(
-            '¡Listo!',
-            'Catalogo actualizado de manera correcta.',
-            'success'
-          );
-        }else{
-          Swal.fire(
-            '¡Ups!',
-            response.message,
-            response.response
-          );
-        }
-      }, 
-      error => {
-        console.error(error);
+    // var data = this.catalogoEdit;
+    // console.log(this.catalogoEdit);
+    enviarCatalogo(this.catalogoEdit, 'editar').then(resp => {
+      if (resp.status == 200 && resp.response == 'success') {
+        this.updateDrawer = false;
+        this.showEditDropzone = false;
+        this.catalogoEdit = {
+          "id_catalogo": null,
+          "titulo": 0,
+          "descuento": null,
+          "estado": null,
+          "tipo": null,
+          "image": null
+        };
+        Swal.fire(
+          '¡Listo!',
+          'Catalogo actualizado de manera correcta.',
+          'success'
+        );
+        this.getCatalogos();
+        this.resetForm();
+      }else{
+        Swal.fire(
+          '¡Ups!',
+          resp.message,
+          'error'
+        );
       }
-    )
+    }, error => {
+      console.log(error);
+    })
   }
 
   showEditImageOptions(){
