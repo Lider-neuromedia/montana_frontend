@@ -120,7 +120,7 @@ export class ProductoDetalleComponent implements OnInit {
           this.valoraciones = resp.preguntas;
           // console.log("Funciona");
           this.dataSource = new MatTableDataSource<any>(this.valoraciones);
-          console.log(this.valoraciones);
+          console.log(this.dataSource.data);
         }
       },error => {
         console.log(error)
@@ -164,17 +164,6 @@ export class ProductoDetalleComponent implements OnInit {
       }
     })
     return;
-    this.http.httpPut('producto', this.id_producto, data, true).subscribe(
-      response => {
-        if (response.status == 200 && response.response == 'success') {
-          this.openDrawerRigth(false, 'edit');
-          this.getProduct();
-        }
-      },
-      error => {
-
-      }
-    )
   }
 
   onSelect(event, fileSelect) {

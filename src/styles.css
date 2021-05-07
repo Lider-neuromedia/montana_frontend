@@ -712,10 +712,9 @@ ngx-gallery-preview .ngx-gallery-icon{
 
 /* pagination */
 .pagination /deep/ .ngx-pagination .current {
-    background: #FF596A !important;
+    background: #fde8ea !important;
     border-radius: 5px;
 }
-
 
 /* Bootstrap */
 .table-striped tbody tr:nth-of-type(odd) {

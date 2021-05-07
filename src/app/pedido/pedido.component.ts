@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { SendHttpData } from '../services/SendHttpData';
 
 @Component({
@@ -9,6 +10,8 @@ import { SendHttpData } from '../services/SendHttpData';
 })
 export class PedidoComponent implements OnInit {
   imagen_catalogo: string;
+  cantidad: any;
+  tempStock: number;
 
   constructor(private route: Router, private http : SendHttpData) { }
 
@@ -62,6 +65,21 @@ export class PedidoComponent implements OnInit {
       response => {
         if (response.status == 200 && response.response == 'success') {
           this.productos = response.productos;  
+          console.log(this.productos);
+          let productoTemp = JSON.parse(localStorage.getItem('pedido'));
+          // console.log(JSON.parse(localStorage.getItem('pedido')));
+          let i = 0;
+          productoTemp.productos.forEach(element1 => {
+            if(element1.id_producto == this.productos[i].id_producto){
+              element1.tiendas.forEach(element2 => {
+                if(element2.cantidad > 0){
+                  this.productos[i].stock -= element2.cantidad;
+                }
+              });
+            }
+            i++;
+          });
+          console.log();
           this.show_room = response.show_room;
         }
       }, 
@@ -82,6 +100,7 @@ export class PedidoComponent implements OnInit {
       };
     }else{
       this.producto_select = producto;
+      this.tempStock = this.producto_select.stock;
     }
   }
 
@@ -90,6 +109,10 @@ export class PedidoComponent implements OnInit {
   }
 
   addProducto(){
+    if(this.producto_select.stock === this.tempStock){
+      Swal.fire('No se puede crear un pedido en 0', '', 'error');
+      return;
+    }
     var product_add = {
       id_producto : this.producto_select.id_producto,
       referencia : this.producto_select.referencia,
@@ -139,30 +162,29 @@ export class PedidoComponent implements OnInit {
   }
 
   sumCantidad(position, edit = false){
-    if(this.tiendas[position].cantidad == undefined){
-      if (edit) {
-        this.selectEditPedido.tiendas[position].cantidad = 1;
-      }else{
-        this.tiendas[position].cantidad = 1;
-      }
-    }else{
-      if (edit) {
-        this.selectEditPedido.tiendas[position].cantidad++;
-      }else{
-
-        if (this.control_cantidad < this.producto_select.stock) {
-          this.control_cantidad ++;
-          this.tiendas[position].cantidad++;
+    if(this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
+      this.producto_select.stock > 0){
+        if(this.tiendas[position].cantidad === this.producto_select.stock && this.producto_select.stock === 0){
+          return;
         }
-      }
-    }
+     this.cantidad++;
+     this.producto_select.stock--;
+     this.tiendas[position].cantidad++;
+   }
   }
 
   resCantidad(position){
-    if (this.tiendas[position].cantidad != undefined && this.tiendas[position].cantidad != 0) {
-      this.tiendas[position].cantidad--;
-      this.control_cantidad--;
-    }
+    if (this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
+      this.producto_select.stock != 0) {
+        if(this.tiendas[position].cantidad === 0){
+          return;
+        }
+    this.tiendas[position].cantidad--;
+    this.producto_select.stock++;
+  }else if(this.tiendas[position].cantidad > this.producto_select.stock && this.producto_select.stock === 0){
+    this.tiendas[position].cantidad--;
+    this.producto_select.stock++;
+  }
   }
 
   editarPedido(product){

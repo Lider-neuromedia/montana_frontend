@@ -173,6 +173,10 @@ export class CatalogoComponent implements OnInit, OnDestroy {
       return;
     }
     this.flagNombreCatalogo = false;
+    if(this.catalogo.image === null){
+      Swal.fire('Seleccione una imagen para el catálogo', '', 'error');
+      return;
+    }
     var data = this.catalogo;
     console.log(data);
     enviarCatalogo(this.catalogo, 'nuevo').then(resp => {
@@ -209,7 +213,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
 
   deleteCatalogo(id){
     Swal.fire({
-      title: 'Está seguro que desea eliminar este catalogo?',
+      title: 'Está seguro que desea eliminar este catálogo?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

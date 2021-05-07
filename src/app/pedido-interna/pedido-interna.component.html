@@ -9,7 +9,6 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="content-gallery">
-                    <!-- <img src="{{producto.destacada}}" alt=""> -->
                     <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
                 </div>
 
@@ -19,9 +18,8 @@
                             <h2>{{producto.nombre}}</h2>
                             <p class="marca">{{producto.nombre_marca}}</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-5">
                             <p class="precio-real">{{producto.total  |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
-                            <!-- <p class="precio-anterior">$970.000</p> -->
                         </div>
                     </div>
                     <div class="row" style="margin-top: 3rem; margin-bottom: 3rem;">
@@ -103,7 +101,7 @@
                         <div class="col-md-5">
                             <div class="valoraciones-column">
                                 <h3 class="valoraciones-title">Otras valoraciones</h3>
-                                <div class="example-table-container">
+                                <div class="example-table-container" *ngIf="dataSource.data.length > 0; else noOtrasValoraciones">
                                     <table mat-table [dataSource]="dataSource">
                                         <ng-container matColumnDef="valoraciones">
                                             <th *matHeaderCellDef></th>
@@ -127,6 +125,14 @@
                                         <tr mat-row *matRowDef="let row; columns: columns"></tr>
                                     </table>
                                 </div>
+                                <ng-template #noOtrasValoraciones>
+                                    <div class="col-md-12 text-center no-products">
+                                        <p>
+                                            <mat-icon style="font-size: 70px;margin-left: -100%;">sentiment_dissatisfied</mat-icon>
+                                        </p>
+                                        <h3>No has registrado productos aun...</h3>
+                                    </div>
+                                </ng-template>
                             </div>
                         </div>
                     </div>

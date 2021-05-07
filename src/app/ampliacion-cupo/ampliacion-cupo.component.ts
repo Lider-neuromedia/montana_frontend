@@ -165,7 +165,7 @@ export class AmpliacionCupoComponent implements OnInit {
       this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = true;
 return;
     }else if(this.createSolicitud.vendedor === '' || this.createSolicitud.cliente === '' || this.createSolicitud.doc_identidad === null ||
-    this.createSolicitud.doc_rut === null || this.createSolicitud.doc_camara_com === null || this.createSolicitud.monto === 0){
+    this.createSolicitud.doc_rut === null || this.createSolicitud.doc_camara_com === null || this.createSolicitud.monto === 0 || this.createSolicitud.monto.toString() === ''){
     if(this.createSolicitud.vendedor === ''){
       this.vendedorBool = true;
     }else{
@@ -195,6 +195,10 @@ return;
       this.montoBool = true;
     }else{
       this.montoBool = false;
+    }
+    if(this.createSolicitud.monto.toString() === ''){
+      this.createSolicitud.monto = 0;
+      this.montoBool = true;
     }
     return;
   }

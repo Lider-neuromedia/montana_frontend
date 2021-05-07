@@ -161,6 +161,10 @@ export class InternaCatalogoComponent implements OnInit {
       }
       return;
     }
+    if(this.crearProducto.imagenes.length === 0){
+      Swal.fire('Debe subir por lo mínimo una imagen', '', 'error');
+      return;
+    }
     this.nombreBool, this.codigoBool, this.referenciaBool, this.stockBool, this.marcarBool,
     this.precioBool, this.descripcionBool = false;
     var data = this.crearProducto;

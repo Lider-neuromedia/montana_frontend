@@ -97,7 +97,7 @@
                         <div class="col-md-5">
                             <div class="valoraciones-column">
                                 <h3 class="valoraciones-title">Otras valoraciones</h3>
-                                <div class="example-table-container">
+                                <div class="example-table-container" *ngIf="dataSource.data.length > 0; else noOtrasValoraciones">
                                     <table mat-table [dataSource]="dataSource">
                                         <ng-container matColumnDef="valoraciones">
                                             <th *matHeaderCellDef></th>
@@ -121,6 +121,14 @@
                                         <tr mat-row *matRowDef="let row; columns: columns"></tr>
                                     </table>
                                 </div>
+                                <ng-template #noOtrasValoraciones>
+                                    <div class="col-md-12 text-center no-products">
+                                        <p>
+                                            <mat-icon style="font-size: 70px;margin-left: -100%;">sentiment_dissatisfied</mat-icon>
+                                        </p>
+                                        <h3>No has registrado productos aun...</h3>
+                                    </div>
+                                </ng-template>
                                 <!-- <small class="total-comentarios">12 comentarios</small> -->
 
                                 <!-- <div class="user-feedback">
@@ -198,7 +206,7 @@
                         <!-- <button mat-raised-button (click)="openDialogPedido()" class="btn-agregar"><mat-icon>add_circle_outline</mat-icon>Agregar Pedido</button> -->
                         <a class="agregar" style="width: 180px;" (click)="openDialogPedido()">
                             Agregar Pedido
-                            <div class="box-mas">
+                            <div class="box-mas" style="top:48px; left:56px;">
                                 <!-- <img class="mas" src="./assets//img/mas.svg" alt=""> -->
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
                             </div>

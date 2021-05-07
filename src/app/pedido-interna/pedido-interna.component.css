@@ -9,6 +9,14 @@
     padding: 30px;
     position: relative;
 }
+.no-products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    color: #ccc;
+}
 .example-table-container{
     position: relative;
     margin-left: -5%;

@@ -33,6 +33,7 @@
                         <option value="calidad_servicio">Calidad del servicio</option>
                         <option value="calidad_pedido">Calidad del pedido</option>
                     </select>
+                    <small *ngIf="tipoBool"><span class="text-danget">Seleccione un tipo de encuesta</span></small>
                 </div>
                 <div class="label-field">
                     <label >Elige un catálogo</label>
@@ -42,6 +43,7 @@
                             {{catalogo.titulo}}
                         </option>
                     </select>
+                    <small *ngIf="catalogoBool"><span class="text-danget">Seleccione un tipo de encuesta</span></small>
                 </div>
             </div>
 
@@ -156,16 +158,13 @@
     <div class="contenido">
 
         <div class="filtros">
-            <div class="box-buscador">
+            <div class="box-buscador mr-3">
                 <img class="lupa" src="./assets/img/search.svg" alt="">
                 <input name="buscador" class="buscador"  (keyup)="filtro($event)" placeholder="Buscar..." type="text" #input>
                 <button type="button" class="hidden"></button>
             </div>
 
-            <div class="box-editar" (click)="accionesEncuestas()">
-                <!-- <div class="icono-editar">
-                    <img src="{{ templateImage.lapiz }}" alt="">
-                </div> -->
+            <!-- <div class="box-editar" (click)="accionesEncuestas()">
                 <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img src="./assets/img/edit_points.svg" alt="">
@@ -175,7 +174,7 @@
                     <li (click)="editEncuesta()"><img src="./assets/img/editar.svg" alt=""> Editar</li>
                     <li (click)="exporter.exportTable('xlsx', {fileName:'encuestas'})"><img src="./assets/img/icons-filter/export.svg" alt=""> Exportar</li>
                 </ul>
-            </div>
+            </div> -->
 
             <div class="box-create-new">
                 <div class="box-mas">

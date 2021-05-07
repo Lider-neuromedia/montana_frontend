@@ -30,7 +30,7 @@
                                     <p>Puma</p>
                                     <p class="nombre-show-room">{{producto.nombre}}</p>
 
-                                    <p class="stock-show-room">Stock: {{producto.stock}} cajas</p>
+                                    <p class="stock-show-room">Stock: {{producto.stock}} pares</p>
 
                                     <p class="price-show-room">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0' }}</p>
                                 </div>
@@ -186,7 +186,7 @@
                 <a class="remove" type="button" (click)="resCantidad(i)">
                     <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
                 </a>
-                <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                <input name="cantidad{{i}}" disabled type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
                 <a class="add" type="button" (click)="sumCantidad(i)">
                     <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
                 </a>

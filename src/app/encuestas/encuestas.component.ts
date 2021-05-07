@@ -47,6 +47,9 @@ export class EncuestasComponent implements OnInit {
   columns = ['select', 'encuesta', 'fechaCreacion', 'catalogo', 'objetivo', 'estado'];
   numRows: number;
   contador: number;
+  tipoBool: boolean;
+  catalogoBool: boolean;
+  preguntaBool: boolean;
   
   constructor( private http : SendHttpData, private router : Router ) { }
 
@@ -157,6 +160,37 @@ export class EncuestasComponent implements OnInit {
   }
 
   submitCrearEncuesta(){
+    if(this.createEncuesta.tipo == '' || this.createEncuesta.catalogo == '' || this.createEncuesta.tipo == null ||
+       this.createEncuesta.catalogo == null){
+         if(this.createEncuesta.tipo == '' || this.createEncuesta.tipo == null){
+          this.tipoBool = true;
+         }else{
+          this.tipoBool = false;
+         }
+         if(this.createEncuesta.catalogo == '' || this.createEncuesta.catalogo == null){
+          this.catalogoBool = true;
+        }else{
+          this.catalogoBool = false;
+        }
+        return;
+       }
+       this.preguntaBool = this.catalogoBool = this.tipoBool = false;
+       console.log(this.createEncuesta);
+      if(this.createEncuesta.preguntas.length == 0){
+          Swal.fire('Debes ingresar mínimo una pregunta', '', 'info');
+          return;
+      }
+      this.createEncuesta.preguntas.forEach(element => {
+        if(element.name == ""){
+          this.preguntaBool = true;
+          console.log(element.name);
+          return; 
+        }
+      });
+      if(this.preguntaBool){
+        Swal.fire('No pueden haber campos en blancos','','info');
+        return;
+      }
     this.http.httpPost('encuestas', this.createEncuesta, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == '200') {
