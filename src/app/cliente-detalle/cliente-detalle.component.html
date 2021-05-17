@@ -4,22 +4,22 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido">
-        <div class="filtros filtro-clientes">
-            <div class="ident-admin">
+    <div class="contenido detalle-cliente">
+        <div class="filtros filtro-clientes" style="align-items: center;">
+            <div class="ident-admin" style="align-items: center;">
                 <div class="div-imagen">
-                    <div class="iniciales-azul"> {{ iniciales }} </div>
+                    <div class="iniciales-azul" style="position: inherit; margin-left: 0;"> {{ iniciales }} </div>
                     <!-- <img src="/assets/img/iniciales_dm_azul.svg" alt=""> -->
                 </div>
                 <div class="div-datos">
-                    <span *ngIf="show"> <strong>{{ usuario.name }} {{ usuario.apellidos }}</strong> </span>
+                    <span *ngIf="show" style="margin: 0;"> <strong>{{ usuario.name }} {{ usuario.apellidos }}</strong> </span>
                     <td class="datos" *ngFor="let data of usuario.data_user">
                         <p *ngIf="data.field_key == 'nit'">Cliente No. {{ data.value_key }}</p>
                     </td>
                 </div>
             </div>
-            <!-- <div class="div-edit-boton">
-                <div (click)="accionesAdministrador()" class="box-editar"> 
+            <div class="div-edit-boton">
+                <div (click)="accionesAdministrador()" class="box-editar t-0"> 
                     <span class="texto-editar">Acción de</span>
                     <div class="icono-puntos">
                         <img src="./assets/img/edit_points.svg" alt="">
@@ -31,7 +31,7 @@
                         <li><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
                     </ul>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="overview"></div>
 
@@ -347,6 +347,7 @@
                     <mat-tab-group mat-align-tabs="start">
                         <mat-tab label="Pedidos">
                             <input (keyup)="filtro($event)" class="buscador-pedido" type="search" placeholder="Realiza una búsqueda" #input>
+                            <div class="scroll-table">
                             <table class="tabla-pedidos" mat-table [dataSource]="dataSource">
                                 <ng-container matColumnDef="Pedidos">
                                     <th *matHeaderCellDef></th>
@@ -355,9 +356,10 @@
                                             <div class="foto-referencia">
                                                 <p>Pedido #{{pedido.codigo}}</p>
                                             </div>
+                                            <hr>
                                             <div class="info-pedido">
                                                 <p>{{pedido.fecha}}</p>
-                                                <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                                <p class="valor_pedido">Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -368,9 +370,11 @@
                                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                                 </tr>
                             </table>
+                        </div>
                         </mat-tab>
                         <mat-tab label="Solicitar cupo">
                             <input class="buscador-pedido" (keyup)="filtroCupo($event)" type="search" placeholder="Realiza una búsqueda" #inputCupo>
+                            <div class="scroll-table">
                             <table class="tabla-cupo" mat-table [dataSource]="dataCupo">
                                 <ng-container matColumnDef="cupos">
                                     <th *matHeaderCellDef></th>
@@ -402,7 +406,7 @@
                                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ inputCupo.value }}"</td>
                                 </tr>
                             </table>
-                            
+                        </div>
                         </mat-tab>
                       </mat-tab-group>
 

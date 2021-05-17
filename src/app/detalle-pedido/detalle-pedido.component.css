@@ -9,6 +9,18 @@
     margin: .6em 0em;
 }
 
+.contenido-encuesta{
+    top: 2.5rem !important;
+    left: 10.4rem;
+    width: 91% !important;
+}
+
+.filtro-encuesta{
+    left: 13rem;
+    top: -1rem !important;
+    margin-bottom: 0rem !important;
+}
+
 .filtro-clientes {
     justify-content: space-between;
     margin-bottom: 1em;

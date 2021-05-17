@@ -66,6 +66,7 @@ async function enviarData(createSolicitud, cambiar){
         formData.append('estado', catalogo.estado);
         formData.append('titulo', catalogo.titulo);
         formData.append('tipo', catalogo.tipo);
+        formData.append('etiqueta', catalogo.etiqueta);
         formData.append('id_catalogo', catalogo.id_catalogo);
         formData.append('_method', 'PUT');
 
@@ -86,6 +87,7 @@ async function enviarData(createSolicitud, cambiar){
         formData.append('image', catalogo.image);
         formData.append('nombre', catalogo.nombre);
         formData.append('tipo', catalogo.tipo);
+        formData.append('etiqueta', catalogo.etiqueta);
 
         const config = { headers: { 'Authorization': `Bearer ${token}` } };
         const response = await axios.post(`${backend}/catalogos`, formData, config);

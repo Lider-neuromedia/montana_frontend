@@ -4,16 +4,16 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido">
+    <div class="contenido contenido-ampliacion">
 
-        <div class="filtros">
-            <div class="box-buscador">
+        <div class="filtros filtro-ampliacion">
+            <div class="box-buscador t-0">
                 <img class="lupa" src="./assets/img/search.svg" alt="" >
                 <input name="buscador" class="buscador" placeholder="buscar" (keyup)="searchTable($event)" type="text">
                 <button type="button" class="hidden"></button>
             </div>
 
-            <div class="box-editar" (click)="accionesEncuestas()">
+            <div class="box-editar t-0" (click)="accionesEncuestas()">
                 <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img src="./assets/img/edit_points.svg" alt="">
@@ -27,7 +27,7 @@
                 </ul>
             </div>
 
-            <div class="box-create-new">
+            <div class="box-create-new t-0">
                 <div class="box-mas">
                     <img class="mas" src="./assets/img/mas.svg" alt="">
                 </div>

@@ -22,49 +22,70 @@
                         <div class="label-field">
                             <label for="">Nombres</label>
                             <input type="text" class="" [(ngModel)]="createClient.name" [ngModelOptions]="{standalone: true}">
-                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.name">
-                                {{errors.name}}
+                            <small class="form-text text-danger animated fadeIn" *ngIf="nombreBool">
+                                {{error.nombre}}
                             </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Apellidos</label>
                             <input type="text" class="" [(ngModel)]="createClient.apellidos" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="apellidoBool">
+                                {{error.apellidos}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Tipo de documento</label>
                             <select name="" id="" [(ngModel)]="createClient.tipo_documento" [ngModelOptions]="{standalone: true}">
                                     <option value="">Selecciones tipo de documento</option>
-                                    <option value="">Cédula de ciudadanía</option>
-                                    <option value="">Cédula de extranjería</option>
-                                    <option value="">Pasaporte</option>
+                                    <option value="1">Cédula de ciudadanía</option>
+                                    <option value="2">Cédula de extranjería</option>
+                                    <option value="3">Pasaporte</option>
                                 </select>
+                                <small class="form-text text-danger animated fadeIn" *ngIf="tipoDocBool">
+                                    {{error.tipoDoc}}
+                                </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Número de documento</label>
                             <input type="number" class="" [(ngModel)]="createClient.dni" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="numDocBool">
+                                {{error.numDoc}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Nit</label>
                             <input type="text" class="" [(ngModel)]="createClient.nit" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="nitBool">
+                                {{error.nit}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Razón social</label>
                             <input type="text" class="" [(ngModel)]="createClient.razon_social" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="razonSocialBool">
+                                {{error.razonSocial}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Dirección</label>
                             <input type="text" class="" [(ngModel)]="createClient.direccion" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="direcClienteBool">
+                                {{error.direcCliente}}
+                            </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Teléfono</label>
                             <input type="text" class="" [(ngModel)]="createClient.telefono" [ngModelOptions]="{standalone: true}">
+                            <small class="form-text text-danger animated fadeIn" *ngIf="telefonoBool">
+                                {{error.telefono}}
+                            </small>
                         </div>
                     </div>
 
@@ -73,24 +94,24 @@
                         <div class="label-field">
                             <label for="">Correo electrónico</label>
                             <input name="email" type="email" [(ngModel)]="createClient.email" [ngModelOptions]="{standalone: true}" class="">
-                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.email">
-                                {{errors.email}}
+                            <small class="form-text text-danger animated fadeIn" *ngIf="emailBool">
+                                {{error.email}}
                             </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Contraseña</label>
                             <input name="password" type="password" [(ngModel)]="createClient.password" [ngModelOptions]="{standalone: true}" class="">
-                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.password">
-                                {{errors.password}}
+                            <small class="form-text text-danger animated fadeIn" *ngIf="passwordBool">
+                                {{error.password}}
                             </small>
                         </div>
 
                         <div class="label-field">
                             <label for="">Confirmar contraseña</label>
                             <input type="password" class="" [(ngModel)]="confirm_password" name="confirm_password">
-                            <small class="form-text text-danger animated fadeIn" *ngIf="errors.password">
-                                {{errors.password}}
+                            <small class="form-text text-danger animated fadeIn" *ngIf="confirPasswordBool">
+                                {{error.confirPassword}}
                             </small>
                         </div>
 
@@ -118,7 +139,7 @@
                             <small *ngIf="nombreBool"><span class="text-danger">{{ error.nombre }}</span></small>
                         </div>
 
-                        <div class="row p-2">
+                        <div class="row pl-3 pr-3">
                             <div class="label-field col">
                                 <label for="">Lugar</label>
                                 <input type="text" class="form-control" [(ngModel)]="createTiendas.lugar"  [ngModelOptions]="{standalone: true}">
@@ -346,12 +367,12 @@
 
         </app-drawer-advanced>
 
-        <div class="filtros">
-            <div class="box-buscador">
+        <div class="filtros" style="top: 6px; left: 14rem;padding-top: 1rem;padding-bottom: 1rem;">
+            <div class="box-buscador t-0">
                 <img class="lupa" src="{{ templateImage.lupa }}" alt="">
                 <input class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
             </div>
-            <div (click)="accionesCliente()" class="box-editar">
+            <div (click)="accionesCliente()" class="box-editar t-0">
                 <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img src="{{ templateImage.points }}" alt="">
@@ -365,7 +386,7 @@
                     <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                 </ul>
             </div>
-            <div class="box-create-new">
+            <div class="box-create-new t-0">
                 <div class="box-mas">
                     <img class="mas" src="{{ templateImage.mas }}" alt="">
                 </div>
@@ -394,8 +415,9 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="Nombre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente"><div class="iniciales"> {{cliente.iniciales}} </div><p class="nombre">{{ cliente.name }} {{ cliente.apellidos }}</p></td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="tituloNombre">Nombre</span></th>
+                    <td (click)="clienteDetalle(cliente.id)" style="cursor: pointer;" mat-cell *matCellDef="let cliente"><div class="iniciales" style="margin-left: -1.5rem;
+                        margin-top: -4.5px;"> {{cliente.iniciales}} </div><p class="nombre">{{ cliente.name }} {{ cliente.apellidos }}</p></td>
                 </ng-container>
                 <ng-container matColumnDef="Nit">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nit</th>

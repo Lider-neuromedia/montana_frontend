@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';

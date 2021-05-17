@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'admin-athletic';
+  constructor(private paginator: MatPaginatorIntl){
+    this.paginator.itemsPerPageLabel = "Registro por página"
+  }
 }

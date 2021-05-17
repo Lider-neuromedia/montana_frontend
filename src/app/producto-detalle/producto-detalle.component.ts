@@ -146,6 +146,8 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   openDrawerRigth(action : boolean, type : string){
+    $('.acciones-form-adminitrador').addClass('elevar-btns');
+    $('.box-cancelar').addClass('icono-catalogo');
     if (type == 'edit') {
       this.openDrawer = action; 
     }else{  }

@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 declare var enviarProducto: any;
+declare var $: any;
 
 @Component({
   selector: 'app-interna-catalogo',
@@ -73,6 +74,8 @@ export class InternaCatalogoComponent implements OnInit {
   }
   
   openDrawerRigth(action : boolean, type : string){
+    $('.acciones-form-adminitrador').addClass('elevar-btns');
+    $('.box-cancelar').addClass('icono-catalogo');
     if (type == 'create') {
       this.openDrawer = action;
       // (!action) ? this.updateDrawer = false : '';

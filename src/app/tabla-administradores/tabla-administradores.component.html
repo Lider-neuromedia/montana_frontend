@@ -1,11 +1,11 @@
- <div class="filtros">
-    <div class="box-buscador">
+ <div class="filtros" style="left: 14rem;top: 1rem;margin-bottom: 2rem;padding-top: .5rem;padding-bottom: .5rem;">
+    <div class="box-buscador t-0">
         <img class="lupa" src="./assets/img/search.svg" alt="">
         <input class="buscador" type="text" (keyup)="filtro($event)" placeholder="Buscar" #input>
         <button type="button" class="hidden"></button>
     </div>
 
-    <div (click)="accionesAdministrador()" class="box-editar">
+    <div (click)="accionesAdministrador()" class="box-editar t-0">
         <span class="texto-editar">Acción de</span>
         <div class="icono-puntos">
             <img src="./assets/img/edit_points.svg" alt="">
@@ -18,7 +18,7 @@
         </ul>
     </div>
 
-    <div class="box-create-new">
+    <div class="box-create-new t-0">
         <div class="box-mas">
             <img class="mas" src="./assets/img/mas.svg" alt="">
         </div>

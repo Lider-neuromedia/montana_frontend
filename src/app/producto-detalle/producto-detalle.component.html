@@ -8,8 +8,8 @@
     <div class="area">
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
-            <div class="filtros" style="margin-bottom: 15px;">
-                <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar">
+            <div class="filtros">
+                <div  (click)="accionesAdministrador()" style="height: 31px;left: 11.3rem;top: 0;" class="box-editar">
                     <!-- <div class="icono-editar">
                         <img src="{{ templateImage.lapiz }}" alt="">
                     </div> -->
@@ -35,8 +35,8 @@
                 </div>
 
                 <div class="detalle">
-                    <h2 class="title-detalle">Detalles</h2>
-                    <ul class="bullet-rojo">
+                    <span class="descripcion" [innerHTML]="producto.descripcion"></span>
+                    <!-- <ul class="bullet-rojo">
                         <li>Sistema de amarre de cordones</li>
                         <li>Exterior tejido con refuerzos de TPU</li>
                         <li>Diseño ajustado y elástico</li>
@@ -44,7 +44,7 @@
                         <li>Suela de caucho</li>
                         <li>Tenis urbanos icónicos</li>
                         <li>Color del artículo: Core Black</li>
-                    </ul>
+                    </ul> -->
                 </div>
 
                 <div class="opiniones">
@@ -202,11 +202,11 @@
                     <p class="numero-stock mrg-btn-30">{{producto.stock}} pares</p>
 
                     <!-- Footer actions. -->
-                    <div class="acciones">
+                    <div class="acciones btn-fijo-agregar">
                         <!-- <button mat-raised-button (click)="openDialogPedido()" class="btn-agregar"><mat-icon>add_circle_outline</mat-icon>Agregar Pedido</button> -->
                         <a class="agregar" style="width: 180px;" (click)="openDialogPedido()">
                             Agregar Pedido
-                            <div class="box-mas" style="top:48px; left:56px;">
+                            <div class="box-mas icono-mas">
                                 <!-- <img class="mas" src="./assets//img/mas.svg" alt=""> -->
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
                             </div>
@@ -247,8 +247,24 @@
                 </div>
                 <div class="label-field">
                     <label for="">Descripción</label>
-                    <textarea [(ngModel)]="producto.descripcion" name="descripcion" class="text-area">
-                    </textarea>
+                    <editor [(ngModel)]="producto.descripcion"
+                    name="descripcion"
+                    apiKey="kj0s5hcgbtivft47uma4vhezznlb62r2gg0sqp7rcpqx6vzr"
+                    [init]="{height: 500,
+                        menubar: false,
+                        plugins: [
+                          'advlist autolink lists link image charmap print',
+                          'preview anchor searchreplace visualblocks code',
+                          'fullscreen insertdatetime media table paste',
+                          'help wordcount'
+                        ],
+                        toolbar:
+                          'undo redo | formatselect | bold italic | \
+                          alignleft aligncenter alignright alignjustify | \
+                          bullist numlist outdent indent | help'}"
+                    ></editor>
+                    <!-- <textarea [(ngModel)]="producto.descripcion" name="descripcion" class="text-area">
+                    </textarea> -->
                 </div>
 
                 <div class="label-field" style="display: flex;">

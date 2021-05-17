@@ -77,6 +77,10 @@ export class MenuComponent implements OnInit {
     this.getPedido();
   }
 
+  ajustarMenuChild(){
+    $('.preview-child-menu').toggleClass('t-40')
+  }
+
   previewChildMenu(){
     $('.child-menu').addClass('preview-child-menu');
   }

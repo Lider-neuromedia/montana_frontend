@@ -43,6 +43,7 @@ img {
 .workplace {
     display: flex;
     position: relative;
+    top: 38px;
 }
 .workplace .header{
 
@@ -53,19 +54,20 @@ img {
 }
 
 .workplace .area {
-    margin-top: 3%;
+    margin-top: 0%;
     /* margin-bottom: 50%; */
-    padding: 4em 2em 3em 0px;
+    padding: 2em 3em 0px;
     width: 100%;
     position: relative;
-    margin-left: 240px;
+    margin-left: 11rem;
 }
 
 .footer {
     padding: .5em .5em .5em 0;
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
+    margin-top: 2rem;
     background: #F4F8FB;
 }
 
@@ -81,11 +83,15 @@ img {
     display: flex;
     width: 100%;
     justify-content: flex-end;
-    padding-right: 25px;
+    padding-right: 211px;
+    position: relative;
+    top: 0;
+    margin-bottom: 2rem;
 }
 
 .box-buscador {
     position: relative;
+    top: -10px;
 }
 
 .lupa {
@@ -110,6 +116,7 @@ img {
     position: relative;
     border-radius: 15px;
     margin: 0px 18px;
+    top: -10px;
 }
 
 .text-center {
@@ -171,6 +178,11 @@ img {
     display: flex;
     position: relative;
     height: 31px;
+    top: 13px;
+}
+
+.t-40{
+    top: 40px !important;
 }
 
 .bold{
@@ -263,6 +275,7 @@ img {
     background: white;
     padding-left: 15px;
     color: #444A4F;
+    margin-top: -19px;
 }
 
 .table-data table {
@@ -320,7 +333,7 @@ img {
 .administrador-detalle,
 .cliente-detalle, .content-detalle {
     background: white;
-    padding-top: 2em;
+    padding-top: 0em;
     padding-left: 2em;
 }
 
@@ -342,8 +355,9 @@ input[type="tel"] {
 #wrapper .contenido {
     background: #F4F8FB;
     width: 100%;
-    padding-left: 209px;
-    padding-top: 60px;
+    padding: 2em 3em 0px;
+    position: absolute;
+    top: 12px;
 }
 
 .label-field {
@@ -417,7 +431,7 @@ input[type="tel"] {
     display: block;
     text-decoration: none;
     height: 33px;   
-    width: 45%;
+    width: 23.5rem;
 }
 
 .agregar {
@@ -426,6 +440,8 @@ input[type="tel"] {
     color: white;
     transition: all .5s ease;
     font-size: 14px;
+    position: fixed;
+    padding: 8px;
     letter-spacing: 0.84px;
     line-height: 17.6px;
 }
@@ -433,7 +449,6 @@ input[type="tel"] {
 .agregar:hover {
     background: #5aa97d;
 }
-
 .cancelar {
     background: white;
     border: 1px solid #FF596A;
@@ -444,7 +459,9 @@ input[type="tel"] {
     letter-spacing: 0.84px;
     line-height: 17.6px;
 }
-
+.pedido-btn-relativos{
+    position: relative !important;
+}
 .cancelar:hover {
     background: #ec5362;
     color: white;
@@ -486,7 +503,7 @@ input[type="tel"] {
     padding: 0px -6px;
     border-radius: 0px 0px 15px 15px;
     opacity: 1;
-    z-index: 1000;
+    z-index: 3;
 }
 
 
@@ -503,6 +520,8 @@ input[type="tel"] {
     font-size: 18px;
     color: #fff;
     text-transform: uppercase;
+    margin-top: -10px;
+    margin-left: -48px;
 }
 .div-datos{
     margin-top: 8%;
@@ -535,7 +554,8 @@ input[type="tel"] {
 }
 
 p.nombre {
-    margin-left: 50px !important;
+    /* margin-left: 50px !important;
+    margin: 10px; */
 }
 .imagen-nombre{
     position: relative;

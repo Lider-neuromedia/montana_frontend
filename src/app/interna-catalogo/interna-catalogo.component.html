@@ -9,10 +9,10 @@
     <div class="area">
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
-            <div class="filtros" style="margin-bottom: 15px;">
+            <div class="filtros filtro-producto">
                 <div class="filtro-ordernar">
                     <mat-form-field>
-                    <mat-label>Ordernar por:</mat-label>
+                    <mat-label>Ordenar por:</mat-label>
                     <mat-select>
                         <mat-option value="food.value">
                             Marca
@@ -23,11 +23,11 @@
                     </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="box-buscador">
+                <div class="box-buscador buscador-producto">
                     <img class="lupa" src="./assets/img/search.svg" alt="">
                     <input class="buscador mr-1" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
                 </div>
-                <div class="box-create-new">
+                <div class="box-create-new create-new">
                     <div class="box-mas">
                         <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>
@@ -74,8 +74,24 @@
                 </div>
                 <div class="label-field">
                     <label for="">Descripción</label>
-                    <textarea [(ngModel)]="crearProducto.descripcion" name="descripcion" class="text-area" required>
-                    </textarea>
+                    <editor [(ngModel)]="crearProducto.descripcion"
+                    name="descripcion"
+                    apiKey="kj0s5hcgbtivft47uma4vhezznlb62r2gg0sqp7rcpqx6vzr"
+                    [init]="{height: 500,
+                        menubar: false,
+                        plugins: [
+                          'advlist autolink lists link image charmap print',
+                          'preview anchor searchreplace visualblocks code',
+                          'fullscreen insertdatetime media table paste',
+                          'help wordcount'
+                        ],
+                        toolbar:
+                          'undo redo | formatselect | bold italic | \
+                          alignleft aligncenter alignright alignjustify | \
+                          bullist numlist outdent indent | help'}"
+                    ></editor>
+                    <!-- <textarea [(ngModel)]="crearProducto.descripcion" name="descripcion" class="text-area" required>
+                    </textarea> -->
                     <small *ngIf="descripcionBool"><span class="text-danger">{{error.descripcion}}</span></small>
                 </div>
 
@@ -183,11 +199,11 @@
         </app-drawer-rigth>
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="productos">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let producto">
+                <th *matHeaderCellDef></th>
+                <td *matCellDef="let producto">
                     <div class="row" *ngIf="producto.codigo; else noProducto">
                         <div class="col-md-12">
-                            <div class="row row-producto">
+                            <div class="row row-producto" style="border-radius: 6px;">
                                 <div class="col-md-4">
                                     <img src="{{producto.image}}" alt="{{producto.nombre}}">
                                 </div>
@@ -205,13 +221,15 @@
                                     <a (click)="verProducto(producto.id_producto)" class="ver-producto">
                                         Ver producto
                                     <div class="box-ver">
-                                        <mat-icon class="text-size-sm icon-add">shopping_bag</mat-icon>
+                                        <img src="./assets/img/ojo.svg" class="iconos-ojo" alt="">
+                                        <!-- <mat-icon class="text-size-sm icon-add">visibility</mat-icon> -->
                                     </div>
                                     </a>
                                     <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
                                         Añadir a pedido
                                         <div class="box-add">
-                                            <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
+                                            <img class="iconos-bolsa" width="100" src="./assets/img/bolsa.svg" alt="">
+                                            <!-- <mat-icon class="text-size-sm icon-add">shopping_bag</mat-icon> -->
                                         </div>
                                         
                                     </a>

@@ -411,6 +411,7 @@ export class VendedoresComponent implements OnInit, OnDestroy {
   }
 
   openDrawerRigth(action : boolean, type : string){
+    $('.drawer-right').addClass('ocultar-scroll');
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';
@@ -691,17 +692,6 @@ export class VendedoresComponent implements OnInit, OnDestroy {
       )
      
     }, 1500);
-    // this.http.httpGet(route, true).subscribe(
-    //   response => {
-    //     if (response.response == 'success' && response.status == 200) {
-    //       if (this.selectVendedor.clientes.includes(cliente) === false) this.selectVendedor.clientes.push(cliente);
-    //       this.clientes = [];
-    //     }
-    //   },
-    //   error => {
-
-    //   }
-    // );
   }
 
   deleteAsignClient(cliente){

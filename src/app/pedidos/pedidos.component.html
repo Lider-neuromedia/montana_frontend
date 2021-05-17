@@ -72,7 +72,7 @@
         <label for="estados">CAMBIAR ESTADO</label>
         <select name="estados" [(ngModel)]="change_state">
             <option [value]="0">Seleccione el estado...</option>
-            <option [value]="1"> Activo</option>
+            <option [value]="1"> Aprobado</option>
             <option [value]="2"> Pendiente</option>
             <option [value]="3"> Rechazado</option>
         </select>
@@ -93,21 +93,21 @@
     <div class="slide-menu">
         <app-menu></app-menu>
     </div>
-    <div class="area">
+    <div class="area contenido-pedidos">
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
-            <div class="filtros">
+            <div class="filtros filtro-pedidos">
                 <div class="fechas">
                     <p class="hoy" (click)="changeFilterDate('hoy')">Hoy</p>
                     <p class="ayer" (click)="changeFilterDate('ayer')">Ayer</p>
                     <p class="todos fecha-active" (click)="changeFilterDate('todos')">Todos</p>
                 </div>
-                <div class="box-buscador">
+                <div class="box-buscador t-0">
                     <img class="lupa" src="./assets/img/search.svg" alt="">
                     <input class="buscador" placeholder="Buscar..." (keyup)="filtro($event)" type="text">
                 </div>
             
-                <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar">
+                <div  (click)="accionesAdministrador()" style="height: 31px;" class="box-editar t-0">
                     <!-- <div class="icono-editar">
                         <img src="{{ templateImage.lapiz }}" alt="">
                     </div> -->
@@ -126,7 +126,7 @@
                     </ul>
                 </div>
             
-                <div class="box-create-new">
+                <div class="box-create-new t-0">
                     <div class="box-mas">
                         <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>

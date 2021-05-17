@@ -21,6 +21,23 @@
     border: 1px solid #ff596a;
 }
 
+.filtro-ampliacion{
+    top: -.8rem !important;
+    left: 12rem;
+    margin-bottom: 0 !important;
+}
+
+.contenido-ampliacion{
+    top: 2.5rem !important;
+    left: 9.6rem;
+    width: 92% !important;
+
+}
+
+.t-0{
+    top: 0 !important;
+}
+
 table{
     width: 100%;
 }

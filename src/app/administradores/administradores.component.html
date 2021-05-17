@@ -12,8 +12,8 @@
 
         <div class="nuevo-administrador">
             <div class="header-form">
-                <h2>Nuevo administrador</h2>
-                <img (click)="cerrarFormAdmin()" class="cerrar-form-admin" src="{{ templateImage.btnCerrar }}" alt="">
+                <h2 class="titulo-crear-admin">Nuevo administrador</h2>
+                <img (click)="cerrarFormAdmin()" class="cerrar-form-admin btn-close" src="{{ templateImage.btnCerrar }}" alt="">
             </div>
             <form (ngSubmit)="agregarAdmin()" [formGroup]="formCreateAdmin">
                 <h3 class="datos-generales">Datos generales</h3>
@@ -70,12 +70,12 @@
                 </div>
                 <div class="acciones-form-adminitrador">
                     <button type="submit" class="agregar">
-                        <span class="box-mas">
+                        <span class="box-mas mas-administrador">
                             <img class="mas" [src]="templateImage.mas" alt="">
                         </span> Agregar
                     </button>
                     <div class="box-create-new">
-                        <div class="box-cancelar">
+                        <div class="box-cancelar cancelar-administrador">
                             <mat-icon class="text-danger img-close-admin">close</mat-icon>
                     </div>
                 </div>
@@ -145,14 +145,14 @@
                 </div>
                 <div class="acciones-form-adminitrador">
                     <div class="box-create-new">
-                        <div class="box-mas">
+                        <div class="box-mas mas-edit-admin">
                             <img class="mas" [src]="templateImage.mas" alt="">
                     </div>
                 </div>
                     <button type="submit" class="agregar">Actualizar</button>
     
                     <div class="box-create-new">
-                        <div class="box-cancelar">
+                        <div class="box-cancelar cancelar-edit-admin">
                             <mat-icon class="text-danger img-close-admin">close</mat-icon>
                     </div>
                 </div>

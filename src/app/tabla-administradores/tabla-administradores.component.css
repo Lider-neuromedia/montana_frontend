@@ -1,5 +1,10 @@
 table {
     width : 100% ;
+    position: relative;
+    left: 12rem;
+ }
+ .t-0{
+     top: 0;
  }
  table td{
      height: 70px;
@@ -20,4 +25,5 @@ table {
     background: white;
     opacity: 1;
 }
+
 

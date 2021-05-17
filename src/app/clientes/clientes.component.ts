@@ -114,6 +114,16 @@ export class ClientesComponent implements OnInit, OnDestroy {
     local: 'Ingrese un local',
     lugar: 'Ingrese un lugar',
     nombre: 'Ingrese un nombre',
+    apellidos: 'Ingrese un apellido',
+    tipoDoc: 'Seleccione un documento',
+    numDoc: 'Ingrese número documento',
+    nit: 'Ingrese un nit',
+    razonSocial: 'Ingrese razón social',
+    direcCliente: 'Ingrese dirección cliente',
+    telefonoCliente: 'Ingrese teléfono cliente',
+    email: 'Ingrese correo electrónico',
+    password: 'Ingrese contraseña',
+    confirPassword: 'Ingrese confirmación de contraseña',
     telefono: 'Ingrese un teléfono'
   }
 
@@ -122,6 +132,17 @@ export class ClientesComponent implements OnInit, OnDestroy {
   lugarBool: boolean = false;
   nombreBool: boolean = false;
   telefonoBool: boolean = false;
+  direcClienteBool: boolean = false;
+  apellidoBool: boolean = false;
+  tipoDocBool: boolean = false;
+  numDocBool: boolean = false;
+  nitBool: boolean = false;
+  razonSocialBool: boolean = false;
+  telefonoClienteBool: boolean = false;
+  emailBool: boolean = false;
+  passwordBool: boolean = false;
+  confirPasswordBool: boolean = false;
+
   constructor( private clients: UsersService, private route: Router, private http: SendHttpData) {
    
   }
@@ -242,6 +263,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosGenerales(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = true;
     this.credenciales = false;
     this.tienda = false;
@@ -254,6 +276,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosCredenciales(){
+    $('.acciones-form-adminitrador').addClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = true;
     this.tienda = false;
@@ -266,6 +289,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   crearTienda(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = false;
     this.tienda = true;
@@ -278,6 +302,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosAsignar(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = false;
     this.tienda = false;
@@ -304,6 +329,85 @@ export class ClientesComponent implements OnInit, OnDestroy {
         return;
     });
   }
+  if(!this.createClient.razon_social){
+    this.createClient.razon_social = "";
+  }
+  if(!this.createClient.direccion){
+    this.createClient.direccion = "";
+  }
+  if(!this.createClient.telefono){
+    this.createClient.telefono = "";
+  }
+  
+  // console.log(this.createClient);
+  if(this.createClient.name === "" || this.createClient.apellidos === "" || this.createClient.dni === "" ||
+     this.createClient.tipo_documento === "" || this.createClient.email === "" || this.createClient.password === "" ||
+     this.createClient.razon_social === "" || this.createClient.direccion === "" || this.createClient.tiendas.length === 0 ||
+     this.createClient.telefono === "" || this.confirm_password === "" || this.createClient.nit === ""){
+       if(this.createClient.name === ""){
+         this.nombreBool = true;
+       }else{
+         this.nombreBool = false;
+       }
+       if(this.createClient.apellidos === ""){
+         this.apellidoBool = true;
+       }else{
+         this.apellidoBool = false;
+       }
+       if(this.createClient.dni === ""){
+         this.numDocBool = true;
+       }else{
+         this.numDocBool = false;
+       }
+       if(this.createClient.tipo_documento === ""){
+         this.tipoDocBool = true;
+       }else{
+         this.tipoDocBool = false;
+       }
+       if(this.createClient.email === ""){
+         this.emailBool = true;
+       }else{
+         this.emailBool = false;
+       }
+       if(this.createClient.password === ""){
+         this.passwordBool = true;
+       }else{
+         this.passwordBool = false;
+       }
+       if(this.confirm_password === ""){
+        this.confirPasswordBool = true;
+       }else{
+         this.confirPasswordBool = false;
+       }
+       if(this.createClient.razon_social === ""){
+         this.razonSocialBool = true;
+       }else{
+         this.razonSocialBool = false;
+       }
+       if(this.createClient.direccion === ""){
+         this.direcClienteBool = true;
+       }else{
+         this.direcClienteBool = false;
+       }
+       if(this.createClient.nit === ""){
+         this.nitBool = true;
+       }else{
+         this.nitBool = false;
+       }
+       if(this.createClient.telefono === ""){
+         this.telefonoBool = true;
+       }else{
+         this.telefonoBool = false;
+       }
+       if(this.createClient.tiendas.length === 0){
+         Swal.fire('Debes ingresar por lo mínimo 1 tienda', '', 'error');
+       }
+       return;
+     }
+
+     this.nombreBool = this.apellidoBool = this.direcClienteBool = this.numDocBool = this.tipoDocBool = this.emailBool =
+     this.passwordBool = this.confirPasswordBool = this.razonSocialBool = this.direcClienteBool = false;
+     
   console.log(this.createClient.password);
   console.log(this.confirm_password);
   if(this.createClient.password !== this.confirm_password){
@@ -333,21 +437,17 @@ export class ClientesComponent implements OnInit, OnDestroy {
         if (response.response == 'success' && response.status == 200) {
           this.getClients();
           this.openDrawerRigth(false, 'create');
+          this.asignCreateClient();
+          this.confirm_password = "";
           Swal.fire(
             'Completado',
             'Usuario creado de manera correcta.',
             'success'
           );
+          
         }
       },
       (error) =>{
-        this.errors.name = error.error.errors.name;
-        this.errors.email = error.error.errors.email;
-        this.errors.password = error.error.errors.password;
-
-        console.log( this.errors.name );
-        console.log( this.errors.email );
-        console.log( this.errors.password );
       });
   }
 
@@ -407,6 +507,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   openDrawerRigth(action : boolean, type : string){
+    $('.acciones-form-adminitrador').toggleClass('btn-relativos');
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';

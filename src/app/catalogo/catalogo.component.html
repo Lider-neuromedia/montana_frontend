@@ -11,9 +11,12 @@
 </div>
     <div class="area">
         <div class="row">
-            <div class="filtros" style="margin-bottom: 15px;">
-                <div class="box-editar" (click)="accionesCatalogos()">
-                    <span class="texto-editar">Filtros</span>
+            <div class="filtros" style="padding-right: 25px;">
+                <div class="box-editar t-0" (click)="accionesCatalogos()">
+                    <span class="texto-editar">
+                        <img src="./assets/img/filtrosSVG.svg" class="filtro-icon" alt="">
+                        Filtros
+                    </span>
 
                     <!-- Pop up editar -->
                     <ul class="filtros-catalogo">
@@ -65,7 +68,7 @@
                     </ul>
                 </div>
 
-                <div class="box-create-new">
+                <div class="box-create-new t-0">
                     <div class="box-mas nuevo-catalogo">
                         <img class="mas" src="./assets/img/mas.svg" alt="">
                     </div>
@@ -179,6 +182,13 @@
         </mat-button-toggle-group>
     </div>
     <div class="label-field">
+        <label for="">Categoría</label>
+        <mat-button-toggle-group [(ngModel)]="catalogo.etiqueta" name="etiqueta" aria-label="etiqueta">
+            <mat-button-toggle checked="true" value="adultos">Adultos</mat-button-toggle>
+            <mat-button-toggle value="niños">Niños</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="label-field">
         <label for="">Imagen destacada</label>
         <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
             (change)="onSelect($event)">
@@ -231,6 +241,13 @@
         <mat-button-toggle-group [(ngModel)]="catalogoEdit.tipo" name="tipo" aria-label="tipo">
             <mat-button-toggle checked="true" value="general">General</mat-button-toggle>
             <mat-button-toggle value="show room">Show Room</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="label-field">
+        <label for="">Categoría</label>
+        <mat-button-toggle-group [(ngModel)]="catalogoEdit.etiqueta" name="etiqueta" aria-label="etiqueta">
+            <mat-button-toggle checked="true" value="adultos">Adultos</mat-button-toggle>
+            <mat-button-toggle value="niños">Niños</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="label-field">

@@ -4,7 +4,7 @@
     <div class="slide-menu">
         <app-menu></app-menu>
     </div>
-    <div class="area">
+    <div class="area area-pedido-interno">
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
             <div class="col-md-8">
@@ -54,7 +54,7 @@
                 <div class="opiniones">
                     <div class="row">
                         <div class="col-md-7">
-                            <div class="valoracion-column">
+                            <div class="valoracion-column" style="padding: 30px;">
                                 <h3 class="valorar-title">Valorar producto</h3>
                                 <ul class="qya-list" *ngIf="preguntas?.length > 0; else preguntaNoExiste">
                                     <li *ngFor="let pregunta of preguntas" style="padding: 5%;">
@@ -156,7 +156,7 @@
                                     <a class="remove" type="button" (click)="resCantidad(i)">
                                         <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
                                     </a>
-                                    <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
+                                    <input name="cantidad{{i}}" disabled type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
                                     <a class="add" type="button" (click)="sumCantidad(i)">
                                         <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
                                     </a>
@@ -165,16 +165,17 @@
                         </form>
                     </div>
                     <!-- Footer actions. -->
-                    <div class="acciones">
-                        <a class="agregar" (click)="addProducto()">
-                            <span class="mas">
-                                <img src="" alt="">
-                            </span> Agregar producto
+                    <div class="acciones acciones-fijo-btns">
+                        <a class="agregar btn-agregar" (click)="addProducto()">
+                            Agregar
+                            <div class="box-mas icono-mas">
+                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
+                            </div>
                         </a>
                 
                         <a class="cancelar" [routerLink]="['/productos',catalogo]">
-                            <span class="mas">
-                                <img src="" alt="">
+                            <span class="box-cancelar icono-cancelar">
+                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
                     </div>

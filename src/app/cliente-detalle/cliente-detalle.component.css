@@ -11,14 +11,16 @@
 
 .filtro-clientes {
     justify-content: space-between;
-    margin-left: 3%;
-    margin-bottom: 1em;
+    margin-bottom: 0;
     padding: 0 2em;
+    top: 0;
 }
-hr {
-    border-top: 1px solid #EEEEEE;
-    margin: auto;
-    margin-right: 0;
+tr.mat-header-row{
+    height: 10px;
+}
+
+hr{
+    margin-top: 0rem;
 }
 
 .width-75 {
@@ -245,19 +247,30 @@ hr {
     margin: 1em 0em;
     cursor: pointer;
 }
-
+.t-0{
+    top: 0;
+}
+.detalle-cliente{
+    width: 90% !important;
+    left: 168px !important;
+}
 .box-pedidos:hover{
     background: #e7e7e7;
 }
 
+.valor_pedido{
+    margin: 0 25px;
+}
+
 .info-pedido{
-    display: block;
+    display: inline-flex;
     justify-content: space-between;
     font-size: 21px;
     padding: 0.2em 0;
 }
 .div-datos{
-    margin-top: 2%;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 .foto-referencia {
@@ -665,6 +678,17 @@ p.codigo {
     display: flex;
     justify-content: space-between;
     font-size: 21px;
+}
+.scroll-table{
+    height: 28.8rem !important;
+    overflow: auto !important;
+}
+
+@media screen and (min-width:1920px){
+    .valor_pedido{
+        position: relative;
+        left: 12rem;
+    }
 }
 
 .aprobado{color: #1CD34D; font-weight: 600;}

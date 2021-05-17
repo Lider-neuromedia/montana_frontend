@@ -13,6 +13,21 @@
     padding-right: 43px !important;
 }
 
+.t-0{
+    top: 0 !important;
+}
+
+.filtro-encuesta{
+    left: 13rem;
+    top: -8px !important;
+}
+
+.contenido-encuesta{
+    top: 2.5rem !important;
+    left: 10rem;
+    width: 91% !important;
+}
+
 .btn-delete-pregunta{
     position: absolute;
     top: 0.2em;

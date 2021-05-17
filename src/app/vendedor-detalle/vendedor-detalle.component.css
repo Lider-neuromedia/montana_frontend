@@ -7,6 +7,9 @@
     padding: .6em .8em;
     position: relative;
 }
+.valor_pedido{
+    margin: 0 25px;
+}
 
 .placeholder-img{
     position: absolute;
@@ -121,8 +124,13 @@
     background: #e7e7e7;
 }
 
+.detalle-vendedor{
+    width: 90% !important;
+    left: 168px !important;
+}
+
 .info-pedido{
-    display: block;
+    display: inline-flex;
     justify-content: space-between;
     font-size: 21px;
     padding: 0.2em 0;
@@ -131,6 +139,7 @@
 .foto-referencia {
     display: flex;
     padding-bottom: 7px;
+    margin-top: 1rem;
     /* border-bottom: 1px solid #D7D7D7; */
     align-items: center;
 }
@@ -181,9 +190,9 @@
 
 .filtro-vendedores{
     justify-content: space-between;
-    margin-left: 3%;
-    margin-bottom: 1em;
+    margin-bottom: 0;
     padding: 0 2em;
+    top: -2px;
 }
 
 .filtro-vendedores .ident-admin{
@@ -201,7 +210,7 @@
 .filtro-vendedores .box-editar{
     cursor: pointer;
     padding: 4px 40px;
-    margin-right: 0;
+    top: 0;
 }
 
 .box-editar-open{
@@ -245,13 +254,22 @@
     padding: 0px -6px;
     border-radius: 0px 0px 15px 15px;
     opacity: 1;
+    width: 9rem !important;
+    left: -1px !important;
 }
 
+hr{
+    margin-top: 0rem;
+}
 
 .administrador-detalle{
     background: white;
-    padding-top: 2em;
+    padding-top: 0em;
     padding-left: 2em;
+}
+
+tr.mat-header-row{
+    height: 10px;
 }
 
 .aside-pedidos {
@@ -271,4 +289,58 @@
 
 ::-ms-input-placeholder {
     color: #E3E3E3;
+}
+.search-cliente {
+    padding: 0 15px;
+}
+
+.item-cliente {
+    width: 100%;
+    padding: 25px 20px;
+    /* cursor: pointer; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-cliente:hover {
+    background: #ff596a2c;
+    transition: all 1s ease;
+}
+
+.item-cliente p{
+    font-size: 15px;
+    color: #82867D;
+}
+
+span.icon-cliente {
+    background: #ff596a;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.scroll-table{
+    height: 28.8rem !important;
+    overflow: auto !important;
+}
+
+.item-cliente-select{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #2eb07b1f;
+    align-items: center;
+    transition: all 1s ease;
+}
+
+@media screen and (min-width:1920px){
+    .valor_pedido{
+        position: relative;
+        left: 12rem;
+    }   
+    .open-acciones{
+        width: 9.01rem !important;
+    }
 }

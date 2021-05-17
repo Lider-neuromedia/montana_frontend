@@ -13,6 +13,8 @@
 }
 table{
     width: 100%;
+    position: relative;
+    left: 12rem;
 }
 
 table td{
@@ -21,6 +23,15 @@ table td{
 
 .cerrar-form-admin{
     cursor: pointer;
+}
+
+.nombre{
+    margin-left: 2rem;
+    margin-top: .4rem;
+}
+
+.tituloNombre{
+    margin-left: 2rem;
 }
 
 .buscador::placeholder{
@@ -291,6 +302,9 @@ span.icon-cliente {
     background: #2eb07b1f;
     align-items: center;
     transition: all 1s ease;
+}
+.t-0{
+    top: 0;
 }
 
  /* Cambiar color del placeholder */

@@ -22,6 +22,14 @@ export class DialogPedidoComponent implements OnInit {
     catalogo : '',
     codigo_pedido : ''
   };
+  error = {
+    cliente: 'Seleccione un cliente',
+    vendedor: 'Seleccione un vendedor',
+    catalogo: 'Seleccione un catálogo'
+  }
+  catalogoBool: boolean;
+  clienteBool: boolean;
+  vendedorBool: boolean;
 
   constructor( private http : SendHttpData, private route: Router) { }
 
@@ -53,6 +61,27 @@ export class DialogPedidoComponent implements OnInit {
   }
   
   continuarPedido(){
+    console.log(this.crear_pedido);
+    if(this.crear_pedido.catalogo === "" || this,this.crear_pedido.cliente === "" || this.crear_pedido.vendedor === "" ||
+       this.crear_pedido.catalogo === null || this,this.crear_pedido.cliente === null || this.crear_pedido.vendedor === null){
+      if(this.crear_pedido.catalogo === "" || this.crear_pedido.catalogo === null){
+        this.catalogoBool = true;
+      }else{
+        this.catalogoBool = false;
+      }
+      if(this.crear_pedido.cliente === "" || this.crear_pedido.cliente === null){
+        this.clienteBool = true;
+      }else{
+        this.clienteBool = false;
+      }
+      if(this.crear_pedido.vendedor === "" || this.crear_pedido.vendedor === null){
+        this.vendedorBool = true;
+      }else{
+        this.vendedorBool = false;
+      }
+      return;
+    }
+    this.catalogoBool = this.vendedorBool = this.clienteBool = false;
     this.http.httpGet('generate-code', true).subscribe(
       response => {
 

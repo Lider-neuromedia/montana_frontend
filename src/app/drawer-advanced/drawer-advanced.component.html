@@ -10,14 +10,14 @@
         <ng-content></ng-content>
     </div>
     <div class="acciones-form-adminitrador">
-        <a class="agregar" (click)="submitCreateUser()">
-            <span class="box-mas">
+        <a class="agregar btn-agregar" (click)="submitCreateUser()">
+            <span class="box-mas box-mas-agregar">
                 <img class="mas" src="./assets/img/mas.svg" alt="">
             </span> {{button}}
         </a>
 
-        <a class="cancelar" (click)="closeDrawer()">
-            <span class="box-cancelar">
+        <a class="cancelar btn-cancelar" (click)="closeDrawer()">
+            <span class="box-cancelar box-cancelar-cancelar">
                 <mat-icon class="text-danger cancel">close</mat-icon>
             </span> Cancelar
         </a>

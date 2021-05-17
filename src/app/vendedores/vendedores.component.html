@@ -88,14 +88,6 @@
                                   </mat-autocomplete>                 
                             </mat-form-field>
                         </div>
-                        <!-- <div class="item-cliente-select" *ngFor="let clienteAsign of vendedor.clientes" [@inOutAnimation]>
-                            <p style="display: flex;"> 
-                                {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
-                            </p>
-                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteClientSelect(clienteAsign)">
-                                <mat-icon style="color: #ff596a;">delete</mat-icon>
-                            </button> 
-                        </div> -->
                         <div class="list-vendedores">
                             <div class="item-cliente" *ngFor="let cliente of vendedor.clientes" [@fadeIn]>
                                 <p> 
@@ -216,12 +208,12 @@
                 </div>
         </app-drawer-advanced>
 
-        <div class="filtros">
-            <div class="box-buscador">
+        <div class="filtros" style="top: 6px; left: 14rem;padding-top: 1rem;padding-bottom: 1rem;">
+            <div class="box-buscador t-0">
                 <img class="lupa" [src]="templateImage.lupa" alt="">
                 <input class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
             </div>
-            <div (click)="accionesVendedor()" class="box-editar">
+            <div (click)="accionesVendedor()" class="box-editar t-0">
                 <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img [src]="templateImage.points" alt="">
@@ -234,7 +226,7 @@
                     <li (click)="getUsersAndDelete()"><img [src]="templateImage.eliminar" alt=""> Eliminar</li>
                 </ul>
             </div>
-            <div class="box-create-new">
+            <div class="box-create-new t-0">
                 <div class="box-mas">
                     <img class="mas" src="./assets/img/mas.svg" alt="">
                 </div>
@@ -262,9 +254,9 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="Nombre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header><span class="tituloNombre">Nombre</span></th>
                     <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">
-                        <div class="iniciales"> {{vendedor.iniciales}} </div>
+                        <div class="iniciales" style="margin-left: -1.5rem;margin-top: -4.5px;"> {{vendedor.iniciales}} </div>
                         <p class="nombre">{{ vendedor.name }} {{ vendedor.apellidos }}</p></td>
                 </ng-container>
                 <ng-container matColumnDef="Teléfono">

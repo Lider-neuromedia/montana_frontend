@@ -25,6 +25,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
     "descuento": 0,
     "estado": 'activo',
     "tipo": 'general',
+    "etiqueta": "adultos",
     "image": null
   };
   catalogoEdit = {
@@ -33,6 +34,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
     "descuento": null,
     "estado": null,
     "tipo": null,
+    "etiqueta": null,
     "image": null
   };
   showEditDropzone = false;
@@ -97,6 +99,8 @@ export class CatalogoComponent implements OnInit, OnDestroy {
 
 
   openDrawerRight(action : boolean, type : string){
+    $('.acciones-form-adminitrador').addClass('elevar-btns');
+    $('.box-cancelar').addClass('icono-catalogo');
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';
@@ -155,6 +159,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
       "descuento": 0,
       "estado": 'activo',
       "tipo": 'general',
+      "etiqueta": "adultos",
       "image": null
     };
     this.files = [];
@@ -187,7 +192,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
         this.resetForm();
         Swal.fire(
           '¡Listo!',
-          'Catalogo creado de manera existosa',
+          'Catálogo creado de manera existosa',
           'success'
         );
       }else{
@@ -227,13 +232,13 @@ export class CatalogoComponent implements OnInit, OnDestroy {
               this.getCatalogos();
               Swal.fire(
                 '¡Exito!',
-                'Catalogo eliminado de manera correcta!',
+                'Catálogo eliminado de manera correcta!',
                 'success'
               );
             }else{
               // console.log(response);
             Swal.fire({
-              title: 'Este catalogo tiene productos registrados',
+              title: 'Este Catálogo tiene productos registrados',
               text: 'Quieres seguir con la eliminación?',
               icon: 'warning',
               showCancelButton: true,
@@ -253,7 +258,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
                           console.log("catalogo con productos");
                           Swal.fire(
                             '¡Exito!',
-                            'Catalogo eliminado de manera correcta!',
+                            'Catálogo eliminado de manera correcta!',
                             'success'
                           );
                         }
@@ -308,11 +313,12 @@ export class CatalogoComponent implements OnInit, OnDestroy {
           "descuento": null,
           "estado": null,
           "tipo": null,
+          "etiqueta": null,
           "image": null
         };
         Swal.fire(
           '¡Listo!',
-          'Catalogo actualizado de manera correcta.',
+          'Catálogo actualizado de manera correcta.',
           'success'
         );
         this.getCatalogos();

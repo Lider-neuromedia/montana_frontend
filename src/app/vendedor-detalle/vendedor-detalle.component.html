@@ -4,7 +4,7 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido">
+    <div class="contenido detalle-vendedor">
         <div class="filtros filtro-vendedores" style="align-items: center;">
             <div class="ident-admin" style="align-items: center;">
                 <div class="div-imagen">
@@ -27,7 +27,7 @@
                     </div>
 
                     <ul class="editar-vendedor">
-                        <li><img [src]="templateImage.editar" alt="">Editar</li>
+                        <li (click)="openDrawerRigth(true, 'create')"><img [src]="templateImage.editar" alt="">Editar</li>
                         <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
                         <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                     </ul>
@@ -156,6 +156,7 @@
                     <mat-tab-group mat-align-tabs="start">
                         <mat-tab label="Pedidos">
                             <input #input (keyup)="filtro($event)" class="buscador-pedido" type="search" placeholder="Realiza una búsqueda">
+                        <div class="scroll-table">
                             <table class="tabla-pedidos" mat-table [dataSource]="dataSource">
                                 <ng-container matColumnDef="Pedidos">
                                     <th *matHeaderCellDef></th>
@@ -164,9 +165,10 @@
                                             <div class="foto-referencia">
                                                 <p>Pedido #{{pedido.codigo}}</p>
                                             </div>
+                                            <hr>
                                             <div class="info-pedido">
                                                 <p>{{pedido.fecha}}</p>
-                                                <p>Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
+                                                <p class="valor_pedido">Valor: {{pedido.total | currency : 'COP':'symbol-narrow' :'1.0-0'}}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -177,10 +179,102 @@
                                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                                 </tr>
                             </table>
+                        </div>
                         </mat-tab>
                     </mat-tab-group>
 
                 </div>
+                <app-drawer-advanced class="form-advanced" name="crear-vendedor" title="Crear Vendedor" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="actualizarVendedor()" button="Actualizar">
+                    <div class="tabs">
+                        <ul>
+                            <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
+                            <li><a [class.activeclasstab]="activeUsuario" (click)="datosCredenciales()">Usuario y contraseña</a></li>
+                            <li><a [class.activeclasstab]="asignarCliente" (click)="datosAsignar()">Asignar un cliente</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="fields">
+                        <div *ngIf="generales" class="field-datos-generales">
+                            <div class="label-field">
+                                <label for="">Nombres</label>
+                                <input [(ngModel)]="usuarios.name" name="nombres" type="text" class="">
+                                <small *ngIf="nameBool"><span class="text-danger">{{error.name}}</span></small>
+                            </div>
+    
+                            <div class="label-field">
+                                <label for="">Apellidos</label>
+                                <input [(ngModel)]="usuarios.apellidos" name="apellidos" type="text" class="">
+                                <small *ngIf="apellidosBool"><span class="text-danger">{{error.apellidos}}</span></small>
+                            </div>
+    
+    
+                            <div class="label-field">
+                                <label for="">Cédula de ciudadanía</label>
+                                <input [(ngModel)]="usuarios.dni" name="dni" type="number" class="">
+                                <small *ngIf="dniBool"><span class="text-danger">{{error.dni}}</span></small>
+                            </div>
+    
+                            <div class="label-field">
+                                <label for="">{{usuarios.data_user[0].field_key}}</label>
+                                <input [(ngModel)]="usuarios.data_user[0].value_key" name="celular" type="tel" class="">
+                                <small *ngIf="telefonoBool"><span class="text-danger">{{error.telefono}}</span></small>
+                            </div>
+    
+                            <div class="label-field">
+                                <label for="">{{usuarios.data_user[1].field_key}}</label>
+                                <input [(ngModel)]="usuarios.data_user[1].value_key" type="number" name="codigo" class="">
+                                <small *ngIf="codigoBool"><span class="text-danger">{{error.codigo}}</span></small>
+                            </div>
+    
+                        </div>
+    
+                        <div *ngIf="credenciales" class="credenciales">
+                            <div class="label-field">
+                                <label for="">Correo electrónico</label>
+                                <input [(ngModel)]="usuarios.email" name="email" type="email" class="">
+                                <small *ngIf="emaiBool"><span class="text-danger">{{error.email}}</span></small>
+                            </div>
+    
+                            <div class="label-field">
+                                <label for="">Contraseña</label>
+                                <input [(ngModel)]="usuarios.password" name="password" type="password" class="">
+                                <small *ngIf="passwordBool"><span class="text-danger">{{error.password}}</span></small>
+                            </div>
+    
+                            <div class="label-field">
+                                <label for="">Confirmar Contraseña</label>
+                                <input [(ngModel)]="usuarios.confirm_password" name="confirm_password" type="password"
+                                    class="">
+                                    <small *ngIf="confirm_passwordBool"><span class="text-danger">{{error.confirm_password}}</span></small>
+                            </div>
+                        </div>
+    
+                        <div *ngIf="asignar" class="asignar-cliente">
+                            <div class="search-cliente">
+                                <p>Elige un cliente</p>
+                                <mat-form-field class="w-100">
+                                    <mat-label>Asignar Cliente</mat-label>
+                                    <input placeholder="Asignar Cliente" matInput [formControl]="asigCliente" [matAutocomplete]="auto">
+                                    <mat-icon matSuffix>search</mat-icon>
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let cliente of filteredOptions | async" [value]="cliente" (blur)="updateAsignCliente(cliente)">
+                                          {{cliente}}
+                                        </mat-option>
+                                      </mat-autocomplete>                 
+                                </mat-form-field>
+                            </div>
+                            <div class="list-vendedores">
+                                <div class="item-cliente" *ngFor="let cliente of usuarios.clientes" [@fadeIn]>
+                                    <p> 
+                                        <span class="icon-cliente">{{(cliente.name?.charAt(0)) + (cliente.apellidos?.charAt(0))}}</span> 
+                                        {{cliente.name + ' ' + cliente.apellidos}}
+                                    </p>
+                                    <p (click)="deleteAsignClient(cliente)" style="cursor: pointer;" class="text-danger"><mat-icon>delete_outline</mat-icon></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </app-drawer-advanced>
             </div>
         </div>
     </div>

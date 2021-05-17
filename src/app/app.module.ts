@@ -28,6 +28,7 @@ import {MaterialModule} from './material/material.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PaginatePipe } from './pipes/paginate.pipe';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -104,7 +105,8 @@ import { RestablecerContrasenaComponent } from './restablecer-contrasena/restabl
     MaterialModule,
     NgxDropzoneModule,
     NgxGalleryModule,
-    ChartsModule
+    ChartsModule,
+    EditorModule
   ],
   providers: [SendHttpData],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido">
+    <div class="contenido contenido-pedido">
         <div class="filtros">
         </div>
         <div class="cliente-detalle" style="padding-top: 0;">
@@ -19,7 +19,7 @@
                             <div *ngIf="productos.length == 0">
                                 <p class="txt-sin-disponibilidad">Ningun producto disponible.</p>
                             </div>
-                            <div class="card-show-room" *ngFor="let producto of productos">
+                            <div class="card-show-room card-show-room-ajustado" *ngFor="let producto of productos">
                                 <div class="img-show-room">
                                     <img src="./assets/img/image1.png" alt="">
                                 </div>
@@ -64,22 +64,22 @@
                                     <p class="referencia">Ref: {{producto.referencia}}</p>
                                     <p class="marca">{{producto.nombre_marca}}</p>
                                     <p class="nombre_pedido">{{producto.nombre}}</p>
-                                    <p class="stock">Stock: {{producto.stock}} cajas</p>
+                                    <p class="stock">Stock: {{producto.stock}} pares</p>
                                     <p class="precio">{{producto.total | currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <a (click)="pedidoInterna(producto.id_producto)" class="ver-producto">
-                                    <span>
-                                        <img src="" alt="">
-                                    </span>
                                     Ver producto
+                                    <div class="box-ver">
+                                        <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
+                                    </div>
                                 </a>
                                 <a class="anadir-a-pedido" (click)="openDrawerRight(true, this.producto)">
-                                    <span>
-                                        <img src="" alt="">
-                                    </span>
-                                    Añadir a pedido
+                                    <span style="position: relative;left: 14px;">Añadir a pedido</span>
+                                    <div class="box-add">
+                                        <mat-icon class="text-size-sm icon-add">shopping_bag</mat-icon>
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -109,15 +109,16 @@
                     </div>
                     <!-- Footer actions. -->
                     <div class="acciones">
-                        <a class="agregar" (click)="openDrawerFinally(true)">
-                            <span class="mas">
-                                <img src="" alt="">
-                            </span> Finalizar Pedido
+                        <a class="agregar btn-agregar" (click)="openDrawerFinally(true)">
+                            Finalizar Pedido
+                            <div class="box-mas icono-mas">
+                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
+                            </div>
                         </a>
                 
                         <a class="cancelar">
-                            <span class="mas">
-                                <img src="" alt="">
+                            <span class="box-cancelar icono-cancelar" style="left: 201px;">
+                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
                     </div>
@@ -141,7 +142,7 @@
                                     <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">remove</mat-icon>
                                 </a>
                                 <input name="cantidad{{i}}" type="text" [(ngModel)]="tienda.cantidad" class="cantidad">
-                                <a class="add" type="button" (click)="sumCantidad(i, true)">
+                                <a class="add" type="button" (click)="sumCantidad(i)">
                                     <mat-icon aria-hidden="false" class="icon-tienda" aria-label="Camera icon">add</mat-icon>
                                 </a>
                             </div>
@@ -150,10 +151,10 @@
     
                     <!-- Footer actions. -->
                     <div class="acciones">
-                        <a class="agregar" (click)="saveEditPedido()">
+                        <a class="agregar" id="actualizar" (click)="saveEditPedido()">
                             <span class="mas">
                                 <img src="" alt="">
-                            </span> Actualizar producto
+                            </span> Actualizar
                         </a>
                 
                         <a class="cancelar" (click)="deleteProductPedido()">

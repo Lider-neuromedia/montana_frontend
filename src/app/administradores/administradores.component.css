@@ -30,6 +30,16 @@
     border-radius: 5px;
 }
 
+.titulo-crear-admin{
+    position: relative;
+    top: 6px;
+}
+
+.btn-close{
+    position: relative;
+    top: 0;
+}
+
 
 /* 
 .loading-text {
@@ -41,7 +51,7 @@
     color: #323E4A;
     justify-content: space-between;
     background: #F6FBFF;
-    padding: 15px 20px;
+    padding: 0px 15px 0px 15px;
     letter-spacing: 0.54px;
 }
 .nuevo-administrador h2,
@@ -56,6 +66,7 @@
 
 .open {
     transform: translateX(0%);
+    overflow: auto;
 }
 
 .datos-generales {
@@ -90,12 +101,18 @@
 }
 
 .acciones-form-adminitrador {
-    display: flex;
-    position: fixed;
+    display: inline-flex;
+    /* position: fixed; */
     bottom: 50px;
     padding: 0px 20px;
     justify-content: space-around;
     width: 100%;
+}
+@media screen and (min-width:1920px){
+    .acciones-form-adminitrador {
+        position: relative;
+        top: 21rem;
+    }
 }
 
 .agregar,
@@ -110,9 +127,33 @@
 
 .agregar {
     background: #FF596A;
-    padding: 6px 0px;
+    /* padding: 6px 0px; */
+    position: relative;
     color: white;
     transition: all .5s ease;
+}
+
+.mas-administrador{
+    top: 0;
+    left: 0 !important;
+}
+.mas-edit-admin{
+    z-index: 1;
+    top: -12px !important;
+    left: 9px !important;
+}
+
+.cancelar-administrador{
+    left: 12px !important;
+    top: -12px;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+}
+.cancelar-edit-admin{
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    top: -12px;
+    left: 9px !important;
 }
 
 .agregar:hover {

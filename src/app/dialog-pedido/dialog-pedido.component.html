@@ -15,6 +15,7 @@
                     {{cliente.name + ' ' + cliente.apellidos}}
                 </option>
             </select>
+            <small *ngIf="clienteBool"><span class="text-danger">{{error.cliente}}</span></small>
         </div>
 
         <div class="label-field">
@@ -25,6 +26,7 @@
                     {{vendedor.name + ' ' + vendedor.apellidos}}
                 </option>
             </select>
+            <small *ngIf="vendedorBool"><span class="text-danger">{{error.vendedor}}</span></small>
         </div>
 
         <div class="label-field" *ngIf="id_catalogo == 0">
@@ -35,6 +37,7 @@
                     {{catalogo.titulo}}
                 </option>
             </select>
+            <small *ngIf="catalogoBool"><span class="text-danger">{{error.catalogo}}</span></small>
         </div>
 
         <div class="label-field">

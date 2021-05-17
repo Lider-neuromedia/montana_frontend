@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SendHttpData } from '../services/SendHttpData';
+declare var $: any;
 
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.component.html',
   styleUrls: ['./pedido.component.css']
 })
-export class PedidoComponent implements OnInit {
+export class PedidoComponent implements OnInit, OnDestroy {
   imagen_catalogo: string;
   cantidad: any;
   tempStock: number;
 
   constructor(private route: Router, private http : SendHttpData) { }
+  ngOnDestroy(){
+    console.log("destruir");
+    delete this.pedido.total_pedido;
+    localStorage.setItem('pedido', JSON.stringify(this.pedido));
+  }
 
   pedido : any; 
   productos = [];
@@ -50,6 +56,7 @@ export class PedidoComponent implements OnInit {
       this.imagen_catalogo = localStorage.getItem('img-catalogo');
       this.getProductos();
       this.getTiendas();
+      console.log(this.pedido);
       
       this.total_pedido = (this.pedido.total_pedido == undefined) ? 0 : this.pedido.total_pedido;
     }
@@ -90,6 +97,7 @@ export class PedidoComponent implements OnInit {
   }
 
   openDrawerRight(action : boolean, producto : any = null){
+    $('.box-cancelar').addClass('iconos-pedido');
     this.openDrawer = action;
     if (producto == null) {
       this.producto_select = {
@@ -161,7 +169,7 @@ export class PedidoComponent implements OnInit {
     );
   }
 
-  sumCantidad(position, edit = false){
+  sumCantidad(position){
     if(this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
       this.producto_select.stock > 0){
         if(this.tiendas[position].cantidad === this.producto_select.stock && this.producto_select.stock === 0){
@@ -190,6 +198,9 @@ export class PedidoComponent implements OnInit {
   editarPedido(product){
     this.editPedido = true;
     this.selectEditPedido = product;
+    setTimeout(() => {
+      $('#actualizar').addClass('pedido-btn-relativos');
+    }, 500);
   }
 
   saveEditPedido(){

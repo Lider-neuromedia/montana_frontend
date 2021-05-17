@@ -37,7 +37,7 @@
     font-weight: bold;
     letter-spacing: 0.03px;
     line-height: 17px;
-    margin-bottom: 35px;
+    margin: 0;
 }
 
 .info-interna .stock{
@@ -76,7 +76,6 @@
     background-color: #fff;
     color: #919191;
 }
-
 .anadir-a-pedido{
     color: #FF596A;
     cursor: pointer;
@@ -111,13 +110,28 @@
     margin-right: 10%;
     margin-left: -20%;
 }
+
+tr.mat-header-row{
+    height: 10px;
+}
+
 table{
     width: 100%;
 }
-.filtro-ordernar{
-    margin-top: -1%;
-    margin-right: 65%;
+.filtro-producto{
+    margin-bottom: 0px;
 }
+.filtro-ordernar{
+    position: relative;
+    top: 1px;
+    left: -22rem;
+}
+
+.buscador-producto,
+.create-new{
+    left: 13rem;
+}
+
 .box-ver{
     background-color: #919191;
     padding: 2.5%;
@@ -152,4 +166,21 @@ table{
 
 .label-field select{
     padding: 10px !important;
+}
+.iconos-bolsa{
+    width: .8rem;
+    position: relative;
+    left: 7px;
+    top: 5px;
+}
+.iconos-ojo{
+    width: 1rem;
+    position: relative;
+    left: 6px;
+    top: 6px;
+}
+@media screen and (min-width:1920px){
+    .filtro-ordernar{
+        left: -56rem;
+    }
 }

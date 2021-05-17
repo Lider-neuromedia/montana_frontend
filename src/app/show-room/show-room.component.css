@@ -9,7 +9,11 @@
 .container-show-room{
     background: #1f2224;
 }
-
+.contenido-show-room{
+    top: 2.5rem !important;
+    left: 10.4rem;
+    width: 91% !important;
+}
 .cont-img-banner{
     padding: 0;
 }
@@ -24,7 +28,7 @@
 }
 
 .card-show-room {
-    padding: 1em;
+    padding: 2em;
     background: #1b1e23;
     border-radius: 10px;
     margin-top: 17px;

@@ -8,7 +8,7 @@
     <ul class="firts-menu">
         <li> <a class="das" style="cursor: pointer;"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
         <li *ngIf="admin || vendedor" (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
-            <a routerLinkActive="active-menu" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
+            <a routerLinkActive="active-menu" (click)="ajustarMenuChild()" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
         </li>
         <!-- <li> <a [routerLink]="['/roles']"> <img src="" alt=""> Roles</a></li> -->
         <li> <a [routerLink]="['/catalogos']"> <img src="{{ templateImage.catalogo }}" alt=""> Catálogo</a></li>

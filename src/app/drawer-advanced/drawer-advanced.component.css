@@ -44,6 +44,7 @@
 
 .open {
     transform: translateX(0%);
+    overflow: auto;
 }
 
 .header-form {
@@ -86,8 +87,20 @@
     padding: 10px;
 }
 
+.btn-relativos{
+    position: relative !important;
+    top: -4rem;
+    left: 17rem;
+}
+
+.btn-subir-relativos{
+    top: -27rem !important;
+}
+.ocultar-scroll{
+    overflow: hidden !important;
+}
 .acciones-form-adminitrador {
-    display: flex;
+    display: inline-flex;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -107,9 +120,55 @@
     width: 45%;
 }
 
+.btn-agregar{
+    width: 10.3rem !important;
+    left: 18rem;
+}
+
+.btn-cancelar{
+    width: 10.3rem !important;
+    position: relative;
+    left: 6rem;
+}
+
+@media screen and (min-width:1920px){
+    .btn-agregar{
+        width: 14rem !important;
+        left: 26rem;
+    }
+    
+    .btn-cancelar{
+        width: 14rem !important;
+        left: 8rem;
+    }
+    .btn-relativos{
+        top: -10rem;
+        left: 23.7rem;
+        border-left: 1px solid lightgray;
+    }
+    .btn-subir-relativos{
+        top: -10rem !important;
+    }
+    .open{
+        overflow: hidden !important;
+    }
+}
+
+.box-cancelar-cancelar{
+    top: 0 !important;
+    left: -1px !important;
+}
+
+.box-mas-agregar{
+    top: 0 !important;
+    left: 0 !important;
+}
+
+
+
 .agregar {
     background: #FF596A;
-    padding: 6px 0px;
+    /* padding: 6px 0px; */
     color: white;
     transition: all .5s ease;
 }

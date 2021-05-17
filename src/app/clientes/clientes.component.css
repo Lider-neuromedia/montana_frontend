@@ -12,8 +12,14 @@
     z-index: 510;
 }
 
+.t-0{
+    top: 0;
+}
+
 table{
     width: 100%;
+    position: relative;
+    left: 12rem;
 }
 table td{
     height: 70px;
@@ -67,7 +73,13 @@ table td{
     border-radius: 6px;
     padding: 6px;
 }
-
+.nombre{
+    margin-left: 2rem;
+    margin-top: .4rem;
+}
+.tituloNombre{
+    margin-left: 2rem;
+}
 .agregar,
 .cancelar {
     cursor: pointer;

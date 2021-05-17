@@ -8,6 +8,21 @@
     cursor: pointer;
 }
 
+.fa-filter::before{
+    position: absolute;
+    left: 12px;
+    top: 6px;
+    font-size: 18px;
+}
+.filtro-icon{
+    position: relative;
+    left: -2.5rem;
+}
+
+.t-0{
+    top: 0;
+}
+
 .title-catalogo{
     color: #1E2933;
     font-size: 14px;

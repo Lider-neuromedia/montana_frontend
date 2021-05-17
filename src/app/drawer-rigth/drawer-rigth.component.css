@@ -88,8 +88,41 @@
     padding: 10px;
 }
 
+.btn-agregar{
+    left: 0;
+    margin-left: 5px;
+}
+
+.btn-box-mas{
+    left: 0 !important;
+    top: 0 !important;
+}
+
+.btn-box-cancelar{
+    left: 0 !important;
+    top: -1px !important;
+}
+
+.btn-cancelar{
+    position: relative;
+    left: 6rem;
+}
+.iconos-pedido{
+    top: 0 !important;
+    left: -1px !important;
+}
+.elevar-btns{
+    z-index: 10 !important;
+}
+
+.icono-catalogo{
+    z-index: 1;
+    left: -1px !important;
+    top: 0 !important;
+}
 .acciones-form-adminitrador {
-    display: flex;
+    z-index: 1;
+    display: inline-flex;
     position: fixed;
     bottom: 25px;
     padding: 0px 20px;

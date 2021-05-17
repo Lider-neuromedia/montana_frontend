@@ -399,6 +399,7 @@ export class PedidosComponent implements OnInit {
 
   getEditPedido(){
     var edit_pedido = this.checkPedido;
+    console.log(this.edit_pedido);
     this.http.httpGet('edit-pedido/' + edit_pedido['id_pedido'], true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
