@@ -29,6 +29,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -106,7 +107,9 @@ import { RestablecerContrasenaComponent } from './restablecer-contrasena/restabl
     NgxDropzoneModule,
     NgxGalleryModule,
     ChartsModule,
-    EditorModule
+    EditorModule,
+    SignaturePadModule,
+    
   ],
   providers: [SendHttpData],
   bootstrap: [AppComponent]

@@ -140,9 +140,16 @@
                             <h2 class="title-tiendas">Notas adicionales</h2>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" *ngIf="pedido.notas; else noPedido">
                             <p class="notas">{{pedido.notas}}</p>
                         </div>
+                        <ng-template #noPedido>
+                            <div class="sin-notas">
+                                <img src="./assets/img/sin_novedad.png" alt="">
+                                <p>Aún no se registran novedades</p>
+                            </div>
+                        </ng-template>
+                        
                     </div>
                 </div>
 

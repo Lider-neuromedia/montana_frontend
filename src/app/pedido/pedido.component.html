@@ -108,7 +108,7 @@
                         <span>{{total_pedido | currency:'COP':'symbol-narrow' :'1.0-0'}}</span>
                     </div>
                     <!-- Footer actions. -->
-                    <div class="acciones">
+                    <div class="acciones" id="final-pedido">
                         <a class="agregar btn-agregar" (click)="openDrawerFinally(true)">
                             Finalizar Pedido
                             <div class="box-mas icono-mas">
@@ -117,7 +117,7 @@
                         </a>
                 
                         <a class="cancelar">
-                            <span class="box-cancelar icono-cancelar" style="left: 201px;">
+                            <span class="box-cancelar icono-cancelar" style="left: 186px;">
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
@@ -224,5 +224,10 @@
             <textarea name="notas" class="text-area"  [(ngModel)]="finalizar_pedido.notas">
             </textarea>
         </div>
+        <div class=label-field>
+            <label for="">Firma Digital</label>
+            <signature-pad class="firma-pedido" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+        </div>
+        
     </form>
 </app-drawer-rigth>

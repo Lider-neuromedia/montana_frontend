@@ -1,20 +1,58 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SendHttpData } from '../services/SendHttpData';
+import { SignaturePad } from 'angular2-signaturepad';
 declare var $: any;
+declare var enviarPedido: any;
 
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.component.html',
   styleUrls: ['./pedido.component.css']
 })
-export class PedidoComponent implements OnInit, OnDestroy {
+export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  signaturePadOptions:Object = {
+    'minWidth': 5,
+    'canvasWidth': 380,
+    'canvasHeight':170
+  }
   imagen_catalogo: string;
   cantidad: any;
   tempStock: number;
 
-  constructor(private route: Router, private http : SendHttpData) { }
+  constructor(private route: Router, private http : SendHttpData) { 
+  }
+  ngAfterViewInit(){
+    this.signaturePad.set('minWidth', 5);
+    this.signaturePad.clear();
+  }
+
+  drawComplete() {
+    // console.log(this.signaturePad.toDataURL());
+    let file = this.base64ToFile(this.signaturePad.toDataURL(), 'firma.png');
+    this.pedido.firma = file;
+    console.log(file);
+  }
+  base64ToFile(url, filename){
+    let arr = url.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+        while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+  }
+
+  drawStart() {
+    console.log('begin drawing');
+  }
+  
+
   ngOnDestroy(){
     console.log("destruir");
     delete this.pedido.total_pedido;
@@ -48,6 +86,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    setTimeout(() => {
+      $('#final-pedido').addClass('btn-relativos');
+    }, 500);
     if (localStorage.getItem('pedido') == null) {
       this.route.navigate(['/pedidos']);
     }else{
@@ -228,19 +269,33 @@ export class PedidoComponent implements OnInit, OnDestroy {
     data.descuento = this.finalizar_pedido.descuento;
     data.forma_pago = this.finalizar_pedido.forma_pago;
     data.notas = this.finalizar_pedido.notas;
-    
-    this.http.httpPost('pedidos', data, true).subscribe(
-      response => {
-        if (response.status == 200 && response.response == 'success') {
-          this.openDrawerFinally(false);
-          localStorage.removeItem('pedido');
-          this.route.navigate(['/pedidos']);
-        }
-      },
-      error => {
 
+    console.log(data);
+    Swal.fire('Creando Pedido', '', 'info');
+    Swal.showLoading();
+    enviarPedido(data, 'nuevo').then(response => {
+      if (response.status == 200 && response.response == 'success') {
+        Swal.fire(response.message,'','success');
+        this.openDrawerFinally(false);
+        localStorage.removeItem('pedido');
+        this.route.navigate(['/pedidos']);
       }
-    )
+    }, error => {
+
+    })
+    
+    // this.http.httpPost('pedidos', data, true).subscribe(
+    //   response => {
+    //     if (response.status == 200 && response.response == 'success') {
+    //       this.openDrawerFinally(false);
+    //       localStorage.removeItem('pedido');
+    //       this.route.navigate(['/pedidos']);
+    //     }
+    //   },
+    //   error => {
+
+    //   }
+    // )
   }
 
 }

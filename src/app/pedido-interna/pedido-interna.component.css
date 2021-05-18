@@ -373,10 +373,22 @@ p.info {
     width: 100%;
     padding-bottom: 5em;
 }
+.sin-notas{
+    text-align: center;
+    position: relative;
+    left: 0;
+    bottom: 1rem;
+}
+.sin-notas p{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #e5e5e5;
+}
 @media screen and (min-width:1920px){
     .acciones-fijo-btns{
         left: 85rem;
-        top: 92rem;
+        top: 62rem;
     }
     .icono-mas{
         top: 1.3rem;

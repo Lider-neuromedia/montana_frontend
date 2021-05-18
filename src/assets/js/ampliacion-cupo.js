@@ -1,5 +1,6 @@
 const backend = 'https://pruebasneuro.co/N-1010/montana_backend/public/api';
 const token = localStorage.getItem('access_token');
+
 async function enviarData(createSolicitud, cambiar){
     let formData = new FormData();
 
@@ -158,5 +159,52 @@ async function enviarProducto(producto, cambiar){
       console.log(error);
       return error;
     }
+  }
+}
+
+async function enviarPedido(pedido, cambiar){
+  let formData = new FormData();
+  let i = 0;
+  let iTienda = 0;
+  if(cambiar === "editar"){
+
+  }else{
+
+    try {
+      pedido.productos.forEach(element1 => {
+        
+        formData.append(`productos[${i}][id_producto]`, element1.id_producto);
+        console.log(formData.get(`productos[${i}][id_producto]`));
+        element1.tiendas.forEach(element2 => {
+          formData.append(`productos[${i}][tiendas][${iTienda}][id_tienda]`, element2.id_tienda);
+          formData.append(`productos[${i}][tiendas][${iTienda}][cantidad]`, element2.cantidad);
+          console.log(formData.get(`productos[${i}][tiendas][${iTienda}][id_tienda]`));
+          iTienda++;
+        });
+        i++;
+      });
+      
+  
+      formData.append('cliente', pedido.cliente);
+      formData.append('vendedor', pedido.vendedor);
+      formData.append('codigo_pedido', pedido.codigo_pedido);
+      formData.append('descuento', pedido.descuento);
+      formData.append('total_pedido', pedido.total_pedido);
+      formData.append('firma', pedido.firma);
+      formData.append('forma_pago', pedido.forma_pago);
+
+      const config = { headers: { 'Authorization': `Bearer ${token}` } };
+      for (const [name, value] of formData) {
+        console.log(`${name} = ${value}`);
+      }
+        const response = await axios.post(`${backend}/pedidos`, formData, config);
+        console.log(response.data);
+        return response.data;
+
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  
   }
 }

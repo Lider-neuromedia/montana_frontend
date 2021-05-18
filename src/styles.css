@@ -462,6 +462,9 @@ input[type="tel"] {
 .pedido-btn-relativos{
     position: relative !important;
 }
+.firma-pedido  canvas{
+    border: 1px solid lightgray !important;
+}
 .cancelar:hover {
     background: #ec5362;
     color: white;

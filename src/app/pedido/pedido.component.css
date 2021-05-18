@@ -114,8 +114,8 @@
 }
 .btn-agregar{
     position: relative !important;
-    margin-right: 1rem;
-    padding-left: 1.3rem;
+    margin-right: .5rem;
+    padding-left: 2rem;
 }
 .icon-center{
     margin-left: 5px    ;
@@ -503,6 +503,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.btn-relativos{
+    position: relative !important;
 }
 
 .txt-sin-disponibilidad{
