@@ -105,9 +105,9 @@
                                     <table mat-table [dataSource]="dataSource">
                                         <ng-container matColumnDef="valoraciones">
                                             <th *matHeaderCellDef></th>
-                                            <td mat-cell *matCellDef="let valoracion">
+                                            <td *matCellDef="let valoracion">
                                                 <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
-                                                 <div class="strellas-valoracion">
+                                                 <div class="strellas-valoracion" style="margin-bottom: 3rem;">
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
                                                         'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 2, 
@@ -140,10 +140,10 @@
 
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding: 0 .5rem; box-shadow: 2px 2px 2px 3px lightgray;">
                 <div class="content-rigth">
                     <div class="aside-interna-pedido mrg-btn-30">
-                        <h3 class="nombre" style="margin-bottom: 15px;">Tu pedido</h3>
+                        <h3 class="nombre" style="padding: 20px 20px; margin-bottom: 0;">Tu pedido</h3>
                         <form>
                             <div class="label-field">
                                 <label for="">REFERENCIA</label>

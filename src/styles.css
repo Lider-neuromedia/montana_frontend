@@ -464,6 +464,8 @@ input[type="tel"] {
 }
 .firma-pedido  canvas{
     border: 1px solid lightgray !important;
+    border-radius: 4px;
+    cursor: url(./assets/img/editar.svg), pointer;
 }
 .cancelar:hover {
     background: #ec5362;
