@@ -120,7 +120,61 @@ export class ProductoDetalleComponent implements OnInit {
           this.valoraciones = resp.preguntas;
           // console.log("Funciona");
           this.dataSource = new MatTableDataSource<any>(this.valoraciones);
-          console.log(this.dataSource.data);
+          // console.log(this.dataSource.data);
+          let color = [];
+          let preguntasTemp = [];
+          let colorMap = [];
+          let preguntaUnica = [];
+          this.valoraciones.forEach(element => {
+            color.push({
+              id_pregunta:element.id_pregunta,
+              pregunta:element.pregunta,
+              respuesta:element.respuesta
+            });
+            preguntasTemp.push({
+              id_pregunta:element.id_pregunta,
+              pregunta:element.pregunta
+            });
+          });
+          colorMap = preguntasTemp.map(item => [item.id_pregunta, item]);
+
+        let colorMapArr = new Map(colorMap);
+        
+        let unicos = [...colorMapArr.values()];
+
+        preguntaUnica = unicos;
+
+        let i = 0;
+        let arrTemp = [];
+        let resultTemp = [];
+        let objTemp = {};
+        color.forEach(element => {
+          if(element.id_pregunta == preguntaUnica[i].id_pregunta){
+            resultTemp.push({
+              id_pregunta: element.id_pregunta,
+              respuesta: element.respuesta
+            })
+          }else{
+            i++;
+            if(element.id_pregunta == preguntaUnica[i].id_pregunta){
+              resultTemp.push({
+                id_pregunta: element.id_pregunta,
+                respuesta: element.respuesta
+              })
+            }
+          }
+          
+        });
+        // console.log(color);
+        let sumatoria = resultTemp.reduce(function(acumulador, siguienteValor){
+          return {
+            id_pregunta: acumulador.id_pregunta,
+            respuesta: acumulador.respuesta + siguienteValor.respuesta
+          }
+        })
+        
+        console.log(resultTemp);
+        console.log(sumatoria);
         }
       },error => {
         console.log(error)
