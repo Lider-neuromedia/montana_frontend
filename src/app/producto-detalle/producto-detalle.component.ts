@@ -118,9 +118,6 @@ export class ProductoDetalleComponent implements OnInit {
       resp => {
         if(resp.response === 'success' && resp.status === 200){
           this.valoraciones = resp.preguntas;
-          // console.log("Funciona");
-          this.dataSource = new MatTableDataSource<any>(this.valoraciones);
-          // console.log(this.dataSource.data);
           let color = [];
           let preguntasTemp = [];
           let colorMap = [];
@@ -145,18 +142,54 @@ export class ProductoDetalleComponent implements OnInit {
         preguntaUnica = unicos;
 
         let i = 0;
+        let aumentar = 0;
         let arrTemp = [];
         let resultTemp = [];
         let objTemp = {};
-        color.forEach(element => {
+        let cantidadId = 0;
+        // console.log(color);
+        color.forEach((element, index) => {
+          aumentar++;
           if(element.id_pregunta == preguntaUnica[i].id_pregunta){
+            cantidadId++;
             resultTemp.push({
               id_pregunta: element.id_pregunta,
               respuesta: element.respuesta
             })
+            // console.log(aumentar);
+            // console.log(color.length);
+            if((aumentar) === color.length){
+              let sumatoria = resultTemp.reduce(function(acumulador, siguienteValor){
+                return {
+                  id_pregunta: acumulador.id_pregunta,
+                  respuesta: acumulador.respuesta + siguienteValor.respuesta
+                }
+              })
+              objTemp = {
+                id_pregunta: sumatoria.id_pregunta,
+                pregunta: preguntaUnica[i].pregunta,
+                respuesta: Math.round(sumatoria.respuesta / cantidadId)
+              }
+              arrTemp.push(objTemp);
+            }
           }else{
+            let sumatoria = resultTemp.reduce(function(acumulador, siguienteValor){
+              return {
+                id_pregunta: acumulador.id_pregunta,
+                respuesta: acumulador.respuesta + siguienteValor.respuesta
+              }
+            })
+            objTemp = {
+              id_pregunta: sumatoria.id_pregunta,
+              pregunta: preguntaUnica[i].pregunta,
+              respuesta: Math.round(sumatoria.respuesta / cantidadId)
+            }
+            arrTemp.push(objTemp);
             i++;
+            resultTemp = [];
+            cantidadId = 0;
             if(element.id_pregunta == preguntaUnica[i].id_pregunta){
+              cantidadId++;
               resultTemp.push({
                 id_pregunta: element.id_pregunta,
                 respuesta: element.respuesta
@@ -166,15 +199,9 @@ export class ProductoDetalleComponent implements OnInit {
           
         });
         // console.log(color);
-        let sumatoria = resultTemp.reduce(function(acumulador, siguienteValor){
-          return {
-            id_pregunta: acumulador.id_pregunta,
-            respuesta: acumulador.respuesta + siguienteValor.respuesta
-          }
-        })
-        
-        console.log(resultTemp);
-        console.log(sumatoria);
+        this.dataSource = new MatTableDataSource<any>(arrTemp);
+        // console.log(resultTemp);
+        // console.log(arrTemp);
         }
       },error => {
         console.log(error)
@@ -209,10 +236,12 @@ export class ProductoDetalleComponent implements OnInit {
 
   submitEditProduct(){
     var data = this.producto;
+    
     if(!this.imagenesBool){
       this.producto.imagenes = [];
     }
     this.imagenesBool = false;
+    console.log(this.producto);
     enviarProducto(this.producto, 'editar').then(response => {
       if (response.status == 200 && response.response == 'success') {
         this.openDrawerRigth(false, 'edit');
@@ -326,6 +355,7 @@ export class ProductoDetalleComponent implements OnInit {
             'Calificación creada con exito. Muchas gracias por tus aportes.',
             'success'
           );
+          this.getValoraciones();
           this.respuesta_usuario = true;
         }
       }

@@ -54,7 +54,10 @@ table td{
 
 .label-field {
     padding: 0px 20px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    position: relative;
+    right: 1px;
+    border-left: 1px solid lightgray;
 }
 
 .label-field label,
@@ -291,4 +294,13 @@ span.icon-vendedor {
     background: #2eb07b1f;
     align-items: center;
     transition: all 1s ease;
+}
+@media screen and (min-width: 1920px){
+    .label-field {
+        padding: 0px 20px;
+        margin-bottom: 16px;
+        position: relative;
+        right: 1px;
+        border-left: 1px solid lightgray;
+    }
 }

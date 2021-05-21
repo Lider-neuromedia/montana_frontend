@@ -21,6 +21,10 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   imagen_catalogo: string;
   cantidad: any;
   tempStock: number;
+  notasBool: boolean;
+  error = {
+    notas: 'Debes ingresar una nota',
+  }
 
   constructor(private route: Router, private http : SendHttpData) { 
   }
@@ -158,6 +162,7 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addProducto(){
+    
     if(this.producto_select.stock === this.tempStock){
       Swal.fire('No se puede crear un pedido en 0', '', 'error');
       return;
@@ -269,8 +274,19 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
     data.descuento = this.finalizar_pedido.descuento;
     data.forma_pago = this.finalizar_pedido.forma_pago;
     data.notas = this.finalizar_pedido.notas;
-
-    console.log(data);
+    if(data.notas === "" || !data.firma){
+      if(data.notas === ""){
+        this.notasBool = true;
+      }else{
+        this.notasBool = false;
+      }
+      if(!data.firma){
+        Swal.fire('La firma debe ser ingresada', '', 'warning');
+      }
+      return;
+    }
+    this.notasBool = false;
+    console.log(data); 
     Swal.fire('Creando Pedido', '', 'info');
     Swal.showLoading();
     enviarPedido(data, 'nuevo').then(response => {

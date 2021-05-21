@@ -4,7 +4,7 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido detalle-vendedor">
+    <div class="contenido detalle-vendedor" id="vendedor">
         <div class="filtros filtro-vendedores" style="align-items: center;">
             <div class="ident-admin" style="align-items: center;">
                 <div class="div-imagen">
@@ -23,13 +23,13 @@
                 <div (click)="editarVendedor()" class="box-editar"> 
                     <span class="texto-editar">Acción de</span>
                     <div class="icono-puntos">
-                        <img src="./assets/img/edit_points.svg" alt="">
+                        <img [src]="templateImage.points" alt="">
                     </div>
 
                     <ul class="editar-vendedor">
                         <li (click)="openDrawerRigth(true, 'create')"><img [src]="templateImage.editar" alt="">Editar</li>
-                        <li><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
-                        <li><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
+                        <li (click)="exportarPDF()"><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                        <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                     </ul>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Total 2020</p>
                                 <p class="valor-comision">$2.300.400</p>
-                                <div class="placeholder-img"><img src="./assets/img/ganadas.svg" alt=""></div>
+                                <div class="placeholder-img"><img [src]="templateImage.ganadas" alt=""></div>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Junio</p>
                                 <p class="valor-comision">$1.300.400</p>
-                                <div class="placeholder-img"><img src="./assets/img/perdidas.svg" alt=""></div>
+                                <div class="placeholder-img"><img [src]="templateImage.perdidas" alt=""></div>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                                 <hr class="division-comisiones">
                                 <p class="total-fecha">Total 2020</p>
                                 <p class="valor-comision">$4.300.400</p>
-                                <div class="placeholder-img"><img src="./assets/img/proximas.svg" alt=""></div>
+                                <div class="placeholder-img"><img [src]="templateImage.proximas" alt=""></div>
                             </div>
                         </div>
 
@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="datos">
-                            <p>Cedula</p>
+                            <p>Cédula</p>
                             <p >{{ usuarios.dni }}</p>
                         </div>
 

@@ -1,6 +1,6 @@
 // import { stringify } from '@angular/compiler/src/util';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,10 +9,9 @@ import { startWith } from 'rxjs/internal/operators/startWith';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { SendHttpData } from '../services/SendHttpData';
-
 import { UsersService } from '../services/users.service';
+import * as html2pdf from 'html2pdf.js';
 
-declare var jQuery:any;
 declare var $:any;
 
 @Component({
@@ -63,7 +62,10 @@ export class VendedorDetalleComponent implements OnInit {
     "btnCerrar": "assets/img/cerrar.svg",
     "exportar": "assets/img/icons-filter/export.svg",
     "eliminar": "assets/img/icons-filter/trash.svg",
-    "editar": "assets/img/editar.svg"
+    "editar": "assets/img/editar.svg",
+    "ganadas":"assets/img/ganadas.svg",
+    "perdidas":"assets/img/perdidas.svg",
+    "proximas":"assets/img/proximas.svg"
   };
 
   id:any;
@@ -110,6 +112,9 @@ export class VendedorDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      $('.mat-tab-body-content').addClass('scroll-desctivado');
+    }, 500);
     this.getVendedor();
     this.getClientes();
     setTimeout(() => {
@@ -119,6 +124,32 @@ export class VendedorDetalleComponent implements OnInit {
           map(value => this._filter(value))
         );      
       }, 2000);
+  }
+  exportarPDF(){
+      const options = {
+        filename: `${this.usuarios.name} ${this.usuarios.apellidos}.pdf`,
+        image: {
+          type: 'jpeg',
+          quality: 0.98
+        },
+        html2canvas: {
+          scale: 3,
+          letterRendering: true
+        },
+        jsPDF: {
+          unit: 'in',
+          format: 'a3',
+          orientation: 'landscape'
+        }
+      };
+    let element = document.querySelector('#vendedor');
+    setTimeout(() => {
+      html2pdf()
+      .from(element)
+      .set(options)
+      .save();  
+    }, 500);
+    
   }
   private _filter(value: string): string[] {
     // console.log(value);
@@ -328,6 +359,44 @@ export class VendedorDetalleComponent implements OnInit {
 
       }
     )
+  }
+
+  getUsersAndDelete(){
+    Swal.fire({
+      title: 'Está seguro que desea eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        var usuarios = [];
+          usuarios.push(this.usuarios.id);
+        var data = {usuarios : usuarios};
+        Swal.fire('Eliminando Vendedor', '', 'info');
+        Swal.showLoading();
+          this.user.deleteUsers(data).subscribe(
+            (data:any) =>{
+              if (data.response == 'success' && data.status == 200) {
+                
+                Swal.fire(
+                  'Completado',
+                  'Los usuarios han sido eliminados correctamente.',
+                  'success'
+                );
+                this.route.navigateByUrl('vendedores');
+              }else{
+                Swal.fire(
+                  '¡Ups!',
+                  data.message,
+                  'error'
+                );
+              }
+            }
+          );
+      }
+    }) 
   }
 
   editarVendedor(){

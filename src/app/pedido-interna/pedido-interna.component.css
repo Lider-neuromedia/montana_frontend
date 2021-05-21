@@ -351,7 +351,9 @@ p.info {
 .remove:hover{
     background: #ff596ad6;
 }
-
+tr.mat-header-row{
+    height: 0;
+}
 .icon-tienda { font-size: 20px !important; }
 
 .cantidad {

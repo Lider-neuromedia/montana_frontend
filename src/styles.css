@@ -459,8 +459,17 @@ input[type="tel"] {
     letter-spacing: 0.84px;
     line-height: 17.6px;
 }
+.scroll-desctivado{
+    overflow: hidden !important;
+}
+.scroll-activo{
+    overflow: auto !important;
+}
 .pedido-btn-relativos{
     position: relative !important;
+}
+.mat-tab-body-content{
+    height: 30rem !important;
 }
 .firma-pedido  canvas{
     border: 1px solid lightgray !important;

@@ -244,8 +244,15 @@ hr{
     background: #f7f8f9;
     border-radius: 7px;
     padding: .3em .6em;
-    margin: 1em 0em;
+    margin: 0;
+    height: 6rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     cursor: pointer;
+    margin-bottom: 1rem;
+}
+hr{
+    margin-bottom: 0;
 }
 .t-0{
     top: 0;

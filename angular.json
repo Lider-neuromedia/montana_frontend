@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["chart.js", "xlsx"],
+            "allowedCommonJsDependencies": ["chart.js", "xlsx", "startWith"],
             "outputPath": "dist/admin-athletic",
             "index": "src/index.html",
             "main": "src/main.ts",

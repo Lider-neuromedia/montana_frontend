@@ -117,6 +117,18 @@
     margin-right: .5rem;
     padding-left: 2rem;
 }
+.iconos-ojo{
+    width: 1rem;
+    position: relative;
+    left: 6px;
+    top: 6px;
+}
+.iconos-bolsa{
+    width: .8rem;
+    position: relative;
+    left: 7px;
+    top: 5px;
+}
 .icon-center{
     margin-left: 5px    ;
     margin-top: 5px;

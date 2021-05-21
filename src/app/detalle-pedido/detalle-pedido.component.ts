@@ -56,6 +56,9 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      $('.mat-tab-body-content').addClass('scroll-activo');
+    }, 500);
     this.getPedido();
   }
 

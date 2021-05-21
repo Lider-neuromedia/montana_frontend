@@ -411,7 +411,7 @@ export class VendedoresComponent implements OnInit, OnDestroy {
   }
 
   openDrawerRigth(action : boolean, type : string){
-    $('.drawer-right').addClass('ocultar-scroll');
+    // $('.drawer-right').addClass('ocultar-scroll');
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';

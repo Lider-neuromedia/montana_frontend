@@ -51,9 +51,10 @@ table{
 }
 .btn-fijo-agregar{
     position: fixed !important;
-    top: 35.5rem;
-    left: 61rem;
-    width: 23%;
+    /* top: 35.5rem; */
+    /* left: 61rem; */
+    right: 2.5rem;
+    width: 25.6%;
 }
 
 .acciones{
@@ -157,6 +158,21 @@ table{
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .2);
     padding: 50px 30px;
     position: relative;
+}
+.box-editar {
+    position: relative;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.box-editar-open {
+    border-bottom: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: white;
+    opacity: 1;
+}
+
+tr.mat-header-row{
+    height: 0;
 }
 
 .aside-detalle-producto .nombre{

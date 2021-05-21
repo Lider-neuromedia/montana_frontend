@@ -65,6 +65,24 @@
                                 (change)="checkFilterCatalogo($event, 'private')">
                             <label for="privados">Privados</label>
                         </li>
+                        <li style="border-top: 1px solid #D7D7D7;">
+                            <input class="check-nombre"  
+                                type="checkbox" 
+                                name="niños" 
+                                id="niños"
+                                [(ngModel)]="filterCatalogo.ninos"
+                                (change)="checkFilterCatalogo($event, 'niños')"> 
+                            <label for="todos">Niños</label>
+                        </li>
+                        <li>
+                            <input class="check-nombre"  
+                                type="checkbox" 
+                                name="adultos" 
+                                id="adultos"
+                                [(ngModel)]="filterCatalogo.adultos"
+                                (change)="checkFilterCatalogo($event, 'adultos')"> 
+                            <label for="todos">Adultos</label>
+                        </li>
                     </ul>
                 </div>
 
@@ -78,6 +96,7 @@
 
         </div>
         <div class="row">
+            <ng-container *ngIf="catalogos?.length > 0; else noCatalogo">
             <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos  | paginate: { itemsPerPage: itemPerPage, currentPage: current }">
                 <div id="{{catalogo.id_catalogo}}-box-catalogo" class="box-catalogo">
                     <div (click)="closeCatOptions(catalogo.id_catalogo)" id="{{catalogo.id_catalogo}}-overblock"
@@ -120,6 +139,15 @@
                     </ul>
                 </div>
             </div>
+        </ng-container>
+        <ng-template #noCatalogo>
+            <div class="col-md-12 text-center no-catalogo">
+                <div class="sin-catalogo">
+                    <img src="./assets/img/sin_novedad.png" alt="">
+                    <p>Aún no se registran Catálogos</p>
+                </div>
+            </div>
+        </ng-template>
         </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 declare var $:any;
+declare var enviarPedido:any;
 
 @Component({
   selector: 'app-pedidos',
@@ -439,6 +440,26 @@ export class PedidosComponent implements OnInit {
   }
 
   submitEditPedido(){
+    console.log(this.edit_pedido);
+    Swal.fire('Actualizando pedido', '', 'info');
+    Swal.showLoading();
+    enviarPedido(this.edit_pedido, 'editar').then(response => {
+      if (response.response == 'success' && response.status == 200) {
+        Swal.fire('Pedido actualizado', '', 'success');
+        this.edit_pedido = {
+          id_pedido: null,
+          metodo_pago: null,
+          productos : [],
+          sub_total: 0,
+          total: 0
+        }
+        this.checkPedido = [];
+        this.openDrawerRigth(false);
+        this.getPedidos();
+      }
+    }, error => {
+
+    })
     this.http.httpPost('update-pedido', this.edit_pedido, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {

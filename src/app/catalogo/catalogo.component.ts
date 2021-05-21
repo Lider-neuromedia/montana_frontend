@@ -47,6 +47,8 @@ export class CatalogoComponent implements OnInit, OnDestroy {
     show_room : false,
     public : false,
     private : false,
+    ninos: false,
+    adultos: false
   }
   nombreCatalogo: string;
   flagNombreCatalogo: boolean;
@@ -363,9 +365,9 @@ export class CatalogoComponent implements OnInit, OnDestroy {
       this.filterCatalogo.all = false;
     }else{
       if (event.target.checked) {
-        Object.assign(this.filterCatalogo, {all:true, general:true, show_room :true, public : true, private: true});
+        Object.assign(this.filterCatalogo, {all:true, general:true, show_room :true, public : true, private: true, ninos: true, adultos: true});
       }else{
-        Object.assign(this.filterCatalogo, {all:false, general:false, show_room :false, public : false, private: false});
+        Object.assign(this.filterCatalogo, {all:false, general:false, show_room :false, public : false, private: false, ninos: false, adultos: false});
       }
     }
     var search = "search=" + JSON.stringify(this.filterCatalogo);
@@ -374,4 +376,3 @@ export class CatalogoComponent implements OnInit, OnDestroy {
     this.getCatalogos(search);
   }
 }
-

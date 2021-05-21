@@ -57,7 +57,7 @@
                             <div class="valoracion-column" style="padding: 30px;">
                                 <h3 class="valorar-title">Valorar producto</h3>
                                 <ul class="qya-list" *ngIf="preguntas?.length > 0; else preguntaNoExiste">
-                                    <li *ngFor="let pregunta of preguntas" style="padding: 5%;">
+                                    <li *ngFor="let pregunta of preguntas">
                                         <span>{{pregunta.pregunta}}</span>
                                         <div class="strellas-valoracion">
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 1, 
@@ -107,7 +107,7 @@
                                             <th *matHeaderCellDef></th>
                                             <td *matCellDef="let valoracion">
                                                 <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
-                                                 <div class="strellas-valoracion" style="margin-bottom: 3rem;">
+                                                 <div class="strellas-valoracion" style="margin-bottom: 1rem;">
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
                                                         'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 2, 
@@ -140,7 +140,7 @@
 
 
             </div>
-            <div class="col-md-4" style="padding: 0 .5rem; box-shadow: 2px 2px 2px 3px lightgray;">
+            <div class="col-md-4" style="padding: 0 .5rem; box-shadow: -3px 1px 0px 0px rgb(236, 235, 235); border-radius: 5px;">
                 <div class="content-rigth">
                     <div class="aside-interna-pedido mrg-btn-30">
                         <h3 class="nombre" style="padding: 20px 20px; margin-bottom: 0;">Tu pedido</h3>

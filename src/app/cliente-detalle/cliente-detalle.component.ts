@@ -91,7 +91,9 @@ export class ClienteDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    setTimeout(() => {
+      $('.mat-tab-body-content').addClass('scroll-desctivado');
+    }, 500);
     if(this.id != null){
       this.getCliente();
         this.getCupo();

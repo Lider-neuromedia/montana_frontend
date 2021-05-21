@@ -10,9 +10,6 @@
         <div class="row">
             <div class="filtros">
                 <div  (click)="accionesAdministrador()" style="height: 31px;left: 11.3rem;top: 0;" class="box-editar">
-                    <!-- <div class="icono-editar">
-                        <img src="{{ templateImage.lapiz }}" alt="">
-                    </div> -->
                     <span class="puntero">Acción de</span>
                     <div class="icono-puntos">
                         <img src="./assets/img/edit_points.svg" alt="">
@@ -103,7 +100,7 @@
                                             <th *matHeaderCellDef></th>
                                             <td *matCellDef="let valoracion">
                                                 <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
-                                                 <div class="strellas-valoracion" style="margin-bottom: 3rem;">
+                                                 <div class="strellas-valoracion" style="margin-bottom: 1rem;">
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
                                                         'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 2, 
@@ -219,7 +216,7 @@
 
         <!-- DRAWER EDITAR PRODUCTO. -->
         <app-drawer-rigth name="edit-producto" title="Editar producto" [open]="openDrawer"
-        (close)="openDrawerRigth(false, 'edit')" (submit)="submitEditProduct()">
+        (close)="openDrawerRigth(false, 'edit')" (submit)="submitEditProduct()" button="Actualizar">
             <form>
                 <div class="label-field">
                     <label for="">Nombres</label>
@@ -277,7 +274,7 @@
                                     <img src="{{producto.imagenes[0].image}}" alt="" *ngIf="producto.imagenes[0]">
                                     <div *ngIf="!producto.imagenes[0]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -296,7 +293,7 @@
                                     <img src="{{producto.imagenes[1].image}}" alt="" *ngIf="producto.imagenes[1]">
                                     <div *ngIf="!producto.imagenes[1]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -317,7 +314,7 @@
                                     <img src="{{producto.imagenes[2].image}}" alt="" *ngIf="producto.imagenes[2]">
                                     <div *ngIf="!producto.imagenes[2]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -335,7 +332,7 @@
                                     <img src="{{producto.imagenes[3].image}}" alt="" *ngIf="producto.imagenes[3]">
                                     <div *ngIf="!producto.imagenes[3]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -356,7 +353,7 @@
                                     <img src="{{producto.imagenes[4].image}}" alt="" *ngIf="producto.imagenes[4]">
                                     <div *ngIf="!producto.imagenes[4]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -374,7 +371,7 @@
                                     <img src="{{producto.imagenes[5].image}}" alt="" *ngIf="producto.imagenes[5]">
                                     <div *ngIf="!producto.imagenes[5]">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>

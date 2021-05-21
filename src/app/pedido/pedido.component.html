@@ -72,13 +72,13 @@
                                 <a (click)="pedidoInterna(producto.id_producto)" class="ver-producto">
                                     Ver producto
                                     <div class="box-ver">
-                                        <mat-icon class="text-size-sm icon-add">visibility</mat-icon>
+                                        <img src="./assets/img/ojo.svg" class="iconos-ojo" alt="">
                                     </div>
                                 </a>
                                 <a class="anadir-a-pedido" (click)="openDrawerRight(true, this.producto)">
                                     <span style="position: relative;left: 14px;">Añadir a pedido</span>
                                     <div class="box-add">
-                                        <mat-icon class="text-size-sm icon-add">shopping_bag</mat-icon>
+                                        <img class="iconos-bolsa" width="100" src="./assets/img/bolsa.svg" alt="">
                                     </div>
                                 </a>
                             </div>
@@ -223,6 +223,7 @@
             <label for="">Notas adicionales</label>
             <textarea name="notas" class="text-area"  [(ngModel)]="finalizar_pedido.notas">
             </textarea>
+            <small *ngIf="notasBool"><span class="text-danger">{{ error.notas }}</span></small>
         </div>
         <div class=label-field>
             <label for="">Firma Digital</label>

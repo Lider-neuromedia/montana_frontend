@@ -89,7 +89,6 @@
 
 .btn-relativos{
     position: relative !important;
-    top: -4rem;
     left: 17rem;
 }
 
@@ -101,7 +100,9 @@
 }
 .acciones-form-adminitrador {
     display: inline-flex;
-    position: fixed;
+    position: relative;
+    left: 16.55rem;
+    border-left: 1px solid lightgray;
     bottom: 0;
     right: 0;
     padding: 15px 20px;
@@ -122,17 +123,21 @@
 
 .btn-agregar{
     width: 10.3rem !important;
-    left: 18rem;
+    right: 0;
+    position: relative;
 }
 
 .btn-cancelar{
     width: 10.3rem !important;
     position: relative;
-    left: 6rem;
+    left: 0;
 }
 
 @media screen and (min-width:1920px){
-    .btn-agregar{
+    .acciones-form-adminitrador{
+        left: 23.5rem;
+    }
+    /* .btn-agregar{
         width: 14rem !important;
         left: 26rem;
     }
@@ -151,7 +156,7 @@
     }
     .open{
         overflow: hidden !important;
-    }
+    } */
 }
 
 .box-cancelar-cancelar{

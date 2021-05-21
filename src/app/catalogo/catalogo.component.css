@@ -414,6 +414,26 @@
     padding: 0px 50px !important;
     font-weight: 400;
 }
+.sin-catalogo{
+    text-align: center;
+    position: relative;
+    left: 0;
+    bottom: 1rem;
+}
+.sin-catalogo p{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #e5e5e5;
+}
+.no-catalogo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    color: #ccc;
+}
 .filtros-catalogo li {
     color: #959BA0;
     position: relative;

@@ -108,12 +108,17 @@ async function enviarProducto(producto, cambiar){
   if(cambiar === 'editar'){
     try {
       producto.imagenes.forEach(element => {
+        if(element.image.type){
           formData.append(`imagenes[${i}][image]`, element.image);
           formData.append(`imagenes[${i}][destacada]`, element.destacada);
+        }else{
+          formData.append(`imagenes[${i}][image]`, '');
+          formData.append(`imagenes[${i}][destacada]`,   element.destacada);
+        }
           console.log(element);
         i++;
       });
-      console.log(producto);
+      
       formData.append('catalogo', producto.catalogo);
       formData.append('codigo', producto.codigo);
       formData.append('descripcion', producto.descripcion);
@@ -126,6 +131,9 @@ async function enviarProducto(producto, cambiar){
       formData.append('_method', 'PUT');
 
       const config = { headers: { 'Authorization': `Bearer ${token}` } };
+      for (const [name, value] of formData) {
+        console.log(`${name} = ${value}`);
+      }
         const response = await axios.post(`${backend}/producto/${producto.id_producto}`, formData, config);
         console.log(response.data);
         return response.data;
@@ -167,7 +175,33 @@ async function enviarPedido(pedido, cambiar){
   let i = 0;
   let iTienda = 0;
   if(cambiar === "editar"){
+    try {
+      pedido.productos.forEach(element1 => {
+        formData.append(`productos[${i}][producto]`, element1.producto);
+        formData.append(`productos[${i}][stock]`, element1.stock);
+        element1.tiendas.forEach(element2 => {
+          formData.append(`productos[${i}][tiendas][${iTienda}][cantidad_producto]`, element2.cantidad_producto);
+          formData.append(`productos[${i}][tiendas][${iTienda}][id_pedido_prod]`, element2.id_pedido_prod);
+          iTienda++;
+        });
+        i++;
+      });
+      formData.append('id_pedido', pedido.id_pedido);
+      formData.append('metodo_pago', pedido.metodo_pago);
+      formData.append('total', pedido.total);
+      formData.append('firma', '');
 
+      const config = { headers: { 'Authorization': `Bearer ${token}` } };
+      for (const [name, value] of formData) {
+        console.log(`${name} = ${value}`);
+      }
+        const response = await axios.post(`${backend}/update-pedido`, formData, config);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }else{
 
     try {
