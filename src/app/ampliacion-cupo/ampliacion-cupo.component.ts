@@ -81,7 +81,7 @@ export class AmpliacionCupoComponent implements OnInit {
     this.http.httpGet(router, true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
-          this.solicitudes = response.solicitudes;
+          this.solicitudes = response.solicitudes.reverse();
           this.dataSource = new MatTableDataSource<any>(response.solicitudes);
           this.selection = new SelectionModel<any>(true, []);
           this.dataSource.paginator = this.paginator;
@@ -143,6 +143,10 @@ export class AmpliacionCupoComponent implements OnInit {
 
   // Change files
   onFileChange(files: File, file, variable){
+    setTimeout(() => {
+      console.log(variable);
+    console.log(file);
+    console.log(files);
     this[variable][file] = files;
     if (this[variable][file]['length'] > 0) {
       this.name_files[file] = this[variable][file][0]['name'];
@@ -156,6 +160,7 @@ export class AmpliacionCupoComponent implements OnInit {
     console.log(this.createSolicitud.doc_camara_com);
     console.log(this.createSolicitud.doc_identidad);
     console.log(this.createSolicitud.doc_rut);
+    }, 1000);
   }
 
   submitSolicitud(){
@@ -227,12 +232,13 @@ return;
               doc_rut : '',
               doc_camara_com : '',
             }
+            
             this.createSolicitud = {
               vendedor : '',
               cliente : '',
-              doc_identidad : null,
-              doc_rut : null,
-              doc_camara_com : null,
+              doc_identidad : '',
+              doc_rut : '',
+              doc_camara_com : '',
               monto : 0,
             }
             

@@ -75,12 +75,12 @@
                     <th mat-header-cell *matHeaderCellDef>Estado</th>
                     <td mat-cell *matCellDef="let solicitud">
                         <div *ngIf="solicitud.estado == 'pendiente'; else estado" class="txt-capitalize">
-                            <a class="change-state" (click)="setChangeState(solicitud)">
+                            <a class="change-state text-capitalize" (click)="setChangeState(solicitud)">
                                 {{solicitud.estado}}
                             </a> 
                         </div>
                         <ng-template #estado>
-                                {{ solicitud.estado }}
+                                <span class="text-capitalize">{{ solicitud.estado }}</span>
                         </ng-template>
                     </td>
                 </ng-container>
