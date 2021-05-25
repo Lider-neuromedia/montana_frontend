@@ -5,6 +5,9 @@ import { SendHttpData } from '../services/SendHttpData';
 import { SignaturePad } from 'angular2-signaturepad';
 declare var $: any;
 declare var enviarPedido: any;
+declare var ordenarProductosMayor: any;
+declare var ordenarProductosMenor: any;
+declare var ordenarProductosStock: any;
 
 @Component({
   selector: 'app-pedido',
@@ -109,6 +112,18 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   pedidoInterna(id){
     this.route.navigate(['/pedido-interna', id]);
+  }
+
+  ordenarFiltro(filtro: string){
+    if('mayor_menor' == filtro){
+      this.productos = ordenarProductosMayor(this.productos);
+
+    }else if('menor_mayor' == filtro){
+      this.productos = ordenarProductosMenor(this.productos);
+
+    }else if('stock' == filtro){
+      this.productos =ordenarProductosStock(this.productos);
+    }
   }
 
   getProductos(){
@@ -299,19 +314,5 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
     }, error => {
 
     })
-    
-    // this.http.httpPost('pedidos', data, true).subscribe(
-    //   response => {
-    //     if (response.status == 200 && response.response == 'success') {
-    //       this.openDrawerFinally(false);
-    //       localStorage.removeItem('pedido');
-    //       this.route.navigate(['/pedidos']);
-    //     }
-    //   },
-    //   error => {
-
-    //   }
-    // )
   }
-
 }

@@ -4,6 +4,10 @@ import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 
+declare var ordenarProductosMayor: any;
+declare var ordenarProductosMenor: any;
+declare var ordenarProductosStock: any;
+
 @Component({
   selector: 'app-show-room',
   templateUrl: './show-room.component.html',
@@ -22,13 +26,22 @@ export class ShowRoomComponent implements OnInit {
   ngOnInit(): void {
     this.getProductsShowRoom();
   }
-
+  ordenarFiltro(filtro: string){
+    if('mayor_menor' == filtro){
+      this.productos =ordenarProductosMayor(this.productos);
+    }else if('menor_mayor' == filtro){
+      this.productos =ordenarProductosMenor(this.productos);
+    }else if('stock' == filtro){
+      this.productos =ordenarProductosStock(this.productos);
+    }
+  }
   getProductsShowRoom(){
 
     this.http.httpGet('getProductsShowRoom', true).subscribe(
       response => {
         if (response.response == 'success' && response.status == 200) {
           this.productos = response.productos;
+          console.log(this.productos);
         }else{
           Swal.fire(
             '¡Ups!',

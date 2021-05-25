@@ -9,6 +9,9 @@ import { MatPaginator } from '@angular/material/paginator';
 
 declare var enviarProducto: any;
 declare var $: any;
+declare var ordenarProductosMayor: any;
+declare var ordenarProductosMenor: any;
+declare var ordenarProductosStock: any;
 
 @Component({
   selector: 'app-interna-catalogo',
@@ -71,6 +74,19 @@ export class InternaCatalogoComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.getMarcas();
+  }
+  
+  ordenarFiltro(filtro: string){
+    if('mayor_menor' == filtro){
+      this.dataSource = new MatTableDataSource<any>(ordenarProductosMayor(this.dataSource.data));
+      this.dataSource.paginator = this.paginator;
+    }else if('menor_mayor' == filtro){
+      this.dataSource = new MatTableDataSource<any>(ordenarProductosMenor(this.dataSource.data));
+      this.dataSource.paginator = this.paginator;
+    }else if('stock' == filtro){
+      this.dataSource = new MatTableDataSource<any>(ordenarProductosStock(this.dataSource.data));
+      this.dataSource.paginator = this.paginator;
+    }
   }
   
   openDrawerRigth(action : boolean, type : string){

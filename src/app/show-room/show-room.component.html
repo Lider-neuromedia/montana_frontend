@@ -8,6 +8,22 @@
     <div class="contenido contenido-show-room">
 
         <div class="filtros">
+            <div class="filtro-ordernar">
+                <mat-form-field>
+                <mat-label>Ordenar por:</mat-label>
+                <mat-select>
+                    <mat-option (click)="ordenarFiltro('mayor_menor')" value="mayor_menor">
+                        De mayor a menor
+                    </mat-option>
+                    <mat-option (click)="ordenarFiltro('menor_mayor')"  value="menor_mayor">
+                        De menor a mayor
+                    </mat-option>
+                    <mat-option (click)="ordenarFiltro('stock')"  value="stock">
+                        stock
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
         </div>
 
         
@@ -25,7 +41,7 @@
                             </div>
                             <div class="card-show-room" *ngFor="let producto of productos">
                                 <div class="img-show-room">
-                                    <img src="./assets/img/image1.png" alt="">
+                                    <img [src]="producto.image" alt="">
                                 </div>
                                 <div class="info-show-room">
                                     <p>Cod: {{producto.codigo}}</p>

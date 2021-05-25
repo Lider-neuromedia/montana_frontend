@@ -14,11 +14,14 @@
                     <mat-form-field>
                     <mat-label>Ordenar por:</mat-label>
                     <mat-select>
-                        <mat-option value="food.value">
-                            Marca
+                        <mat-option (click)="ordenarFiltro('mayor_menor')" value="mayor_menor">
+                            De mayor a menor
                         </mat-option>
-                        <mat-option value="food.value">
-                            Precio
+                        <mat-option (click)="ordenarFiltro('menor_mayor')"  value="menor_mayor">
+                            De menor a mayor
+                        </mat-option>
+                        <mat-option (click)="ordenarFiltro('stock')"  value="stock">
+                            stock
                         </mat-option>
                     </mat-select>
                     </mat-form-field>
@@ -207,7 +210,7 @@
                                 <div class="col-md-4">
                                     <img src="{{producto.image}}" alt="{{producto.nombre}}">
                                 </div>
-                                <div class="col-md-4 border-rh-lft">
+                                <div class="col-md-4 border-rh-lft" style="display: flex; align-items: center;">
                                     <div class="info-interna">
                                         <p class="codigo">Cod: {{producto.codigo}}</p>
                                         <p class="referencia">Ref: {{producto.referencia}}</p>

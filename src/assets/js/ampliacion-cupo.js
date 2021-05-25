@@ -210,9 +210,11 @@ async function enviarPedido(pedido, cambiar){
         formData.append(`productos[${i}][id_producto]`, element1.id_producto);
         console.log(formData.get(`productos[${i}][id_producto]`));
         element1.tiendas.forEach(element2 => {
-          formData.append(`productos[${i}][tiendas][${iTienda}][id_tienda]`, element2.id_tienda);
-          formData.append(`productos[${i}][tiendas][${iTienda}][cantidad]`, element2.cantidad);
-          console.log(formData.get(`productos[${i}][tiendas][${iTienda}][id_tienda]`));
+          if(element2.cantidad > 0){
+            formData.append(`productos[${i}][tiendas][${iTienda}][id_tienda]`, element2.id_tienda);
+            formData.append(`productos[${i}][tiendas][${iTienda}][cantidad]`, element2.cantidad);
+            console.log(formData.get(`productos[${i}][tiendas][${iTienda}][id_tienda]`));
+          }
           iTienda++;
         });
         i++;
@@ -241,4 +243,38 @@ async function enviarPedido(pedido, cambiar){
     }
   
   }
+}
+
+function ordenarProductosMayor(productos){
+  return productos.sort(function(a, b){
+    if(a.precio < b.precio){
+      return 1;
+    }
+    if(a.precio > b.precio){
+      return -1;
+    }
+    return 0;
+  })
+}
+function ordenarProductosMenor(productos){
+  return productos.sort(function(a, b){
+    if(a.precio > b.precio){
+      return 1;
+    }
+    if(a.precio < b.precio){
+      return -1;
+    }
+    return 0;
+  })
+}
+function ordenarProductosStock(productos){
+  return productos.sort(function(a, b){
+    if(a.stock < b.stock){
+      return 1;
+    }
+    if(a.stock > b.stock){
+      return -1;
+    }
+    return 0;
+  })
 }

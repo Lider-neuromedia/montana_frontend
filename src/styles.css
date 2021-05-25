@@ -468,6 +468,17 @@ input[type="tel"] {
 .pedido-btn-relativos{
     position: relative !important;
 }
+.descripcion ul{
+    list-style: none; /* Quitamos los marcadores */
+    padding: 0; /* Quitamos el padding por defecto de la lista */
+    margin-left: 10px; /* Separamos la lista de la izquierda */
+}
+.descripcion ul > li::before {
+    content: "\2022";
+    padding-right: 3px;
+    color: red;
+    font-size: 17px;
+}
 .mat-tab-body-content{
     height: 30rem !important;
 }

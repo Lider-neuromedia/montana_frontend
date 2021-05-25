@@ -9,6 +9,11 @@
 .container-show-room{
     background: #1f2224;
 }
+.filtro-ordernar{
+    position: relative;
+    bottom: .5rem;
+    right: 46rem;
+}
 .contenido-show-room{
     top: 2.5rem !important;
     left: 10.4rem;

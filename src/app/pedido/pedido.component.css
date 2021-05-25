@@ -115,7 +115,7 @@
 .btn-agregar{
     position: relative !important;
     margin-right: .5rem;
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
 }
 .iconos-ojo{
     width: 1rem;
@@ -519,6 +519,11 @@
 .btn-relativos{
     position: relative !important;
 }
+.filtro-ordernar{
+    position: relative;
+    top: 1px;
+    right: 44.5rem;
+}
 
 .txt-sin-disponibilidad{
     color: #fff;
@@ -528,6 +533,9 @@
     font-size: 31px;
 }
 @media screen and (min-width: 1920px){
+    .filtro-ordernar{
+        right: 75.5rem;
+    }
     .contenido-pedido{
         left: 12rem;
     }
@@ -536,6 +544,6 @@
         left: -2.5rem;
     }
     .icono-cancelar{
-        left: 17.6rem !important;
+        left: 16.3rem !important;
     }
 }

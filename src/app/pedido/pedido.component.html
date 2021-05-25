@@ -6,6 +6,22 @@
     </div>
     <div class="contenido contenido-pedido">
         <div class="filtros">
+            <div class="filtro-ordernar">
+                <mat-form-field>
+                <mat-label>Ordenar por:</mat-label>
+                <mat-select>
+                    <mat-option (click)="ordenarFiltro('mayor_menor')" value="mayor_menor">
+                        De mayor a menor
+                    </mat-option>
+                    <mat-option (click)="ordenarFiltro('menor_mayor')"  value="menor_mayor">
+                        De menor a mayor
+                    </mat-option>
+                    <mat-option (click)="ordenarFiltro('stock')"  value="stock">
+                        stock
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
         </div>
         <div class="cliente-detalle" style="padding-top: 0;">
             <div class="row" [ngClass]="{'row-show-room' : show_room}">
@@ -21,7 +37,7 @@
                             </div>
                             <div class="card-show-room card-show-room-ajustado" *ngFor="let producto of productos">
                                 <div class="img-show-room">
-                                    <img src="./assets/img/image1.png" alt="">
+                                    <img [src]="producto.image" alt="">
                                 </div>
                                 <div class="info-show-room">
                                     <p>Cod: {{producto.codigo}}</p>
@@ -92,7 +108,7 @@
                         <span>#{{pedido.codigo_pedido}}</span>
                     </h3>
     
-                    <div class="detalle-pedido"  *ngFor="let buy_product of list_buy_products" (click)="editarPedido(buy_product)">
+                    <div class="detalle-pedido"  *ngFor="let buy_product of list_buy_products" (click)="editarPedido(buy_product)" style="padding: 1rem;">
                         <div class="title-detalle">
                             <!-- <img src="http://127.0.0.1:8000/storage/catalogos/12.png" alt="catalogo"> -->
                             <p>Ref: {{buy_product.referencia}}</p>
@@ -110,14 +126,14 @@
                     <!-- Footer actions. -->
                     <div class="acciones" id="final-pedido">
                         <a class="agregar btn-agregar" (click)="openDrawerFinally(true)">
-                            Finalizar Pedido
+                            Finalizar
                             <div class="box-mas icono-mas">
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
                             </div>
                         </a>
                 
                         <a class="cancelar">
-                            <span class="box-cancelar icono-cancelar" style="left: 186px;">
+                            <span class="box-cancelar icono-cancelar" style="left: 179px;">
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
