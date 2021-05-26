@@ -111,6 +111,7 @@ async function enviarProducto(producto, cambiar){
         if(element.image.type){
           formData.append(`imagenes[${i}][image]`, element.image);
           formData.append(`imagenes[${i}][destacada]`, element.destacada);
+          formData.append(`imagenes[${i}][id_galeria_prod]`, element.id_galeria_prod)
         }else{
           formData.append(`imagenes[${i}][image]`, '');
           formData.append(`imagenes[${i}][destacada]`,   element.destacada);
@@ -169,6 +170,28 @@ async function enviarProducto(producto, cambiar){
     }
   }
 }
+// function base64ToFile(url, filename){
+//   let arr = url.split(','),
+//       mime = arr[0].match(/:(.*?);/)[1],
+//       bstr = atob(arr[1]),
+//       n = bstr.length,
+//       u8arr = new Uint8Array(n);
+
+//       while(n--){
+//         u8arr[n] = bstr.charCodeAt(n);
+//       }
+//       return new File([u8arr], filename, {type:mime});
+// }
+// function getBase64Image(index) {
+//   let canvas = document.getElementById('canvas0');
+//   let img = document.getElementById('img0');
+//   let ctx = canvas.getContext("2d");
+//   console.log(img.src);
+//   ctx.drawImage(img, 0, 0);
+//   let dataURL = canvas.toDataURL("image/png");
+//   console.log(dataURL);
+//   return dataURL;
+// }
 
 async function enviarPedido(pedido, cambiar){
   let formData = new FormData();

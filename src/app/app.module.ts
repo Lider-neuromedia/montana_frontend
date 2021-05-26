@@ -51,6 +51,8 @@ import { DialogCatalogoComponent } from './dialog-catalogo/dialog-catalogo.compo
 import { DialogExportPedidoComponent } from './dialog-export-pedido/dialog-export-pedido.component';
 import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog-preguntas-pedido.component';
 import { RestablecerContrasenaComponent } from './restablecer-contrasena/restablecer-contrasena.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GraficoBarComponent } from './components/grafico-bar/grafico-bar.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -92,7 +94,9 @@ import { RestablecerContrasenaComponent } from './restablecer-contrasena/restabl
     DialogCatalogoComponent,
     DialogExportPedidoComponent,
     DialogPreguntasPedidoComponent,
-    RestablecerContrasenaComponent
+    RestablecerContrasenaComponent,
+    DashboardComponent,
+    GraficoBarComponent
   ],
   imports: [
     BrowserModule,

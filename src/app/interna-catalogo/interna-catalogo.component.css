@@ -131,6 +131,20 @@ table{
 .create-new{
     left: 13rem;
 }
+.no-catalogo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    color: #ccc;
+}
+.sin-catalogo{
+    text-align: center;
+    position: relative;
+    left: 0;
+    bottom: 1rem;
+}
 
 .box-ver{
     background-color: #919191;

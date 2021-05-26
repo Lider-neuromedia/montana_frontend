@@ -200,11 +200,11 @@
                 </div>
             </form>
         </app-drawer-rigth>
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0; else noProducto">
             <ng-container matColumnDef="productos">
                 <th *matHeaderCellDef></th>
                 <td *matCellDef="let producto">
-                    <div class="row" *ngIf="producto.codigo; else noProducto">
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="row row-producto" style="border-radius: 6px;">
                                 <div class="col-md-4">
@@ -244,21 +244,21 @@
                             <h2>No has registrado productos aun...</h2>
                         </div>
                     </div>
-                    <ng-template #noProducto>
-                        <div class="row">
-                            <div class="col-md-12 text-center text-muted">
-                                <h1>
-                                    <mat-icon style="font-size: 80px;">sentiment_dissatisfied</mat-icon>
-                                    <p style="margin-left: 5%;">{{producto.message}}</p>
-                                </h1>
-                            </div>
-                        </div>
-                    </ng-template>
                 </td>
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
                 <tr mat-row *matRowDef="let row; columns: columns"></tr>
             </ng-container>
         </table>
-        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <ng-template #noProducto>
+            <div class="row">
+                <div class="col-md-12 text-center no-catalogo">
+                    <div class="sin-catalogo">
+                        <img src="./assets/img/sin_novedad.png" alt="">
+                        <p>Aún no se registran Productos</p>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <mat-paginator  *ngIf="dataSource.data.length > 0" [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

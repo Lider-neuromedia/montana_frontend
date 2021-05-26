@@ -130,6 +130,7 @@ export class PedidosComponent implements OnInit {
           this.crear_pedido.codigo_pedido = response.code;
           // Crerar la sesion con la informacion correspondiente al pedido.
           var new_pedido = JSON.stringify(this.crear_pedido);
+          console.log(this.crear_pedido);
           localStorage.setItem('pedido', new_pedido);
           this.route.navigate(['/pedido']);
         }

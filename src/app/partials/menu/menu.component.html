@@ -6,7 +6,7 @@
     <p class="title-menu">Menú</p>
 
     <ul class="firts-menu">
-        <li> <a class="das" style="cursor: pointer;"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
+        <li *ngIf="admin"> <a class="das" routerLink="/dashboard" style="cursor: pointer;"> <img src="{{ templateImage.dashboardWhite }}" alt=""> Dashboard</a></li>
         <li *ngIf="admin || vendedor" (mouseenter)="previewChildMenu()" (mouseleave)="hideChildMenu()" (click)="showChildMenu()">
             <a routerLinkActive="active-menu" (click)="ajustarMenuChild()" class="menu-usuarios"> <img src="{{ templateImage.usuarios }}" alt=""> Usuarios</a>
         </li>

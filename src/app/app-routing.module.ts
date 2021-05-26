@@ -37,6 +37,7 @@ import { DetallePqrsComponent } from './detalle-pqrs/detalle-pqrs.component';
 import { ShowRoomComponent } from './show-room/show-room.component';
 import { RestablecerComponent } from './restablecer/restablecer.component';
 import { RestablecerContrasenaComponent } from './restablecer-contrasena/restablecer-contrasena.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // import { AuthGuardService } from './services/auth-guard.service';
@@ -81,6 +82,7 @@ const routes : Routes = [
   { path: 'show-room', component: ShowRoomComponent },
   {path: 'restablecer', component: RestablecerComponent},
   {path: 'restablecer-contraseña', component: RestablecerContrasenaComponent},
+  {path: 'dashboard', component: DashboardComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 

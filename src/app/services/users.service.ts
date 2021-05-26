@@ -206,4 +206,13 @@ export class UsersService {
 	deleteRol(id){
 		return this.http.delete(`${this.api}/roles/${id}`,id);
 	}
+  convertirImg(image: string){
+    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
+    return this.http.get(image, {
+      responseType: "arraybuffer",
+      headers: headers
+    }).pipe(map(resp => {
+      return new File([resp], "myImage.png");
+    }))
+  }
 }

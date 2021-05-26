@@ -283,4 +283,7 @@ tr.mat-header-row{
         top: 63rem;
         left: 86rem;
     } */
+    .btn-fijo-agregar{
+        width: 27.9%;
+    }
 }

@@ -8,8 +8,10 @@ import { DialogPedidoComponent } from '../dialog-pedido/dialog-pedido.component'
 
 import Swal from 'sweetalert2'
 import { MatTableDataSource } from '@angular/material/table';
+import { UsersService } from '../services/users.service';
 declare var $:any;
 declare var enviarProducto: any;
+declare var getBase64Image: any;
 
 @Component({
   selector: 'app-producto-detalle',
@@ -56,12 +58,11 @@ export class ProductoDetalleComponent implements OnInit {
   columns = ['valoraciones'];
   imagenesBool: any;
 
-  constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData) {
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData, private userService: UsersService) {
     this.id_producto = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-
     this.getProduct();
     this.galleryOptions = [
       {
@@ -238,17 +239,17 @@ export class ProductoDetalleComponent implements OnInit {
     var data = this.producto;
     
     if(!this.imagenesBool){
-      this.producto.imagenes = [];
+      // this.producto.imagenes = [];
     }
     this.imagenesBool = false;
     console.log(this.producto);
-    enviarProducto(this.producto, 'editar').then(response => {
-      if (response.status == 200 && response.response == 'success') {
-        this.openDrawerRigth(false, 'edit');
-        this.getProduct();
-      }
-    })
-    return;
+    
+      enviarProducto(this.producto, 'editar').then(response => {
+        if (response.status == 200 && response.response == 'success') {
+          this.openDrawerRigth(false, 'edit');
+          this.getProduct();
+        }
+      })
   }
 
   onSelect(event, fileSelect) {

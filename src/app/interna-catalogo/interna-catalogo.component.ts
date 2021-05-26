@@ -131,7 +131,8 @@ export class InternaCatalogoComponent implements OnInit {
         }
       }, 
       error => {
-
+        this.dataSource = new MatTableDataSource<any>([]);
+        console.log(this.dataSource.data);
       }
     );
   }
