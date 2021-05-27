@@ -200,65 +200,67 @@
                 </div>
             </form>
         </app-drawer-rigth>
-        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0; else noProducto">
-            <ng-container matColumnDef="productos">
-                <th *matHeaderCellDef></th>
-                <td *matCellDef="let producto">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row row-producto" style="border-radius: 6px;">
-                                <div class="col-md-4">
-                                    <img src="{{producto.image}}" alt="{{producto.nombre}}">
-                                </div>
-                                <div class="col-md-4 border-rh-lft" style="display: flex; align-items: center;">
-                                    <div class="info-interna">
-                                        <p class="codigo">Cod: {{producto.codigo}}</p>
-                                        <p class="referencia">Ref: {{producto.referencia}}</p>
-                                        <p class="marca">{{producto.nombre_marca}}</p>
-                                        <p class="nombre">{{producto.nombre}}</p>
-                                        <p class="stock">Stock: {{producto.stock}} pares</p>
-                                        <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+        <div>
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="productos">
+                    <th *matHeaderCellDef></th>
+                    <td *matCellDef="let producto">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row row-producto" style="border-radius: 6px;">
+                                    <div class="col-md-4">
+                                        <img src="{{producto.image}}" alt="{{producto.nombre}}">
                                     </div>
-                                </div>
-                                <div class="col-md-4 end-content">
-                                    <a (click)="verProducto(producto.id_producto)" class="ver-producto">
-                                        Ver producto
-                                    <div class="box-ver">
-                                        <img src="./assets/img/ojo.svg" class="iconos-ojo" alt="">
-                                    </div>
-                                    </a>
-                                    <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
-                                        Añadir a pedido
-                                        <div class="box-add">
-                                            <img class="iconos-bolsa" width="100" src="./assets/img/bolsa.svg" alt="">
+                                    <div class="col-md-4 border-rh-lft" style="display: flex; align-items: center;">
+                                        <div class="info-interna">
+                                            <p class="codigo">Cod: {{producto.codigo}}</p>
+                                            <p class="referencia">Ref: {{producto.referencia}}</p>
+                                            <p class="marca">{{producto.nombre_marca}}</p>
+                                            <p class="nombre">{{producto.nombre}}</p>
+                                            <p class="stock">Stock: {{producto.stock}} pares</p>
+                                            <p class="precio">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
                                         </div>
-                                        
-                                    </a>
+                                    </div>
+                                    <div class="col-md-4 end-content">
+                                        <a (click)="verProducto(producto.id_producto)" class="ver-producto">
+                                            Ver producto
+                                        <div class="box-ver">
+                                            <img src="./assets/img/ojo.svg" class="iconos-ojo" alt="">
+                                        </div>
+                                        </a>
+                                        <a class="anadir-a-pedido" (click)="openDialogPedido(producto.id_producto)">
+                                            Añadir a pedido
+                                            <div class="box-add">
+                                                <img class="iconos-bolsa" width="100" src="./assets/img/bolsa.svg" alt="">
+                                            </div>
+                                            
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 no-products" *ngIf="productos.length == 0">
+                                <p>
+                                    <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
+                                </p>
+                                <h2>No has registrado productos aun...</h2>
+                            </div>
                         </div>
-                        <div class="col-md-12 no-products" *ngIf="productos.length == 0">
-                            <p>
-                                <mat-icon style="font-size: 70px;">sentiment_dissatisfied</mat-icon>
-                            </p>
-                            <h2>No has registrado productos aun...</h2>
-                        </div>
-                    </div>
-                </td>
-                <tr mat-header-row *matHeaderRowDef="columns"></tr>
-                <tr mat-row *matRowDef="let row; columns: columns"></tr>
-            </ng-container>
-        </table>
-        <ng-template #noProducto>
-            <div class="row">
-                <div class="col-md-12 text-center no-catalogo">
-                    <div class="sin-catalogo">
-                        <img src="./assets/img/sin_novedad.png" alt="">
-                        <p>Aún no se registran Productos</p>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-        <mat-paginator  *ngIf="dataSource.data.length > 0" [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </td>
+                    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">
+                            <div class="col-md-12 text-center no-catalogo">
+                                <div class="sin-catalogo">
+                                    <img src="./assets/img/sin_novedad.png" alt="">
+                                    <p>Aún no se registran Productos</p>
+                                </div>
+                            </div>
+                        </td>
+                      </tr>
+                </ng-container>
+            </table>
+            <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
     </div>
 </div>

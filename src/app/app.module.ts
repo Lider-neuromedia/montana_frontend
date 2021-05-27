@@ -53,6 +53,7 @@ import { DialogPreguntasPedidoComponent } from './dialog-preguntas-pedido/dialog
 import { RestablecerContrasenaComponent } from './restablecer-contrasena/restablecer-contrasena.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraficoBarComponent } from './components/grafico-bar/grafico-bar.component';
+import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.component';
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -96,7 +97,8 @@ import { GraficoBarComponent } from './components/grafico-bar/grafico-bar.compon
     DialogPreguntasPedidoComponent,
     RestablecerContrasenaComponent,
     DashboardComponent,
-    GraficoBarComponent
+    GraficoBarComponent,
+    GraficoDonaComponent
   ],
   imports: [
     BrowserModule,

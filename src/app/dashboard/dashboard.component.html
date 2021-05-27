@@ -5,12 +5,12 @@
     </div>
     <div class="contenido contenido-dashboard">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <app-grafico-bar 
                 [chartLabels]="labels"
                 [chartData]="data"></app-grafico-bar>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <app-grafico-bar 
                 [chartLabels]="labels1"
                 [chartData]="data1"></app-grafico-bar>
@@ -38,7 +38,7 @@
                     <tr mat-header-row *matHeaderRowDef="columns"></tr>
                     <tr mat-row *matRowDef="let row; columns:columns;"></tr>
                 </table>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div>
             <div class="col-md-6 mb-3">
             <div class="table-container">
@@ -59,6 +59,69 @@
                     <tr mat-row *matRowDef="let row; columns:columnsPedidos;"></tr>
                 </table>
             </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle (click)="filtro($event, 'all')">Todos</mat-button-toggle>
+                    <mat-button-toggle (click)="filtro($event, 'niños')">Niños</mat-button-toggle>
+                    <mat-button-toggle (click)="filtro($event, 'adultos')">Adultos</mat-button-toggle>
+                  </mat-button-toggle-group>
+                <table mat-table [dataSource]="catalogoTabla" style="width: 100%;">
+                    <ng-container matColumnDef="titulo">
+                        <th mat-header-cell *matHeaderCellDef>Título</th>
+                        <td mat-cell *matCellDef="let catalogo">{{catalogo.titulo}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                        <td mat-cell *matCellDef="let catalogo">{{catalogo.tipo}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef>Estado</th>
+                        <td mat-cell *matCellDef="let catalogo">{{catalogo.estado}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="categoria">
+                        <th mat-header-cell *matHeaderCellDef>Categoría</th>
+                        <td mat-cell *matCellDef="let catalogo">{{catalogo.etiqueta}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="cantidad">
+                        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                        <td mat-cell *matCellDef="let catalogo"><button (click)="getProducts(catalogo.id_catalogo)" class="btn-link">{{catalogo.cantidad}}</button></td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsCatalogos"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsCatalogos"></tr>
+                </table>
+                <mat-paginator #paginatorCatalogo [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+            <div class="col-md-6">
+                <div class="table-container">
+                    <table mat-table [dataSource]="productosTabla" style="width: 100%;">
+                        <ng-container matColumnDef="codigo">
+                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                            <td mat-cell *matCellDef="let producto">{{producto.codigo}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                            <td mat-cell *matCellDef="let producto">{{producto.nombre}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="marca">
+                            <th mat-header-cell *matHeaderCellDef>Marca</th>
+                            <td mat-cell *matCellDef="let producto">{{producto.nombre_marca}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="precio">
+                            <th mat-header-cell *matHeaderCellDef>Precio</th>
+                            <td mat-cell *matCellDef="let producto">{{producto.precio}}</td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="columnsProductos"></tr>
+                        <tr mat-row *matRowDef="let row; columns: columnsProductos"></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <app-grafico-dona [labels]="labels2" [data]="data2"></app-grafico-dona>
             </div>
         </div>
     </div>

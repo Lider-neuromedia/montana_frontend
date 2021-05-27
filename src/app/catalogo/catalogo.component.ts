@@ -364,6 +364,7 @@ export class CatalogoComponent implements OnInit, OnDestroy {
     if (type != 'all') {
       this.filterCatalogo.all = false;
     }else{
+      console.log(event.target.checked);
       if (event.target.checked) {
         Object.assign(this.filterCatalogo, {all:true, general:true, show_room :true, public : true, private: true, ninos: true, adultos: true});
       }else{

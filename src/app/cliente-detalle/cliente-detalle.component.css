@@ -450,6 +450,13 @@ hr{
     opacity: 1;
 }
 
+.contenedor-tabla-tiendas{
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+}
+
 .acciones-administrador, .acciones-administradorTIenda {
     display: none;
     position: absolute;

@@ -218,7 +218,7 @@ export class ProductoDetalleComponent implements OnInit {
           this.preguntas = response.preguntas;
           this.respuesta_usuario = response.respuesta_usuario;
           // console.log("Bueno");
-          // console.log(this.preguntas);
+          console.log(this.preguntas);
         }
       },
       error => {
