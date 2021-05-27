@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
   columnsCatalogos: any[] = ['titulo', 'tipo', 'estado', 'categoria', 'cantidad'];
   columnsProductos: any[] = ['codigo', 'nombre', 'marca', 'precio'];
   pedidos: any;
+  colors: any[];
 
 
   constructor(private userService: UsersService, private http: SendHttpData) { 
@@ -60,6 +61,9 @@ export class DashboardComponent implements OnInit {
           {data: [this.cantidad_clientes], label: 'Clientes'},
           {data: [this.cantidad_vendedores], label: 'Vendedores'},
         ]
+        this.colors = [
+          {backgroundColor: ['#FE8080', '#56B6F5']}
+        ];
         
     }, 1500);
   }

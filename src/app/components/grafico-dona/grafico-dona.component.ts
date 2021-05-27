@@ -14,6 +14,9 @@ export class GraficoDonaComponent implements OnInit {
     [350, 450, 100]
   ];
   doughnutChartType: ChartType = 'doughnut';
+  colors: Color[] = [
+    {backgroundColor: ['#22FE03', '#A5A5A5', '#FF0000']}
+  ]
   constructor() { }
 
   ngOnInit(): void {

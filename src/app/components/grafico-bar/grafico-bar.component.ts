@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-grafico-bar',
@@ -27,7 +27,9 @@ export class GraficoBarComponent implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
-
+  @Input('colores') colors: Color[] = [
+    {backgroundColor: ['#22FE03', '#A5A5A5', '#FF0000']}
+  ]
   constructor() { }
 
   ngOnInit(): void {
