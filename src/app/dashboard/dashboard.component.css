@@ -3,3 +3,10 @@
     left: 10.4rem;
     width: 90.5% !important;
 }
+.table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 304px;
+    overflow: auto;
+  }
+  

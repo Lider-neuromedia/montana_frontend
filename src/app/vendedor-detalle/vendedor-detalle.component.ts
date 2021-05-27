@@ -352,7 +352,7 @@ export class VendedorDetalleComponent implements OnInit {
             'success'
           );
           this.getVendedor();
-          this.openDrawerRigth(false, 'edit');
+          this.openDrawer = false;
         }
       }, 
       error =>{
@@ -385,7 +385,8 @@ export class VendedorDetalleComponent implements OnInit {
                   'Los usuarios han sido eliminados correctamente.',
                   'success'
                 );
-                this.route.navigateByUrl('vendedores');
+                this.openDrawer = false;
+                this.route.navigateByUrl('/users/vendedores');
               }else{
                 Swal.fire(
                   '¡Ups!',

@@ -199,28 +199,25 @@
                 <div class="label-field">
                     <label >Adjuntar documento de identidad</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event.target.files,'doc_identidad', 'createSolicitud')" 
-                        class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
+                        <span id="doc_identidad"></span>
                         <small *ngIf="doc_identidadBool"><span class="text-danger">{{error.doc_identidad}}</span></small>
-                        <label class="custom-file-label" for="customFileLang">{{name_files.doc_identidad}}</label>
+                        <label class="custom-file-label" for="customFileLang1">{{name_files.doc_identidad}}</label>
                     </div>
                 </div>
                 <div class="label-field">
                     <label >Adjuntar RUT</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event.target.files,'doc_rut', 'createSolicitud')" 
-                        class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
+                        <span id="doc_rut"></span>
                         <small *ngIf="doc_rutBool"><span class="text-danger">{{error.doc_rut}}</span></small>
-                        <label class="custom-file-label" for="customFileLang">{{name_files.doc_rut}}</label>
+                        <label class="custom-file-label" for="customFileLang2">{{name_files.doc_rut}}</label>
                     </div>
                 </div>
                 <div class="label-field">
                     <label >Adjuntar cámara de comercio</label>
                     <div class="custom-file">
-                        <input type="file" (change)="onFileChange($event.target.files,'doc_camara_com', 'createSolicitud')" 
-                        class="custom-file-input" id="customFileLang" lang="es" accept="image/jpeg,image/gif,image/png,application/pdf" required>
+                        <span id="doc_camara_com"></span>
                         <small *ngIf="doc_camara_comBool"><span class="text-danger">{{error.doc_camara_com}}</span></small>
-                        <label class="custom-file-label" for="customFileLang">{{name_files.doc_camara_com}}</label>
+                        <label class="custom-file-label" for="customFileLang3">{{name_files.doc_camara_com}}</label>
                     </div>
                 </div>
                 <div class="text-ampliar-cupo">

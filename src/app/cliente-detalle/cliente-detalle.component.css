@@ -50,7 +50,8 @@ hr{
 }
 
 .box-editar,
-.box-create-new {
+.box-create-new,
+.box-editarTienda {
     height: max-content;
 }
 
@@ -436,7 +437,7 @@ hr{
 }
 
 /* Boton tienda. */
-.box-editar {
+.box-editar, .box-editarTienda  {
     position: relative;
     cursor: pointer;
     transition: all .3s ease;
@@ -449,7 +450,7 @@ hr{
     opacity: 1;
 }
 
-.acciones-administrador {
+.acciones-administrador, .acciones-administradorTIenda {
     display: none;
     position: absolute;
     top: 30px;
@@ -459,6 +460,17 @@ hr{
     left: -1px;
     transition: all .3s ease;
     text-align: center;
+}
+.acciones-administradorTienda li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administradorTienda li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
 }
 
 .acciones-administrador li {
@@ -474,6 +486,16 @@ hr{
 }
 
 .open-acciones {
+    display: block;
+    opacity: 1;
+    border-left: 1px solid #FF596A;
+    border-right: 1px solid #FF596A;
+    border-bottom: 1px solid #FF596A;
+    padding: 0px -6px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 1;
+}
+.open-accionesTienda {
     display: block;
     opacity: 1;
     border-left: 1px solid #FF596A;

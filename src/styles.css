@@ -107,7 +107,7 @@ img {
     padding: 5px 10px;
 }
 
-.box-editar {
+.box-editar, .box-editarTienda {
     align-items: center;
     border: 1px solid #FF596A;
     color: #FF596A;
@@ -118,7 +118,6 @@ img {
     margin: 0px 18px;
     top: -10px;
 }
-
 .text-center {
     text-align: center;
 }
@@ -174,6 +173,7 @@ img {
 .box-buscador,
 .box-editar,
 .box-create-new,
+.box-editarTienda,
 .box-button-light {
     display: flex;
     position: relative;
@@ -519,7 +519,33 @@ input[type="tel"] {
     top: 3px;
 }
 
-.open-acciones {
+.acciones-administradorTienda {
+    display: none;
+    position: absolute;
+    top: 30px;
+    list-style: none;
+    opacity: 0;
+    background: white;
+    /* width: 101%; */
+    left: -1px;
+    right: -1px;
+    transition: all .3s ease;
+    text-align: center;
+}
+
+.acciones-administradorTienda li {
+    color: #959BA0;
+    margin: 8px 0px;
+    position: relative;
+}
+
+.acciones-administradorTienda li img {
+    position: absolute;
+    left: 8px;
+    top: 3px;
+}
+
+.open-acciones, .open-accionesTienda {
     display: block;
     opacity: 1;
     border-left: 1px solid #FF596A;

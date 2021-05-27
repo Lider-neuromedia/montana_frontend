@@ -4,7 +4,7 @@
     <div class="opciones">
         <app-menu></app-menu>
     </div>
-    <div class="contenido contenido-pedido">
+    <div class="contenido contenido-pedido" style="height: 6rem;">
         <div class="filtros">
             <div class="filtro-ordernar">
                 <mat-form-field>
@@ -23,15 +23,15 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="cliente-detalle" style="padding-top: 0;">
+        <div class="cliente-detalle">
             <div class="row" [ngClass]="{'row-show-room' : show_room}">
-                <div class="col-sm-12 col-md-8 container-show-room" *ngIf="show_room">
+                <div class="col-sm-12 col-md-8 container-show-room mb-3" *ngIf="show_room">
                     <div class="row">
                         <div class="col-sm-12 cont-img-banner">
                             <img src="./assets/img/show-room-banner.png" alt="banner-show-room">
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 mb-3">
                             <div *ngIf="productos.length == 0">
                                 <p class="txt-sin-disponibilidad">Ningun producto disponible.</p>
                             </div>
@@ -133,7 +133,7 @@
                         </a>
                 
                         <a class="cancelar">
-                            <span class="box-cancelar icono-cancelar" style="left: 179px;">
+                            <span class="box-cancelar icono-cancelar">
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>

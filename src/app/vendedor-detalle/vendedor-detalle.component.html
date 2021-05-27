@@ -28,7 +28,7 @@
 
                     <ul class="editar-vendedor">
                         <li (click)="openDrawerRigth(true, 'create')"><img [src]="templateImage.editar" alt="">Editar</li>
-                        <li (click)="exportarPDF()"><img src="{{ templateImage.exportar }}" alt=""> Exportar</li>
+                        <!-- <li (click)="exportarPDF()"><img src="{{ templateImage.exportar }}" alt=""> Exportar</li> -->
                         <li (click)="getUsersAndDelete()"><img src="{{ templateImage.eliminar }}" alt=""> Eliminar</li>
                     </ul>
                 </div>
@@ -131,7 +131,7 @@
                             <h2 class="title-tiendas">Clientes</h2>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" *ngIf="usuarios.clientes.length > 0; else noClientes">
                             <table class="tabla-clientes-en-vendedores">
                                 <thead>
                                     <th>Nombre del cliente</th>
@@ -147,7 +147,14 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <ng-template #noClientes>
+                            <div class="col-md-12 text-center no-clientes">
+                                <div class="sin-clientes">
+                                    <img src="./assets/img/sin_novedad.png" alt="">
+                                    <p>Aún no se registran clientes</p>
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
 
                 </div>

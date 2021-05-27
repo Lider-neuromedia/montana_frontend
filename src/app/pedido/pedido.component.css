@@ -70,7 +70,7 @@
 }
 .icono-cancelar{
     top: 15px;
-    left: 205px;
+    left: 196px;
 }
 .cancelar:hover {
     background: #fff;
@@ -302,6 +302,7 @@
 }
 
 .title-pedido{
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: 17px;
     letter-spacing: 0.54px;
@@ -319,7 +320,7 @@
 .total-pedido {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0px;
+    padding: 10px;
     border-top: 1px solid #D7D7D7;
 }
 
@@ -439,6 +440,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding-bottom: 1rem;
 }
 
 .box-view-show-room {
@@ -517,12 +519,17 @@
     align-items: center;
 }
 .btn-relativos{
-    position: relative !important;
+    position: fixed !important;
+    width: 23.6rem;
+    right: 0;
 }
 .filtro-ordernar{
     position: relative;
     top: 1px;
     right: 44.5rem;
+}
+.cliente-detalle{
+    padding-top: 0;
 }
 
 .txt-sin-disponibilidad{
@@ -544,6 +551,13 @@
         left: -2.5rem;
     }
     .icono-cancelar{
-        left: 16.3rem !important;
+        left: 16.6rem !important;
+    }
+    .cliente-detalle{
+        padding-left: 1rem;
+    }
+    .btn-relativos{
+        width: 32.9rem;
+        right: 3.7rem;
     }
 }

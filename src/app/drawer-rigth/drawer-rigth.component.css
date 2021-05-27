@@ -105,7 +105,7 @@
 
 .btn-cancelar{
     position: relative;
-    left: 6rem;
+    /* left: 6rem; */
 }
 .iconos-pedido{
     top: 0 !important;
@@ -141,6 +141,7 @@
 }
 
 .agregar {
+    position: relative;
     background: #FF596A;
     padding: 6px 0px;
     color: white;

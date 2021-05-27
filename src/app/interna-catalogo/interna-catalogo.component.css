@@ -145,6 +145,12 @@ table{
     left: 0;
     bottom: 1rem;
 }
+.sin-catalogo p{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #e5e5e5;
+}
 
 .box-ver{
     background-color: #919191;

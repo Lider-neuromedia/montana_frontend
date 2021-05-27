@@ -68,6 +68,40 @@ export class AmpliacionCupoComponent implements OnInit {
 
   ngOnInit(): void {
     this.selection = new SelectionModel<any>(true, []);
+
+    let file1 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang1',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    let file2 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang2',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    let file3 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang3',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    file1.change(() => {
+      let input: any = document.getElementById('customFileLang1');
+      this.onFileChange(input.files,'doc_identidad', 'createSolicitud')
+    })
+    file2.change(() => {
+      let input: any = document.getElementById('customFileLang2');
+      this.onFileChange(input.files,'doc_rut', 'createSolicitud')
+    })
+    file3.change(() => {
+      let input: any = document.getElementById('customFileLang3');
+      this.onFileChange(input.files,'doc_camara_com', 'createSolicitud')
+    })
+    $('#doc_identidad').html(file1)
+    $('#doc_rut').html(file2)
+    $('#doc_camara_com').html(file3)
     this.getSolicitudes();
     this.getUsers();
   }
@@ -143,24 +177,13 @@ export class AmpliacionCupoComponent implements OnInit {
 
   // Change files
   onFileChange(files: File, file, variable){
-    setTimeout(() => {
-      console.log(variable);
-    console.log(file);
-    console.log(files);
     this[variable][file] = files;
     if (this[variable][file]['length'] > 0) {
       this.name_files[file] = this[variable][file][0]['name'];
       this[variable][file] = this[variable][file][0];
-      this.readFile(this[variable][file]).then(fileContents => { 
-        // this[variable][file] = fileContents;
-      });
     }else{
       this.name_files[file] = '';
     }
-    console.log(this.createSolicitud.doc_camara_com);
-    console.log(this.createSolicitud.doc_identidad);
-    console.log(this.createSolicitud.doc_rut);
-    }, 1000);
   }
 
   submitSolicitud(){
@@ -208,14 +231,6 @@ return;
     return;
   }
   console.log(this.createSolicitud);
-
-  // const formData = new FormData();
-  // formData.append('cliente', this.createSolicitud.cliente);
-  // formData.append('doc_camara_com', this.createSolicitud.doc_camara_com);
-  // formData.append('doc_identidad', this.createSolicitud.doc_identidad);
-  // formData.append('doc_rut', this.createSolicitud.doc_rut);
-  // formData.append('monto', this.createSolicitud.monto.toString());
-  // formData.append('vendedor', this.createSolicitud.vendedor);
   this.vendedorBool = this.clienteBool = this.doc_identidadBool = this.doc_rutBool = this.doc_camara_comBool = this.montoBool = false;
   enviarData(this.createSolicitud, 'nuevo').then( resp => {
     console.log(resp);
@@ -241,6 +256,40 @@ return;
               doc_camara_com : '',
               monto : 0,
             }
+      $('#doc_identidad').html('');
+      let file1 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang1',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    let file2 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang2',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    let file3 = $('<input/>', {
+      'class' : 'custom-file-input',
+      'id' : 'customFileLang3',
+      'accept' : 'image/jpeg,image/gif,image/png,application/pdf',
+      'type' : 'file'
+    })
+    file1.change(() => {
+      let input: any = document.getElementById('customFileLang1');
+      this.onFileChange(input.files,'doc_identidad', 'createSolicitud')
+    })
+    file2.change(() => {
+      let input: any = document.getElementById('customFileLang2');
+      this.onFileChange(input.files,'doc_rut', 'createSolicitud')
+    })
+    file3.change(() => {
+      let input: any = document.getElementById('customFileLang3');
+      this.onFileChange(input.files,'doc_camara_com', 'createSolicitud')
+    })
+    $('#doc_identidad').html(file1)
+    $('#doc_rut').html(file2)
+    $('#doc_camara_com').html(file3)
             
           }else{
             Swal.fire(
@@ -252,33 +301,6 @@ return;
   }, error => {
     console.log(error);
   })
-    // this.http.httpPost('ampliacion-cupo', this.createSolicitud, true).subscribe(
-    //   response => {
-    //     if (response.response == 'success' && response.status == 200) {
-    //       Swal.fire(
-    //         '¡Listo!',
-    //         'Solicitud creada de manera correcta!.',
-    //         'success'
-    //       );
-    //       $('#crearSolicitud').modal('hide');
-    //       this.getSolicitudes();
-    //       this.name_files = { 
-    //         doc_identidad : '',
-    //         doc_rut : '',
-    //         doc_camara_com : '',
-    //       }
-    //     }else{
-    //       Swal.fire(
-    //         '¡Ups!',
-    //         response.message,
-    //         'error'
-    //       );
-    //     }
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // )
   }
 
   submitUpdateSolicitud(){

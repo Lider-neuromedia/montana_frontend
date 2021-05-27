@@ -89,12 +89,35 @@
 .administrador-detalle{
     color: #323E4A !important;
 }
+.no-clientes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #ccc;
+}
+.sin-clientes{
+    text-align: center;
+    position: relative;
+    left: 0;
+    bottom: 1rem;
+}
+.sin-clientes p{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: #e5e5e5;
+}
 
 .administrador-detalle .title-tus-finanzas,
 .administrador-detalle .title-datos-personales,
 .administrador-detalle .title-credenciales,
 .administrador-detalle .title-tiendas{
     margin-bottom: .8em;
+    margin-top: .8em;
+    font-weight: bold;
     color: #323E4A;
     font-size: 26px;
     letter-spacing: 0.74px;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { UsersService } from '../services/users.service';
@@ -19,8 +20,11 @@ export class DashboardComponent implements OnInit {
   cantidad_clientes: number;
   vendedor_max_clientes: any[] = [];
   dataSource: MatTableDataSource<any>;
+  pedidosTabla: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   clientes: any[] = [];
   columns: any[] = ['nombre', 'dni', 'correo', 'pedidos'];
+  columnsPedidos: any[] = ['codigo', 'fecha', 'medio_pago'];
 
 
   constructor(private userService: UsersService) { 
@@ -29,19 +33,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
       this.getVendedoresClientes();
-      this.getMaxClientesVendedores();
-      this.getClientePedidos();
-  }
-  getClientePedidos(){
-    setTimeout(() => {
-      this.dataSource = new MatTableDataSource<any>(this.clientes);
-    }, 1500);
-  }
-  getMaxClientesVendedores(){
-    setTimeout(() => {
-      this.labels1 = ['Vendedores Max Clientes'];
-      this.data1 = this.vendedor_max_clientes;
-    }, 1500);
   }
   getVendedoresClientes(){
     this.getClientes();
@@ -77,12 +68,20 @@ export class DashboardComponent implements OnInit {
   getVendedor(id: number){
     this.userService.getSeller(id).subscribe((resp:any) => {
       this.vendedor_max_clientes.push({data: [resp.clientes.length], label: resp.name+' '+resp.apellidos});
+      this.labels1 = ['Vendedores Max Clientes'];
+      this.data1 = this.vendedor_max_clientes;
     })
   }
 
   getCliente(id: number){
     this.userService.getClient(id).subscribe((resp: any) => {
       this.clientes.push(resp);
+      this.dataSource = new MatTableDataSource<any>(this.clientes);
+      this.dataSource.paginator = this.paginator;
     })
+  }
+  getPedido(pedido: any[]){
+    console.log(pedido);
+    this.pedidosTabla = new MatTableDataSource<any>(pedido);
   }
 }

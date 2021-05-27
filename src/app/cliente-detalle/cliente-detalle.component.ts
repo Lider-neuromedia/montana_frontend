@@ -39,8 +39,19 @@ export class ClienteDetalleComponent implements OnInit {
     "eliminar": "assets/img/icons-filter/trash.svg"
   };
 
+  generales = true;
+  credenciales = false;
+  tienda = false;
+  asignar = false;
+
+  activeDatos = true;
+  activeUsuario = false;
+  activeTienda = false;
+  asignarCliente = false;
   userdata:any;
   datosDetalles:any;
+  search = '';
+  vendedores : [];
 
   id:any;
   usuario:any = [];
@@ -53,6 +64,7 @@ export class ClienteDetalleComponent implements OnInit {
   active:string = "activeOff";
 
   openDrawer = false;
+  openDrawerCliente = false;
   updateDrawer = false;
   tiendas = [];
   selectTiendas : any;
@@ -78,6 +90,7 @@ export class ClienteDetalleComponent implements OnInit {
   telefonoBool: boolean = false;
 
   dataAmpliacion: any;
+  createTiendas: { nombre: string; lugar: string; local: string; direccion: string; telefono: string; };
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService, private http: SendHttpData, private ampliacionCupo: AmplicacionCupoService) {
 
@@ -99,7 +112,10 @@ export class ClienteDetalleComponent implements OnInit {
         this.getCupo();
     }
     this.asignTiendasClient();
+    this.CreateasignTiendasClient();
   }
+
+  
 
   getCupo(){
     this.ampliacionCupo.getAumentarCupo().subscribe(resp => {
@@ -160,6 +176,21 @@ export class ClienteDetalleComponent implements OnInit {
       local : '',
       direccion : '',
       telefono : ''
+    }
+  }
+  CreateasignTiendasClient(){
+    this.createTiendas = {
+      nombre : '',
+      lugar : '',
+      local : '',
+      direccion : '',
+      telefono : ''
+    }
+  }
+  openDrawerRigthCliente(action : boolean, type : string){
+    $('.acciones-form-adminitrador').toggleClass('btn-relativos');
+    if (type == 'edit') {
+      this.openDrawerCliente = action;
     }
   }
 
@@ -348,6 +379,153 @@ export class ClienteDetalleComponent implements OnInit {
     }
   }
 
+  datosGenerales(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
+    this.generales = true;
+    this.credenciales = false;
+    this.tienda = false;
+    this.asignar = false;
+
+    this.activeDatos = true;
+    this.activeUsuario = false;
+    this.activeTienda = false;
+    this.asignarCliente = false;
+  }
+
+  datosCredenciales(){
+    $('.acciones-form-adminitrador').addClass('btn-subir-relativos');
+    this.generales = false;
+    this.credenciales = true;
+    this.tienda = false;
+    this.asignar = false;
+
+    this.activeDatos = false;
+    this.activeUsuario = true;
+    this.activeTienda = false;
+    this.asignarCliente = false;
+  }
+
+  crearTienda(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
+    this.generales = false;
+    this.credenciales = false;
+    this.tienda = true;
+    this.asignar = false;
+
+    this.activeDatos = false;
+    this.activeUsuario = false;
+    this.activeTienda = true;
+    this.asignarCliente = false;
+  }
+
+  datosAsignar(){
+    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
+    this.generales = false;
+    this.credenciales = false;
+    this.tienda = false;
+    this.asignar = true;
+
+    this.activeDatos = false;
+    this.activeUsuario = false;
+    this.activeTienda = false;
+    this.asignarCliente = true;
+  }
+
+  createTiendaUpdateClient(){
+    
+    var route = 'newTienda/' + this.usuario.id;
+    this.http.httpPost(route, this.createTiendas, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.usuario.tiendas.push(this.createTiendas);
+          this.CreateasignTiendasClient();
+        }
+      },
+      error => {
+
+      }
+    )
+  } 
+
+  deleteVendedorSelect(){
+    this.usuario.vendedor = {
+      id: 0,
+      name: '',
+      apellidos: '',
+      dni : ''
+    };
+  }
+
+  searchVendedor(){
+    var route = 'searchVendedor?search=' + this.search;
+    this.http.httpGet(route, true).subscribe(
+      response => {
+        if (response.response == 'success' && response.status == 200) {
+          this.deleteVendedorSelect();
+          this.vendedores = response.vendedores;
+        }
+      },
+      error => {
+
+      }
+    )
+  }
+  getUsersAndDelete(){
+
+    Swal.fire({
+      title: 'Está seguro que desea eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then((result) => {
+      if (result.value) {
+        var usuarios = [];
+        // console.log(this.usuario);
+          usuarios.push(this.usuario.id);
+        var data = {usuarios : usuarios};
+          this.user.deleteUsers(data).subscribe(
+            (data:any) =>{
+              if (data.response == 'success' && data.status == 200) {
+                Swal.fire(
+                  'Completado',
+                  'Los usuarios han sido eliminados correctamente.',
+                  'success'
+                );
+                this.route.navigateByUrl('/users/clientes');
+              }else{
+                Swal.fire(
+                  '¡Ups!',
+                  data.message,
+                  'error'
+                );
+              }
+            }
+          )
+      }
+    })
+    
+  }
+  submitUpdateClient(){
+    this.http.httpPost('update-cliente/' + this.usuario.id, this.usuario, true).subscribe(
+      response =>{  
+        if (response.response == 'success' && response.status == 200) {
+          Swal.fire(
+            'Completado',
+            'Cliente actualizado de manera correcta.',
+            'success'
+          );
+          this.getCliente();
+          this.openDrawerCliente = false;
+          this.openDrawerRigth(false, 'edit');
+        }
+      }, 
+      error =>{
+
+      }
+    )
+  }
   navigatePedido(pedido){
     this.route.navigate(['/pedido-detalle/' + pedido]);
   }
@@ -356,6 +534,9 @@ export class ClienteDetalleComponent implements OnInit {
     $('.acciones-administrador').toggleClass('open-acciones');
     $('.box-editar').toggleClass('box-editar-open');
   }
-
+  accionesAdministradorTienda(){
+    $('.acciones-administradorTienda').toggleClass('open-acciones');
+    $('.box-editarTienda').toggleClass('box-editar-open');
+  }
 
 }
