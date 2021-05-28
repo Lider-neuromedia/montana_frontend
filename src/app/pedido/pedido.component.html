@@ -213,7 +213,7 @@
 </app-drawer-rigth>
 
 <!-- DRAWER PARA FINALIZAR PEDIDO -->
-<app-drawer-rigth name="finalizar-pedido" title="Metodo de pago" [open]="openDrawerFinallyPed"
+<app-drawer-rigth name="finalizar-pedido" title="Método de pago" [open]="openDrawerFinallyPed"
 (close)="openDrawerFinally(false)" (submit)="finallyPedido()">
     <form>
         <div class="label-field">
@@ -243,7 +243,7 @@
         </div>
         <div class=label-field>
             <label for="">Firma Digital</label>
-            <signature-pad class="firma-pedido" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+            <signature-pad fxFlexAlign.xs="center" class="firma-pedido" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
         </div>
         
     </form>

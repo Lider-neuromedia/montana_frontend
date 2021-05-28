@@ -243,10 +243,12 @@ export class ProductoDetalleComponent implements OnInit {
     }
     this.imagenesBool = false;
     console.log(this.producto);
-    
+    Swal.fire('Realizando cambios', 'Espere por favor', 'info');
+    Swal.showLoading();
       enviarProducto(this.producto, 'editar').then(response => {
         if (response.status == 200 && response.response == 'success') {
           this.openDrawerRigth(false, 'edit');
+          Swal.fire(response.message, '', 'success');
           this.getProduct();
         }
       })
@@ -297,7 +299,37 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   onRemove(event) {
+    console.log(event);
     this.files_1.splice(this.files_1.indexOf(event), 1);
+    this.files_2.splice(this.files_2.indexOf(event), 1);
+    this.files_3.splice(this.files_3.indexOf(event), 1);
+    this.files_4.splice(this.files_4.indexOf(event), 1);
+    this.files_5.splice(this.files_5.indexOf(event), 1);
+    this.files_6.splice(this.files_6.indexOf(event), 1);
+  }
+
+  quitarImagen(imagen: any[], position: number){
+    if(!imagen[position]){
+      return;
+    }
+
+    if(imagen[position].destacada === 1){
+      if(imagen[1].image && imagen[1].image != ""){
+        imagen[1].destacada = 1;
+      }else if(imagen[2].image && imagen[2].image != ""){
+        imagen[2].destacada = 1;
+      }else if(imagen[3].image && imagen[3].image != ""){
+        imagen[3].destacada = 1;
+      }else if(imagen[4].image && imagen[4].image != ""){
+        imagen[4].destacada = 1;
+      }else if(imagen[5].image && imagen[5].image != ""){
+        imagen[5].destacada = 1;
+      }
+    }
+
+    imagen[position]['image'] = "";
+    imagen[position]['delete'] = 1;
+    console.log(this.producto);
   }
 
   deleteProduct(){

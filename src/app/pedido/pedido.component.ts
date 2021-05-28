@@ -32,7 +32,7 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private route: Router, private http : SendHttpData) { 
   }
   ngAfterViewInit(){
-    this.signaturePad.set('minWidth', 5);
+    this.signaturePad.set('minWidth', .5);
     this.signaturePad.clear();
   }
 

@@ -276,6 +276,17 @@ tr.mat-header-row{
     text-align: center;
     color: #e5e5e5;
 }
+.btn-remplazar{
+    display: none;
+    /* position: absolute;
+    left: 1.5rem; */
+}
+.removeImage{
+    position: relative;
+}
+.removeImage:hover .btn-remplazar{
+    display: block;
+}
 
 @media screen and (min-width: 1920px) {
 

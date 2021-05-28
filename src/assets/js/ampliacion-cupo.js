@@ -108,10 +108,18 @@ async function enviarProducto(producto, cambiar){
   if(cambiar === 'editar'){
     try {
       producto.imagenes.forEach(element => {
-        if(element.image.type){
+        if(element.image.type && element.id_galeria_prod){
           formData.append(`imagenes[${i}][image]`, element.image);
           formData.append(`imagenes[${i}][destacada]`, element.destacada);
           formData.append(`imagenes[${i}][id_galeria_prod]`, element.id_galeria_prod)
+        }else if(element.image.type && !element.id_galeria_prod){
+          formData.append(`imagenes[${i}][image]`, element.image);
+          formData.append(`imagenes[${i}][destacada]`, element.destacada);
+        }else if(element.delete){
+          formData.append(`imagenes[${i}][image]`, element.image);
+          formData.append(`imagenes[${i}][destacada]`,   element.destacada);
+          formData.append(`imagenes[${i}][id_galeria_prod]`, element.id_galeria_prod)
+          formData.append(`imagenes[${i}][delete]`,   element.delete);
         }else{
           formData.append(`imagenes[${i}][image]`, '');
           formData.append(`imagenes[${i}][destacada]`,   element.destacada);
