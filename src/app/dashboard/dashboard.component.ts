@@ -5,6 +5,8 @@ import { SendHttpData } from '../services/SendHttpData';
 
 import { UsersService } from '../services/users.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -41,6 +43,7 @@ export class DashboardComponent implements OnInit {
   columnsProductos: any[] = ['codigo', 'nombre', 'marca', 'precio'];
   pedidos: any;
   colors: any[];
+  colorsBarra: any[] = [];
 
 
   constructor(private userService: UsersService, private http: SendHttpData) { 
@@ -48,6 +51,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $('#btn_all').addClass('filtroCatalogo');
       this.getVendedoresClientes();
   }
   getVendedoresClientes(){
@@ -82,16 +86,20 @@ export class DashboardComponent implements OnInit {
       resp.users.forEach(element => {
         this.getVendedor(element.id);  
       });
-      
     })
   }
+  generarColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
 
   getVendedor(id: number){
     this.userService.getSeller(id).subscribe((resp:any) => {
       this.vendedor_max_clientes.push({data: [resp.clientes.length], label: resp.name+' '+resp.apellidos});
       this.labels1 = ['Vendedores Max Clientes'];
       this.data1 = this.vendedor_max_clientes;
-    })
+        this.colorsBarra.push({
+            backgroundColor: this.generarColor()
+          });  
+        console.log(this.colorsBarra);
+    })    
   }
 
   getCliente(id: number){
@@ -123,7 +131,22 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-  filtro(event: Event, categoria: string){
+  filtro(event: Event, categoria: string, boton: string){
+    if(boton === 'btn_all'){
+      $('#btn_all').addClass('filtroCatalogo');
+      $('#btn_ninos').removeClass('filtroCatalogo');
+      $('#btn_adultos').removeClass('filtroCatalogo');
+    }
+    if(boton === 'btn_ninos'){
+      $('#btn_ninos').addClass('filtroCatalogo');
+      $('#btn_all').removeClass('filtroCatalogo');
+      $('#btn_adultos').removeClass('filtroCatalogo');
+    }
+    if(boton === 'btn_adultos'){
+      $('#btn_adultos').addClass('filtroCatalogo');
+      $('#btn_ninos').removeClass('filtroCatalogo');
+      $('#btn_all').removeClass('filtroCatalogo');
+    }
     this.filtroCategoria = categoria;
     if (categoria != 'all') {
       this.filterCatalogo.all = false;

@@ -9,4 +9,30 @@
     max-height: 304px;
     overflow: auto;
   }
+  .contenedor-tabla{
+      background-color: #fff;
+      margin-bottom: 25px;
+      box-shadow: 2px 2px 6px rgb(0, 0, 0 / 20%);
+      padding: 15px;
+      border-radius: 5px;
+  }
+  .filtroCatalogo{
+    background-color: #ff596f;
+    color: #fff;
+  }
+
+  .btn-generar-datos{
+      background-color: #ff596f;
+      color: #fff;
+      padding: 5px 15px;
+      box-shadow: 2px 2px 6px rgb(0, 0, 0 / 20%);
+  }
+
+  .grafico-dona-pedidos{
+      background-color: #fff;
+      margin-bottom: 25px;
+      box-shadow: rgb(0, 0, 0 / 20%);
+      padding: 15px;
+      border-radius: 5px;
+  }
   
