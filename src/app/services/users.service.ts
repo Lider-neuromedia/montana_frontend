@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,9 @@ export class UsersService {
   // Producción
   api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
   web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
+  cargarClientes: boolean;
+  cargarVendedores: boolean;
+  cargarCliente: boolean;
 
   constructor( private http: HttpClient ) {}
   private refresh = new Subject<void>();
@@ -130,10 +133,14 @@ export class UsersService {
   }
 
   getAllSellers(search){
+    if(this.cargarVendedores){
+      return of([]);
+    }
+    this.cargarVendedores = true;
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     var route = 'vendedores?search=' + search;
     let users = [];
-    return this.http.get(`${this.api}/` + route, {headers: headers});
+    return this.http.get(`${this.api}/` + route, {headers: headers}).pipe(tap(() => this.cargarVendedores = false));
   }
   getAllSellersForTable(search){
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
@@ -161,9 +168,13 @@ export class UsersService {
   }
 
   getAllClients(search){
+    if(this.cargarClientes){
+      return of([]);
+    }
+    this.cargarClientes = true;
     const headers = new HttpHeaders( {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem('access_token')} );
     var route = 'clientes?search=' + search;
-    return this.http.get(`${this.api}/` + route, {headers: headers});
+    return this.http.get(`${this.api}/` + route, {headers: headers}).pipe(tap(() => this.cargarClientes = false));
   }
   getNameAllClients(search){
     const headers = new HttpHeaders( 
@@ -206,13 +217,4 @@ export class UsersService {
 	deleteRol(id){
 		return this.http.delete(`${this.api}/roles/${id}`,id);
 	}
-  convertirImg(image: string){
-    const headers = new HttpHeaders( {'Content-Type':'application/json'} );
-    return this.http.get(image, {
-      responseType: "arraybuffer",
-      headers: headers
-    }).pipe(map(resp => {
-      return new File([resp], "myImage.png");
-    }))
-  }
 }

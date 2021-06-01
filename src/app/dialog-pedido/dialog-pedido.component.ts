@@ -65,8 +65,7 @@ export class DialogPedidoComponent implements OnInit {
     if(this.crear_pedido.cliente === '' && this.crear_pedido.vendedor === '' && this.crear_pedido.catalogo === ''){
       this.clienteBool = this.vendedorBool = this.catalogoBool = true;
       return;
-    }else if(this.crear_pedido.catalogo === "" || this,this.crear_pedido.cliente === "" || this.crear_pedido.vendedor === "" ||
-       this.crear_pedido.catalogo === null || this,this.crear_pedido.cliente === null || this.crear_pedido.vendedor === null){
+    }else if(this.crear_pedido.catalogo === "" || this,this.crear_pedido.cliente === "" || this.crear_pedido.vendedor === ""){
       if(this.crear_pedido.catalogo === "" || this.crear_pedido.catalogo === null){
         this.catalogoBool = true;
       }else{
