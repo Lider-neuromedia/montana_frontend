@@ -54,6 +54,9 @@ import { RestablecerContrasenaComponent } from './restablecer-contrasena/restabl
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraficoBarComponent } from './components/grafico-bar/grafico-bar.component';
 import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './custom-paginator';
+
 
 
 // import { Select2Module } from 'ng2-select2';
@@ -114,10 +117,13 @@ import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.com
     NgxGalleryModule,
     ChartsModule,
     EditorModule,
-    SignaturePadModule,
+    SignaturePadModule
     
   ],
-  providers: [SendHttpData],
+  providers: [
+    SendHttpData,
+    {provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

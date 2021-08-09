@@ -231,36 +231,52 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   sumCantidad(position){
-    if(this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
-      this.producto_select.stock > 0){
-        if(this.tiendas[position].cantidad === this.producto_select.stock && this.producto_select.stock === 0){
-          return;
-        }
-     this.cantidad++;
-     this.producto_select.stock--;
-     this.tiendas[position].cantidad++;
-   }
+    this.productos.forEach(element => {
+      if(this.selectEditPedido['id_producto'] === element.id_producto){
+        console.log(this.selectEditPedido);
+        console.log(this.productos);
+        console.log(this.selectEditPedido.tiendas[position].cantidad);
+        if(this.selectEditPedido.tiendas[position].cantidad <= element.stock || this.selectEditPedido.tiendas[position].cantidad > element.stock &&
+          element.stock > 0){
+            if(this.selectEditPedido.tiendas[position].cantidad === element.stock && element.stock === 0){
+              return;
+            }
+            this.cantidad++;
+            element.stock--;
+            this.selectEditPedido.tiendas[position].cantidad++;
+          }
+      }
+    })
   }
 
   resCantidad(position){
-    if (this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
-      this.producto_select.stock != 0) {
-        if(this.tiendas[position].cantidad === 0){
-          return;
-        }
-    this.tiendas[position].cantidad--;
-    this.producto_select.stock++;
-  }else if(this.tiendas[position].cantidad > this.producto_select.stock && this.producto_select.stock === 0){
-    this.tiendas[position].cantidad--;
-    this.producto_select.stock++;
-  }
+    this.productos.forEach(element => {
+      if(this.selectEditPedido['id_producto'] === element.id_producto){
+        console.log(this.selectEditPedido);
+        console.log(this.productos);
+        console.log(this.selectEditPedido.tiendas[position].cantidad);
+        if (this.selectEditPedido.tiendas[position].cantidad <= element.stock || this.selectEditPedido.tiendas[position].cantidad > element.stock &&
+          element.stock != 0) {
+            if(this.selectEditPedido.tiendas[position].cantidad === 0){
+              return;
+            }
+        this.selectEditPedido.tiendas[position].cantidad--;
+        element.stock++;
+      }else if(this.selectEditPedido.tiendas[position].cantidad > element.stock && element.stock === 0){
+        this.selectEditPedido.tiendas[position].cantidad--;
+        element.stock++;
+      }
+      }
+    })
   }
 
   editarPedido(product){
+    console.log(product);
     this.editPedido = true;
     this.selectEditPedido = product;
     setTimeout(() => {
       $('#actualizar').addClass('pedido-btn-relativos');
+      $('.acciones').addClass('pedido-btn-relativos');
     }, 500);
   }
 
