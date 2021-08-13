@@ -1,27 +1,29 @@
-# AdminAthletic
+## Despliegue en LocalHost
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+Despues de clonar el proyecto actualizar con la rama front-inge5
 
-## Development server
+Ejecutar los comandos desde la consola dentro del proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+npm install
 
-## Code scaffolding
+ng add @angular/material
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+npm i ngx-pagination
 
-## Build
+npm i ngx-spinner
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+npm i angular2-signaturepad
 
-## Running unit tests
+npm i @tinymce/tinymce-angular
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+npm i @kolkov/ngx-gallery
 
-## Running end-to-end tests
+npm i ngx-dropzone
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+npm i ng2-charts
 
-## Further help
+npm install chart.js
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+npm i mat-table-exporter
+
+npm install @angular/cdk --save

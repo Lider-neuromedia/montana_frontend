@@ -195,6 +195,7 @@ export class PedidosComponent implements OnInit {
   getRecursosCrearPedido(){
     this.http.httpGet('recursos-crear-pedido', true).subscribe(
       response => {
+        console.log(response);
         if (response.status == 200 && response.response == 'success') {
           this.vendedores = response.vendedores;
           this.clientes = response.clientes;
