@@ -1,15 +1,13 @@
 <div *ngIf="access_token; else login">
-
-<app-header breadcrumbs="Usuarios / Vendedores"></app-header>
-
-<div id="wrapper">
+    <app-header rutaBreadCrumbs1="/users/vendedores" breadcrumbs1="Vendedores"></app-header>
+    <div id="wrapper">
     <div class="opciones">
         <app-menu></app-menu>
     </div>
     <div class="contenido">
 
         <div class="overview"></div>
-        <app-drawer-advanced class="form-advanced" name="crear-vendedor" title="Crear Vendedor" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarVendedor()">
+    <app-drawer-advanced class="form-advanced" name="crear-vendedor" title="Crear Vendedor" [open]="openDrawer" (close)="openDrawerRigth(false, 'create')" (submit)="agregarVendedor()">
                 <div class="tabs">
                     <ul>
                         <li><a [class.activeclasstab]="activeDatos" (click)="datosGenerales()">Datos generales</a></li>
@@ -162,20 +160,6 @@
                     <div *ngIf="asignar" class="asignar-cliente">
                         <div class="search-cliente">
                             <p>Elige un cliente</p>
-                            <!-- <mat-form-field appearance="legacy" class="w-100">
-                                <input matInput 
-                                    placeholder="Buscar por nombre, cedula."
-                                    style="color: #82867D;"
-                                    [(ngModel)]="search"
-                                    (keyup.enter)="searchClientes()"
-                                    [ngModelOptions]="{standalone: true}"
-                                    >
-                                    <mat-icon matSuffix
-                                        (click)="searchClientes()"
-                                        style="color: #82867D; cursor: pointer;">
-                                        search
-                                    </mat-icon>
-                            </mat-form-field> -->
                             <mat-form-field class="w-100">
                                 <mat-label>Asignar Cliente</mat-label>
                                 <input placeholder="Asignar Cliente" matInput [formControl]="asigCliente" [matAutocomplete]="auto">
@@ -187,14 +171,6 @@
                                   </mat-autocomplete>                               
                             </mat-form-field>
                         </div>
-                        <!-- <div class="item-cliente-select" *ngFor="let clienteAsign of selectVendedor.clientes" [@inOutAnimation]>
-                            <p style="display: flex;"> 
-                                {{clienteAsign.name + ' ' + clienteAsign.apellidos}}
-                            </p>
-                            <button mat-icon-button aria-label="Delete" type="button" (click)="deleteAsignClient(clienteAsign)">
-                                <mat-icon style="color: #ff596a;">delete</mat-icon>
-                            </button> 
-                        </div> -->
                         <div class="list-vendedores">
                             <div class="item-cliente" *ngFor="let cliente of selectVendedor.clientes" [@fadeIn]>
                                 <p> 
@@ -208,7 +184,7 @@
                 </div>
         </app-drawer-advanced>
 
-        <div class="filtros" style="top: 6px; left: 14rem;padding-top: 1rem;padding-bottom: 1rem;">
+    <div class="filtros" style="top: 6px; left: 14rem;padding-top: 1rem;padding-bottom: 1rem;">
             <div class="box-buscador t-0">
                 <img class="lupa" [src]="templateImage.lupa" alt="">
                 <input class="buscador" placeholder="Buscar" (keyup)="filtro($event)" type="text" #input>
@@ -261,12 +237,10 @@
                 </ng-container>
                 <ng-container matColumnDef="Teléfono">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
-                    <!-- <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor.name }}</td> -->
                     <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor['user_data'][0]?.value_key }}</td>
                 </ng-container>
                 <ng-container matColumnDef="Código">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-                    <!-- <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor.apellidos }}</td> -->
                     <td mat-cell *matCellDef="let vendedor" (click)="vendedorDetalle(vendedor.id)" style="cursor: pointer;">{{ vendedor['user_data'][1]?.value_key }}</td>
                 </ng-container>
                 <ng-container matColumnDef="Correo">
@@ -279,55 +253,10 @@
                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                 </tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            <!--<table style="width:100%">
-
-                <tr class="tabla-fila-cabecera">
-                    <td></td>
-                    <th style="padding-left: 38px;">Nombre <img src="/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Teléfono <img src="/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Código <img src="/assets/img/arrows_orden.svg" alt=""></th>
-                    <th>Correo <img src="/assets/img/arrows_orden.svg" alt=""></th>
-                </tr>
-
-                <tr *ngFor="let vendedor of vendedores | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
-                    <td><input class="check-nombre" (change)="selectVendCheckbox($event, vendedor)" type="checkbox" name="check"
-                            id=""></td>
-                    <td (click)="vendedorDetalle(vendedor.id)" class="imagen-nombre">
-                        <div class="iniciales"> {{vendedor.iniciales}} </div>
-                        <p class="nombre">{{ vendedor.name + ' ' + vendedor.apellidos }}</p>
-                    </td>
-                    <td (click)="vendedorDetalle(vendedor.id)" *ngFor="let data of vendedor.user_data">
-                        <p class="codigo">{{data.value_key}}</p>
-                    </td>
-                    <td (click)="vendedorDetalle(vendedor.id)" class="correo">{{ vendedor.email }}</td>
-                </tr>
-
-            </table>-->
+            <mat-paginator class="fijar-abajo" [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
         </section>
     </div>
 </div>
-
-
-
-<!-- <div class="footer">
-    <div class="footer-paginate">
-        <div class="pagination">
-            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
-        </div>
-        <div class="label-field label-field-paginate">
-            <select name="changeNumberPage" id="changeNumberPage" 
-            class="select-paginate"
-            (change)="changeListPagination($event)">
-                <option [value]="5"> 5 Por página </option>
-                <option [value]="10"> 10 Por página </option>
-                <option [value]="15"> 15 Por página </option>
-                <option [value]="20"> 20 Por página </option>
-                <option [value]="30"> 30 Por página </option>
-            </select>
-        </div>
-    </div> 
-</div> -->
 </div>
 <ng-template #login>
     <app-login></app-login>

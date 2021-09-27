@@ -142,6 +142,9 @@ export class ClientesComponent implements OnInit, OnDestroy {
   emailBool: boolean = false;
   passwordBool: boolean = false;
   confirPasswordBool: boolean = false;
+  admin: boolean;
+  vendedor: boolean;
+  cliente: boolean;
 
   constructor( private clients: UsersService, private route: Router, private http: SendHttpData) {
    
@@ -150,6 +153,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.selection = new SelectionModel<any>(true, []);
     this.access_token = localStorage.getItem('access_token');
+    this.obtenerRoles();
     this.asignCreateClient();
     this.asignUpdateClient();
     this.asignTiendasClient();
@@ -168,7 +172,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource<any>(data['users']);
       this.dataSource.paginator = this.paginator
       this.numRows = this.dataSource.data.length;
-      // this.checkCliente = [];
     });
   }
   filtro(event: Event){
@@ -263,7 +266,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosGenerales(){
-    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = true;
     this.credenciales = false;
     this.tienda = false;
@@ -276,7 +278,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosCredenciales(){
-    $('.acciones-form-adminitrador').addClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = true;
     this.tienda = false;
@@ -289,7 +290,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   crearTienda(){
-    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = false;
     this.tienda = true;
@@ -302,7 +302,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   datosAsignar(){
-    $('.acciones-form-adminitrador').removeClass('btn-subir-relativos');
     this.generales = false;
     this.credenciales = false;
     this.tienda = false;
@@ -497,6 +496,8 @@ export class ClientesComponent implements OnInit, OnDestroy {
                 );
                 this.checkCliente = [];
               }
+            }, error => {
+              Swal.fire(error.error.response, error.error.message, 'error')
             }
           )
         }
@@ -689,6 +690,27 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
       }
     )
-  }  
+  }
+  
+  obtenerRoles(){
+
+    this.clients.getRoles().subscribe( (data:any) =>{
+      if( this.rol == data[2].id){ // Rol de clientes rol_id = 3
+        this.admin = false;
+        this.vendedor = false;
+        this.cliente = true;
+      } else if( this.rol == data[1].id){ // Rol de vendedores rol_id = 2
+        this.admin = false;
+        this.vendedor = true;
+        this.cliente = false;
+      } else if( this.rol == data[0].id ){ // Rol de adminnistrador rol_id = 1
+        this.admin = true;
+        this.vendedor = true;
+        this.cliente = false;
+      } else {
+        alert('Hubo un error');
+      }
+    })
+  }
 
 }

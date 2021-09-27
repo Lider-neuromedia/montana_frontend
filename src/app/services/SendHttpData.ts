@@ -8,7 +8,7 @@ declare var axios: any;
 @Injectable()
 export class SendHttpData {
 
-  private baseUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/';
+  private baseUrl = 'https://pruebasneuro.co/N-1010/montana_backend/public/api/';
   // private baseUrl = 'http://127.0.0.1:8000/api/';
 
   options : any;

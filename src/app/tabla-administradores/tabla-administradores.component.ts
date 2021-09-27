@@ -142,8 +142,9 @@ export class TablaAdministradoresComponent implements OnInit, OnDestroy {
             this.router.navigateByUrl('/login');
             
           }
+        }, error => {
+          Swal.fire(error.error.response, error.error.message, 'error')
         })
-        console.log("Eliminar");
       }
     });
     

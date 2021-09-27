@@ -87,6 +87,10 @@
     padding-left: 1em;
 }
 
+.width-10{
+    width: 10%;
+}
+
 .child-menu li a{
     padding: 10px 30px;
     border-radius: 7px 0px 0px 7px;
@@ -170,5 +174,10 @@
     .modal-dialog {
         max-width: 660px;
         margin: 1.75rem auto;
+    }
+}
+@media (max-width: 1366px){
+    .width-10{
+        width: 13%;
     }
 }

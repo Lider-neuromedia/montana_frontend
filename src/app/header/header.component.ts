@@ -9,7 +9,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() breadcrumbs: string;
+  @Input() breadcrumbs1: string = '';
+  @Input() rutaBreadCrumbs1: string = '';
+  @Input() breadcrumbs2: string = '';
+  @Input() rutaBreadCrumbs2: string = '';
+  @Input() breadcrumbs3: string = '';
+  @Input() rutaBreadCrumbs3: string = '';
   logoutUrl = 'http://localhost/athletic-api/public/api/auth/logout';
   apiUrl = 'http://localhost/athletic-api/public/api';
   options: any;

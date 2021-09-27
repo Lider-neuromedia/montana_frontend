@@ -2,7 +2,7 @@
 
 <div class="workplace">
     <div class="header">
-        <app-header breadcrumbs="Catálogos"></app-header>
+        <app-header rutaBreadCrumbs1="/catalogos" breadcrumbs1="Catálogos"></app-header>
     
     <div class="slide-menu">
         <app-menu></app-menu>
@@ -95,7 +95,7 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <ng-container *ngIf="catalogos?.length > 0; else noCatalogo">
             <div class="col-md-3 catalogo-column" *ngFor="let catalogo of catalogos  | paginate: { itemsPerPage: itemPerPage, currentPage: current }">
                 <div id="{{catalogo.id_catalogo}}-box-catalogo" class="box-catalogo">
@@ -108,7 +108,7 @@
                         <div class="estado">{{catalogo.estado}}</div>
                         <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
                         <div *ngIf="catalogo.descuento != null" [class]="(catalogo.tipo == 'general') ? 'descuento' : 'descuento-show-room'">
-                            -{{catalogo.descuento}}%
+                            -{{catalogo.descuento === null?'0':catalogo.descuento}}%
                         </div>
                     </div>
                     <div class="box-titulo-cantidad-opciones">
@@ -153,7 +153,7 @@
 </div>
 
 <!-- Paginacion. -->
-<div class="footer">
+<div class="footer fijar-abajo index-2">
     <div class="footer-paginate">
         <div class="pagination">
             <pagination-controls  (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>

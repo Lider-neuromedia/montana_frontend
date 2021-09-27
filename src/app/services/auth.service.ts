@@ -14,8 +14,8 @@ export class AuthService {
   // apiUrl = 'http://127.0.0.1:8000/api';
 
   // Producción
-  authUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
-  apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+  authUrl = 'https://pruebasneuro.co/N-1010/montana_backend/public/api/auth/login';
+  apiUrl = 'https://pruebasneuro.co/N-1010/montana_backend/public/api';
 
   // urlCorreo: string = "http://localhost:3000/formulario";
 

@@ -91,7 +91,10 @@ export class ClienteDetalleComponent implements OnInit {
 
   dataAmpliacion: any;
   createTiendas: { nombre: string; lugar: string; local: string; direccion: string; telefono: string; };
-
+  admin: boolean;
+  vendedor: boolean;
+  cliente: boolean;
+  rol = localStorage.getItem('rol');
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private user: UsersService, private http: SendHttpData, private ampliacionCupo: AmplicacionCupoService) {
 
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -110,6 +113,7 @@ export class ClienteDetalleComponent implements OnInit {
     if(this.id != null){
       this.getCliente();
         this.getCupo();
+        this.obtenerRoles();
     }
     this.asignTiendasClient();
     this.CreateasignTiendasClient();
@@ -525,6 +529,26 @@ export class ClienteDetalleComponent implements OnInit {
 
       }
     )
+  }
+  obtenerRoles(){
+
+    this.user.getRoles().subscribe( (data:any) =>{
+      if( this.rol == data[2].id){ // Rol de clientes rol_id = 3
+        this.admin = false;
+        this.vendedor = false;
+        this.cliente = true;
+      } else if( this.rol == data[1].id){ // Rol de vendedores rol_id = 2
+        this.admin = false;
+        this.vendedor = true;
+        this.cliente = false;
+      } else if( this.rol == data[0].id ){ // Rol de adminnistrador rol_id = 1
+        this.admin = true;
+        this.vendedor = true;
+        this.cliente = false;
+      } else {
+        alert('Hubo un error');
+      }
+    })
   }
   navigatePedido(pedido){
     this.route.navigate(['/pedido-detalle/' + pedido]);

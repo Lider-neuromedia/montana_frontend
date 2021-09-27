@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { DialogExportPedidoComponent } from '../dialog-export-pedido/dialog-export-pedido.component';
+import { UsersService } from '../services/users.service';
 
 declare var $: any;
 
@@ -49,9 +50,13 @@ export class DetallePedidoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataDetalle: MatTableDataSource<any>;
   columnsDetalle = ['detalle'];
+  rol = localStorage.getItem('rol');
+  admin: boolean;
+  vendedor: boolean;
+  cliente: boolean;
 
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private http : SendHttpData, 
-              private dialog: MatDialog){ 
+              private dialog: MatDialog, private user: UsersService){ 
     this.id_pedido = this.activatedRoute.snapshot.params['id'];
   }
 
@@ -60,6 +65,7 @@ export class DetallePedidoComponent implements OnInit {
       $('.mat-tab-body-content').addClass('scroll-activo');
     }, 500);
     this.getPedido();
+    this.obtenerRoles();
   }
 
   getPedido(){
@@ -134,6 +140,26 @@ export class DetallePedidoComponent implements OnInit {
 
       }
     )
+  }
+  obtenerRoles(){
+
+    this.user.getRoles().subscribe( (data:any) =>{
+      if( this.rol == data[2].id){ // Rol de clientes rol_id = 3
+        this.admin = false;
+        this.vendedor = false;
+        this.cliente = true;
+      } else if( this.rol == data[1].id){ // Rol de vendedores rol_id = 2
+        this.admin = false;
+        this.vendedor = true;
+        this.cliente = false;
+      } else if( this.rol == data[0].id ){ // Rol de adminnistrador rol_id = 1
+        this.admin = true;
+        this.vendedor = true;
+        this.cliente = false;
+      } else {
+        alert('Hubo un error');
+      }
+    })
   }
 
   acccionPedido(){

@@ -238,6 +238,7 @@ export class AdministradoresComponent implements OnInit {
       Swal.fire('La contraseña debe ser minimo 6 caracteres', '', 'info');
       return;
     }
+    // this.formCreateAdmin.controls['rol_id'].setValue(1);
     this.userService.createUser(this.formCreateAdmin.value).subscribe(
       (data:any) =>{
         // console.log(data);
@@ -249,7 +250,9 @@ export class AdministradoresComponent implements OnInit {
           icon: 'success',
           title: 'Se ha creado un nuevo administrador'
         });
-        this.formCreateAdmin.reset();
+        this.formCreateAdmin.reset({
+          rol_id: 1
+        });
         this.cerrarFormAdmin();
         // this.buscarAdmin();
       },

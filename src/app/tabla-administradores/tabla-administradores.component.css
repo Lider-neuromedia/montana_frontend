@@ -1,7 +1,5 @@
 table {
     width : 100% ;
-    position: relative;
-    left: 13rem;
  }
  .t-0{
      top: 0;
@@ -24,6 +22,12 @@ table {
     border-radius: 15px 15px 0px 0px;
     background: white;
     opacity: 1;
+}
+.table-data{
+    position: relative;
+    max-height: 72vh;
+    overflow: auto;
+    left: 13rem;
 }
 
 

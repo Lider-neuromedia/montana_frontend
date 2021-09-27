@@ -463,6 +463,8 @@ export class VendedoresComponent implements OnInit, OnDestroy {
                 this.checkVendedor = [];
   
               }
+            },error => {
+              Swal.fire(error.error.response, error.error.message, 'error')
             }
           );
         }

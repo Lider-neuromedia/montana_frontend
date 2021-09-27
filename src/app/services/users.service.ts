@@ -14,8 +14,8 @@ export class UsersService {
   // web = 'http://127.0.0.1:8000';
 
   // Producción
-  api = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
-  web = 'http://pruebasneuro.co/N-1010/montana_backend/public';
+  api = 'https://pruebasneuro.co/N-1010/montana_backend/public/api';
+  web = 'https://pruebasneuro.co/N-1010/montana_backend/public';
   cargarClientes: boolean;
   cargarVendedores: boolean;
   cargarCliente: boolean;

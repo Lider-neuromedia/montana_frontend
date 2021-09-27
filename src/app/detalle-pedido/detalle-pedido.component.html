@@ -5,21 +5,8 @@
         <app-menu></app-menu>
     </div>
     <div class="contenido contenido-encuesta">
-        <div class="filtros filtro-encuesta">
-            <!-- <div (click)="accionesCliente()" class="box-editar">
-                <span class="texto-editar">Acción de</span>
-                <div class="icono-puntos">
-                    <img src="assets/img/edit_points.svg" alt="">
-                </div>
-                <ul class="acciones-cliente">
-                    <li>
-                        <img src="assets/img/editar.svg" alt=""> Editar
-                    </li>
-                    <li><img src="assets/img/icons-filter/export.svg" alt=""> Exportar</li>
-                    <li ><img src="assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
-                </ul>
-            </div> -->
-            <div (click)="acccionPedido()" class="box-editar" style="top: 0;">
+        <div class="filtros filtro-encuesta" [ngClass]="{'height-3rem': vendedor}">
+            <div *ngIf="admin" (click)="acccionPedido()" class="box-editar" style="top: 0;">
                 <span class="texto-editar">Acción de</span>
                 <div class="icono-puntos">
                     <img src="./assets/img/edit_points.svg" alt="">

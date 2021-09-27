@@ -101,7 +101,7 @@ import { CustomMatPaginatorIntl } from './custom-paginator';
     RestablecerContrasenaComponent,
     DashboardComponent,
     GraficoBarComponent,
-    GraficoDonaComponent
+    GraficoDonaComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@
                     </td>
                 </div>
             </div>
-            <div class="div-edit-boton">
+            <div *ngIf="admin" class="div-edit-boton">
                 <div (click)="accionesAdministrador()" class="box-editar t-0"> 
                     <span class="texto-editar">Acción de</span>
                     <div class="icono-puntos">
@@ -438,7 +438,7 @@
                         <div class="col-sm-12">
                             <div class="cont-title-tienda">
                                 <h2 class="title-tiendas">Tiendas</h2>
-                                <div (click)="accionesAdministradorTienda()"  class="box-editarTienda t-0">
+                                <div *ngIf="admin" (click)="accionesAdministradorTienda()"  class="box-editarTienda t-0">
                                     <div class="icono-editar">
                                             <img src="./assets/img/icons-filter/shop.svg" alt="">
                                         </div>

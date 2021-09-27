@@ -4,26 +4,15 @@
         <div class="breadcrumb-custom">
             <ul>
                 <li>Sección</li>
-                <li>/</li>
-                <li>{{ breadcrumbs }}</li>
+                <li *ngIf="rutaBreadCrumbs1 !== '' && breadcrumbs1 !== ''">/</li>
+                <li [routerLink]="[ rutaBreadCrumbs1 ]">{{ breadcrumbs1 }}</li>
+                <li *ngIf="rutaBreadCrumbs2 !== '' && breadcrumbs2 !== ''">/</li>
+                <li [routerLink]="[ rutaBreadCrumbs2 ]">{{ breadcrumbs2 }}</li>
+                <li *ngIf="rutaBreadCrumbs3 !== '' && breadcrumbs3 !== ''">/</li>
+                <li [routerLink]="[ rutaBreadCrumbs3 ]">{{ breadcrumbs3 }}</li>
             </ul>
         </div>
         <div class="notify-accout">
-            <!-- <div class="notify">
-                <img src="{{ templateImage.notificacion }}" alt=""> <span>Notificaciones</span>
-            </div> -->
-            <!-- <div (click)="logout()" class="close-custom">
-                <img src="{{ templateImage.logout }}" alt=""> 
-                <span>Cerrar sesión</span>
-            </div> -->
-            <!-- <div class="account">
-                <div class="div-imagen">
-                    <div class="iniciales-azul-notificacion"> {{iniciales}} </div>
-                </div>
-                <span class="centrado">{{email}}</span>
-            </div> -->
-
-            
         </div>
         <ul class="lista-horizontal">
             <li style="cursor: pointer;" (click)="logout()"(click)="logout()">

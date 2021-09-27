@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class AmplicacionCupoService {
 
-  apiUrl = 'http://pruebasneuro.co/N-1010/montana_backend/public/api';
+  apiUrl = 'https://pruebasneuro.co/N-1010/montana_backend/public/api';
 
   constructor(private http: HttpClient) { }
 

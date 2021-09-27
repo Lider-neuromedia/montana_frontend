@@ -52,23 +52,21 @@ export class MenuComponent implements OnInit {
 
     this.users.getRoles().subscribe( (data:any) =>{
       this.roles = data;
-
-      if( this.rol == this.roles[2].id){
+      if( this.rol == this.roles[2].id){ // Rol de clientes rol_id = 3
         this.admin = false;
         this.vendedor = false;
         this.cliente = true;
-      } else if( this.rol == this.roles[1].id){
+      } else if( this.rol == this.roles[1].id){ // Rol de vendedores rol_id = 2
         this.admin = false;
         this.vendedor = true;
         this.cliente = false;
-      } else if( this.rol == this.roles[0].id ){
+      } else if( this.rol == this.roles[0].id ){ // Rol de adminnistrador rol_id = 1
         this.admin = true;
         this.vendedor = true;
         this.cliente = false;
       } else {
         alert('Hubo un error');
       }
-
     })
 
   }
@@ -83,6 +81,10 @@ export class MenuComponent implements OnInit {
 
   previewChildMenu(){
     $('.child-menu').addClass('preview-child-menu');
+    if(this.vendedor){
+      $('.preview-child-menu').addClass('width-10');
+    }
+    
   }
 
   hideChildMenu(){

@@ -18,6 +18,9 @@
     position: relative;
     left: -2.5rem;
 }
+.index-2{
+    z-index: 2;
+}
 
 .t-0{
     top: 0;
