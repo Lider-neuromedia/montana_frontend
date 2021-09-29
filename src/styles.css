@@ -33,6 +33,41 @@ img {
     max-width: 100%;
 }
 
+/* BOTONES */
+.agregar,
+.cancelar {
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50px;
+    display: block;
+    text-decoration: none;
+    width: 45%;
+}
+.agregar {
+    background: #FF596A;
+    /* padding: 6px 0px; */
+    position: relative;
+    color: white;
+    transition: all .5s ease;
+}
+.cancelar {
+    background: white;
+    border: 1px solid #FF596A;
+    color: #FF596A;
+    padding: 6px 0px;
+    transition: all .5s ease;
+    position: relative;
+}
+.cancelar:hover {
+    background: #ec5362;
+    color: white;
+}
+.cancelar:hover .mat-icon{
+    color: white !important;
+    transition: .5s ease-in-out;
+}
+/* FIN BOTONES */
+
 .mrg-btn-30{ margin-bottom: 30px; }
 
 .area-admin {
@@ -44,9 +79,6 @@ img {
     display: flex;
     position: relative;
     top: 38px;
-}
-.workplace .header{
-
 }
 
 .workplace .slide-menu {
@@ -61,7 +93,6 @@ img {
     position: relative;
     margin-left: 11rem;
 }
-
 .footer {
     padding: .5em .5em .5em 0;
     width: 100%;
@@ -70,13 +101,10 @@ img {
     margin-top: 2rem;
     background: #F4F8FB;
 }
-
 .footer-paginate {
     margin-left: 240px;
     display: flex;
 }
-
-
 /* Estilos generales de las tablas */
 
 .filtros {
@@ -88,7 +116,6 @@ img {
     top: 0;
     margin-bottom: 2rem;
 }
-
 .box-buscador {
     position: relative;
     top: -10px;
@@ -250,8 +277,8 @@ img {
     background-image: linear-gradient(180deg, #FF596A 0%, #F51A3C 100%);
     border-radius: 50%;
     left: 0%;
-    height: 31px;
-    width: 31px;
+    height: 33px;
+    width: 33px;
 }
 
 .box-cancelar {
@@ -260,8 +287,8 @@ img {
     border: 1px solid #FF596A;
     border-radius: 50%;
     left: 100%;
-    height: 31px;
-    width: 31px;
+    height: 33px;
+    width: 33px;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

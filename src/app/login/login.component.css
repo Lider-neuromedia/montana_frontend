@@ -16,9 +16,8 @@
     grid-column: 1 / 7;
     height: 100vh;
 }
-
 .bg-login .plataforma {
-    font-size: 64px;
+    font-size: 55px;
     font-weight: 700;
     margin-top: 81px;
     margin-left: 55px;
@@ -31,9 +30,10 @@
     margin-left: 55px;
     letter-spacing: -0.31px;
     font-weight: 600;
-    font-size: 31px;
+    font-size: 25px;
     line-height: 31px;
 }
+
 
 .bg-login .col-login {
     background-color: #FF596A;

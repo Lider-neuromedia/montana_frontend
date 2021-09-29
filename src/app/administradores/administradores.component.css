@@ -102,9 +102,12 @@
 
 .acciones-form-adminitrador {
     display: inline-flex;
-    padding: 0px 20px;
+    padding: 20px;
+    box-shadow: 0 0 5px 0 rgb(125 125 125 / 50%);
+    margin-bottom: 0 !important;
     justify-content: space-around;
     width: 100%;
+    background: #fff;
 }
 @media screen and (max-width:1366px){
     .fijar-abajo {
@@ -112,23 +115,7 @@
     }
 }
 
-.agregar,
-.cancelar {
-    cursor: pointer;
-    text-align: center;
-    border-radius: 15px;
-    display: block;
-    text-decoration: none;
-    width: 45%;
-}
 
-.agregar {
-    background: #FF596A;
-    /* padding: 6px 0px; */
-    position: relative;
-    color: white;
-    transition: all .5s ease;
-}
 
 .mas-administrador{
     top: 0;
@@ -157,18 +144,6 @@
     background: #da4e5c;
 }
 
-.cancelar {
-    background: white;
-    border: 1px solid #FF596A;
-    color: #FF596A;
-    padding: 6px 0px;
-    transition: all .5s ease;
-}
-
-.cancelar:hover {
-    background: #ec5362;
-    color: white;
-}
 
 .box-editar {
     position: relative;
@@ -177,7 +152,7 @@
 }
 .box-mas{
     position: absolute;
-    top: 5%;
+    top: 0%;
     left: 5%;
 }
 .box-cancelar{
@@ -186,8 +161,20 @@
 }
 .img-close-admin{
     font-size: 15px;
-    margin-left: 22%;
-    margin-top: 20%;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    border-radius: 50px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 22%;
+    margin-top: 20%; */
+}
+.mat-icon{
+    height: 33px;
+    width: 33px;
 }
 .box-editar-open {
     border-bottom: 0;
