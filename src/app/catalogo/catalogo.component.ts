@@ -76,8 +76,12 @@ export class CatalogoComponent implements OnInit, OnDestroy {
 
     this.http.httpGet(route, true).subscribe(
       response => {
+        response.catalogos.forEach(element => {
+          if(element.descuento === null){
+            element.descuento = 0;
+          }
+        });
         this.catalogos = response.catalogos.reverse();
-        console.log(this.catalogos);
       },
       error => {
         console.error(error);

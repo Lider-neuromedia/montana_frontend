@@ -110,7 +110,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_1"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_1')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
@@ -126,7 +126,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_2"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_2')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
@@ -144,7 +144,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_3"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_3')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
@@ -159,7 +159,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_4"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_4')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
@@ -177,7 +177,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_5"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_5')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
@@ -192,7 +192,7 @@
                                 </div>
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files_6"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                [file]="f" [removable]="true" (removed)="onRemove(f, 'files_6')">
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>

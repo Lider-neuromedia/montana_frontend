@@ -195,6 +195,9 @@ export class InternaCatalogoComponent implements OnInit {
         if (response.response == "success" && response.status == 200) {
           Swal.fire('Producto creado correctamente', '', 'success');
           this.getProducts();
+          this.crearProducto.imagenes.forEach(element => {
+            
+          })
           this.crearProducto = {
             nombre : '',
             catalogo : '',
@@ -270,14 +273,17 @@ export class InternaCatalogoComponent implements OnInit {
     });
   }
 
-  onRemove(event) {
-    console.log(event);
-    this.files_1.splice(this.files_1.indexOf(event), 1);
-    this.files_2.splice(this.files_2.indexOf(event), 1);
-    this.files_3.splice(this.files_3.indexOf(event), 1);
-    this.files_4.splice(this.files_4.indexOf(event), 1);
-    this.files_5.splice(this.files_5.indexOf(event), 1);
-    this.files_6.splice(this.files_6.indexOf(event), 1);
+  onRemove(event, propiedad) {
+    console.log(this.crearProducto.imagenes);
+    this.crearProducto.imagenes.forEach((element, index) => {
+      element.imageArr = [element.image]
+      if(element.imageArr.indexOf(event) === 0){
+        console.log(index);
+        this.crearProducto.imagenes.splice(index, 1);
+        this.crearProducto.imagenes[0].destacada = 1;
+      }
+    })
+    this[propiedad].splice(this[propiedad].indexOf(event), 1);
   }
 
   openDialogPedido(id){

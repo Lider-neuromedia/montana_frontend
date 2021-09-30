@@ -108,7 +108,7 @@
                         <div class="estado">{{catalogo.estado}}</div>
                         <div class="show-room" *ngIf="catalogo.tipo != 'general'">{{catalogo.tipo}}</div>
                         <div *ngIf="catalogo.descuento != null" [class]="(catalogo.tipo == 'general') ? 'descuento' : 'descuento-show-room'">
-                            -{{catalogo.descuento === null?'0':catalogo.descuento}}%
+                            -{{ catalogo.descuento }}%
                         </div>
                     </div>
                     <div class="box-titulo-cantidad-opciones">

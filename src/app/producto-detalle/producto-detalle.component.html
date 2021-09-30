@@ -94,7 +94,7 @@
                         <div class="col-md-5">
                             <div class="valoraciones-column">
                                 <h3 class="valoraciones-title">Otras valoraciones</h3>
-                                <div class="example-table-container" *ngIf="dataSource.data.length > 0; else noOtrasValoraciones">
+                                <div class="example-table-container" *ngIf="(dataSource?dataSource.data.length:'') > 0; else noOtrasValoraciones">
                                     <table mat-table [dataSource]="dataSource">
                                         <ng-container matColumnDef="valoraciones">
                                             <th *matHeaderCellDef></th>
