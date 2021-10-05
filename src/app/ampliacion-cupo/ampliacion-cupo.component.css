@@ -2,7 +2,11 @@
 .modal-body{
     padding: 5.7em;
 }
-
+.table-data{
+    left: 0;
+    width: 90vw;
+    margin: 0;
+}
 .custom-file-label::after{
     position: absolute;
     top: 0;

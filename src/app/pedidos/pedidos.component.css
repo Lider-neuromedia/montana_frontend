@@ -10,7 +10,11 @@ button:focus{ outline: none !important;}
     margin: 0 auto;
     cursor: pointer;
 }
-
+.table-data{
+    left: 0;
+    margin: 0;
+    width: 90vw;
+}
 table{
     width: 100%;
 }
@@ -353,4 +357,10 @@ table td{
 
 .mat-button-toggle-group{
     width: 100%;
+}
+
+@media (max-width:1440px){
+    .table-data{
+        width: 86vw;
+    }
 }

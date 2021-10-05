@@ -1,6 +1,11 @@
 .box-buscador{
     margin-right: 20px;
 }
+.table-data{
+    left: 0;
+    width: 90vw;
+    margin: 0;
+}
 
 .modal-body{
     padding: 5.7em;

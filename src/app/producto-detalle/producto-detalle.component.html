@@ -9,17 +9,18 @@
         <!-- <router-outlet></router-outlet> -->
         <div class="row">
             <div class="filtros">
-                <div  (click)="accionesAdministrador()" style="height: 31px;left: 11.3rem;top: 0;" class="box-editar">
+                <div (click)="accionesAdministrador()" style="height: 31px;left: 11.3rem;top: 0;" class="box-editar">
                     <span class="puntero">Acción de</span>
                     <div class="icono-puntos">
                         <img src="./assets/img/edit_points.svg" alt="">
                     </div>
-    
+
                     <ul class="acciones-administrador">
                         <li class="puntero" (click)="openDrawerRigth(true, 'edit')">
                             <img src="./assets/img/editar.svg" alt=""> Editar
                         </li>
-                        <li class="puntero" (click)="deleteProduct()"><img src="./assets/img/icons-filter/trash.svg" alt=""> Eliminar</li>
+                        <li class="puntero" (click)="deleteProduct()"><img src="./assets/img/icons-filter/trash.svg"
+                                alt=""> Eliminar</li>
                     </ul>
                 </div>
             </div>
@@ -54,24 +55,25 @@
                                         {{pregunta.pregunta}}
                                         <div class="strellas-valoracion">
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 1, 
-                                                'star-inactive' : pregunta.respuesta < 1}" 
-                                            (click)="pregunta.respuesta = 1">star</mat-icon>
+                                                'star-inactive' : pregunta.respuesta < 1}"
+                                                (click)="pregunta.respuesta = 1">star</mat-icon>
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 2, 
-                                                'star-inactive' : pregunta.respuesta < 2}" 
-                                            (click)="pregunta.respuesta = 2">star</mat-icon>
+                                                'star-inactive' : pregunta.respuesta < 2}"
+                                                (click)="pregunta.respuesta = 2">star</mat-icon>
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 3, 
-                                                'star-inactive' : pregunta.respuesta < 3}" 
-                                            (click)="pregunta.respuesta = 3">star</mat-icon>
+                                                'star-inactive' : pregunta.respuesta < 3}"
+                                                (click)="pregunta.respuesta = 3">star</mat-icon>
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 4, 
-                                                'star-inactive' : pregunta.respuesta < 4}" 
-                                            (click)="pregunta.respuesta = 4">star</mat-icon>
+                                                'star-inactive' : pregunta.respuesta < 4}"
+                                                (click)="pregunta.respuesta = 4">star</mat-icon>
                                             <mat-icon [ngClass]="{'star-active' : pregunta.respuesta >= 5, 
-                                                'star-inactive' : pregunta.respuesta < 5}"  
-                                            (click)="pregunta.respuesta = 5">star</mat-icon>
+                                                'star-inactive' : pregunta.respuesta < 5}"
+                                                (click)="pregunta.respuesta = 5">star</mat-icon>
                                         </div>
                                     </li>
                                     <div style="display: flex; justify-content: center;">
-                                        <button class="calificar" (click)="createCalificacion()" *ngIf="!respuesta_usuario; else califica">
+                                        <button class="calificar" (click)="createCalificacion()"
+                                            *ngIf="!respuesta_usuario; else califica">
                                             Calificar
                                         </button>
                                         <ng-template #califica>
@@ -94,13 +96,14 @@
                         <div class="col-md-5">
                             <div class="valoraciones-column">
                                 <h3 class="valoraciones-title">Otras valoraciones</h3>
-                                <div class="example-table-container" *ngIf="(dataSource?dataSource.data.length:'') > 0; else noOtrasValoraciones">
+                                <div class="example-table-container"
+                                    *ngIf="(dataSource?dataSource.data.length:'') > 0; else noOtrasValoraciones">
                                     <table mat-table [dataSource]="dataSource">
                                         <ng-container matColumnDef="valoraciones">
                                             <th *matHeaderCellDef></th>
                                             <td *matCellDef="let valoracion">
                                                 <p class="font-weight-bold">{{ valoracion.pregunta }}</p>
-                                                 <div class="strellas-valoracion" style="margin-bottom: 1rem;">
+                                                <div class="strellas-valoracion" style="margin-bottom: 1rem;">
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 1, 
                                                         'star-inactive' : valoracion.respuesta < 1}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 2, 
@@ -108,7 +111,7 @@
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 3, 
                                                         'star-inactive' : valoracion.respuesta < 3}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 4, 
-                                                        'star-inactive' : valoracion.respuesta < 4}" >star</mat-icon>
+                                                        'star-inactive' : valoracion.respuesta < 4}">star</mat-icon>
                                                     <mat-icon [ngClass]="{'star-active' : valoracion.respuesta >= 5, 
                                                         'star-inactive' : valoracion.respuesta < 5}">star</mat-icon>
                                                 </div>
@@ -126,54 +129,6 @@
                                         </div>
                                     </div>
                                 </ng-template>
-                                <!-- <small class="total-comentarios">12 comentarios</small> -->
-
-                                <!-- <div class="user-feedback">
-                                    <p>Excelentes zapatillas</p>
-                                    <div class="strellas-valoracio">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="user-feedback">
-                                    <p>Excelentes zapatillas</p>
-                                    <div class="strellas-valoracio">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="user-feedback">
-                                    <p>Excelentes zapatillas</p>
-                                    <div class="strellas-valoracio">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="user-feedback">
-                                    <p>Excelentes zapatillas</p>
-                                    <div class="strellas-valoracio">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                        <img src="assets/img/start-on.svg" alt="">
-                                    </div>
-                                </div>
-                                <a href="#" class="ver-valoraciones">
-                                    Ver más
-                                </a> -->
                             </div>
 
                         </div>
@@ -186,7 +141,7 @@
                 <div class="aside-detalle-producto">
                     <h2 class="nombre">{{producto.nombre}}</h2>
                     <p class="marca">{{producto.nombre_marca}}</p>
-                    <p class="precio-descuento">{{producto.total  |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
+                    <p class="precio-descuento">{{producto.total |currency:'COP':'symbol-narrow' :'1.0-0'}}</p>
                     <!-- <p class="precio-normal"></p> -->
 
                     <p class="codigo">Código</p>
@@ -198,17 +153,24 @@
                     <p class="stock">Stock</p>
                     <p class="numero-stock mrg-btn-30">{{producto.stock}} pares</p>
 
-                    <!-- Footer actions. -->
-                    <div class="acciones btn-fijo-agregar">
-                        <!-- <button mat-raised-button (click)="openDialogPedido()" class="btn-agregar"><mat-icon>add_circle_outline</mat-icon>Agregar Pedido</button> -->
+                    
+                    <!-- <div class="acciones btn-fijo-agregar">
                         <a class="agregar" style="width: 180px;" (click)="openDialogPedido()">
                             Agregar Pedido
                             <div class="box-mas icono-mas">
-                                <!-- <img class="mas" src="./assets//img/mas.svg" alt=""> -->
-                                <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">add</mat-icon>
+                                <img class="mas" src="./assets/img/mas.svg" alt="">
                             </div>
-                            
                         </a>
+                    </div> -->
+                </div>
+                <!-- Footer actions. -->
+                <div class="row py-3 m-0 justify-content-center align-items-center fijar-btn-agregar">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <button type="button" (click)="openDialogPedido()"
+                            class="d-flex justify-content-between align-items-center btn-agregar">
+                            <img class="icono-btn-mas" src="./assets/img/mas.svg" alt="">
+                            <span class="flex-grow-1">Agregar Pedido</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -216,7 +178,7 @@
 
         <!-- DRAWER EDITAR PRODUCTO. -->
         <app-drawer-rigth name="edit-producto" title="Editar producto" [open]="openDrawer"
-        (close)="openDrawerRigth(false, 'edit')" (submit)="submitEditProduct()" button="Actualizar">
+            (close)="openDrawerRigth(false, 'edit')" (submit)="submitEditProduct()" button="Actualizar">
             <form>
                 <div class="label-field">
                     <label for="">Nombres</label>
@@ -244,10 +206,8 @@
                 </div>
                 <div class="label-field">
                     <label for="">Descripción</label>
-                    <editor [(ngModel)]="producto.descripcion"
-                    name="descripcion"
-                    apiKey="kj0s5hcgbtivft47uma4vhezznlb62r2gg0sqp7rcpqx6vzr"
-                    [init]="{height: 500,
+                    <editor [(ngModel)]="producto.descripcion" name="descripcion"
+                        apiKey="kj0s5hcgbtivft47uma4vhezznlb62r2gg0sqp7rcpqx6vzr" [init]="{height: 500,
                         menubar: false,
                         plugins: [
                           'advlist autolink lists link image charmap print',
@@ -258,8 +218,7 @@
                         toolbar:
                           'undo redo | formatselect | bold italic | \
                           alignleft aligncenter alignright alignjustify | \
-                          bullist numlist outdent indent | help'}"
-                    ></editor>
+                          bullist numlist outdent indent | help'}"></editor>
                     <!-- <textarea [(ngModel)]="producto.descripcion" name="descripcion" class="text-area">
                     </textarea> -->
                 </div>
@@ -272,10 +231,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas0" style="width: 0rem;"></canvas>
-                                    <img id="img0" src="{{producto.imagenes[0].image}}" alt="" *ngIf="producto.imagenes[0]">
+                                    <img id="img0" src="{{producto.imagenes[0].image}}" alt=""
+                                        *ngIf="producto.imagenes[0]">
                                     <div *ngIf="!producto.imagenes[0]  || producto.imagenes[0].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -284,7 +246,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 0)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 0)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                     <div class="col-md-6 removeImage">
                         <label for="">Imagen destacada</label>
@@ -293,10 +256,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas1" style="width: 0rem;"></canvas>
-                                     <img id="img1" src="{{producto.imagenes[1].image}}" alt="" *ngIf="producto.imagenes[1]">
+                                    <img id="img1" src="{{producto.imagenes[1].image}}" alt=""
+                                        *ngIf="producto.imagenes[1]">
                                     <div *ngIf="!producto.imagenes[1]  || producto.imagenes[1].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -305,7 +271,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 1)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 1)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                 </div>
 
@@ -316,10 +283,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas2" style="width: 0rem;"></canvas>
-                                    <img id="img2" src="{{producto.imagenes[2].image}}" alt="" *ngIf="producto.imagenes[2]">
+                                    <img id="img2" src="{{producto.imagenes[2].image}}" alt=""
+                                        *ngIf="producto.imagenes[2]">
                                     <div *ngIf="!producto.imagenes[2]  || producto.imagenes[2].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -328,7 +298,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 2)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 2)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                     <div class="col-md-6 removeImage">
                         <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
@@ -336,10 +307,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas3" style="width: 0rem;"></canvas>
-                                    <img id="img3" src="{{producto.imagenes[3].image}}" alt="" *ngIf="producto.imagenes[3]">
+                                    <img id="img3" src="{{producto.imagenes[3].image}}" alt=""
+                                        *ngIf="producto.imagenes[3]">
                                     <div *ngIf="!producto.imagenes[3]  || producto.imagenes[3].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -348,7 +322,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 3)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 3)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                 </div>
 
@@ -359,10 +334,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas4" style="width: 0rem;"></canvas>
-                                    <img id="img4" src="{{producto.imagenes[4].image}}" alt="" *ngIf="producto.imagenes[4]">
+                                    <img id="img4" src="{{producto.imagenes[4].image}}" alt=""
+                                        *ngIf="producto.imagenes[4]">
                                     <div *ngIf="!producto.imagenes[4]  || producto.imagenes[4].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -371,7 +349,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 4)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 4)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                     <div class="col-md-6 removeImage">
                         <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" [multiple]="false"
@@ -379,10 +358,13 @@
                             <ngx-dropzone-label>
                                 <div>
                                     <canvas id="canvas5" style="width: 0rem;"></canvas>
-                                    <img id="img5" src="{{producto.imagenes[5].image}}" alt="" *ngIf="producto.imagenes[5]">
+                                    <img id="img5" src="{{producto.imagenes[5].image}}" alt=""
+                                        *ngIf="producto.imagenes[5]">
                                     <div *ngIf="!producto.imagenes[5]  || producto.imagenes[5].image == ''">
                                         <h6>Suelta los archivos aquí o haz clic para subirlos...</h6>
-                                        <mat-icon aria-hidden="false" aria-label="Camera icon" style="font-size: 50px;position: relative;right: .8rem;">photo_camera</mat-icon>
+                                        <mat-icon aria-hidden="false" aria-label="Camera icon"
+                                            style="font-size: 50px;position: relative;right: .8rem;">photo_camera
+                                        </mat-icon>
                                     </div>
                                 </div>
                             </ngx-dropzone-label>
@@ -391,7 +373,8 @@
                                 <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
                             </ngx-dropzone-image-preview>
                         </div>
-                        <button type="button" (click)="quitarImagen(producto.imagenes, 5)" class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
+                        <button type="button" (click)="quitarImagen(producto.imagenes, 5)"
+                            class="btn btn-secondary btn-block btn-remplazar mb-3">Quitar</button>
                     </div>
                 </div>
             </form>

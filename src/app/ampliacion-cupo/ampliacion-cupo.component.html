@@ -106,65 +106,7 @@
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
                 <tr mat-row *matRowDef="let row; columns: columns"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            <!-- <table class="table">
-                <thead>
-                    <tr class="tabla-fila-cabecera">
-                        <th></th>
-                        <th>
-                            #Solicitud
-                        </th>   
-                        <th>
-                            Fecha de creación
-                        </th>
-                        <th>
-                            Monto
-                        </th>
-                        <th>
-                            Vendedor
-                        </th>
-                        <th>
-                            Estado
-                        </th>
-                        <th>
-                            Documentos
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let solicitud of solicitudes | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
-                        <td><input type="checkbox" (change)="checkBoxSolicitud($event, solicitud)"></td>
-                        <td>#{{solicitud.codigo_solicitud}}</td>
-                        <td>{{solicitud.fecha_solicitud}}</td>
-                        <td>{{solicitud.monto |currency:'COP':'symbol-narrow' :'1.0-0' }}</td>
-                        <td>{{solicitud.name + ' ' + solicitud.apellidos}}</td>
-                        <td *ngIf="solicitud.estado != 'pendiente'" class="txt-capitalize">
-                            {{solicitud.estado}}
-                        </td>
-                        <td *ngIf="solicitud.estado == 'pendiente'" class="txt-capitalize">
-                            <a class="change-state" (click)="setChangeState(solicitud)">
-                                {{solicitud.estado}}
-                            </a>    
-                        </td>
-                        <td>
-                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                                <mat-menu #menu="matMenu">
-                                <a class="txt-hover-black" target="_blank" mat-menu-item [href]="solicitud.doc_identidad">
-                                    Doc. Identidad
-                                </a>
-                                <a class="txt-hover-black" target="_blank" mat-menu-item [href]="solicitud.doc_rut">
-                                    RUT
-                                </a>
-                                <a class="txt-hover-black" target="_blank" mat-menu-item [href]="solicitud.doc_camara_com">
-                                    Camara comercio
-                                </a>
-                            </mat-menu>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
+            <mat-paginator class="fijar-abajo" [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
         </section>
     </div>
 </div>
@@ -342,20 +284,3 @@
       </div>
     </div>
 </div>
-
-<!-- <div class="footer">
-    <div class="footer-paginate">
-        <div class="pagination">
-            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
-        </div>
-        <div class="label-field label-field-paginate">
-            <select name="changeNumberPage" (change)="changeListPagination($event)" id="changeNumberPage" class="select-paginate">
-                <option [value]="5"> 5 Por página </option>
-                <option [value]="10"> 10 Por página </option>
-                <option [value]="15"> 15 Por página </option>
-                <option [value]="20"> 20 Por página </option>
-                <option [value]="30"> 30 Por página </option>
-            </select>
-        </div>   
-    </div>
-</div> -->

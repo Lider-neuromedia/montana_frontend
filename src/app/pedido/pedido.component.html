@@ -124,7 +124,21 @@
                         <span>{{total_pedido | currency:'COP':'symbol-narrow' :'1.0-0'}}</span>
                     </div>
                     <!-- Footer actions. -->
-                    <div class="acciones" id="final-pedido">
+                    <div class="row py-3 botonera-administrador m-0">
+                        <div class="col-md-6 d-flex justify-content-between align-items-center">
+                            <button type="button" (click)="openDrawerFinally(true)" class="d-flex justify-content-between align-items-center btn-agregar flex-grow-1">
+                                <img class="icono-btn-mas" src="assets/img/mas.svg" alt="">
+                                <span class="flex-grow-1">Finalizar</span>
+                            </button>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-between align-items-center">
+                            <button [routerLink]="['/pedidos']" type="button" class="d-flex justify-content-between align-items-center btn-cancelar flex-grow-1">
+                                <img class="icono-btn-cancelar" src="assets/img/cancelar.svg" alt="">
+                                <span class="flex-grow-1">Cancelar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <div class="acciones" id="final-pedido">
                         <a class="agregar btn-agregar" (click)="openDrawerFinally(true)">
                             Finalizar
                             <div class="box-mas icono-mas">
@@ -137,7 +151,7 @@
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
-                    </div>
+                    </div> -->
                 </div>
     
                 <div class="col-md-4" *ngIf="editPedido">

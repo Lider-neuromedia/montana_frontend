@@ -218,3 +218,37 @@
     border-radius: 0px 0px 15px 15px;
     opacity: 1;
 }
+
+.botonera-administrador{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: #f1f1f1;
+}
+.btn-agregar{
+    background-color: #da4e5c;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: 500;
+}
+.icono-btn-mas{
+    background-image: linear-gradient(180deg, #ff596a 0%, #f51a3c 100%);
+    border-radius: 15px;
+}
+.btn-cancelar{
+    border: 1px solid #da4e5c;
+    border-radius: 17px;
+    color: #da4e5c;
+}
+.icono-btn-cancelar{
+    border-radius: 15px;
+    border: 1px solid #da4e5c;
+    width: 30px;
+    height: 30px;
+}
+@media (max-width: 1366px){
+    .botonera-administrador{
+        position: relative;
+    }
+}

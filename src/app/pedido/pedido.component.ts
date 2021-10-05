@@ -93,9 +93,6 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   ngOnInit(): void {
-    setTimeout(() => {
-      $('#final-pedido').addClass('btn-relativos');
-    }, 500);
     if (localStorage.getItem('pedido') == null) {
       this.route.navigate(['/pedidos']);
     }else{
@@ -136,7 +133,7 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
           let productoTemp = JSON.parse(localStorage.getItem('pedido'));
           // console.log(JSON.parse(localStorage.getItem('pedido')));
           let i = 0;
-          productoTemp.productos.forEach(element1 => {
+          productoTemp.productos?.forEach(element1 => {
             if(element1.id_producto == this.productos[i].id_producto){
               element1.tiendas.forEach(element2 => {
                 if(element2.cantidad > 0){
@@ -159,6 +156,9 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   openDrawerRight(action : boolean, producto : any = null){
     $('.box-cancelar').addClass('iconos-pedido');
     this.openDrawer = action;
+    this.tiendas.forEach(element => {
+      element.cantidad = 0;
+    })
     if (producto == null) {
       this.producto_select = {
         id_producto: '',
@@ -231,43 +231,32 @@ export class PedidoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   sumCantidad(position){
-    this.productos.forEach(element => {
-      if(this.selectEditPedido['id_producto'] === element.id_producto){
-        console.log(this.selectEditPedido);
-        console.log(this.productos);
-        console.log(this.selectEditPedido.tiendas[position].cantidad);
-        if(this.selectEditPedido.tiendas[position].cantidad <= element.stock || this.selectEditPedido.tiendas[position].cantidad > element.stock &&
-          element.stock > 0){
-            if(this.selectEditPedido.tiendas[position].cantidad === element.stock && element.stock === 0){
-              return;
-            }
-            this.cantidad++;
-            element.stock--;
-            this.selectEditPedido.tiendas[position].cantidad++;
+      console.log(this.tiendas);
+      console.log(this.producto_select);
+      if(this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
+        this.producto_select.stock > 0){
+          if(this.tiendas[position].cantidad === this.producto_select.stock && this.producto_select.stock === 0){
+            return;
           }
-      }
-    })
+       this.cantidad++;
+       this.producto_select.stock--;
+       this.tiendas[position].cantidad++;
+     }
   }
 
   resCantidad(position){
-    this.productos.forEach(element => {
-      if(this.selectEditPedido['id_producto'] === element.id_producto){
-        console.log(this.selectEditPedido);
-        console.log(this.productos);
-        console.log(this.selectEditPedido.tiendas[position].cantidad);
-        if (this.selectEditPedido.tiendas[position].cantidad <= element.stock || this.selectEditPedido.tiendas[position].cantidad > element.stock &&
-          element.stock != 0) {
-            if(this.selectEditPedido.tiendas[position].cantidad === 0){
-              return;
-            }
-        this.selectEditPedido.tiendas[position].cantidad--;
-        element.stock++;
-      }else if(this.selectEditPedido.tiendas[position].cantidad > element.stock && element.stock === 0){
-        this.selectEditPedido.tiendas[position].cantidad--;
-        element.stock++;
-      }
-      }
-    })
+    console.log(this.tiendas);
+    if (this.tiendas[position].cantidad <= this.producto_select.stock || this.tiendas[position].cantidad > this.producto_select.stock &&
+      this.producto_select.stock != 0) {
+        if(this.tiendas[position].cantidad === 0){
+          return;
+        }
+    this.tiendas[position].cantidad--;
+    this.producto_select.stock++;
+  }else if(this.tiendas[position].cantidad > this.producto_select.stock && this.producto_select.stock === 0){
+    this.tiendas[position].cantidad--;
+    this.producto_select.stock++;
+  }
   }
 
   editarPedido(product){

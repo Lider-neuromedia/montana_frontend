@@ -230,56 +230,7 @@
                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{input.value}}"</td>
                 </tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            <!-- <table class="table">
-                <thead>
-                    <tr class="tabla-fila-cabecera">
-                        <th></th>
-                        <th>
-                            #Encuesta
-                        </th>   
-                        <th>
-                            Fecha de creación
-                        </th>
-                        <th>
-                            Catálogo
-                        </th>
-                        <th>
-                            Objetivo
-                        </th>
-                        <th>
-                            Estado
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let encuesta of encuestas | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
-                        <td><input (change)="selectClientCheckbox($event, encuesta)" class="check-nombre" type="checkbox" name="" id=""></td>
-                        <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.codigo}}</td>
-                        <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.fecha_creacion}}</td>
-                        <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.titulo}}</td>
-                        <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.tipo}}</td>
-                        <td (click)="detalleEncuesta(encuesta.id_form)">{{encuesta.estado}}</td>
-                    </tr>
-                </tbody>
-            </table> -->
+            <mat-paginator class="fijar-abajo" [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
         </section>
     </div>
 </div>
-
-<!-- <div class="footer">
-    <div class="footer-paginate">
-        <div class="pagination">
-            <pagination-controls (pageChange)="current = $event" previousLabel="" nextLabel="" responsive="true"></pagination-controls>
-        </div>
-        <div class="label-field label-field-paginate">
-            <select name="changeNumberPage" (change)="changeListPagination($event)" id="changeNumberPage" class="select-paginate">
-                <option [value]="5"> 5 Por página </option>
-                <option [value]="10"> 10 Por página </option>
-                <option [value]="15"> 15 Por página </option>
-                <option [value]="20"> 20 Por página </option>
-                <option [value]="30"> 30 Por página </option>
-            </select>
-        </div>   
-    </div>
-</div> -->

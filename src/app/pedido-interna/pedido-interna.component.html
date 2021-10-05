@@ -40,16 +40,6 @@
 
                 <div class="detalle">
                     <span class="descripcion" [innerHTML]="producto.descripcion"></span>
-                    <!-- <h2 class="title-detalle">Detalles</h2>
-                    <ul class="bullet-rojo">
-                        <li>Sistema de amarre de cordones</li>
-                        <li>Exterior tejido con refuerzos de TPU</li>
-                        <li>Diseño ajustado y elástico</li>
-                        <li>Mediasuela receptiva Boost</li>
-                        <li>Suela de caucho</li>
-                        <li>Tenis urbanos icónicos</li>
-                        <li>Color del artículo: Core Black</li>
-                    </ul> -->
                 </div>
 
                 <div class="opiniones">
@@ -166,7 +156,23 @@
                         </form>
                     </div>
                     <!-- Footer actions. -->
-                    <div class="acciones acciones-fijo-btns">
+                    <div class="row py-3 m-0 justify-content-center align-items-center fijar-btn-agregar">
+                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                            <button type="button" (click)="addProducto()"
+                                class="d-flex justify-content-between align-items-center btn-agregar flex-grow-1">
+                                <img class="icono-btn-mas" src="./assets/img/mas.svg" alt="">
+                                <span class="flex-grow-1">Agregar Pedido</span>
+                            </button>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                            <button type="button"
+                                class="d-flex justify-content-between align-items-center btn-cancelar flex-grow-1">
+                                <img class="icono-btn-cancelar" src="./assets/img/cancelar.svg" alt="">
+                                <span class="flex-grow-1">Cancelar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <div class="acciones acciones-fijo-btns">
                         <a class="agregar btn-agregar" (click)="addProducto()">
                             Agregar
                             <div class="box-mas icono-mas">
@@ -179,7 +185,7 @@
                                 <mat-icon class="mas" style="font-size: 15px;margin-top: 10%;">close</mat-icon>
                             </span> Cancelar
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

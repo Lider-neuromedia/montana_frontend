@@ -68,13 +68,6 @@ table{
     margin-top: 40px;
     color: #ccc;
 }
-.btn-agregar{
-    border-radius: 30px;
-    display: flex;
-    width: 80%;
-    background-color: #2fb863;
-    color: #fff;
-}
 
 .detalle ul{
     display: flex;
@@ -287,14 +280,32 @@ tr.mat-header-row{
 .removeImage:hover .btn-remplazar{
     display: block;
 }
-
+.btn-agregar{
+    background-color: #68BE8E;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: 500;
+    width: 50%;
+}
+.icono-btn-mas{
+    background-image: linear-gradient(180deg, #2fb863 0%, #2ca85b 100%);
+    border-radius: 15px;
+}
+.fijar-btn-agregar{
+    position: fixed;
+    bottom: 0;
+    width: 25.4vw;
+    right: 3%;
+    background-color: #f1f1f1;
+}
+@media (min-width: 1440px){
+    .fijar-btn-agregar{
+        width: 25.8vw;
+    }  
+}
 @media screen and (min-width: 1920px) {
-
-    /* .btn-fijo-agregar{
-        top: 63rem;
-        left: 86rem;
-    } */
-    .btn-fijo-agregar{
-        width: 27.9%;
-    }
+    .fijar-btn-agregar{
+        width: 27.5vw;
+        right: 2.2%;
+    }  
 }

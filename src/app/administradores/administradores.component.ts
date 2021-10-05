@@ -29,7 +29,8 @@ export class AdministradoresComponent implements OnInit {
     "dmRojo": "assets/img/iniciales_dm_rojo.svg",
     "btnCerrar": "assets/img/cerrar.svg",
     "exportar": "assets/img/icons-filter/export.svg",
-    "eliminar": "assets/img/icons-filter/trash.svg"
+    "eliminar": "assets/img/icons-filter/trash.svg",
+    "cancelar": "assets/img/cancelar.svg"
   };
 
   usuarios = [];

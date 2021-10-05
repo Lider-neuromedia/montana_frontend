@@ -508,7 +508,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   openDrawerRigth(action : boolean, type : string){
-    $('.acciones-form-adminitrador').toggleClass('btn-relativos');
     if (type == 'create') {
       this.openDrawer = action;
       (!action) ? this.updateDrawer = false : '';
@@ -705,7 +704,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
         this.cliente = false;
       } else if( this.rol == data[0].id ){ // Rol de adminnistrador rol_id = 1
         this.admin = true;
-        this.vendedor = true;
+        this.vendedor = false;
         this.cliente = false;
       } else {
         alert('Hubo un error');

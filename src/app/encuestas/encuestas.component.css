@@ -12,6 +12,11 @@
 .pregunta-dinamica input{
     padding-right: 43px !important;
 }
+.table-data{
+    left: 0;
+    width: 90vw;
+    margin: 0;
+}
 
 .t-0{
     top: 0 !important;

@@ -50,37 +50,7 @@
                     <td class="mat-cell" colspan="4">No se encuentra el dato filtrado "{{ input.value }}"</td>
                 </tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-            <!-- <table class="table">
-                <thead>
-                    <tr class="tabla-fila-cabecera">
-                        <th>
-                            #Ticket
-                        </th>   
-                        <th>
-                            Fecha de registro
-                        </th>
-                        <th>
-                            Cliente
-                        </th>
-                        <th>
-                            Vendedor
-                        </th>
-                        <th>
-                            Estado
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let pqr of pqrs | paginate: { itemsPerPage: itemPerPage, currentPage: current }" class="tabla-fila-datos">
-                        <td (click)="redirectDetalle(pqr.id_pqrs)">#{{pqr.codigo}}</td>
-                        <td (click)="redirectDetalle(pqr.id_pqrs)">{{pqr.fecha_registro}}</td>
-                        <td (click)="redirectDetalle(pqr.id_pqrs)">{{pqr.name_cliente + ' ' + pqr.apellidos_cliente}}</td>
-                        <td (click)="redirectDetalle(pqr.id_pqrs)">{{pqr.name_vendedor + ' ' + pqr.apellidos_vendedor}}</td>
-                        <td (click)="redirectDetalle(pqr.id_pqrs)">{{pqr.estado}}</td>
-                    </tr>
-                </tbody>
-            </table> -->
+            <mat-paginator class="fijar-abajo" [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
         </section>
     </div>
 </div>
